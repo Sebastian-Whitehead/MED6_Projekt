@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour {
     private int patrolPoint = 0;
     private Vector3[] patrolPoints;
     private bool circlePatrole = false;
+    Color viewColor, moveColor;
 
     public enum Action {
         Idle,
@@ -66,7 +67,7 @@ public class Enemy : MonoBehaviour {
             new Vector3(3, 0, 0),
             transform.position,
         };
-        patrolPoints = GenerateRandomPath(3);
+        patrolPoints = GenerateRandomPath(5);
         endTurn();
     }
 
@@ -108,6 +109,14 @@ public class Enemy : MonoBehaviour {
     }
 
     private void DrawPath() {
+
+        viewColor = Color.green;
+        moveColor = Color.blue;
+        if (currentAction == Action.ChasePlayer) {
+            viewColor = Color.red;
+            moveColor = Color.red;
+        }
+
         for (int i = 0; i < patrolPoints.Length; i++) {
             Vector3 startPoint = patrolPoints[i] + new Vector3(0, 1, 0);
             Vector3 endPoint;
@@ -129,9 +138,6 @@ public class Enemy : MonoBehaviour {
             Vector3 targetPos = new Vector3(0, 0, 0);
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
 
-            Color viewColor;
-            if (currentAction == Action.ChasePlayer) viewColor = Color.red;
-            else viewColor = Color.green;
             Debug.DrawRay(transform.position, targetPos, viewColor);
 
             if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
@@ -231,7 +237,7 @@ public class Enemy : MonoBehaviour {
         transform.LookAt(location, Vector3.up);
 
         float step = moveSpeed * Time.deltaTime;
-        Debug.DrawLine(transform.position, location, Color.green);
+        Debug.DrawLine(transform.position, location, moveColor);
         transform.position = Vector3.MoveTowards(transform.position, location, step);
     }
 
