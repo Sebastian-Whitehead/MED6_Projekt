@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public int mapWidth = 10;
-    public int mapHeight = 10;
 
-    [Header("Action attributes")]
+    [Header("Action")]
     public Action currentAction = Action.Patrole;
     public bool startTurn = false;
     private bool executing = false;
     private GameObject player;
 
-    [Header("Character attributes")]
+    [Header("Character")]
     public float maxHealth = 10f;
-    public int moveSpeed = 2;
-    public int moveDistance = 2;
     public float attackDistance = 1f;
     public float damage = 2f;
     private float health;
     
-    [Header("View attributes")]
+    [Header("View")]
     [Range(2, 15)] public int inc = 5;
     [Range(1, 180)] public int FOV = 25;
     [Range(0f, 10f)] public float distance = 10f;
     
-    [Header("Movement attributes")]
-    private Vector3 location;
-    private int patrolPoint = 0;
+    [Header("Movement")]
+    public int moveSpeed = 2;
+    public int moveDistance = 2;
+    private Vector3 targetLocation;
+    private int patrolPoint = 1;
     private Vector3[] patrolPoints;
-    private bool circlePatrole = false;
+    public bool circlePatrole = false;
+    private bool clockwise = true;
+    
+    [Header("Debug")]
     Color viewColor, moveColor;
+
+    [Header("Elements")]
+    public Transform Character;
+    public Transform Path;
+
 
     public enum Action {
         Idle,
@@ -61,13 +67,8 @@ public class Enemy : MonoBehaviour {
     void Awake() {
         player = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
-        patrolPoints = new [] {
-            new Vector3(0, 0, 0),
-            new Vector3(1, 0, 1),
-            new Vector3(3, 0, 0),
-            transform.position,
-        };
-        patrolPoints = GenerateRandomPath(5);
+        //patrolPoints = GenerateRandomPath(5);
+        patrolPoints = GetManualPath();
         endTurn();
     }
 
@@ -84,28 +85,39 @@ public class Enemy : MonoBehaviour {
 
     // ---------------------------------------------------------------------
     
-    private Vector3 GenerateRandomPoint(Vector3 min, Vector3 max) {
-        float randomX = UnityEngine.Random.Range(min.x, max.x);
-        float randomZ = UnityEngine.Random.Range(min.z, max.z);
-        Vector3 randomPoint = new Vector3(randomX, 0, randomZ);
-        return randomPoint;
+
+    // https://answers.unity.com/questions/475066/how-to-get-a-random-point-on-navmesh.html
+    public Vector3 RandomNavmeshLocation(float radius) {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        UnityEngine.AI.NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+            finalPosition = hit.position;            
+        }
+        return finalPosition;
     }
 
     private Vector3[] GenerateRandomPath(int pathLength) {
         Vector3[] path = new Vector3[pathLength];
-        Vector3 minPoint = new Vector3(0, 0, 0);
-        Vector3 maxPoint = new Vector3(mapWidth, 0, mapHeight);
         for (int i = 0; i < pathLength; i++) {
-            Vector3 randomPoint = GenerateRandomPoint(minPoint, maxPoint);
-            CheckPointInsideMap(randomPoint);
-            path[i] = randomPoint;
+            Vector3 nextPoint = RandomNavmeshLocation(1000f);
+            path[i] = nextPoint;
         }
         return path;
     }
 
-    private bool CheckPointInsideMap(Vector3 point) {
-        // INCOMPLETE
-        return false;
+    Vector3[] GetManualPath() {
+        Transform[] points = Path.transform.GetComponentsInChildren<Transform>();
+        Vector3[] path = new Vector3[points.Length];
+        for (int i = 0; i < points.Length; i++) {
+            Transform point = points[i];
+            Vector3 position = point.transform.position;
+            path[i] = position;
+        }
+        return path;
+        Debug.LogError("memberVariable must be set to point to a Transform.", transform);
+        return new Vector3[0];
     }
 
     private void DrawPath() {
@@ -129,25 +141,25 @@ public class Enemy : MonoBehaviour {
 
     private void Eyes() {
 
-        if (currentAction == Action.ChasePlayer) return;
-
         inc = Mathf.Max(2, inc);
         RaycastHit hit;
 
         for (int angle = -FOV; angle <= FOV; angle += inc) {
             Vector3 targetPos = new Vector3(0, 0, 0);
-            targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
+            targetPos += Quaternion.AngleAxis(angle, Vector3.up) * Character.transform.forward * distance;
 
-            Debug.DrawRay(transform.position, targetPos, viewColor);
+            Debug.DrawRay(Character.transform.position, targetPos, viewColor);
 
-            if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
+            if (Physics.Raycast(Character.transform.position, targetPos, out hit, distance)) {
                 if (hit.transform.tag == "Player") {
-                    Debug.Log("Player spotted!");
                     currentAction = Action.ChasePlayer;
-                    endTurn();
+                    ChasePlayer();
                     return;
                 }
             }
+        }
+        if (currentAction == Action.ChasePlayer) {
+            currentAction = Action.ScoutArea;
         }
     }
 
@@ -190,55 +202,56 @@ public class Enemy : MonoBehaviour {
     // ---------------------------------------------------------------------
 
     private void Idle() {
-        location = transform.position;
+        targetLocation = Character.transform.position;
     }
 
     private void Patroling() {
-        location = patrolPoints[patrolPoint];
-        location.y = transform.position.y;
+        targetLocation = patrolPoints[patrolPoint];
 
-        float distanceToPatrolPoint = Vector3.Distance(transform.position, location);
-        if (++patrolPoint >= patrolPoints.Length) patrolPoint = 0;
+        if (circlePatrole) {
+            if (clockwise) {
+                if (++patrolPoint >= patrolPoints.Length - 1) clockwise = false;
+            } else {
+                if (--patrolPoint <= 0) clockwise = true;
+            }
+        } else {
+            if (++patrolPoint >= patrolPoints.Length) patrolPoint = 0;
+        }
     }
 
     private void ChasePlayer() {
-        location = player.transform.position;
+        targetLocation = player.transform.position;
     }
 
     private void ScoutArea() {
-        Vector3 minDistance = new Vector3(-1, 0, -1) * moveDistance;
-        Vector3 maxDistance = new Vector3(1, 0, 1) * moveDistance;
-        Vector3 randomPoint = GenerateRandomPoint(minDistance, maxDistance);
-        Vector3 currentLocation = transform.position;
-        Vector3 nextLocation = currentLocation + randomPoint;
-        CheckPointInsideMap(nextLocation);
-        location = nextLocation;
+        targetLocation = RandomNavmeshLocation(moveDistance);
     }
 
     private void LookAround() {
-        location = transform.position;
+        targetLocation = Character.transform.position;
     }
 
     // ---------------------------------------------------------------------
 
     private void AttackPlayer() {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        float distanceToPlayer = Vector3.Distance(Character.transform.position, player.transform.position);
         if (distanceToPlayer > attackDistance) return;
 
-        location = transform.position;
+        targetLocation = Character.transform.position;
         Debug.Log("Attack!");
         endTurn();
     }
 
     private void MoveToLocation() {
-        float distanceToLocation = Vector3.Distance(transform.position, location);
+        float distanceToLocation = Vector3.Distance(Character.transform.position, targetLocation);
         if (distanceToLocation < 0.01f) endTurn();
 
-        transform.LookAt(location, Vector3.up);
+        Character.transform.LookAt(targetLocation, Vector3.up);
 
         float step = moveSpeed * Time.deltaTime;
-        Debug.DrawLine(transform.position, location, moveColor);
-        transform.position = Vector3.MoveTowards(transform.position, location, step);
+        Debug.DrawLine(Character.transform.position, targetLocation, moveColor);
+        targetLocation.y = Character.transform.position.y;
+        Character.transform.position = Vector3.MoveTowards(Character.transform.position, targetLocation, step);
     }
 
     // ---------------------------------------------------------------------
