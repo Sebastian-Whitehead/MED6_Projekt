@@ -85,24 +85,23 @@ public class Enemy : MonoBehaviour {
 
     // ---------------------------------------------------------------------
     
-    private Vector3 GenerateRandomPoint(Vector3 startPoint, Vector3 min, Vector3 max) {
-        Vector3 newPoint = startPoint;
-        do {
-            float randomX = Mathf.Round(UnityEngine.Random.Range(min.x, max.x));
-            float randomZ = Mathf.Round(UnityEngine.Random.Range(min.z, max.z));
-            Vector3 randomPoint = new Vector3(randomX, 0, randomZ);
-            newPoint += randomPoint;
-        } while (!CheckPointInsideMap(newPoint));
-        return newPoint;
+
+    // https://answers.unity.com/questions/475066/how-to-get-a-random-point-on-navmesh.html
+    public Vector3 RandomNavmeshLocation(float radius) {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        UnityEngine.AI.NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
+            finalPosition = hit.position;            
+        }
+        return finalPosition;
     }
 
     private Vector3[] GenerateRandomPath(int pathLength) {
         Vector3[] path = new Vector3[pathLength];
-        Vector3 minDistance = new Vector3(-1, 0, -1) * moveDistance;
-        Vector3 maxDistance = new Vector3(1, 0, 1) * moveDistance;
-        Vector3 startPoint = Character.transform.position;
         for (int i = 0; i < pathLength; i++) {
-            Vector3 nextPoint = GenerateRandomPoint(startPoint, minDistance, maxDistance);
+            Vector3 nextPoint = RandomNavmeshLocation(1000f);
             path[i] = nextPoint;
         }
         return path;
@@ -119,16 +118,6 @@ public class Enemy : MonoBehaviour {
         return path;
         Debug.LogError("memberVariable must be set to point to a Transform.", transform);
         return new Vector3[0];
-    }
-
-    private bool CheckPointInsideMap(Vector3 point) {
-        float height = GetComponent<Renderer>().bounds.size.y * 2;
-        Vector3 targetPos = Vector3.down * height;
-        RaycastHit hit;
-        if (Physics.Raycast(point, targetPos, out hit, height)) {
-            if (hit.transform.tag == "Ground") return true;
-        }
-        return false;
     }
 
     private void DrawPath() {
@@ -152,8 +141,6 @@ public class Enemy : MonoBehaviour {
 
     private void Eyes() {
 
-        if (currentAction == Action.ChasePlayer) return;
-
         inc = Mathf.Max(2, inc);
         RaycastHit hit;
 
@@ -165,12 +152,14 @@ public class Enemy : MonoBehaviour {
 
             if (Physics.Raycast(Character.transform.position, targetPos, out hit, distance)) {
                 if (hit.transform.tag == "Player") {
-                    Debug.Log("Player spotted!");
                     currentAction = Action.ChasePlayer;
-                    endTurn();
+                    ChasePlayer();
                     return;
                 }
             }
+        }
+        if (currentAction == Action.ChasePlayer) {
+            currentAction = Action.ScoutArea;
         }
     }
 
@@ -218,7 +207,6 @@ public class Enemy : MonoBehaviour {
 
     private void Patroling() {
         targetLocation = patrolPoints[patrolPoint];
-        targetLocation.y = Character.transform.position.y;
 
         if (circlePatrole) {
             if (clockwise) {
@@ -236,11 +224,7 @@ public class Enemy : MonoBehaviour {
     }
 
     private void ScoutArea() {
-        Vector3 minDistance = new Vector3(-1, 0, -1) * moveDistance;
-        Vector3 maxDistance = new Vector3(1, 0, 1) * moveDistance;
-        Vector3 startPoint = Character.transform.position;
-        Vector3 nextLocation = GenerateRandomPoint(startPoint, minDistance, maxDistance);
-        targetLocation = nextLocation;
+        targetLocation = RandomNavmeshLocation(moveDistance);
     }
 
     private void LookAround() {
@@ -266,6 +250,7 @@ public class Enemy : MonoBehaviour {
 
         float step = moveSpeed * Time.deltaTime;
         Debug.DrawLine(Character.transform.position, targetLocation, moveColor);
+        targetLocation.y = Character.transform.position.y;
         Character.transform.position = Vector3.MoveTowards(Character.transform.position, targetLocation, step);
     }
 
