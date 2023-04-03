@@ -539,6 +539,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3888762690216862285, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888762690216862285, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
+      propertyPath: circlePatrole
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5701718752341716762, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
       propertyPath: m_Icon
       value: 
@@ -930,6 +938,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3888762690216862285, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3888762690216862285, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
+      propertyPath: circlePatrole
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5701718752341716762, guid: dcf7881fae1c974419560ea74d8ff590, type: 3}
       propertyPath: m_Icon
       value: 

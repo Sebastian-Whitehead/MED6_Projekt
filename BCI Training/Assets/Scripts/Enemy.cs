@@ -4,36 +4,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    [Header("Elements")]
-    public Transform Character;
-    public Transform Path;
 
-
-    [Header("Action attributes")]
+    [Header("Action")]
     public Action currentAction = Action.Patrole;
     public bool startTurn = false;
     private bool executing = false;
     private GameObject player;
 
-    [Header("Character attributes")]
+    [Header("Character")]
     public float maxHealth = 10f;
-    public int moveSpeed = 2;
-    public int moveDistance = 2;
     public float attackDistance = 1f;
     public float damage = 2f;
     private float health;
     
-    [Header("View attributes")]
+    [Header("View")]
     [Range(2, 15)] public int inc = 5;
     [Range(1, 180)] public int FOV = 25;
     [Range(0f, 10f)] public float distance = 10f;
     
-    [Header("Movement attributes")]
-    private Vector3 location;
+    [Header("Movement")]
+    public int moveSpeed = 2;
+    public int moveDistance = 2;
+    private Vector3 targetLocation;
     private int patrolPoint = 1;
     private Vector3[] patrolPoints;
-    private bool circlePatrole = false;
+    public bool circlePatrole = false;
+    private bool clockwise = true;
+    
+    [Header("Debug")]
     Color viewColor, moveColor;
+
+    [Header("Elements")]
+    public Transform Character;
+    public Transform Path;
 
 
     public enum Action {
@@ -210,19 +213,26 @@ public class Enemy : MonoBehaviour {
     // ---------------------------------------------------------------------
 
     private void Idle() {
-        location = Character.transform.position;
+        targetLocation = Character.transform.position;
     }
 
     private void Patroling() {
-        location = patrolPoints[patrolPoint];
-        location.y = Character.transform.position.y;
+        targetLocation = patrolPoints[patrolPoint];
+        targetLocation.y = Character.transform.position.y;
 
-        float distanceToPatrolPoint = Vector3.Distance(Character.transform.position, location);
-        if (++patrolPoint >= patrolPoints.Length) patrolPoint = 0;
+        if (circlePatrole) {
+            if (clockwise) {
+                if (++patrolPoint >= patrolPoints.Length - 1) clockwise = false;
+            } else {
+                if (--patrolPoint <= 0) clockwise = true;
+            }
+        } else {
+            if (++patrolPoint >= patrolPoints.Length) patrolPoint = 0;
+        }
     }
 
     private void ChasePlayer() {
-        location = player.transform.position;
+        targetLocation = player.transform.position;
     }
 
     private void ScoutArea() {
@@ -230,11 +240,11 @@ public class Enemy : MonoBehaviour {
         Vector3 maxDistance = new Vector3(1, 0, 1) * moveDistance;
         Vector3 startPoint = Character.transform.position;
         Vector3 nextLocation = GenerateRandomPoint(startPoint, minDistance, maxDistance);
-        location = nextLocation;
+        targetLocation = nextLocation;
     }
 
     private void LookAround() {
-        location = Character.transform.position;
+        targetLocation = Character.transform.position;
     }
 
     // ---------------------------------------------------------------------
@@ -243,20 +253,20 @@ public class Enemy : MonoBehaviour {
         float distanceToPlayer = Vector3.Distance(Character.transform.position, player.transform.position);
         if (distanceToPlayer > attackDistance) return;
 
-        location = Character.transform.position;
+        targetLocation = Character.transform.position;
         Debug.Log("Attack!");
         endTurn();
     }
 
     private void MoveToLocation() {
-        float distanceToLocation = Vector3.Distance(Character.transform.position, location);
+        float distanceToLocation = Vector3.Distance(Character.transform.position, targetLocation);
         if (distanceToLocation < 0.01f) endTurn();
 
-        Character.transform.LookAt(location, Vector3.up);
+        Character.transform.LookAt(targetLocation, Vector3.up);
 
         float step = moveSpeed * Time.deltaTime;
-        Debug.DrawLine(Character.transform.position, location, moveColor);
-        Character.transform.position = Vector3.MoveTowards(Character.transform.position, location, step);
+        Debug.DrawLine(Character.transform.position, targetLocation, moveColor);
+        Character.transform.position = Vector3.MoveTowards(Character.transform.position, targetLocation, step);
     }
 
     // ---------------------------------------------------------------------
