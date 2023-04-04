@@ -61,6 +61,14 @@ public class Enemy : MonoBehaviour {
         currentAction = nextAction;
     }
 
+    public bool Executing() {
+        return executing;
+    }
+
+    public bool Active() {
+        return startTurn;
+    }
+
     // ---------------------------------------------------------------------
 
     // Start is called before the first frame update
@@ -116,8 +124,6 @@ public class Enemy : MonoBehaviour {
             path[i] = position;
         }
         return path;
-        Debug.LogError("memberVariable must be set to point to a Transform.", transform);
-        return new Vector3[0];
     }
 
     private void DrawPath() {
@@ -190,6 +196,14 @@ public class Enemy : MonoBehaviour {
         }
         startTurn = false;
         executing = true;
+    }
+    
+    public IEnumerator EnableAfterDelay() {
+        startTurn = true;
+        executing = true;
+        while (executing) {
+            yield return null;
+        }
     }
 
     private void ExecuteAction() {
