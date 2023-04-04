@@ -45,7 +45,7 @@ public class Triggeani : MonoBehaviour
         //_direction = new Vector3(0, 0, horizontalInput) * _speed;
         Vector3 velocity = direction * _speed;
 
-        _controller.Move(velocity * Time.deltaTime);
+        //_controller.Move(velocity * Time.deltaTime);
         anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
         if (velocity.x != 0){
             isMoving = true;
