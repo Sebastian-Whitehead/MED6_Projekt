@@ -1170,9 +1170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTurn: 0
-  individualTurn: 0
+  collectiveTurn: 0
   enemyHolder: {fileID: 742554048}
-  playerHolder: {fileID: 0}
+  playerHolder: {fileID: 20318632}
 --- !u!4 &1973935217
 Transform:
   m_ObjectHideFlags: 0
