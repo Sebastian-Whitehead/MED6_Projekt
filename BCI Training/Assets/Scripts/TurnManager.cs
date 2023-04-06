@@ -15,15 +15,13 @@ public class TurnManager : MonoBehaviour {
         Enemies
     }
 
-    public Transform enemyHolder;
-    public Transform playerHolder;
     private Enemy[] enemies;
     private Player player;
 
     // Start is called before the first frame update
     void Awake() {
-        enemies = enemyHolder.GetComponentsInChildren<Enemy>();
-        player = playerHolder.GetComponent<Player>();
+        enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -49,7 +47,6 @@ public class TurnManager : MonoBehaviour {
             player.StartTurn();
             return;
         }
-        player.endTurn();
     }
 
     void EnemiesCollectiveTurn() {
