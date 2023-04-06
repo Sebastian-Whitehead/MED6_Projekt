@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Unit
 {
 
-    public new Action action = Action.Patrole;
+    public new Action action = Action.Patroling;
 
     [Header("Patrole")]
     private int patrolPoint = 1;
@@ -16,11 +16,11 @@ public class Enemy : Unit
     public new enum Action
     {
         Idle,
-        Patrole,
-        ChaseTarget,
-        ScoutArea,
-        LookAround,
-        Investegate,
+        Patroling,
+        Chasing,
+        ScoutingArea,
+        LookingAround,
+        Investegating,
     }
 
     // ---------------------------------------------------------------------
@@ -38,6 +38,7 @@ public class Enemy : Unit
     {
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
+        AtLocation();
     }
 
     protected override void ChildUpdate()
@@ -45,14 +46,24 @@ public class Enemy : Unit
         DrawPatrole();
     }
 
-    public void ActionSelect()
+    protected override void AtLocation()
     {
-        Idle();
-        ChaseTarget();
-        Patroling();
-        ScoutArea();
-        LookAround();
-        execute = true;
+        switch (action) {
+            case Action.Investegating:
+                ScoutArea();
+                break;
+            case Action.ScoutingArea:
+                Patrole();
+                break;
+            case Action.Patroling:
+                Patrole();
+                break;
+        }
+    }
+
+    protected override void UnitGone()
+    {   
+        if (action != Action.Chasing) Investegate(targetLocation);
     }
 
     // ---------------------------------------------------------------------
@@ -108,7 +119,7 @@ public class Enemy : Unit
 
         viewColor = Color.green;
         moveColor = Color.blue;
-        if (action == Action.ChaseTarget)
+        if (action == Action.Chasing)
         {
             viewColor = Color.red;
             moveColor = Color.red;
@@ -125,16 +136,10 @@ public class Enemy : Unit
         }
     }
 
-    protected override void UnitGone()
-    {
-        action = Action.ScoutArea;
-    }
-
     // ---------------------------------------------------------------------
 
-    private void Patroling()
+    private void Patrole()
     {
-        if (action != Action.Patrole) return;
         targetLocation = patrolPoints[patrolPoint];
         if (circlePatrole)
         {
@@ -155,19 +160,19 @@ public class Enemy : Unit
 
     private void Investegate(Vector3 position)
     {
-        action = Action.Investegate;
+        action = Action.Investegating;
         targetLocation = position;
     }
 
     private void ScoutArea()
-    {
-        if (action != Action.ScoutArea) return;
+    {   
+        action = Action.ScoutingArea;
         targetLocation = RandomNavmeshLocation(moveDistance);
     }
 
     private void LookAround()
     {
-        if (action != Action.LookAround) return;
+        action = Action.LookingAround;
         targetLocation = transform.position;
     }
 }

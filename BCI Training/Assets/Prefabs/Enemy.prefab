@@ -338,13 +338,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
-  attackDistance: 1
+  attackRange: 1
   damage: 2
   health: 10
   alive: 1
   inc: 5
   FOV: 25
-  distance: 10
+  distance: 5
   targetName: Player
   moveSpeed: 5
   moveDistance: 2

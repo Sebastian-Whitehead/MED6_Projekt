@@ -47,7 +47,7 @@ public class TurnManager : MonoBehaviour
 
     private void PlayerTurn()
     {
-        if (player.Executing() || !wait) return;
+        if (player.Active() || !wait) return;
         EndTurn();
     }
 
@@ -55,14 +55,14 @@ public class TurnManager : MonoBehaviour
     {
         foreach (Enemy enemy in enemies)
         {
-            enemy.StartTurn();
+            enemy.Activate();
         }
     }
 
     private void EnemiesSeparateTurn()
     {
         Enemy enemy = enemies[enemyTurn];
-        if (!enemy.Executing() && wait)
+        if (!enemy.Active() && wait)
         {
             wait = false;
             if (++enemyTurn >= enemies.Length)
@@ -74,7 +74,7 @@ public class TurnManager : MonoBehaviour
             return;
         }
         if (wait) return;
-        enemy.ActionSelect();
+        enemy.Activate();
         Wait();
     }
 

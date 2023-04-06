@@ -10,7 +10,7 @@ public class Player : Unit
     public new enum Action
     {
         Idle,
-        ChaseTarget
+        Chasing
     }
 
     Transform _transform;
@@ -48,11 +48,12 @@ public class Player : Unit
     {
         Debug.Log("Set target: " + tmpTarget.name);
         targetLocation = tmpTarget.position;
-        action = Action.ChaseTarget;
-        StartExecute();
+        action = Action.Chasing;
+        Activate();
     }
 
     protected override void UnitGone() { }
+    protected override void AtLocation() {}
 
     IEnumerator GridMove(Vector3 destination)
     {

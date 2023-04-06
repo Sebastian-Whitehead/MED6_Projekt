@@ -7,7 +7,7 @@ public abstract class Unit : MonoBehaviour
 
     protected TurnManager turnManager;
 
-    public enum Action { Idle, ChaseTarget };
+    public enum Action { Idle, Chasing };
     protected Action action;
 
     [Header("Character")]
@@ -33,13 +33,13 @@ public abstract class Unit : MonoBehaviour
     protected Color viewColor, moveColor;
 
     [Header("Manager")]
-    public bool active = false;
-    protected bool execute = false;
+    protected bool active = false;
 
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
     protected abstract void UnitGone();
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
+    protected abstract void AtLocation();
 
     void Awake()
     {
@@ -79,21 +79,17 @@ public abstract class Unit : MonoBehaviour
             {
                 if (hit.transform.tag == targetName)
                 {
-                    action = Action.ChaseTarget;
-                    target = hit.transform.GetComponent<Unit>();
+                    ChaseTarget(hit.transform);
                     return;
                 }
             }
         }
-        if (action == Action.ChaseTarget)
-        {
-            UnitGone();
-        }
+        UnitGone();
     }
 
     protected void ExecuteAction()
     {
-        if (!execute) return;
+        if (!active) return;
         MoveToLocation();
         AttackTarget();
     }
@@ -101,7 +97,10 @@ public abstract class Unit : MonoBehaviour
     protected void MoveToLocation()
     {
         float distanceToLocation = Vector3.Distance(transform.position, targetLocation);
-        if (distanceToLocation < 0.01f) EndExecute();
+        if (distanceToLocation < 0.01f) {
+            Deactivate();
+            AtLocation();
+        }
 
         transform.LookAt(targetLocation, Vector3.up);
 
@@ -113,14 +112,15 @@ public abstract class Unit : MonoBehaviour
 
     protected void Idle()
     {
-        if (action != Action.Idle) return;
+        action = Action.Idle;
         targetLocation = transform.position;
     }
 
-    protected void ChaseTarget()
+    protected void ChaseTarget(Transform tmpTarget)
     {
-        if (action != Action.ChaseTarget) return;
-        targetLocation = target.transform.position;
+        action = Action.Chasing;
+        target = tmpTarget.GetComponent<Unit>();
+        targetLocation = tmpTarget.position;
     }
 
     private void AttackTarget()
@@ -133,40 +133,20 @@ public abstract class Unit : MonoBehaviour
         Unit unit = target.GetComponentInParent<Unit>();
         unit.TakeDamage(transform.position, damage);
         Debug.Log("Attack!");
-        EndExecute();
+        Deactivate();
     }
 
     // ---------------------------------------------------------------------
 
-    public void StartTurn()
+    public void Activate()
     {
         active = true;
-    }
-
-    public void StartExecute()
-    {
-        execute = true;
         turnManager.Wait();
     }
 
-    public void EndExecute()
+    public void Deactivate()
     {
-        execute = false;
-    }
-
-    public void EndTurn()
-    {
-        turnManager.EndTurn();
-    }
-
-    public void SetAction(Action nextAction)
-    {
-        action = nextAction;
-    }
-
-    public bool Executing()
-    {
-        return execute;
+        active = false;
     }
 
     public bool Active()
