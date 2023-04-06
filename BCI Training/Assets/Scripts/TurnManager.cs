@@ -2,74 +2,102 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour {
+public class TurnManager : MonoBehaviour
+{
 
-    public Turn currentTurn = Turn.Idle;
+    public Turn turn = Turn.Player;
     public bool collectiveTurn = false;
     private int enemyTurn = 0;
     private bool wait = false;
 
-    public enum Turn {
+    public enum Turn
+    {
         Idle,
         Player,
         Enemies
     }
 
     private Enemy[] enemies;
-    private Player player;
+    private Unit player;
 
-    // Start is called before the first frame update
-    void Awake() {
+    void Awake()
+    {
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Player").GetComponent<Unit>();
     }
 
-    // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         TurnSwitch();
     }
 
-    void TurnSwitch() {
-        switch (currentTurn) {
+    private void TurnSwitch()
+    {
+        switch (turn)
+        {
             case Turn.Player:
                 PlayerTurn();
-            break;
+                break;
             case Turn.Enemies:
                 if (collectiveTurn) EnemiesCollectiveTurn();
                 else EnemiesSeparateTurn();
-            break;
-
+                break;
         }
     }
 
-    void PlayerTurn() {
-        if (!player.Executing()) {
-            player.StartTurn();
-            return;
-        }
+    private void PlayerTurn()
+    {
+        if (player.Executing() || !wait) return;
+        EndTurn();
     }
 
-    void EnemiesCollectiveTurn() {
-        foreach (Enemy enemy in enemies) {
+    private void EnemiesCollectiveTurn()
+    {
+        foreach (Enemy enemy in enemies)
+        {
             enemy.StartTurn();
         }
-        currentTurn = Turn.Idle;
     }
 
-    void EnemiesSeparateTurn() {
+    private void EnemiesSeparateTurn()
+    {
         Enemy enemy = enemies[enemyTurn];
-        Debug.Log(enemyTurn);
-        if (!enemy.Executing() && wait) {
+        if (!enemy.Executing() && wait)
+        {
             wait = false;
-            if (++enemyTurn >= enemies.Length) {
-                currentTurn = Turn.Idle;
+            if (++enemyTurn >= enemies.Length)
+            {
+                EndTurn();
                 enemyTurn = 0;
                 return;
             }
             return;
         }
         if (wait) return;
-        enemy.StartTurn();
+        enemy.ActionSelect();
+        Wait();
+    }
+
+    // ---------------------------------------------------------------------
+
+    public void EndTurn()
+    {
+        // TODO: Wait for seconds
+
+        switch (turn)
+        {
+            case Turn.Player:
+                turn = Turn.Enemies;
+                break;
+            case Turn.Enemies:
+                turn = Turn.Player;
+                break;
+        }
+        wait = false;
+    }
+
+    public void Wait()
+    {
         wait = true;
     }
 }

@@ -25,6 +25,5 @@ public class Tiles : MonoBehaviour
   void OnMouseExit(){
    rend.material.color = even ? subColor : baseColor;
       Debug.Log("Exit");
-      
    }
 }
