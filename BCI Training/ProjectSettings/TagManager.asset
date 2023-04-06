@@ -43,3 +43,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Empty Hearts
+    uniqueID: 3661782833
+    locked: 0
+  - name: Heart Parts
+    uniqueID: 1307377193
+    locked: 0

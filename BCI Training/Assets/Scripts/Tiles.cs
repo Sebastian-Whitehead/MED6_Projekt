@@ -18,12 +18,13 @@ public class Tiles : MonoBehaviour
    }
 
    void OnMouseEnter(){
-      Debug.Log("Enter");
+      //Debug.Log("Enter");
       rend.material.color = HoverColor;
    }
   
   void OnMouseExit(){
    rend.material.color = even ? subColor : baseColor;
-      Debug.Log("Exit");
+      //Debug.Log("Exit");
+      
    }
 }
