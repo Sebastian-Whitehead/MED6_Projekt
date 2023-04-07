@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Unit : MonoBehaviour
-{
+public abstract class Unit : Movement {
 
     protected TurnManager turnManager;
 
@@ -21,7 +20,7 @@ public abstract class Unit : MonoBehaviour
     [Range(2, 15)] public int inc = 5;
     [Range(1, 180)] public int FOV = 25;
     [Range(0f, 10f)] public float distance = 10f;
-    public string targetName;
+    public string targetTag;
     protected Vector3 targetLocation;
     protected Unit target;
 
@@ -44,7 +43,7 @@ public abstract class Unit : MonoBehaviour
     void Awake()
     {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
-        target = GameObject.FindGameObjectWithTag(targetName).GetComponent<Unit>();
+        target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
         health = maxHealth;
         ChildAwake();
     }
@@ -77,7 +76,7 @@ public abstract class Unit : MonoBehaviour
 
             if (Physics.Raycast(transform.position, targetPos, out hit, distance))
             {
-                if (hit.transform.tag == targetName)
+                if (hit.transform.tag == targetTag)
                 {
                     ChaseTarget(hit.transform);
                     return;
