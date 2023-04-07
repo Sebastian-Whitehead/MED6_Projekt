@@ -2,42 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : TacticsMove
-{
-
+public class PlayerMove : TacticsMove {
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Init();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(!isMoving){
-            BFS();
-            MouseClick();
-        }
-        else{
-          Move();
+    protected void MoveToGrid(Collider collider) {
+        if (collider.tag == "Tile") {
+            Tile t = collider.GetComponent<Tile>();
+            if (t.selectable){
+                MoveTo(t);
+            }
         }
     }
 
+    
 
-    void MouseClick(){
-        if (Input.GetMouseButtonUp(0)){
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit)){
-                if (hit.collider.tag == "Tile"){
-                    Tile t = hit.collider.GetComponent<Tile>();
-                    if(t.selectable){
-                     MoveTo(t);
-                    }
-                }
-            }
-        }
+    protected Tile GetTileAtPosition(Vector3 position) {
+        RaycastHit hit;
+        if (!Physics.Raycast(position, -Vector3.up, out hit, 1)) return null;
+        return hit.collider.GetComponent<Tile>();
     }
 }

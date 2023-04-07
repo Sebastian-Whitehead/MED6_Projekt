@@ -7,11 +7,8 @@ public class TacticsMove : MonoBehaviour
 
     List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
     GameObject[] tiles;
-    Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
-    Tile currentTile; //tile player is standing on
-
-
-
+    protected Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
+    protected Tile currentTile; //tile player is standing on
 
     public bool isMoving = false;
     public int moveRange = 5; //move tiles pr turn
@@ -49,7 +46,7 @@ public class TacticsMove : MonoBehaviour
         }
     }
 
-    public void BFS(){
+    public void BFS() {
         ComputeAdjency();
         GetcurrentTile();
 
@@ -80,20 +77,18 @@ public class TacticsMove : MonoBehaviour
 
     public void MoveTo(Tile tile){
         path.Clear();
-        tile.targetTile = true;
         isMoving = true;
+        tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null){ //when end = null, then we are at the starting tile.
             path.Push(endLocation);
             endLocation = endLocation.parentTile;
         }
-       
-        
     }
 
-    public void Move(){ //move from one tile to the next. - each step in the path is a tile. 
+    public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
-        if (path.Count > 0){
+        if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
             Vector3 targetTile = t.transform.position;
 
@@ -107,18 +102,17 @@ public class TacticsMove : MonoBehaviour
 
                 transform.forward = direction;
                 transform.position += velocity * Time.deltaTime;
-            }
-            else {
+            } else {
+                
                 //Tile mid is reached
                 transform.position = targetTile;
-                path.Pop(); //remove that tile of the path, because we have reached it. 
+                path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
             }
-        }
-        else {
+        } else {
             RemoveSelectableTiles();
             isMoving = false;
-            Debug.Log("ok"); 
+            //Debug.Log("ok");
         }
     }
 
@@ -144,6 +138,4 @@ public class TacticsMove : MonoBehaviour
     public void SetHorizontVelocity(){
         velocity = direction * moveSpeed; //define velocity vector.
     }
-
-
 }

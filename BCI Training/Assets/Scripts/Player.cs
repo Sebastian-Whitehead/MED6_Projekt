@@ -6,8 +6,7 @@ public class Player : Unit {
 
     public new Action action = Action.Idle;
 
-    public new enum Action
-    {
+    public new enum Action {
         Idle,
         Chasing
     }
@@ -15,41 +14,41 @@ public class Player : Unit {
     protected override void ChildAwake() {
     }
 
-    protected override void ChildUpdate()
-    {
+    protected override void ChildUpdate() {
         CheckMouseClick();
     }
 
     void CheckMouseClick() {
+        offensive = false;
 
-        if (!Input.GetMouseButtonDown(0) || IsMoving()) return;
-        if (turnManager.turn != TurnManager.Turn.Player)
-        {
-            Debug.Log(turnManager.turn + " turn");
-            return;
-        }
+        if (!active) return;
+        if (!isMoving) BFS();
+        if (!Input.GetMouseButtonDown(0)) return;
+        if (turnManager.turn != TurnManager.Turn.Player) return;
         target = null;
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity)) return;
-        if (hit.collider.tag == "ground") StartCoroutine(GridMove(hit.point, moveSpeed));
-        else if (hit.collider.tag == targetTag) SetTarget(hit.collider.transform);
+        MoveToGrid(hit.collider);
+        SetTarget(hit.collider);
+        
+        Deactivate();
+        
     }
 
-    void SetTarget(Transform tmpTarget)
-    {
-        Debug.Log("Set target: " + tmpTarget.name);
-        targetLocation = tmpTarget.position;
+    void SetTarget(Collider collider) {
+        if (collider.tag != targetTag) return;
+        Debug.Log("Set target: " + collider.name);
+        targetLocation = collider.transform.position;
         action = Action.Chasing;
-        Activate();
+        offensive = true;
     }
 
     protected override void UnitGone() { }
-    protected override void AtLocation() {}
+    public override void AtLocation() {}
 
-    public override void TakeDamage(Vector3 hitPosition, float damageTaken)
-    {
+    public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;
         action = Action.Idle;
     }
