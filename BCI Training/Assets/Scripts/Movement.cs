@@ -9,11 +9,17 @@ public class Movement : MonoBehaviour {
     bool isMoving = false;
     float distanceThresh = 0.01f;
 
+    float moveSpeed = 2f;
+
     private void Awake() {
         _transform = GetComponent<Transform>();
     }
 
-    protected IEnumerator GridMove(Vector3 destination, float moveSpeed) {
+    public void Move(Vector3 target) {
+        StartCoroutine(GridMove(target));
+    }
+
+    protected IEnumerator GridMove(Vector3 destination) {
         isMoving = true;
 
         Vector3 movementVector = destination - _transform.position;
@@ -21,14 +27,14 @@ public class Movement : MonoBehaviour {
 
         //Move on the x coordinate
         target = _transform.position + new Vector3(movementVector.x, 0, 0);
-        yield return StartCoroutine(movingTo(target, moveSpeed));
+        yield return StartCoroutine(movingTo(target));
 
         //move z when done
         target = _transform.position + new Vector3(0, 0, movementVector.z);
-        yield return StartCoroutine(movingTo(target, moveSpeed));
+        yield return StartCoroutine(movingTo(target));
     }
 
-    protected IEnumerator movingTo(Vector3 destination, float moveSpeed) {
+    protected IEnumerator movingTo(Vector3 destination) {
         while (true)
         {
             _transform.position = Vector3.MoveTowards(_transform.position, destination, moveSpeed * Time.deltaTime);

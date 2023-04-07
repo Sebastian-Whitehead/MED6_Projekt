@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Unit : Movement {
+public abstract class Unit : PlayerMove {
 
     protected TurnManager turnManager;
 
@@ -15,6 +15,7 @@ public abstract class Unit : Movement {
     public float damage = 2f;
     public float health;
     public bool alive = true;
+    protected bool offensive = false;
 
     [Header("View")]
     [Range(2, 15)] public int inc = 5;
@@ -25,7 +26,6 @@ public abstract class Unit : Movement {
     protected Unit target;
 
     [Header("Movement")]
-    public int moveSpeed = 2;
     public int moveDistance = 2;
 
     [Header("Debug")]
@@ -38,7 +38,7 @@ public abstract class Unit : Movement {
     protected abstract void UnitGone();
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
-    protected abstract void AtLocation();
+    public abstract void AtLocation();
 
     void Awake()
     {
@@ -48,12 +48,13 @@ public abstract class Unit : Movement {
         ChildAwake();
     }
 
-    public void Update()
-    {
+    public void Update() {
         Alive();
         Eyes();
         ChildUpdate();
-        ExecuteAction();
+        if (!isMoving) return;
+        Move();
+        AttackTarget();
     }
 
     private void Alive()
@@ -67,17 +68,14 @@ public abstract class Unit : Movement {
         inc = Mathf.Max(2, inc);
         RaycastHit hit;
 
-        for (int angle = -FOV; angle <= FOV; angle += inc)
-        {
+        for (int angle = -FOV; angle <= FOV; angle += inc) {
             Vector3 targetPos = new Vector3(0, 0, 0);
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
 
             Debug.DrawRay(transform.position, targetPos, viewColor);
 
-            if (Physics.Raycast(transform.position, targetPos, out hit, distance))
-            {
-                if (hit.transform.tag == targetTag)
-                {
+            if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
+                if (hit.transform.tag == targetTag) {
                     ChaseTarget(hit.transform);
                     return;
                 }
@@ -86,19 +84,12 @@ public abstract class Unit : Movement {
         UnitGone();
     }
 
-    protected void ExecuteAction()
-    {
-        if (!active) return;
-        MoveToLocation();
-        AttackTarget();
-    }
-
     protected void MoveToLocation()
     {
         float distanceToLocation = Vector3.Distance(transform.position, targetLocation);
         if (distanceToLocation < 0.01f) {
-            Deactivate();
-            AtLocation();
+            //Deactivate();
+            //AtLocation();
         }
 
         transform.LookAt(targetLocation, Vector3.up);
@@ -120,10 +111,11 @@ public abstract class Unit : Movement {
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
         targetLocation = tmpTarget.position;
+        MoveTo(currentTile);
     }
 
-    private void AttackTarget()
-    {
+    private void AttackTarget() {
+        if (!offensive) return;
         if (target == null) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, target.transform.position);
@@ -131,7 +123,7 @@ public abstract class Unit : Movement {
 
         Unit unit = target.GetComponentInParent<Unit>();
         unit.TakeDamage(transform.position, damage);
-        Debug.Log("Attack!");
+        Debug.Log(transform.name + " attacking " + target.name);
         Deactivate();
     }
 
@@ -140,6 +132,7 @@ public abstract class Unit : Movement {
     public void Activate()
     {
         active = true;
+        AtLocation();
         turnManager.Wait();
     }
 

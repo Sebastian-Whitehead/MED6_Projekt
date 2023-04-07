@@ -26,18 +26,20 @@ public class TurnManager : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<Unit>();
     }
 
-    void Update()
-    {
+    void Update() {
         PlayerTurn();
         EnemiesCollectiveTurn();
         EnemiesSeparateTurn();
     }
 
-    private void PlayerTurn()
-    {
+    private void PlayerTurn() {
         if (turn != Turn.Player) return;
-        if (player.Active() || !wait) return;
-        EndTurn();
+        if (!player.Active() && !player.isMoving && wait) {
+            EndTurn();
+        }
+        if (wait) return;
+        player.Activate();
+        Wait();
     }
 
     private void EnemiesCollectiveTurn()
@@ -56,11 +58,10 @@ public class TurnManager : MonoBehaviour
         if (collectiveTurn) return;
         
         Enemy enemy = enemies[enemyTurn];
-        if (!enemy.Active() && wait)
-        {
+        if (!enemy.isMoving && wait) {
             wait = false;
-            if (++enemyTurn >= enemies.Length)
-            {
+            enemy.Deactivate();
+            if (++enemyTurn >= enemies.Length) {
                 EndTurn();
                 enemyTurn = 0;
                 return;

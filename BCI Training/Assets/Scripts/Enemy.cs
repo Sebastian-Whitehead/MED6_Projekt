@@ -25,8 +25,7 @@ public class Enemy : Unit
 
     // ---------------------------------------------------------------------
 
-    public override void TakeDamage(Vector3 hitPosition, float damageTaken)
-    {
+    public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;
         Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
@@ -38,16 +37,16 @@ public class Enemy : Unit
     {
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
-        AtLocation();
+        action = Action.Patroling;
+        offensive = true;
     }
 
-    protected override void ChildUpdate()
-    {
+    protected override void ChildUpdate() {
         DrawPatrole();
     }
 
-    protected override void AtLocation()
-    {
+    public override void AtLocation() {
+        BFS();
         switch (action) {
             case Action.Investegating:
                 ScoutArea();
@@ -59,11 +58,15 @@ public class Enemy : Unit
                 Patrole();
                 break;
         }
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        MoveTo(nextTile);
     }
 
     protected override void UnitGone()
     {   
-        if (action != Action.Chasing) Investegate(targetLocation);
+        if (action == Action.Chasing) {
+            Investegate(targetLocation);
+        }
     }
 
     // ---------------------------------------------------------------------
@@ -141,6 +144,7 @@ public class Enemy : Unit
     private void Patrole()
     {
         targetLocation = patrolPoints[patrolPoint];
+        action = Action.Patroling;
         if (circlePatrole)
         {
             if (clockwise)
@@ -162,17 +166,23 @@ public class Enemy : Unit
     {
         action = Action.Investegating;
         targetLocation = position;
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        //MoveTo(nextTile);
     }
 
     private void ScoutArea()
     {   
         action = Action.ScoutingArea;
         targetLocation = RandomNavmeshLocation(moveDistance);
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        //MoveTo(nextTile);
     }
 
     private void LookAround()
     {
         action = Action.LookingAround;
         targetLocation = transform.position;
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        //MoveTo(nextTile);
     }
 }
