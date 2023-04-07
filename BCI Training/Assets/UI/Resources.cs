@@ -17,6 +17,7 @@ public class Resources: MonoBehaviour
     {
         health = maxHealth;
         lastHealth = health;
+        shaker = GameObject.Find("Main Camera").GetComponent<Shake>();
     }
 
     // Update is called once per frame
