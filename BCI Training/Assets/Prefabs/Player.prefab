@@ -217,8 +217,7 @@ MonoBehaviour:
   inc: 5
   FOV: 25
   distance: 10
-  targetName: Enemy
+  targetTag: Enemy
   moveSpeed: 2
   moveDistance: 2
-  active: 0
   action: 1
