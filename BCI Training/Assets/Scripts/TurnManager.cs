@@ -28,31 +28,22 @@ public class TurnManager : MonoBehaviour
 
     void Update()
     {
-        TurnSwitch();
-    }
-
-    private void TurnSwitch()
-    {
-        switch (turn)
-        {
-            case Turn.Player:
-                PlayerTurn();
-                break;
-            case Turn.Enemies:
-                if (collectiveTurn) EnemiesCollectiveTurn();
-                else EnemiesSeparateTurn();
-                break;
-        }
+        PlayerTurn();
+        EnemiesCollectiveTurn();
+        EnemiesSeparateTurn();
     }
 
     private void PlayerTurn()
     {
+        if (turn != Turn.Player) return;
         if (player.Active() || !wait) return;
         EndTurn();
     }
 
     private void EnemiesCollectiveTurn()
     {
+        if (turn != Turn.Enemies) return;
+        if (!collectiveTurn) return;
         foreach (Enemy enemy in enemies)
         {
             enemy.Activate();
@@ -61,6 +52,9 @@ public class TurnManager : MonoBehaviour
 
     private void EnemiesSeparateTurn()
     {
+        if (turn != Turn.Enemies) return;
+        if (collectiveTurn) return;
+        
         Enemy enemy = enemies[enemyTurn];
         if (!enemy.Active() && wait)
         {
