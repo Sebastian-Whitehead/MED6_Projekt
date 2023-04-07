@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     public bool selectable = false; //The clickable tiles
     public bool isWalkable = true; 
 
-    public List<Tile> adjacentList = new List<Tile>();
+    public List<Tile> adjacentList = new List<Tile>();  //list for identifying the neighbors.
    
    //BFS variables
    public bool visisted = false; //The tile has been processed

@@ -16,11 +16,11 @@ public class PlayerMove : TacticsMove
     void Update()
     {
         if(!isMoving){
-            FindSelectableTilesBFS();
+            BFS();
             MouseClick();
         }
         else{
-           Move();
+          Move();
         }
     }
 
@@ -33,9 +33,8 @@ public class PlayerMove : TacticsMove
             if(Physics.Raycast(ray, out hit)){
                 if (hit.collider.tag == "Tile"){
                     Tile t = hit.collider.GetComponent<Tile>();
-
                     if(t.selectable){
-                        MoveTo(t);  
+                     MoveTo(t);
                     }
                 }
             }

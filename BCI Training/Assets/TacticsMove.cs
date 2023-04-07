@@ -5,6 +5,14 @@ using UnityEngine;
 public class TacticsMove : MonoBehaviour
 {
 
+    List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
+    GameObject[] tiles;
+    Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
+    Tile currentTile; //tile player is standing on
+
+
+
+
     public bool isMoving = false;
     public int moveRange = 5; //move tiles pr turn
     public float jumpHeight = 2; //drop down and jump 2 tiles
@@ -12,11 +20,7 @@ public class TacticsMove : MonoBehaviour
     float halfHeight = 0; 
     
     Vector3 velocity = new Vector3();
-    Vector3 direction = new Vector3();
-    List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
-    Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
-    Tile startTile; //tile player is standing on
-    GameObject[] tiles;
+    Vector3 direction = new Vector3(); //heading
 
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
@@ -25,11 +29,11 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void GetcurrentTile(){ //Find the tile currently under the player.
-        startTile = GetTargetTile(gameObject); //Target tile for the player.
-        startTile.current = true; //Change color from the Tile Script current variable.
+        currentTile = GetTargetTile(gameObject); //Target tile for the player.
+        currentTile.current = true; //Change color from the Tile Script current variable.
     }
 
-    public Tile GetTargetTile(GameObject target){
+    public Tile GetTargetTile(GameObject target){ 
         RaycastHit hit;
         Tile savedTile = null;
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1)){ //Locate the tile
@@ -38,26 +42,26 @@ public class TacticsMove : MonoBehaviour
         return savedTile;
     }
 
-    public void ComputeAdjency(float jumpHeight, Tile target){ //go thorugh each tile
+    public void ComputeAdjency(){ //go thorugh each tile
         foreach(GameObject tile in tiles){
             Tile t = tile.GetComponent<Tile>();
             t.IdentifyNeighbors(jumpHeight);
         }
     }
 
-    public void FindSelectableTilesBFS(){
-        ComputeAdjency(jumpHeight, null);
+    public void BFS(){
+        ComputeAdjency();
         GetcurrentTile();
 
         Queue<Tile> BFSsearch = new Queue<Tile>();
 
         //add currenttile to queue
-        BFSsearch.Enqueue(startTile);
-        startTile.visisted = true; //not wanna come backt to this.
-        //startTile.parentTile = null; //Find it later when backtracking.
+        BFSsearch.Enqueue(currentTile);
+        currentTile.visisted = true; //not wanna come backt to this.
+        //currentTile.parentTile = null; //Find it later when backtracking.
 
         while (BFSsearch.Count > 0 ){ //Continue until empty
-            Tile t = BFSsearch.Dequeue(); //process one tile
+            Tile t = BFSsearch.Dequeue(); //process one tile, pop off the front. 
             selectableTiles.Add(t);
             t.selectable = true;
 
@@ -65,6 +69,7 @@ public class TacticsMove : MonoBehaviour
                 foreach(Tile tile in t.adjacentList){ //Anything adjacent to it, will set the original tile as parent.
                     if (!tile.visisted){
                         tile.parentTile = t;
+                        tile.visisted = true;
                         tile.distance = 1 + t.distance; //can add 1 everytime in an arch away from the start tile
                         BFSsearch.Enqueue(tile); //add it to the queue.
                     }
@@ -77,12 +82,13 @@ public class TacticsMove : MonoBehaviour
         path.Clear();
         tile.targetTile = true;
         isMoving = true;
-
         Tile endLocation = tile; //target tile end location
         while (endLocation != null){ //when end = null, then we are at the starting tile.
             path.Push(endLocation);
             endLocation = endLocation.parentTile;
         }
+       
+        
     }
 
     public void Move(){ //move from one tile to the next. - each step in the path is a tile. 
@@ -119,9 +125,9 @@ public class TacticsMove : MonoBehaviour
 
     protected void RemoveSelectableTiles(){ //remove selectable tiles. no longer active. Reset them. Each of the tiles that has been selected as moveable will no longer be selected
         
-        if (startTile != null){
-            startTile.current = false; 
-            startTile = null;
+        if (currentTile != null){
+            currentTile.current = false; 
+            currentTile = null;
         }
         
         foreach(Tile tile in selectableTiles){ 
