@@ -345,9 +345,8 @@ MonoBehaviour:
   inc: 5
   FOV: 25
   distance: 5
-  targetName: Player
+  targetTag: Player
   moveSpeed: 5
   moveDistance: 2
-  active: 0
   action: 1
   circlePatrole: 0
