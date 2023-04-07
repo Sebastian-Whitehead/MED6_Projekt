@@ -5,8 +5,7 @@ using UnityEngine;
 public class PlayerMove : TacticsMove {
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         Init();
     }
 

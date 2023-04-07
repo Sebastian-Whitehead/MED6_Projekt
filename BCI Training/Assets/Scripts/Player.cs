@@ -19,11 +19,11 @@ public class Player : Unit {
     }
 
     void CheckMouseClick() {
+        offensive = false;
 
         if (!active) return;
         if (!isMoving) BFS();
         if (!Input.GetMouseButtonDown(0)) return;
-        offensive = false;
         if (turnManager.turn != TurnManager.Turn.Player) return;
         target = null;
 
@@ -38,12 +38,11 @@ public class Player : Unit {
     }
 
     void SetTarget(Collider collider) {
-        if (collider.tag == targetTag) 
+        if (collider.tag != targetTag) return;
         Debug.Log("Set target: " + collider.name);
         targetLocation = collider.transform.position;
         action = Action.Chasing;
         offensive = true;
-        Activate();
     }
 
     protected override void UnitGone() { }

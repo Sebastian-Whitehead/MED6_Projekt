@@ -34,43 +34,37 @@ public class TurnManager : MonoBehaviour
 
     private void PlayerTurn() {
         if (turn != Turn.Player) return;
+
         if (!player.Active() && !player.isMoving && wait) {
             EndTurn();
+            return;
         }
-        if (wait) return;
-        player.Activate();
-        Wait();
+        if (!wait) player.Activate();
     }
 
-    private void EnemiesCollectiveTurn()
-    {
+    private void EnemiesCollectiveTurn() {
         if (turn != Turn.Enemies) return;
         if (!collectiveTurn) return;
-        foreach (Enemy enemy in enemies)
-        {
+        foreach (Enemy enemy in enemies) {
             enemy.Activate();
         }
     }
 
-    private void EnemiesSeparateTurn()
-    {
+    private void EnemiesSeparateTurn() {
         if (turn != Turn.Enemies) return;
         if (collectiveTurn) return;
         
         Enemy enemy = enemies[enemyTurn];
-        if (!enemy.isMoving && wait) {
+        if (!enemy.Active() && !enemy.isMoving && wait) {
             wait = false;
-            enemy.Deactivate();
             if (++enemyTurn >= enemies.Length) {
-                EndTurn();
                 enemyTurn = 0;
+                EndTurn();
                 return;
             }
             return;
         }
-        if (wait) return;
-        enemy.Activate();
-        Wait();
+        if (!wait) enemy.Activate();
     }
 
     // ---------------------------------------------------------------------

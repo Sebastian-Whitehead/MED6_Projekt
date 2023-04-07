@@ -209,15 +209,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42f646b05846eef44abd5ad00eed9f33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: 0
+  moveRange: 5
+  jumpHeight: 2
+  moveSpeed: 2
   maxHealth: 10
   attackRange: 5
   damage: 2
   health: 0
   alive: 1
+  offensive: 0
   inc: 5
-  FOV: 25
+  FOV: 180
   distance: 10
   targetTag: Enemy
-  moveSpeed: 2
   moveDistance: 2
   action: 1

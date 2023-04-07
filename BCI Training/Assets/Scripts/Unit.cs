@@ -15,7 +15,7 @@ public abstract class Unit : PlayerMove {
     public float damage = 2f;
     public float health;
     public bool alive = true;
-    protected bool offensive = false;
+    public bool offensive = false;
 
     [Header("View")]
     [Range(2, 15)] public int inc = 5;
@@ -29,7 +29,8 @@ public abstract class Unit : PlayerMove {
     public int moveDistance = 2;
 
     [Header("Debug")]
-    protected Color viewColor, moveColor;
+    protected Color viewColor = Color.green;
+    protected Color moveColor;
 
     [Header("Manager")]
     protected bool active = false;
@@ -40,8 +41,7 @@ public abstract class Unit : PlayerMove {
     protected abstract void ChildUpdate();
     public abstract void AtLocation();
 
-    void Awake()
-    {
+    void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
         health = maxHealth;
@@ -52,19 +52,22 @@ public abstract class Unit : PlayerMove {
         Alive();
         Eyes();
         ChildUpdate();
-        if (!isMoving) return;
-        Move();
-        AttackTarget();
+        if (isMoving) {
+            Move();
+            AttackTarget();
+            if (path.Count <= 0) Deactivate();
+        }
     }
 
-    private void Alive()
-    {
+    private void Alive() {
         if (health > 0) return;
         alive = false;
     }
 
-    protected void Eyes()
-    {
+    protected void Eyes() {
+
+        if (!offensive) return;
+        
         inc = Mathf.Max(2, inc);
         RaycastHit hit;
 
@@ -84,22 +87,6 @@ public abstract class Unit : PlayerMove {
         UnitGone();
     }
 
-    protected void MoveToLocation()
-    {
-        float distanceToLocation = Vector3.Distance(transform.position, targetLocation);
-        if (distanceToLocation < 0.01f) {
-            //Deactivate();
-            //AtLocation();
-        }
-
-        transform.LookAt(targetLocation, Vector3.up);
-
-        float step = moveSpeed * Time.deltaTime;
-        Debug.DrawLine(transform.position, targetLocation, moveColor);
-        targetLocation.y = transform.position.y;
-        transform.position = Vector3.MoveTowards(transform.position, targetLocation, step);
-    }
-
     protected void Idle()
     {
         action = Action.Idle;
@@ -111,7 +98,7 @@ public abstract class Unit : PlayerMove {
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
         targetLocation = tmpTarget.position;
-        MoveTo(currentTile);
+        MoveTo(GetTileAtPosition(targetLocation));
     }
 
     private void AttackTarget() {

@@ -7,7 +7,7 @@ public class TacticsMove : MonoBehaviour
 
     List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
     GameObject[] tiles;
-    Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
+    protected Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
     protected Tile currentTile; //tile player is standing on
 
     public bool isMoving = false;
@@ -112,7 +112,7 @@ public class TacticsMove : MonoBehaviour
         } else {
             RemoveSelectableTiles();
             isMoving = false;
-            Debug.Log("ok");
+            //Debug.Log("ok");
         }
     }
 

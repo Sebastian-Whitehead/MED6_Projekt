@@ -58,8 +58,7 @@ public class Enemy : Unit
                 Patrole();
                 break;
         }
-        Tile nextTile = GetTileAtPosition(targetLocation);
-        MoveTo(nextTile);
+        MoveTo(GetTileAtPosition(targetLocation));
     }
 
     protected override void UnitGone()
@@ -97,19 +96,17 @@ public class Enemy : Unit
         return path;
     }
 
-    private Vector3[] GetManualPath()
-    {
+    private Vector3[] GetManualPath() {
         Transform PathObject = null;
-        foreach (Transform child in transform)
-        {
+        foreach (Transform child in transform) {
             if (child.name != "Path") continue;
             PathObject = child.transform;
         }
         if (PathObject == null) Debug.Log("No 'Path' found");
+
         Transform[] points = PathObject.GetComponentsInChildren<Transform>();
         Vector3[] path = new Vector3[points.Length];
-        for (int i = 0; i < points.Length; i++)
-        {
+        for (int i = 0; i < points.Length; i++) {
             Transform point = points[i];
             Vector3 position = point.transform.position;
             path[i] = position;
