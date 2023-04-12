@@ -110,12 +110,8 @@ GameObject:
   - component: {fileID: 6140743183125843600}
   - component: {fileID: 6140743183125843615}
   - component: {fileID: 6140743183125843603}
-<<<<<<< Updated upstream
-  m_Layer: 0
-=======
   - component: {fileID: 9160982866661872752}
   m_Layer: 3
->>>>>>> Stashed changes
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -230,10 +226,6 @@ MonoBehaviour:
   FOV: 5
   distance: 100
   targetTag: Enemy
-<<<<<<< Updated upstream
-  moveDistance: 2
-  action: 1
-=======
   active: 0
   PlayerLayer:
     serializedVersion: 2
@@ -767,4 +759,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> Stashed changes
