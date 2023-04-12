@@ -6,8 +6,17 @@ public abstract class Unit : PlayerMove {
 
     protected TurnManager turnManager;
 
-    public enum Action { Idle, Chasing };
-    protected Action action;
+    public enum Action {
+        Idle,
+        Patroling,
+        Attacking,
+        Searching,
+        Scouting,
+        Investegating
+    };
+    
+    public Action action;
+    protected bool hasAttacked = false;
 
     [Header("Character")]
     public float maxHealth = 10f;
@@ -20,116 +29,129 @@ public abstract class Unit : PlayerMove {
     [Header("View")]
     [Range(2, 15)] public int inc = 5;
     [Range(1, 180)] public int FOV = 25;
-    [Range(0f, 10f)] public float distance = 10f;
+    [Range(0f, 100f)] public float distance = 10f;
     public string targetTag;
     protected Vector3 targetLocation;
     protected Unit target;
-
-    [Header("Movement")]
-    public int moveDistance = 2;
 
     [Header("Debug")]
     protected Color viewColor = Color.green;
     protected Color moveColor;
 
     [Header("Manager")]
-    protected bool active = false;
-
+    public bool active = false;
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
     protected abstract void UnitGone();
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
-    public abstract void AtLocation();
+    public abstract void DecisionTree();
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
-        target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
+        //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
+        target = null;
         health = maxHealth;
         ChildAwake();
     }
 
     public void Update() {
-        Alive();
+        if (!alive) return;
         Eyes();
         ChildUpdate();
-        if (isMoving) {
-            Move();
-            AttackTarget();
-            if (path.Count <= 0) Deactivate();
-        }
+        AttackTarget();
+        DecisionTree();
+        if (!isMoving) return;
+        Move();
+        Deactivate();
+
     }
 
-    private void Alive() {
+    protected void Alive() {
+        health = Mathf.Max(health, 0);
         if (health > 0) return;
         alive = false;
+        Destroy(gameObject);
     }
 
-    protected void Eyes() {
-
+    private void Eyes() {
         if (!offensive) return;
         
         inc = Mathf.Max(2, inc);
         RaycastHit hit;
 
+        Vector3 dir = targetLocation - transform.position;
+        Debug.DrawRay(transform.position, dir, viewColor);
+
         for (int angle = -FOV; angle <= FOV; angle += inc) {
             Vector3 targetPos = new Vector3(0, 0, 0);
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
-
             Debug.DrawRay(transform.position, targetPos, viewColor);
-
-            if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
-                if (hit.transform.tag == targetTag) {
-                    ChaseTarget(hit.transform);
-                    return;
-                }
-            }
+            if (!Physics.Raycast(transform.position, targetPos, out hit, distance)) continue;
+            if (hit.transform.tag != targetTag) continue;
+            SetTarget(hit.transform);
+            return;
         }
         UnitGone();
     }
 
-    protected void Idle()
-    {
+    private void Idle() {
         action = Action.Idle;
         targetLocation = transform.position;
     }
 
-    protected void ChaseTarget(Transform tmpTarget)
-    {
-        action = Action.Chasing;
+    private void SetTarget(Transform tmpTarget) {
         target = tmpTarget.GetComponent<Unit>();
         targetLocation = tmpTarget.position;
-        MoveTo(GetTileAtPosition(targetLocation));
+        action = Action.Attacking;
+        Debug.Log(transform.name + " set target: " + target.name);
+        if (tag == "Enemy") {
+            Deactivate();
+        }
     }
 
     private void AttackTarget() {
-        if (!offensive) return;
+        if (hasAttacked) return;
+        if (action != Action.Attacking) return;
         if (target == null) return;
+        if (tag == "Enemy" && OutOfRange(targetLocation)) return;
 
-        float distanceToPlayer = Vector3.Distance(transform.position, target.transform.position);
-        if (distanceToPlayer > attackRange) return;
-
-        Unit unit = target.GetComponentInParent<Unit>();
-        unit.TakeDamage(transform.position, damage);
         Debug.Log(transform.name + " attacking " + target.name);
+        target.TakeDamage(transform.position, damage);
+        hasAttacked = true;
         Deactivate();
+    }
+
+    private bool OutOfRange(Vector3 targetPos) {
+        Vector3 playerPos = gameObject.transform.position;
+        float distance = Vector3.Distance(playerPos, targetPos);
+        if (distance > attackRange) {
+            Debug.Log("Out of range");
+            BFS();
+            MoveTo(GetTileAtPosition(targetPos)); 
+            return true;
+        }
+        return false; 
     }
 
     // ---------------------------------------------------------------------
 
-    public void Activate()
-    {
+    public void Activate() {
         active = true;
-        AtLocation();
+        hasAttacked = false;
+        steps = moveRange;
         turnManager.Wait();
     }
 
-    public void Deactivate()
-    {
-        active = false;
+    public void Deactivate() {
+        if ((tag == "Enemy" && (steps <= 0 || !isMoving)) || 
+        (tag == "Player" && steps <= 0) || hasAttacked) {
+            active = false;
+            isMoving = false;
+            steps = 0;
+        }
     }
 
-    public bool Active()
-    {
+    public bool Active() {
         return active;
     }
 }

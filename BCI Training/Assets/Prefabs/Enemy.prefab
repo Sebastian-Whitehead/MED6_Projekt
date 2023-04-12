@@ -337,16 +337,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec391bc2112cbe64ca986666ffb943ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< Updated upstream
+=======
+  isMoving: 0
+  moveRange: 3
+  jumpHeight: 2
+  moveSpeed: 5
+  steps: 0
+  action: 1
+>>>>>>> Stashed changes
   maxHealth: 10
   attackRange: 1
-  damage: 2
+  damage: 1
   health: 10
   alive: 1
+<<<<<<< Updated upstream
+=======
+  offensive: 1
+>>>>>>> Stashed changes
   inc: 5
   FOV: 25
   distance: 5
   targetTag: Player
+<<<<<<< Updated upstream
   moveSpeed: 5
   moveDistance: 2
   action: 1
+=======
+  active: 0
+>>>>>>> Stashed changes
   circlePatrole: 0

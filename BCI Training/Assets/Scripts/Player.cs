@@ -4,52 +4,56 @@ using UnityEngine;
 
 public class Player : Unit {
 
-    public new Action action = Action.Idle;
+    public LayerMask PlayerLayer;
 
-    public new enum Action {
-        Idle,
-        Chasing
-    }
-
-    protected override void ChildAwake() {
-    }
+    protected override void ChildAwake() { }
 
     protected override void ChildUpdate() {
         CheckMouseClick();
     }
 
-    void CheckMouseClick() {
-        offensive = false;
+    protected override void UnitGone() {}
+    public override void DecisionTree() {}
 
+    void CheckMouseClick() {
+        // if (turnManager.turn != TurnManager.Turn.Player) return;
         if (!active) return;
         if (!isMoving) BFS();
+        if (steps <= 0) Deactivate();
         if (!Input.GetMouseButtonDown(0)) return;
-        if (turnManager.turn != TurnManager.Turn.Player) return;
-        target = null;
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (!Physics.Raycast(ray, out hit, Mathf.Infinity)) return;
-        MoveToGrid(hit.collider);
-        SetTarget(hit.collider);
-        
-        Deactivate();
-        
+        if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
+        if (hit.collider.tag == targetTag) {
+            MarkTarget(hit.collider);
+            action = Action.Attacking;
+            return;
+        } else {
+            MoveToGrid(hit.collider);
+        }
     }
 
-    void SetTarget(Collider collider) {
-        if (collider.tag != targetTag) return;
-        Debug.Log("Set target: " + collider.name);
-        targetLocation = collider.transform.position;
-        action = Action.Chasing;
+    private void MarkTarget(Collider collider) {
+        Debug.Log("Mark: " + collider.name);
+        Vector3 targetPos = collider.transform.position;
+        transform.LookAt(targetPos, Vector3.up);
         offensive = true;
     }
 
-    protected override void UnitGone() { }
-    public override void AtLocation() {}
+    private float RangeChance(Vector3 targetPos) {
+        Vector3 playerPos = gameObject.transform.position;
+        float distance = Vector3.Distance(playerPos, targetPos);
+        float hitChance = 100 - Mathf.Pow(distance, 2);
+        return hitChance;
+    }
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;
-        action = Action.Idle;
+        //action = Action.Idle;
+    }
+
+    public void Reset() {
+        offensive = false;
+        target = null;
     }
 }

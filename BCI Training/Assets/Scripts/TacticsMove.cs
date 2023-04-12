@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TacticsMove : MonoBehaviour
-{
+public class TacticsMove : MonoBehaviour {
 
+    [Header("Movement")]
     List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
     GameObject[] tiles;
     protected Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
@@ -14,6 +14,7 @@ public class TacticsMove : MonoBehaviour
     public int moveRange = 5; //move tiles pr turn
     public float jumpHeight = 2; //drop down and jump 2 tiles
     public float moveSpeed = 2;
+    public int steps = 0;
     float halfHeight = 0; 
     
     Vector3 velocity = new Vector3();
@@ -21,7 +22,6 @@ public class TacticsMove : MonoBehaviour
 
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
-
         halfHeight = GetComponent<Collider>().bounds.extents.y;//Gives distance from tile to center of the player. Calculate where player is on the tile.
     }
 
@@ -47,6 +47,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void BFS() {
+
         ComputeAdjency();
         GetcurrentTile();
 
@@ -57,12 +58,15 @@ public class TacticsMove : MonoBehaviour
         currentTile.visisted = true; //not wanna come backt to this.
         //currentTile.parentTile = null; //Find it later when backtracking.
 
-        while (BFSsearch.Count > 0 ){ //Continue until empty
+        while (BFSsearch.Count > 0){ //Continue until empty
             Tile t = BFSsearch.Dequeue(); //process one tile, pop off the front. 
             selectableTiles.Add(t);
             t.selectable = true;
+            
+            int moveAble = steps;
+            if (tag == "Enemy") moveAble = 100;
 
-            if (t.distance < moveRange){
+            if (t.distance < moveAble){
                 foreach(Tile tile in t.adjacentList){ //Anything adjacent to it, will set the original tile as parent.
                     if (!tile.visisted){
                         tile.parentTile = t;
@@ -80,7 +84,7 @@ public class TacticsMove : MonoBehaviour
         isMoving = true;
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
-        while (endLocation != null){ //when end = null, then we are at the starting tile.
+        while (endLocation != null) { //when end = null, then we are at the starting tile.
             path.Push(endLocation);
             endLocation = endLocation.parentTile;
         }
@@ -88,6 +92,14 @@ public class TacticsMove : MonoBehaviour
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
+        if (!isMoving) return;
+        if (steps < 0) {
+            RemoveSelectableTiles();
+            isMoving = false;
+        }
+
+        Debug.Log(path.Count);
+
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
             Vector3 targetTile = t.transform.position;
@@ -96,7 +108,8 @@ public class TacticsMove : MonoBehaviour
             //We dont wanna walk into the tile, because then we will go into the ground, therefore we add halfheight and the tile height.. 
             targetTile.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
 
-            if (Vector3.Distance(transform.position, targetTile) >= 0.05f){
+            float dist = Vector3.Distance(transform.position, targetTile);
+            if (dist >= 0.05f){
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
 
@@ -108,9 +121,14 @@ public class TacticsMove : MonoBehaviour
                 transform.position = targetTile;
                 path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
+
+                if (path.Count > 0) {
+                    steps--;
+                    // Debug.Log("Steps: " + steps + ", Path: " + path.Count);
+                }
+                
             }
         } else {
-            RemoveSelectableTiles();
             isMoving = false;
             //Debug.Log("ok");
         }
