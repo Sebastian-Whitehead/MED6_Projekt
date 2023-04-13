@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMoving: 0
   moveRange: 5
+  maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 2
   maxHealth: 10
@@ -273,6 +274,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6140743183125843602}
     m_Modifications:
+    - target: {fileID: 989409807814337732, guid: 7c6ef5b430067aa44a06169360c77dcd, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 989409807814337733, guid: 7c6ef5b430067aa44a06169360c77dcd, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -360,6 +365,10 @@ PrefabInstance:
     - target: {fileID: 989409807814337753, guid: 7c6ef5b430067aa44a06169360c77dcd, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302536456406589271, guid: 7c6ef5b430067aa44a06169360c77dcd, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7c6ef5b430067aa44a06169360c77dcd, type: 3}
