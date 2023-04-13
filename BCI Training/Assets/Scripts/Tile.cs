@@ -20,8 +20,7 @@ public class Tile : MonoBehaviour
    public int distance = 0; //How far each tile is from start tile.
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (current){
             GetComponent<Renderer>().material.color = Color.yellow;
         }
