@@ -98,7 +98,7 @@ public class TacticsMove : MonoBehaviour {
             isMoving = false;
         }
 
-        Debug.Log(tag + ", " + path.Count);
+        // Debug.Log(tag + ", " + path.Count);
 
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
