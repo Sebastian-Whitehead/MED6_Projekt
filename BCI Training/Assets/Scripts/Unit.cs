@@ -34,6 +34,7 @@ public abstract class Unit : PlayerMove {
 
     [Header("Manager")]
     protected bool active = false;
+    private AudioManager audioManager;
 
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
     protected abstract void UnitGone();
@@ -46,6 +47,7 @@ public abstract class Unit : PlayerMove {
         target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
         health = maxHealth;
         ChildAwake();
+        audioManager = GetComponent<AudioManager>();
     }
 
     public void Update() {
@@ -62,6 +64,7 @@ public abstract class Unit : PlayerMove {
     private void Alive() {
         if (health > 0) return;
         alive = false;
+        audioManager.PlayCategory("Passive");
     }
 
     protected void Eyes() {
