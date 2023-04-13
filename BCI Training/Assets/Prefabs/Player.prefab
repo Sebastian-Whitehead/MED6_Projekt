@@ -111,7 +111,6 @@ GameObject:
   - component: {fileID: 6140743183125843615}
   - component: {fileID: 6140743183125843603}
   - component: {fileID: 9160982866661872752}
-  - component: {fileID: 394546010239236106}
   - component: {fileID: 5775878150265864375}
   - component: {fileID: 2125752014785996816}
   m_Layer: 0
@@ -270,20 +269,6 @@ MonoBehaviour:
   mana: 10
   maxMana: 10
   shaker: {fileID: 0}
---- !u!114 &394546010239236106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6140743183125843614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Category: 
-  AudioClips: []
 --- !u!114 &5775878150265864375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f17cc561acb9224a91a573c10ba5df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  passiveChange: 0
 --- !u!82 &2125752014785996816
 AudioSource:
   m_ObjectHideFlags: 0

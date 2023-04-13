@@ -437,6 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f17cc561acb9224a91a573c10ba5df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PassiveInterval: {x: 10, y: 20}
 --- !u!82 &780728418691133262
 AudioSource:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public abstract class Unit : PlayerMove {
     private void Alive() {
         if (health > 0) return;
         alive = false;
-        audioManager.PlayCategory("Passive");
+        audioManager.PlayCategory("Death");
     }
 
     protected void Eyes() {
