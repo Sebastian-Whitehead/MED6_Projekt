@@ -114,6 +114,7 @@ public abstract class Unit : PlayerMove {
         Unit unit = target.GetComponentInParent<Unit>();
         unit.TakeDamage(transform.position, damage);
         Debug.Log(transform.name + " attacking " + target.name);
+        audioManager.PlayCategory("Attack");
         Deactivate();
     }
 
