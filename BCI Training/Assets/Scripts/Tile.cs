@@ -19,12 +19,6 @@ public class Tile : MonoBehaviour
    //MOve backwards from the parent to identify the path.
    public int distance = 0; //How far each tile is from start tile.
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
