@@ -13752,6 +13752,14 @@ PrefabInstance:
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 5402339679136621297, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5402339680189547563, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6140743183125843602, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -13795,14 +13803,6 @@ PrefabInstance:
     - target: {fileID: 6140743183125843602, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6140743183125843603, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
-      propertyPath: FOV
-      value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 6140743183125843603, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
-      propertyPath: distance
-      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6140743183125843614, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
       propertyPath: m_Name

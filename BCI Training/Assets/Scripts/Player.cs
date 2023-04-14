@@ -11,7 +11,7 @@ public class Player : Unit {
         Chasing
     }
 
-    public Resources res;
+    private Resources res;
 
     protected override void ChildAwake() {
         res = GetComponent<Resources>();
