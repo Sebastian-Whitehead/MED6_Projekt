@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Unit : PlayerMove {
 
     protected TurnManager turnManager;
-
     public enum Action { Idle, Chasing };
     protected Action action;
 
