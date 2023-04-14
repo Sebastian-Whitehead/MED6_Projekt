@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 4033202952093204358}
   - component: {fileID: 5775878150265864375}
   - component: {fileID: 2125752014785996816}
+  - component: {fileID: 174017101173802004}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -228,9 +229,10 @@ MonoBehaviour:
   FOV: 180
   distance: 10
   targetTag: Enemy
+  excecute: 0
   action: 1
   state: 0
-  ConfirmBtn: {fileID: 6495027317920004733}
+  confirmBtn: {fileID: 6495027317920004733}
 --- !u!114 &9160982866661872752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +428,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &174017101173802004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140743183125843614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images: []
 --- !u!1001 &7094183942324419803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -530,7 +545,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 6264367966519310521, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
 --- !u!114 &5402339678164845847 stripped
 MonoBehaviour:

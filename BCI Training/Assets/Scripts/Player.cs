@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class Player : Unit {
 
-    public new Action action = Action.Idle;
+    // State the player is about to execute
     public State state = State.Idle;
-
     public enum State {
         Idle,
         Attack,
@@ -15,46 +14,59 @@ public class Player : Unit {
         Charge
     }
 
-    public new enum Action {
-        Idle,
-        Chasing
-    }
-
-    private Resources res;
-
-    public Button ConfirmBtn;
+    private Resources res; // Health and mana
+    public Button confirmBtn; // Execute action
     
     protected override void ChildAwake() {
-        ConfirmBtn.onClick.AddListener(ConfirmAction);
-        res = GetComponent<Resources>();
+        confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
+        res = GetComponent<Resources>(); // Get resources
     }
 
     protected override void ChildUpdate() {
-        res.Alive(audioManager);
-        CheckMouseClick();
+        res.Alive(audioManager); // Alive check
+        CheckMouseClick(); // Mouse click check
     }
 
+    // Check mouse click to move, attack
     void CheckMouseClick() {
 
-        if (!active) return;
-        if (!isMoving) BFS();
-        if (!Input.GetMouseButtonDown(0)) return;
+        if (turnManager.turn != TurnManager.Turn.Player) return; // Turn check
+        if (!active) return; // Check activity
+        if (!isMoving) BFS(); // Breath search to moveable location
+        if (!Input.GetMouseButtonDown(0)) return; // Click check
         
-        if (turnManager.turn != TurnManager.Turn.Player) return;
-        target = null;
-        excecute = false;
-        offensive = false;
+        target = null; // Enemy target
+        excecute = false; // Action execution
+        offensive = false; // Can attack enemies
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity)) return;
-        SetMoveTarget(hit.collider);
-        SetAttackTarget(hit.collider);
-        ActivateBtn();
+        SetMoveTarget(hit.collider); // Set tile to move to
+        SetAttackTarget(hit.collider); // Set enemy to attack
+        ActivateBtn(); // Activate confirm btn
+    }
+
+    private void ActivateBtn() {
+        if (state == State.Idle) return;
+        Debug.Log("Activate Confirm Btn");
+        confirmBtn.interactable = true;
+        ConfirmBtn conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
+        conBtn.UpdateSprite(state.ToString()); // Update confirm sprite
+    }
+
+    private void ConfirmAction() {
+        if (state == State.Idle) return;
+        Debug.Log("Confirm action");
+        excecute = true; // Execute action
+        confirmBtn.interactable = false; // Deactivate confirm btn
+        state = State.Idle; // Idle player
+        Deactivate(); // Deactivate player
     }
 
     void SetMoveTarget(Collider collider) {
         if (collider.tag == "Tile") {
+            Debug.Log("Set move: " + collider.name);
             state = State.Move;
             Tile t = collider.GetComponent<Tile>();
             if (t.selectable) MoveTo(t);
@@ -63,26 +75,11 @@ public class Player : Unit {
 
     void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
-        Debug.Log("Set target: " + collider.name);
-        targetLocation = collider.transform.position;
-        action = Action.Chasing;
+        Debug.Log("Set attack: " + collider.name);
+        // targetLocation = collider.transform.position; // Set target to enemy location
+        state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);
-        offensive = true;
-    }
-
-    private void ActivateBtn() {
-        if (state == State.Idle) return;
-        Debug.Log("Activate Confirm Btn");
-        ConfirmBtn.interactable = true; 
-    }
-
-    private void ConfirmAction() {
-        if (state == State.Idle) return;
-        Debug.Log("Confirm action");
-        excecute = true;
-        ConfirmBtn.interactable = false;
-        state = State.Idle;
-        Deactivate();
+        offensive = true; // Enable attack mode
     }
 
     protected override void UnitGone() { }
@@ -91,7 +88,6 @@ public class Player : Unit {
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         res.Damage(damageTaken);
         audioManager.PlayCategory("TakeDamage");
-        action = Action.Idle;
     }
 
     protected override bool AttackCheck() {
