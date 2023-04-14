@@ -5,6 +5,12 @@ using UnityEngine;
 public class TacticsMove : MonoBehaviour
 {
 
+<<<<<<< Updated upstream
+=======
+    public bool turn = false; 
+
+    [Header("Movement")]
+>>>>>>> Stashed changes
     List<Tile> selectableTiles = new List<Tile>(); //Set back to original tile point.
     GameObject[] tiles;
     protected Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
@@ -20,10 +26,13 @@ public class TacticsMove : MonoBehaviour
     Vector3 velocity = new Vector3();
     Vector3 direction = new Vector3(); //heading
 
+    public Tile AStarTargetTile;
+
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;//Gives distance from tile to center of the player. Calculate where player is on the tile.
+        NewTurnManager.AddUnit(this); //add unit to dictionary
     }
 
     public void GetcurrentTile(){ //Find the tile currently under the player.
@@ -40,15 +49,22 @@ public class TacticsMove : MonoBehaviour
         return savedTile;
     }
 
-    public void ComputeAdjency(){ //go thorugh each tile
-        foreach(GameObject tile in tiles){
+    public void ComputeAdjency(Tile target){ //go thorugh each tile
+      
+        foreach (GameObject tile in tiles)
+        {
             Tile t = tile.GetComponent<Tile>();
-            t.IdentifyNeighbors(jumpHeight);
+            t.IdentifyNeighbors(target);
         }
     }
 
     public void BFS() {
+<<<<<<< Updated upstream
         ComputeAdjency();
+=======
+
+        ComputeAdjency(null);
+>>>>>>> Stashed changes
         GetcurrentTile();
 
         Queue<Tile> BFSsearch = new Queue<Tile>();
@@ -89,6 +105,17 @@ public class TacticsMove : MonoBehaviour
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
+<<<<<<< Updated upstream
+=======
+        if (!isMoving) return;
+        if (steps <= 0) {
+            RemoveSelectableTiles();
+            isMoving = false;
+        }
+
+        Debug.Log(tag + ", " + path.Count);
+
+>>>>>>> Stashed changes
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
             Vector3 targetTile = t.transform.position;
@@ -114,6 +141,8 @@ public class TacticsMove : MonoBehaviour
             RemoveSelectableTiles();
             isMoving = false;
             //Debug.Log("ok");
+
+            NewTurnManager.EndTurn(); //Put combat function here.
         }
     }
 
@@ -138,5 +167,104 @@ public class TacticsMove : MonoBehaviour
 
     public void SetHorizontVelocity(){
         velocity = direction * moveSpeed; //define velocity vector.
+    }
+
+    protected Tile LowestF(List <Tile> list){ //find greatest potential of getting to where we are going.
+        Tile lowest = list[0];
+
+        foreach(Tile t in list){ //looking for the lowest f cost.
+            if (t.f < lowest.f){
+               lowest = t; 
+            }
+        }
+
+        list.Remove(lowest);
+        return lowest;
+
+    }
+
+    protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and calc path at max move distance
+        Stack<Tile> TempPath = new Stack<Tile>();
+
+        Tile next = t.parentTile;
+        while (next != null){ //Path from the tile next to the target back to start
+            TempPath.Push(next);
+            next = next.parentTile;
+        }
+
+        if (TempPath.Count <= moveRange){
+            return t.parentTile;
+        }
+        Tile lastTile = null;
+        for (int i = 0; i <= moveRange; i++){
+            lastTile = TempPath.Pop(); //pop each tile for number of moves
+            //when we pop the last one, we move to that tile
+        }
+        return lastTile;
+    }
+
+    protected void FindPath(Tile target){ //enemy astar
+        ComputeAdjency(target);
+        GetcurrentTile();
+        //Two lists, open and closed list.
+
+        List<Tile> openList = new List<Tile>(); //any tile that has not been processed
+        List<Tile> closedList = new List<Tile>(); //every tile that has been processed, not done until the target tile is in this list.
+    
+        openList.Add(currentTile);
+        //leave the start null, to quickly find it 
+        currentTile.heuristicCost = Vector3.Distance(currentTile.transform.position, target.transform.position);
+        currentTile.f = currentTile.heuristicCost;
+
+        while (openList.Count > 0){ //loop the open list. if we hit 0, without getting to the tile, we have no path
+            Tile t = LowestF(openList); 
+
+            closedList.Add(t); //add to closed list, we have found the closest route to this t.
+
+            if (t == target){ //cannot step on target, because there is a unit, stop algorithm 1 node before end
+                AStarTargetTile = FindLastTile(t);
+                MoveTo(AStarTargetTile);
+                return;
+            }
+
+            foreach (Tile tile in t.adjacentList){ //process all the neighbors, assumming we are not at the target tile
+                //3 cases for a node, the tile is in the closed list, open list or not in any lists.
+                if(closedList.Contains(tile)){
+                    //do nothing
+
+                }
+                else if (openList.Contains(tile)){ //found way to a tile already in the list, meaning we found 2 or more routes to the same tile. check which is faster from prev parent
+                    //compare g scores
+                    float temporaryG = t.gCost + Vector3.Distance(tile.transform.position, t.transform.position);
+
+                    if (temporaryG < tile.gCost){ //if this is the case, then it is faster
+                        tile.parentTile = t;
+                        tile.gCost = temporaryG;
+                        tile.f = tile.gCost + tile.heuristicCost;
+                    }    
+                }
+
+                else{ //add the new node, calculate cost
+                    tile.parentTile = t;
+                    
+                    tile.gCost = t.gCost + Vector3.Distance(tile.transform.position, t.transform.position);
+                    tile.heuristicCost = Vector3.Distance(tile.transform.position, target.transform.position);
+                    tile.f = tile.gCost + tile.heuristicCost;
+
+                    openList.Add(tile);
+                }
+            }
+
+        }
+        //problem - what to do if there is no path.
+        Debug.Log("Path not found");
+    }
+
+    public void TurnBegin(){
+        turn = true;
+    }
+
+    public void TurnEnd(){
+        turn = false;
     }
 }

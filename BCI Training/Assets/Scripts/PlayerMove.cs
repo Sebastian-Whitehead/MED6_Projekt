@@ -9,6 +9,11 @@ public class PlayerMove : TacticsMove {
         Init();
     }
 
+    void Update(){
+       if (!turn){
+        return;
+       }
+    }
     protected void MoveToGrid(Collider collider) {
         if (collider.tag == "Tile") {
             Tile t = collider.GetComponent<Tile>();

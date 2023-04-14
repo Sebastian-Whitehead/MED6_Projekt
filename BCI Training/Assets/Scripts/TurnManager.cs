@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TurnManager : MonoBehaviour
+public class TurnManager : TacticsMove
 {
 
     public Turn turn = Turn.Player;
@@ -27,13 +27,18 @@ public class TurnManager : MonoBehaviour
     }
 
     void Update() {
-        PlayerTurn();
+        PlayerTurnF();
         EnemiesCollectiveTurn();
         EnemiesSeparateTurn();
     }
 
+<<<<<<< Updated upstream
     private void PlayerTurn() {
         if (turn != Turn.Player) return;
+=======
+    private void PlayerTurnF() {
+        if (!playerTurn) return;
+>>>>>>> Stashed changes
 
         if (!player.Active() && !player.isMoving && wait) {
             EndTurn();
@@ -54,18 +59,17 @@ public class TurnManager : MonoBehaviour
         if (turn != Turn.Enemies) return;
         if (collectiveTurn) return;
         
-        Enemy enemy = enemies[enemyTurn];
-        if (!enemy.Active() && !enemy.isMoving && wait) {
-            wait = false;
-            if (++enemyTurn >= enemies.Length) {
-                enemyTurn = 0;
-                EndTurn();
-                return;
-            }
-            return;
+        if (!isMoving){
+            FindPlayer();
+            CalculatePath();
+            BFS();
+            AStarTargetTile.targetTile = true; 
         }
-        if (!wait) enemy.Activate();
+        else{
+            Move();
+        }
     }
+
 
     // ---------------------------------------------------------------------
 
@@ -89,4 +93,31 @@ public class TurnManager : MonoBehaviour
     {
         wait = true;
     }
+
+
+    GameObject target;
+    void CalculatePath(){ //Find where it is going to move to
+        Tile targetTile = GetTargetTile(target);
+        //FindPath(targetTile);
+
+    }
+
+    void FindPlayer(){ //finds the nearest player object, delete this. just assign target to the player tag.
+        GameObject[] targets = GameObject.FindGameObjectsWithTag("Player"); //Array change to single
+
+        GameObject nearest = null;
+        float distance = Mathf.Infinity;
+        
+        foreach (GameObject obj in targets){ //check which obj with player tag is closest (ret)
+            float d = Vector3.Distance(transform.position, obj.transform.position);
+
+            if (d < distance){
+                distance  = d; 
+                nearest = obj;
+            }
+        }
+        
+        target = nearest;
+    }
+
 }
