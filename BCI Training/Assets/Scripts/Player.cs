@@ -35,13 +35,15 @@ public class Player : Unit {
     }
 
     void CheckMouseClick() {
-        offensive = false;
 
         if (!active) return;
         if (!isMoving) BFS();
         if (!Input.GetMouseButtonDown(0)) return;
+        
         if (turnManager.turn != TurnManager.Turn.Player) return;
         target = null;
+        excecute = false;
+        offensive = false;
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
