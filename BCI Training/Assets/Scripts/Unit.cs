@@ -37,6 +37,7 @@ public abstract class Unit : PlayerMove {
     [Header("Debug")]
     protected Color viewColor = Color.green;
     protected Color moveColor;
+    protected bool execute;
 
     [Header("Manager")]
     public bool active = false;
@@ -45,6 +46,7 @@ public abstract class Unit : PlayerMove {
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
     public abstract void DecisionTree();
+    protected abstract bool AttackCheck();
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -56,14 +58,14 @@ public abstract class Unit : PlayerMove {
 
     public void Update() {
         if (!alive) return;
-        Eyes();
-        ChildUpdate();
-        AttackTarget();
+        Eyes(); // Raycast see targets depended to 'offensive'
+        ChildUpdate(); // Subclasses Update method
+        if (!execute && tag == "Player") return; // Execute on confirm
+        AttackTarget(); // Attack target, if set
         DecisionTree();
-        if (!isMoving) return;
-        Move();
-        Deactivate();
-
+        if (!isMoving) return; // Break when not moving
+        Move(); // Move to target tile
+        if (path.Count <= 0) Deactivate(); // Deactivate when at location
     }
 
     protected void Alive() {
@@ -99,26 +101,29 @@ public abstract class Unit : PlayerMove {
         targetLocation = transform.position;
     }
 
+    // Set target to chase/attack
     private void SetTarget(Transform tmpTarget) {
-        target = tmpTarget.GetComponent<Unit>();
-        targetLocation = tmpTarget.position;
+        target = tmpTarget.GetComponent<Unit>(); // Get target 'Unit' script
+        targetLocation = tmpTarget.position; // Get target location
         action = Action.Attacking;
         Debug.Log(transform.name + " set target: " + target.name);
-        if (tag == "Enemy") {
-            Deactivate();
-        }
+        if (tag == "Enemy") Deactivate();
     }
 
+    // Attack target, if set and close enough
     private void AttackTarget() {
         if (hasAttacked) return;
         if (action != Action.Attacking) return;
-        if (target == null) return;
-        if (tag == "Enemy" && OutOfRange(targetLocation)) return;
+        if (target == null) return; // Break at null target
+        if (tag == "Enemy" && OutOfRange(targetLocation)) return; // Break when target not in range
+        if (!offensive) return; // Break at not offensive
+        if (!AttackCheck()) return; // Break attack not possible
 
         Debug.Log(transform.name + " attacking " + target.name);
-        target.TakeDamage(transform.position, damage);
+        target.TakeDamage(transform.position, damage); // Target takes damage
+        //audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
-        Deactivate();
+        Deactivate(); // Deactivate unit
     }
 
     private bool OutOfRange(Vector3 targetPos) {
