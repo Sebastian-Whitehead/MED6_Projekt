@@ -175,7 +175,7 @@ public class Enemy : Unit {
     private void ScoutArea()
     {   
         action = Action.ScoutingArea;
-        targetLocation = RandomNavmeshLocation(moveDistance);
+        targetLocation = RandomNavmeshLocation(moveRange);
         Tile nextTile = GetTileAtPosition(targetLocation);
         //MoveTo(nextTile);
     }

@@ -21,9 +21,6 @@ public abstract class Unit : PlayerMove {
     protected Vector3 targetLocation;
     protected Unit target;
 
-    [Header("Movement")]
-    public int moveDistance = 2;
-
     [Header("Debug")]
     protected Color viewColor = Color.green;
     protected Color moveColor;
