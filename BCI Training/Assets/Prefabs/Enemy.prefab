@@ -358,7 +358,7 @@ MonoBehaviour:
   FOV: 25
   distance: 5
   targetTag: Player
-  moveDistance: 2
+  excecute: 1
   action: 1
   circlePatrole: 0
   enemyHealth: {fileID: 0}

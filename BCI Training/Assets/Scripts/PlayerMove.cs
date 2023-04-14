@@ -9,15 +9,6 @@ public class PlayerMove : TacticsMove {
         Init();
     }
 
-    protected void MoveToGrid(Collider collider) {
-        if (collider.tag == "Tile") {
-            Tile t = collider.GetComponent<Tile>();
-            if (t.selectable){
-                MoveTo(t);
-            }
-        }
-    }
-
     
 
     protected Tile GetTileAtPosition(Vector3 position) {

@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour {
     public void PlayCategory(string category) {
         if (!active) return;
         AudioClip audioClip = GetRandomAudioClip(category);
+        if (audioClip == null) return;
         PlayClip(audioClip);
     }
 
@@ -43,12 +44,12 @@ public class AudioManager : MonoBehaviour {
 
     private AudioClip GetRandomAudioClip(string category) {
         if (!audioClipDict.ContainsKey(category)) {
-            Debug.LogError("AudioManager: Could not find category " + category);
+            Debug.Log("AudioManager: Could not find category " + category);
             return null;
         }
         List<AudioClip> audioClips = audioClipDict[category];
         if (audioClips.Count <= 0) {
-            Debug.LogError("AudioManager: " + category + " is empty.");
+            Debug.Log("AudioManager: " + category + " is empty.");
             return null;
         }
         int randomIndex = Random.Range(0, audioClips.Count);

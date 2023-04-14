@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : Unit {
 
     public new Action action = Action.Idle;
+    public State state = State.Idle;
+
+    public enum State {
+        Idle,
+        Attack,
+        Move,
+        Charge
+    }
 
     public new enum Action {
         Idle,
@@ -13,7 +22,10 @@ public class Player : Unit {
 
     private Resources res;
 
+    public Button ConfirmBtn;
+    
     protected override void ChildAwake() {
+        ConfirmBtn.onClick.AddListener(ConfirmAction);
         res = GetComponent<Resources>();
     }
 
@@ -34,19 +46,41 @@ public class Player : Unit {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity)) return;
-        MoveToGrid(hit.collider);
-        SetTarget(hit.collider);
-        
-        Deactivate();
-        
+        SetMoveTarget(hit.collider);
+        SetAttackTarget(hit.collider);
+        ActivateBtn();
     }
 
-    void SetTarget(Collider collider) {
+    void SetMoveTarget(Collider collider) {
+        if (collider.tag == "Tile") {
+            state = State.Move;
+            Tile t = collider.GetComponent<Tile>();
+            if (t.selectable) MoveTo(t);
+        }
+    }
+
+    void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
         Debug.Log("Set target: " + collider.name);
         targetLocation = collider.transform.position;
         action = Action.Chasing;
+        transform.LookAt(targetLocation, Vector3.up);
         offensive = true;
+    }
+
+    private void ActivateBtn() {
+        if (state == State.Idle) return;
+        Debug.Log("Activate Confirm Btn");
+        ConfirmBtn.interactable = true; 
+    }
+
+    private void ConfirmAction() {
+        if (state == State.Idle) return;
+        Debug.Log("Confirm action");
+        excecute = true;
+        ConfirmBtn.interactable = false;
+        state = State.Idle;
+        Deactivate();
     }
 
     protected override void UnitGone() { }

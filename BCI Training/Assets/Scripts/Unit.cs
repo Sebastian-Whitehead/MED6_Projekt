@@ -27,6 +27,7 @@ public abstract class Unit : PlayerMove {
 
     [Header("Manager")]
     protected bool active = false;
+    public bool excecute = false;
     protected AudioManager audioManager;
 
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
@@ -46,6 +47,7 @@ public abstract class Unit : PlayerMove {
     public void Update() {
         Eyes();
         ChildUpdate();
+        if (!excecute) return;
         if (isMoving) {
             Move();
             AttackTarget();
