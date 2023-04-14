@@ -111,6 +111,10 @@ GameObject:
   - component: {fileID: 6140743183125843615}
   - component: {fileID: 6140743183125843603}
   - component: {fileID: 9160982866661872752}
+  - component: {fileID: 6273588794941774848}
+  - component: {fileID: 7966322492147867175}
+  - component: {fileID: 6494686686084642076}
+  - component: {fileID: 4033202952093204358}
   - component: {fileID: 5775878150265864375}
   - component: {fileID: 2125752014785996816}
   m_Layer: 0
@@ -218,11 +222,8 @@ MonoBehaviour:
   maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 2
-  maxHealth: 10
   attackRange: 5
   damage: 2
-  health: 0
-  alive: 1
   offensive: 0
   inc: 5
   FOV: 180
@@ -230,6 +231,7 @@ MonoBehaviour:
   targetTag: Enemy
   moveDistance: 2
   action: 1
+  res: {fileID: 0}
 --- !u!114 &9160982866661872752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,7 +270,67 @@ MonoBehaviour:
   maxHealth: 100
   mana: 10
   maxMana: 10
-  shaker: {fileID: 0}
+  manaCost: 2
+  alive: 1
+--- !u!114 &6273588794941774848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140743183125843614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: 
+  AudioClips: []
+--- !u!114 &7966322492147867175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140743183125843614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: TakeDamage
+  AudioClips:
+  - {fileID: 8300000, guid: 1d1ba072ce164c24eba9dca177b9a9b7, type: 3}
+--- !u!114 &6494686686084642076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140743183125843614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: ManaCharge
+  AudioClips:
+  - {fileID: 8300000, guid: 8ee95901478e22a4992b8a3a245d51ba, type: 3}
+--- !u!114 &4033202952093204358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140743183125843614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: Attack
+  AudioClips:
+  - {fileID: 8300000, guid: de3f4ba5abb0b4a4a84b85cd05c5b237, type: 3}
 --- !u!114 &5775878150265864375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f17cc561acb9224a91a573c10ba5df7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveChange: 0
+  PassiveInterval: {x: 0, y: 0}
+  active: 1
 --- !u!82 &2125752014785996816
 AudioSource:
   m_ObjectHideFlags: 0

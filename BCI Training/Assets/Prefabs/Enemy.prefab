@@ -241,6 +241,8 @@ GameObject:
   - component: {fileID: 132229262974725825}
   - component: {fileID: 7232366589516543057}
   - component: {fileID: 1443240499393714765}
+  - component: {fileID: 9112958392107014610}
+  - component: {fileID: 6814299225856710837}
   - component: {fileID: 4146015416650795641}
   - component: {fileID: 780728418691133262}
   m_Layer: 0
@@ -349,11 +351,8 @@ MonoBehaviour:
   maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 5
-  maxHealth: 10
   attackRange: 1
   damage: 1
-  health: 10
-  alive: 1
   offensive: 0
   inc: 5
   FOV: 25
@@ -393,8 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: Death
   AudioClips:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 91887148efd916d4ca5933be51ed314c, type: 3}
+  - {fileID: 8300000, guid: d5d293e855763fd4790948427bcf66b1, type: 3}
 --- !u!114 &7232366589516543057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,8 +408,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: Passive
   AudioClips:
+  - {fileID: 8300000, guid: 91cd9a8d2a6fe0e468ca88bf01c0bda2, type: 3}
+  - {fileID: 8300000, guid: 5dcfec49913ae6644b6d8148e11f19dd, type: 3}
   - {fileID: 8300000, guid: edff9be61b886ca4ea13ab477cc4fb26, type: 3}
-  - {fileID: 8300000, guid: d5d293e855763fd4790948427bcf66b1, type: 3}
+  - {fileID: 8300000, guid: 30b9623c6777d3c43a0687de9517a3e3, type: 3}
+  - {fileID: 8300000, guid: 6221db0d3296fbb418f813469ffd280b, type: 3}
 --- !u!114 &1443240499393714765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,8 +427,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Category: Attack
   AudioClips:
-  - {fileID: 8300000, guid: 5dcfec49913ae6644b6d8148e11f19dd, type: 3}
-  - {fileID: 8300000, guid: 30b9623c6777d3c43a0687de9517a3e3, type: 3}
+  - {fileID: 8300000, guid: 55ee1e27b480a1c41b7e690964a80ed3, type: 3}
+  - {fileID: 8300000, guid: 04db987efa4243545841db8d0465c206, type: 3}
+  - {fileID: 8300000, guid: 8e778bb1c547c01439ce6c95d37be928, type: 3}
+--- !u!114 &9112958392107014610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297702687541245599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: TakeDamage
+  AudioClips:
+  - {fileID: 8300000, guid: f980c76665743ae4a85292f3dc0ab0ab, type: 3}
+--- !u!114 &6814299225856710837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4297702687541245599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: SpotPlayer
+  AudioClips:
+  - {fileID: 8300000, guid: 626c938f334157043aaa26bacdb2797c, type: 3}
+  - {fileID: 8300000, guid: e3c61c0625181494e9dea30da45a58b0, type: 3}
 --- !u!114 &4146015416650795641
 MonoBehaviour:
   m_ObjectHideFlags: 0
