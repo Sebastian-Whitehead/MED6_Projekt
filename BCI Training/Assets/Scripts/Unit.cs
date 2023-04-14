@@ -10,11 +10,8 @@ public abstract class Unit : PlayerMove {
     protected Action action;
 
     [Header("Character")]
-    public float maxHealth = 10f;
     public float attackRange = 1f;
     public float damage = 2f;
-    public float health;
-    public bool alive = true;
     public bool offensive = false;
 
     [Header("View")]
@@ -34,7 +31,7 @@ public abstract class Unit : PlayerMove {
 
     [Header("Manager")]
     protected bool active = false;
-    private AudioManager audioManager;
+    protected AudioManager audioManager;
 
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
     protected abstract void UnitGone();
@@ -45,13 +42,11 @@ public abstract class Unit : PlayerMove {
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
-        health = maxHealth;
         ChildAwake();
         audioManager = GetComponent<AudioManager>();
     }
 
     public void Update() {
-        Alive();
         Eyes();
         ChildUpdate();
         if (isMoving) {
@@ -59,12 +54,6 @@ public abstract class Unit : PlayerMove {
             AttackTarget();
             if (path.Count <= 0) Deactivate();
         }
-    }
-
-    private void Alive() {
-        if (health > 0) return;
-        alive = false;
-        audioManager.PlayCategory("Death");
     }
 
     protected void Eyes() {
@@ -111,12 +100,16 @@ public abstract class Unit : PlayerMove {
         float distanceToPlayer = Vector3.Distance(transform.position, target.transform.position);
         if (distanceToPlayer > attackRange) return;
 
+        if (!AttackCheck()) return;
+
         Unit unit = target.GetComponentInParent<Unit>();
         unit.TakeDamage(transform.position, damage);
         Debug.Log(transform.name + " attacking " + target.name);
         audioManager.PlayCategory("Attack");
         Deactivate();
     }
+
+    protected abstract bool AttackCheck();
 
     // ---------------------------------------------------------------------
 

@@ -22,18 +22,23 @@ public class Enemy : Unit {
         Investegating,
     }
 
+    public EnemyHealth enemyHealth;
+
     // ---------------------------------------------------------------------
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
-        health -= damage;
+        enemyHealth.Damage(damageTaken);
         Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
     }
 
     // ---------------------------------------------------------------------
 
+    protected override bool AttackCheck() { return true; }
+
     protected override void ChildAwake()
     {
+        enemyHealth = GetComponent<EnemyHealth>();
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
         action = Action.Patroling;
@@ -41,6 +46,7 @@ public class Enemy : Unit {
     }
 
     protected override void ChildUpdate() {
+        enemyHealth.Alive(audioManager);
         DrawPatrole();
     }
 

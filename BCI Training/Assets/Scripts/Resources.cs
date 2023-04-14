@@ -9,15 +9,16 @@ public class Resources: MonoBehaviour
     public Image[] healthPoints;
     public float health, maxHealth = 100;
     public float mana, maxMana = 10;
+    public float manaCost = 2;
 
     private float lastHealth;
-    public Shake shaker;
-    // Start is called before the first frame update
+    private Shake shake;
+
     void Start()
     {
         health = maxHealth;
         lastHealth = health;
-        shaker = GameObject.Find("Main Camera").GetComponent<Shake>();
+        shake = GameObject.Find("Main Camera").GetComponent<Shake>();
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class Resources: MonoBehaviour
         
         if (lastHealth > health)
         {
-            shaker.ShakeOnce();
+            shake.ShakeOnce();
             Debug.Log("Shake");
             lastHealth = health;
         }else if (lastHealth < health)
@@ -89,6 +90,10 @@ public class Resources: MonoBehaviour
     {
         if (mana < maxMana)
             mana -= expendPoints;
+    }
+
+    public bool ManaCheck() {
+        return manaCost < mana;
     }
     
 }

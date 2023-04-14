@@ -11,7 +11,10 @@ public class Player : Unit {
         Chasing
     }
 
+    public Resources res;
+
     protected override void ChildAwake() {
+        res = GetComponent<Resources>();
     }
 
     protected override void ChildUpdate() {
@@ -49,7 +52,12 @@ public class Player : Unit {
     public override void AtLocation() {}
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
-        health -= damage;
+        res.Damage(damageTaken);
         action = Action.Idle;
+    }
+
+    protected override bool AttackCheck() {
+        if (!res.ManaCheck()) return false;
+        return true;
     }
 }

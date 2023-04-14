@@ -351,7 +351,7 @@ MonoBehaviour:
   moveSpeed: 5
   maxHealth: 10
   attackRange: 1
-  damage: 2
+  damage: 1
   health: 10
   alive: 1
   offensive: 0
@@ -362,6 +362,7 @@ MonoBehaviour:
   moveDistance: 2
   action: 1
   circlePatrole: 0
+  enemyHealth: {fileID: 0}
 --- !u!114 &8986806732966117096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +378,7 @@ MonoBehaviour:
   maxHealth: 5
   health: 0
   healthbar: {fileID: 8333352014112691767}
+  alive: 1
 --- !u!114 &132229262974725825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,6 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PassiveInterval: {x: 10, y: 20}
+  active: 1
 --- !u!82 &780728418691133262
 AudioSource:
   m_ObjectHideFlags: 0
