@@ -18,10 +18,7 @@ public class AudioManager : MonoBehaviour {
         }
         StartCoroutine(PlayPassive());
     }
-
-    void Update() {
-    }
-
+    
     private IEnumerator PlayPassive() {
         if (!active) yield return null;
         float waitTime = Random.Range(PassiveInterval.x, PassiveInterval.y);

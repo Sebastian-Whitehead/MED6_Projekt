@@ -6186,11 +6186,29 @@ MonoBehaviour:
   start: 0
   curve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: -1.1412488
+      outSlope: -1.1412488
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.22916667
+    - serializedVersion: 3
+      time: 1
+      value: 0.00033643842
+      inSlope: -0.94690025
+      outSlope: -0.94690025
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.34363446
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  duration: 1
+  duration: 0.1
 --- !u!1001 &974073700
 PrefabInstance:
   m_ObjectHideFlags: 0

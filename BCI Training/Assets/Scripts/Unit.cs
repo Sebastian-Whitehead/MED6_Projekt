@@ -38,6 +38,7 @@ public abstract class Unit : PlayerMove {
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
     public abstract void AtLocation();
+    protected abstract bool AttackCheck();
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -108,8 +109,6 @@ public abstract class Unit : PlayerMove {
         audioManager.PlayCategory("Attack");
         Deactivate();
     }
-
-    protected abstract bool AttackCheck();
 
     // ---------------------------------------------------------------------
 

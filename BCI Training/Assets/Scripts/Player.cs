@@ -18,6 +18,7 @@ public class Player : Unit {
     }
 
     protected override void ChildUpdate() {
+        res.Alive(audioManager);
         CheckMouseClick();
     }
 

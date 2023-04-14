@@ -13,11 +13,15 @@ public class Resources: MonoBehaviour
 
     private float lastHealth;
     private Shake shake;
+    public bool alive = true;
 
     void Start()
     {
         health = maxHealth;
         lastHealth = health;
+    }
+
+    void Awake() {
         shake = GameObject.Find("Main Camera").GetComponent<Shake>();
     }
 
@@ -93,7 +97,15 @@ public class Resources: MonoBehaviour
     }
 
     public bool ManaCheck() {
-        return manaCost < mana;
+        bool manaCheck = manaCost <= mana;
+        Debug.Log("ManaCheck: " + manaCheck);
+        return manaCheck;
+    }
+
+    public void Alive(AudioManager audioManager) {
+        if (health > 0) return;
+        alive = false;
+        audioManager.PlayCategory("Death");
     }
     
 }
