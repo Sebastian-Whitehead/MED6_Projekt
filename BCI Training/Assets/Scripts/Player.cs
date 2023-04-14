@@ -54,6 +54,7 @@ public class Player : Unit {
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         res.Damage(damageTaken);
+        audioManager.PlayCategory("TakeDamage");
         action = Action.Idle;
     }
 

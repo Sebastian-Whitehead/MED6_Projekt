@@ -84,10 +84,11 @@ public class Resources: MonoBehaviour
             health += healPoints;
     }
 
-    public void RegenMana(float RegenPoints)
+    public void RegenMana(float RegenPoints, AudioManager audioManager)
     {
-        if (mana > 0)
-            mana += RegenPoints;
+        if (mana <= 0) return;
+        mana += RegenPoints;
+        audioManager.PlayCategory("ManaCharge");
     }
 
     public void Expend(float expendPoints)

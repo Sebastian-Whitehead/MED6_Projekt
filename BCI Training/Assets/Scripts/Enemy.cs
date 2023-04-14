@@ -28,6 +28,7 @@ public class Enemy : Unit {
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         enemyHealth.Damage(damageTaken);
+        audioManager.PlayCategory("TakeDamage");
         Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
     }

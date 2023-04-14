@@ -69,6 +69,7 @@ public abstract class Unit : PlayerMove {
             if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
                 if (hit.transform.tag == targetTag) {
                     ChaseTarget(hit.transform);
+                    audioManager.PlayCategory("SpotPlayer");
                     return;
                 }
             }
