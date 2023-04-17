@@ -45,7 +45,6 @@ public class Player : Unit {
         
         target = null; // Enemy target
         execute = false; // Action execution
-        offensive = false; // Can attack enemies
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

@@ -56,6 +56,7 @@ public abstract class Unit : PlayerMove {
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
+        audioManager = GetComponent<AudioManager>();
         target = null; // Null set target
         health = maxHealth;
         ChildAwake(); // Sub-class method call
@@ -68,6 +69,7 @@ public abstract class Unit : PlayerMove {
         if (!execute && tag == "Player") return; // Execute on confirm
         AttackTarget(); // Attack target, if set
         DecisionTree(); // Decision tree to pick next action
+        if (tag == "Enemy" && !isMoving && steps < moveRange) Deactivate();
         if (!isMoving) return; // Break when not moving
         Move(); // Move to target tile
         if (path.Count <= 0) Deactivate(); // Deactivate when at location
@@ -120,7 +122,6 @@ public abstract class Unit : PlayerMove {
     // Attack target, if set and close enough
     private void AttackTarget() {
         if (hasAttacked) return;
-        if (action != Action.Attacking) return;
         if (target == null) return; // Break at null target
         if (tag == "Enemy" && OutOfRange(targetLocation)) return; // Break when target not in range
         if (!offensive) return; // Break at not offensive
@@ -128,7 +129,7 @@ public abstract class Unit : PlayerMove {
 
         Debug.Log(transform.name + " attacking " + target.name);
         target.TakeDamage(transform.position, damage); // Target takes damage
-        //audioManager.PlayCategory("Attack"); // Play attack sound effect
+        audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
         Deactivate(); // Deactivate unit
     }
