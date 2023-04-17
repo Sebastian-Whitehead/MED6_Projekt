@@ -12,6 +12,7 @@ public class TacticsMove : MonoBehaviour {
 
     public bool isMoving = false;
     public int moveRange = 5; //move tiles pr turn
+    public int maxMoveRange = 5; //move tiles pr turn
     public float jumpHeight = 2; //drop down and jump 2 tiles
     public float moveSpeed = 2;
     public int steps = 0;

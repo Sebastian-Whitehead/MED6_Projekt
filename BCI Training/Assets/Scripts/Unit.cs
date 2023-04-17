@@ -37,10 +37,11 @@ public abstract class Unit : PlayerMove {
     [Header("Debug")] // Gizmo propeties
     protected Color viewColor = Color.green; // Visualize eyes raycast
     protected Color moveColor; // Visualize moving 
-    protected bool execute; // Execution of current action
 
     [Header("Manager")] // Managing variables
     public bool active = false; // Actions are possible
+    protected AudioManager audioManager;
+    protected bool execute; // Execution of current action
 
     // ---------------------------------------------------------------------
 
@@ -95,6 +96,7 @@ public abstract class Unit : PlayerMove {
             if (!Physics.Raycast(transform.position, targetPos, out hit, distance)) continue;
             if (hit.transform.tag != targetTag) continue; // Only matching 'target tag'
             SetTarget(hit.transform); // Set target to hit game object
+            audioManager.PlayCategory("SpotPlayer");
             return; // Break loop
         }
         UnitGone(); // Call when unit disapereard

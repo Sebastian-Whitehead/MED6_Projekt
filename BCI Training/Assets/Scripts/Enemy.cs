@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Unit
-{
+public class Enemy : Unit {
 
     [Header("Patrole")]
     private int patrolPoint = 1;
@@ -11,20 +10,35 @@ public class Enemy : Unit
     public bool circlePatrole = false;
     private bool clockwise = true;
 
+    public new enum Action
+    {
+        Idle,
+        Patroling,
+        Chasing,
+        ScoutingArea,
+        LookingAround,
+        Investegating,
+    }
+
+    public EnemyHealth enemyHealth;
+
     // ---------------------------------------------------------------------
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
-        Debug.Log(gameObject.name + " took " + damageTaken + " damage");
-        health -= damage;
-        Alive();
-
+        enemyHealth.Damage(damageTaken);
+        audioManager.PlayCategory("TakeDamage");
+        Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
         Investegate(hitPosition);
     }
 
     // ---------------------------------------------------------------------
 
-    protected override void ChildAwake() {
+    protected override bool AttackCheck() { return true; }
+
+    protected override void ChildAwake()
+    {
+        enemyHealth = GetComponent<EnemyHealth>();
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
         targetLocation = transform.position;
@@ -32,6 +46,7 @@ public class Enemy : Unit
     }
 
     protected override void ChildUpdate() {
+        enemyHealth.Alive(audioManager);
         DrawPatrole();
     }
 
@@ -160,6 +175,8 @@ public class Enemy : Unit
     private void Search() {   
         action = Action.Searching;
         targetLocation = RandomNavmeshLocation(moveRange);
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        //MoveTo(nextTile);
     }
 
     private void LookAround() {
