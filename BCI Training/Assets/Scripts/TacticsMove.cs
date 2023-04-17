@@ -16,6 +16,7 @@ public class TacticsMove : MonoBehaviour
     public float jumpHeight = 2; //drop down and jump 2 tiles
     public float moveSpeed = 2;
     float halfHeight = 0; 
+    public bool chasing = false;
     
     Vector3 velocity = new Vector3();
     Vector3 direction = new Vector3(); //heading
@@ -36,7 +37,8 @@ public class TacticsMove : MonoBehaviour
         currentTile.current = true; //Change color from the Tile Script current variable.
     }
 
-    public Tile GetTargetTile(GameObject target){ 
+    public Tile GetTargetTile(GameObject target)
+    {
         RaycastHit hit;
         Tile savedTile = null;
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1)){ //Locate the tile
@@ -82,8 +84,9 @@ public class TacticsMove : MonoBehaviour
         }
     }
 
-    public void MoveTo(Tile tile){
-        Debug.Log("Move to");
+    public void MoveTo(Tile tile)
+    {
+
         path.Clear();
         isMoving = true;
         tile.targetTile = true;
@@ -95,7 +98,8 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
-        Debug.Log("Path.count: " + path.Count);
+
+        //Debug.Log(path.Count);
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
             Vector3 targetTile = t.transform.position;
@@ -111,22 +115,20 @@ public class TacticsMove : MonoBehaviour
                 transform.forward = direction;
                 transform.position += velocity * Time.deltaTime;
             } else {
-                
                 //Tile mid is reached
                 transform.position = targetTile;
-                path.Pop(); // remove that tile of the path, because we have reached it. 
+                Tile temp = path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
+                Debug.Log(temp);
             }
         } else {
             RemoveSelectableTiles();
             isMoving = false;
-            //Debug.Log("ok");
         }
     }
 
 
     protected void RemoveSelectableTiles(){ //remove selectable tiles. no longer active. Reset them. Each of the tiles that has been selected as moveable will no longer be selected
-        
         if (currentTile != null){
             currentTile.current = false; 
             currentTile = null;
@@ -148,7 +150,7 @@ public class TacticsMove : MonoBehaviour
     }
 
 protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and calc path at max move distance
-        Stack<Tile> TempPath = new Stack<Tile>();
+    Stack<Tile> TempPath = new Stack<Tile>();
 
         Tile next = t.parentTile;
         while (next != null){ //Path from the tile next to the target back to start
@@ -163,6 +165,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         for (int i = 0; i <= moveRange; i++){
             lastTile = TempPath.Pop(); //pop each tile for number of moves
             //when we pop the last one, we move to that tile
+            chasing = false; 
         }
         return lastTile;
     }
