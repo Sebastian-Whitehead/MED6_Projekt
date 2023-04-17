@@ -83,8 +83,7 @@ public abstract class Unit : PlayerMove {
                 if (hit.transform.tag == targetTag && chasing == false)
                 {
                     ChaseTarget(hit.transform);
-                    audioManager.PlayCategory("SpotPlayer");
-                    chasing = true;
+                    //chasing = true;
                     return;
                 }
             }
@@ -92,8 +91,7 @@ public abstract class Unit : PlayerMove {
         UnitGone();
     }
 
-    protected void Idle()
-    {
+    protected void Idle() {
         action = Action.Idle;
         targetLocation = transform.position;
     }
@@ -103,8 +101,13 @@ public abstract class Unit : PlayerMove {
         //Debug.Log(currentTile.transform.position);
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
-        if(tag == "Player") return;
         targetLocation = tmpTarget.position;
+
+        if (tag == "Player") return;
+        if (isMoving) return;
+        if (turnManager.turn != TurnManager.Turn.Enemies) return;
+
+        audioManager.PlayCategory("SpotPlayer");
         FindPlayer();
         BFS();
         CalculatePath();

@@ -52,12 +52,14 @@ public class Enemy : Unit {
             case Action.Patroling:
                 Patrole();
                 break;
+            case Action.Chasing:
+                Investegate(targetLocation);
+                break;
         }
         MoveTo(GetTileAtPosition(targetLocation));
     }
 
-    protected override void UnitGone()
-    {      
+    protected override void UnitGone() {      
         return; 
         if (action == Action.Chasing) {
             Investegate(targetLocation);
@@ -115,8 +117,7 @@ public class Enemy : Unit {
 
         viewColor = Color.green;
         moveColor = Color.blue;
-        if (action == Action.Chasing)
-        {
+        if (action == Action.Chasing) {
             viewColor = Color.red;
             moveColor = Color.red;
         }
