@@ -23,7 +23,7 @@ public class TurnManager : MonoBehaviour
     void Awake()
     {
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
-        player = GameObject.Find("Player").GetComponent<Unit>();
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 
     void Update() {

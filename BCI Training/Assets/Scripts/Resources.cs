@@ -10,6 +10,7 @@ public class Resources: MonoBehaviour
     public float health, maxHealth = 100;
     public float mana, maxMana = 10;
     public float manaCost = 2;
+    public float fixedRegenPoints;
 
     private float lastHealth;
     private Shake shake;
@@ -84,11 +85,16 @@ public class Resources: MonoBehaviour
             health += healPoints;
     }
 
-    public void RegenMana(float RegenPoints, AudioManager audioManager)
+    public void RegenMana(float RegenPoints)
     {
         if (mana <= 0) return;
         mana += RegenPoints;
-        audioManager.PlayCategory("ManaCharge");
+    }
+
+    public void RegenMana()
+    {
+        if (mana <= 0) return;
+        mana += fixedRegenPoints;
     }
 
     public void Expend(float expendPoints)
