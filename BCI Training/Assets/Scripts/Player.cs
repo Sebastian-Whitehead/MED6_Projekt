@@ -34,14 +34,14 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void CheckMouseClick() {
 
-        if (turnManager.turn != TurnManager.Turn.Player) return; // Turn check
+        if (!turnManager.playerTurn) return; // Turn check
         if (!active) return; // Check activity
         if (!isMoving) BFS(); // Breath search to moveable location
         if (steps <= 0) Deactivate();
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         
         target = null; // Enemy target
-        excecute = false; // Action execution
+        execute = false; // Action execution
         offensive = false; // Can attack enemies
 
         RaycastHit hit;
@@ -63,7 +63,7 @@ public class Player : Unit {
     private void ConfirmAction() {
         if (state == State.Idle) return;
         Debug.Log("Confirm action");
-        excecute = true; // Execute action
+        execute = true; // Execute action
         confirmBtn.interactable = false; // Deactivate confirm btn
         state = State.Idle; // Idle player
         Deactivate(); // Deactivate player
@@ -97,13 +97,13 @@ public class Player : Unit {
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;
         //action = Action.Idle;
+        res.Damage(damageTaken);
+        audioManager.PlayCategory("TakeDamage");
     }
 
     public void Reset() {
         offensive = false;
         target = null;
-        res.Damage(damageTaken);
-        audioManager.PlayCategory("TakeDamage");
     }
 
     protected override bool AttackCheck() {

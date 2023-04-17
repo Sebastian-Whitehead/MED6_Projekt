@@ -10,17 +10,7 @@ public class Enemy : Unit {
     public bool circlePatrole = false;
     private bool clockwise = true;
 
-    public new enum Action
-    {
-        Idle,
-        Patroling,
-        Chasing,
-        ScoutingArea,
-        LookingAround,
-        Investegating,
-    }
-
-    public EnemyHealth enemyHealth;
+    private EnemyHealth enemyHealth;
 
     // ---------------------------------------------------------------------
 

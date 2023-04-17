@@ -40,8 +40,8 @@ public abstract class Unit : PlayerMove {
 
     [Header("Manager")] // Managing variables
     public bool active = false; // Actions are possible
+    protected bool execute = false; // Execution of current action
     protected AudioManager audioManager;
-    protected bool execute; // Execution of current action
 
     // ---------------------------------------------------------------------
 

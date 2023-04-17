@@ -541,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMoving: 0
   moveRange: 3
+  maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 5
   steps: 0
@@ -555,10 +556,8 @@ MonoBehaviour:
   FOV: 25
   distance: 5
   targetTag: Player
-  excecute: 1
-  action: 1
+  active: 0
   circlePatrole: 0
-  enemyHealth: {fileID: 0}
 --- !u!114 &8986806732966117096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,6 +779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9733d0bada0e77748a63654ef4f5748a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highlightImage: {fileID: 3484490652366827820}
+  selected: 0
 --- !u!1001 &1618273437075966330
 PrefabInstance:
   m_ObjectHideFlags: 0
