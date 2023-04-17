@@ -26,7 +26,7 @@ public class Player : Unit {
     protected override void ChildUpdate() {
         res.Alive(audioManager); // Alive check
         CheckMouseClick(); // Mouse click check
-        if (!excecute) return; // Only on execute
+        if (!execute) return; // Only on execute
         if (state == State.Charge) res.RegenMana();
         
     }
@@ -88,7 +88,7 @@ public class Player : Unit {
     void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
         Debug.Log("Set attack: " + collider.name);
-        // targetLocation = collider.transform.position; // Set target to enemy location
+        targetLocation = collider.transform.position; // Set target to enemy location
         state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);
         offensive = true; // Enable attack mode
@@ -113,8 +113,6 @@ public class Player : Unit {
         state = State.Idle;
     }
 
-    protected override void UnitGone() { }
-    public override void AtLocation() {}
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;

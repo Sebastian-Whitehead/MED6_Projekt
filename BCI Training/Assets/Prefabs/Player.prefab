@@ -225,7 +225,7 @@ MonoBehaviour:
   steps: 0
   action: 1
   maxHealth: 10
-  attackRange: 5
+  attackRange: 100
   damage: 2
   health: 0
   alive: 1
@@ -235,6 +235,7 @@ MonoBehaviour:
   distance: 10
   targetTag: Enemy
   active: 0
+  excecute: 0
   state: 0
   PlayerLayer:
     serializedVersion: 2
@@ -279,6 +280,7 @@ MonoBehaviour:
   mana: 10
   maxMana: 10
   manaCost: 2
+  fixedRegenPoints: 0
   alive: 1
 --- !u!114 &7966322492147867175
 MonoBehaviour:
