@@ -26,6 +26,9 @@ public class Player : Unit {
     protected override void ChildUpdate() {
         res.Alive(audioManager); // Alive check
         CheckMouseClick(); // Mouse click check
+        if (!excecute) return; // Only on execute
+        if (state == State.Charge) res.RegenMana();
+        
     }
 
     protected override void UnitGone() {}
@@ -52,6 +55,7 @@ public class Player : Unit {
         ActivateBtn(); // Activate confirm btn
     }
 
+    // Activate confirm button
     private void ActivateBtn() {
         if (state == State.Idle) return;
         Debug.Log("Activate Confirm Btn");
@@ -60,6 +64,7 @@ public class Player : Unit {
         conBtn.UpdateSprite(state.ToString()); // Update confirm sprite
     }
 
+    // Confirm action
     private void ConfirmAction() {
         if (state == State.Idle) return;
         Debug.Log("Confirm action");
@@ -69,6 +74,7 @@ public class Player : Unit {
         Deactivate(); // Deactivate player
     }
 
+    // Ready moving
     void SetMoveTarget(Collider collider) {
         if (collider.tag == "Tile") {
             Debug.Log("Set move: " + collider.name);
@@ -78,6 +84,7 @@ public class Player : Unit {
         }
     }
 
+    // Ready attacking
     void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
         Debug.Log("Set attack: " + collider.name);
@@ -94,6 +101,21 @@ public class Player : Unit {
         return hitChance;
     }
 
+    // Ready mana charging
+    void ReadyCharge() {
+        Debug.Log("Ready: Charge");
+        state = State.Charge;
+    }
+
+    void ChargeMana() {
+        audioManager.PlayCategory("ManaCharge");
+        res.RegenMana();
+        state = State.Idle;
+    }
+
+    protected override void UnitGone() { }
+    public override void AtLocation() {}
+
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         health -= damage;
         //action = Action.Idle;
@@ -106,6 +128,7 @@ public class Player : Unit {
         target = null;
     }
 
+    // Check if player can attack
     protected override bool AttackCheck() {
         if (!res.ManaCheck()) return false;
         return true;
