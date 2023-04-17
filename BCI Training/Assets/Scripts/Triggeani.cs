@@ -10,6 +10,7 @@ public class Triggeani : MonoBehaviour
     public AudioClip impact;
     AudioSource audioSource;
     bool isMoving = false;
+    public int life;
  
     void Start()
     {
