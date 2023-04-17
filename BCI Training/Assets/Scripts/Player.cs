@@ -112,9 +112,7 @@ public class Player : Unit {
         state = State.Idle;
     }
 
-
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
-        health -= damage;
         //action = Action.Idle;
         res.Damage(damageTaken);
         audioManager.PlayCategory("TakeDamage");

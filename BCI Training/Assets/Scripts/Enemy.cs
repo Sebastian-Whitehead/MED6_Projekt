@@ -9,7 +9,6 @@ public class Enemy : Unit {
     private Vector3[] patrolPoints;
     public bool circlePatrole = false;
     private bool clockwise = true;
-
     private EnemyHealth enemyHealth;
 
     // ---------------------------------------------------------------------

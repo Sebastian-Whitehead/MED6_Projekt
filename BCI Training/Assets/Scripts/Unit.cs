@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Unit : PlayerMove {
@@ -53,6 +54,7 @@ public abstract class Unit : PlayerMove {
     public abstract void DecisionTree(); // Enemy decision tree to pick action
     protected abstract bool AttackCheck(); // Check possible attack
 
+
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
@@ -101,7 +103,6 @@ public abstract class Unit : PlayerMove {
             audioManager.PlayCategory("SpotPlayer");
             return; // Break loop
         }
-        UnitGone(); // Call when unit disapereard
     }
 
     // Have unit go idle 
@@ -110,13 +111,22 @@ public abstract class Unit : PlayerMove {
         targetLocation = transform.position; // Target location to current location
     }
 
-    // Set target to chase/attack
-    private void SetTarget(Transform tmpTarget) {
-        target = tmpTarget.GetComponent<Unit>(); // Get target 'Unit' script
-        targetLocation = tmpTarget.position; // Get target location
+    protected void SetTarget(Transform tmpTarget)
+    {
+        //Debug.Log(currentTile.transform.position);
         action = Action.Attacking;
-        Debug.Log(transform.name + " set target: " + target.name);
-        if (tag == "Enemy") Deactivate(); // Deactivate if unit is 'Enemy'
+        target = tmpTarget.GetComponent<Unit>();
+        targetLocation = tmpTarget.position;
+
+        if (tag == "Player") return;
+        if (isMoving) return;
+        if (turnManager.playerTurn) return;
+
+        audioManager.PlayCategory("SpotPlayer");
+        FindPlayer();
+        BFS();
+        CalculatePath();
+
     }
 
     // Attack target, if set and close enough
@@ -173,4 +183,6 @@ public abstract class Unit : PlayerMove {
     public bool Active() {
         return active;
     }
+
+
 }
