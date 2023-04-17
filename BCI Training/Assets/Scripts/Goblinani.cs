@@ -8,10 +8,15 @@ public class Goblinani : MonoBehaviour
     Animator anim;
     public Animator Girl;
     public int gLife = 4;
+    public AudioClip impact;
+    public AudioClip Death;
+    AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,10 +41,15 @@ public class Goblinani : MonoBehaviour
             //If the GameObject has the same tag as specified, output this message in the console
             gLife = gLife - 2;
             if(gLife>0){
-                 anim.SetTrigger("Hit");
+                anim.SetTrigger("Hit");
                 Debug.Log("Goblin is hit");
+                audioSource.PlayOneShot(impact);
+
             }
-            else anim.SetTrigger("Death");
+            else{ 
+                anim.SetTrigger("Death");
+                audioSource.PlayOneShot(Death);
+            }
             } 
         }
 }
