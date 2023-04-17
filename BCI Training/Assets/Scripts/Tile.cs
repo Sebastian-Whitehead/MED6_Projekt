@@ -31,8 +31,7 @@ public class Tile : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         if (current){
             GetComponent<Renderer>().material.color = Color.yellow;
         }
