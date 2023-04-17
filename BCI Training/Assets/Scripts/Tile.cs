@@ -19,7 +19,12 @@ public class Tile : MonoBehaviour
    //MOve backwards from the parent to identify the path.
    public int distance = 0; //How far each tile is from start tile.
 
-    // Start is called before the first frame update
+    //EnemyMove variables 
+    public float f = 0; //g+heuristic cost
+    public float gCost = 0; //Cost from parent to current tile, som from the beginning
+    public float heuristicCost = 0; //From processed tile to destination - estimated
+
+
     void Start()
     {
         
@@ -52,20 +57,22 @@ public class Tile : MonoBehaviour
         visisted = false;
         parentTile = null;
         distance = 0;
+
+        f = gCost = heuristicCost = 0;
     }
 
-    public void IdentifyNeighbors(float jumpHeight){
+    public void IdentifyNeighbors(Tile target){
         Reset();
         
-        CheckTile(Vector3.forward, jumpHeight);
-        CheckTile(-Vector3.forward, jumpHeight);
-        CheckTile(Vector3.right, jumpHeight);
-        CheckTile(-Vector3.right, jumpHeight);
+        CheckTile(Vector3.forward, target);
+        CheckTile(-Vector3.forward, target);
+        CheckTile(Vector3.right, target);
+        CheckTile(-Vector3.right, target);
 
     }
 
-    public void CheckTile(Vector3 direction, float jumpHeight){ //Check tile forward, back, left, right, is it traversable?
-        Vector3 halfExtents = new Vector3(0.25f, (1+jumpHeight)/ 2.0f, 0.25f); //Check to see if there is a tile there which is reachable.
+    public void CheckTile(Vector3 direction, Tile target){ //Check tile forward, back, left, right, is it traversable?
+        Vector3 halfExtents = new Vector3(0.25f, 1/ 2.0f, 0.25f); //Check to see if there is a tile there which is reachable.
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents); //overlapbox returns a list of colliders that is traversable.
 
         foreach (Collider item in colliders){ 
@@ -74,9 +81,14 @@ public class Tile : MonoBehaviour
                 RaycastHit hit;
                  //Test if there is something on top of the tile, making it non-walkable...
                  //We add it to the list if the raycast DOES NOT hit something.
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1)){
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target)){ //include target even if something is sitting on the tile.
+                    
                     adjacentList.Add(tile);
-                }   
+                    //currentTile.parent = 
+
+
+                }
+                 
             }
         }
     

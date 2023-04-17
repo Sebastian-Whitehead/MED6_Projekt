@@ -37,6 +37,7 @@ public abstract class Unit : PlayerMove {
     public abstract void AtLocation();
     protected abstract bool AttackCheck();
 
+
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
@@ -47,7 +48,7 @@ public abstract class Unit : PlayerMove {
     public void Update() {
         Eyes();
         ChildUpdate();
-        if (!excecute) return;
+        if (!excecute && tag == "Player") return;
         if (isMoving) {
             Move();
             AttackTarget();
@@ -89,8 +90,14 @@ public abstract class Unit : PlayerMove {
     {
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
+        if(tag == "Player") return;
         targetLocation = tmpTarget.position;
-        MoveTo(GetTileAtPosition(targetLocation));
+        FindPlayer();
+        BFS();
+        //Debug.Log(currentTile);
+        CalculatePath();
+        AStarTargetTile.targetTile = true;
+
     }
 
     private void AttackTarget() {
@@ -104,7 +111,7 @@ public abstract class Unit : PlayerMove {
 
         Unit unit = target.GetComponentInParent<Unit>();
         unit.TakeDamage(transform.position, damage);
-        Debug.Log(transform.name + " attacking " + target.name);
+        //Debug.Log(transform.name + " attacking " + target.name);
         audioManager.PlayCategory("Attack");
         Deactivate();
     }
@@ -127,4 +134,6 @@ public abstract class Unit : PlayerMove {
     {
         return active;
     }
+
+
 }
