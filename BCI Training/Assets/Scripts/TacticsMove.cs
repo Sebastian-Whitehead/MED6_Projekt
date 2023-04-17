@@ -83,6 +83,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void MoveTo(Tile tile){
+        Debug.Log("Move to");
         path.Clear();
         isMoving = true;
         tile.targetTile = true;
@@ -94,7 +95,7 @@ public class TacticsMove : MonoBehaviour
     }
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
-        //Debug.Log(path.Count);
+        Debug.Log("Path.count: " + path.Count);
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
             Vector3 targetTile = t.transform.position;

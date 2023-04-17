@@ -72,7 +72,6 @@ public abstract class Unit : PlayerMove {
             if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
                 if (hit.transform.tag == targetTag) {
                     ChaseTarget(hit.transform);
-                    audioManager.PlayCategory("SpotPlayer");
                     return;
                 }
             }
@@ -86,12 +85,17 @@ public abstract class Unit : PlayerMove {
         targetLocation = transform.position;
     }
 
-    protected void ChaseTarget(Transform tmpTarget)
-    {
+    protected void ChaseTarget(Transform tmpTarget) {
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
-        if(tag == "Player") return;
+        if (tag == "Player") return;
         targetLocation = tmpTarget.position;
+        AStarTargetTile = GetTileAtPosition(targetLocation);
+        
+        if (isMoving) return;
+        if (turnManager.turn != TurnManager.Turn.Enemies) return;
+        audioManager.PlayCategory("SpotPlayer");
+
         FindPlayer();
         BFS();
         //Debug.Log(currentTile);
