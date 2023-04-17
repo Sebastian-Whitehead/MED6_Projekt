@@ -42,7 +42,6 @@ public abstract class Unit : PlayerMove {
     protected AudioManager audioManager;
 
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
-    protected abstract void UnitGone();
     protected abstract void ChildAwake();
     protected abstract void ChildUpdate();
     public abstract void AtLocation();
@@ -88,7 +87,6 @@ public abstract class Unit : PlayerMove {
                 }
             }
         }
-        UnitGone();
     }
 
     protected void Idle() {

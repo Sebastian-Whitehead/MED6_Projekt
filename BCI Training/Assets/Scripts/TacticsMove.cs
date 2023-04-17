@@ -119,7 +119,7 @@ public class TacticsMove : MonoBehaviour
                 transform.position = targetTile;
                 Tile temp = path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
-                Debug.Log(temp);
+                // Debug.Log(temp);
             }
         } else {
             RemoveSelectableTiles();
@@ -243,6 +243,9 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         Tile targetTile = GetTargetTile(target);
         FindPath(targetTile);
 
+    }
+    protected void CalculatePath(Tile targetTile){ //Find where it is going to move to
+        FindPath(targetTile);
     }
 
     protected void FindPlayer(){

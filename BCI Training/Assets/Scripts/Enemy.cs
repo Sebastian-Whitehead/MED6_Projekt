@@ -41,7 +41,6 @@ public class Enemy : Unit {
     }
 
     public override void AtLocation() {
-        BFS();
         switch (action) {
             case Action.Investegating:
                 ScoutArea();
@@ -56,14 +55,12 @@ public class Enemy : Unit {
                 Investegate(targetLocation);
                 break;
         }
-        MoveTo(GetTileAtPosition(targetLocation));
-    }
-
-    protected override void UnitGone() {      
-        return; 
-        if (action == Action.Chasing) {
-            Investegate(targetLocation);
-        }
+        //BFS();
+        //MoveTo(GetTileAtPosition(targetLocation));
+        
+        // FindPlayer();
+        BFS();
+        CalculatePath(GetTileAtPosition(targetLocation));
     }
 
     // ---------------------------------------------------------------------

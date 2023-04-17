@@ -79,7 +79,6 @@ public class Player : Unit {
         Deactivate();
     }
 
-    protected override void UnitGone() { }
     public override void AtLocation() {}
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
