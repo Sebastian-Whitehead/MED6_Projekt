@@ -2,113 +2,112 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : Unit {
 
-
-    [Header("Action")]
-    public Action currentAction = Action.Patrole;
-    public bool startTurn = false;
-    private bool executing = false;
-    private GameObject player;
-
-    [Header("Character")]
-    public float maxHealth = 10f;
-    public float attackDistance = 1f;
-    public float damage = 2f;
-    private float health;
-    
-    [Header("View")]
-    [Range(2, 15)] public int inc = 5;
-    [Range(1, 180)] public int FOV = 25;
-    [Range(0f, 10f)] public float distance = 10f;
-    
-    [Header("Movement")]
-    public int moveSpeed = 2;
-    public int moveDistance = 2;
-    private Vector3 targetLocation;
+    [Header("Patrole")]
     private int patrolPoint = 1;
     private Vector3[] patrolPoints;
     public bool circlePatrole = false;
     private bool clockwise = true;
-    
-    [Header("Debug")]
-    Color viewColor, moveColor;
 
-    [Header("Elements")]
-    public Transform Character;
-    public Transform Path;
+    private EnemyHealth enemyHealth;
 
+    // ---------------------------------------------------------------------
 
-    public enum Action {
-        Idle,
-        Patrole,
-        ChasePlayer,
-        ScoutArea,
-        LookAround,
+    public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
+        enemyHealth.Damage(damageTaken);
+        audioManager.PlayCategory("TakeDamage");
+        Investegate(hitPosition);
+        transform.LookAt(hitPosition, Vector3.up);
+        Investegate(hitPosition);
     }
 
     // ---------------------------------------------------------------------
 
-    public void StartTurn() {
-        startTurn = true;
-    }
+    protected override bool AttackCheck() { return true; }
 
-    public void endTurn() {
-        executing = false;
-    }
-
-    public void SetAction(Action nextAction) {
-        currentAction = nextAction;
-    }
-
-    // ---------------------------------------------------------------------
-
-    // Start is called before the first frame update
-    void Awake() {
-        player = GameObject.FindGameObjectWithTag("Player");
-        health = maxHealth;
+    protected override void ChildAwake()
+    {
+        enemyHealth = GetComponent<EnemyHealth>();
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
-        endTurn();
+        targetLocation = transform.position;
+        DecisionTree();
     }
 
-    // Update is called once per frame
-    void Update() {
-        if (health <= 0) Dead();
+    protected override void ChildUpdate() {
+        enemyHealth.Alive(audioManager);
+        DrawPatrole();
+    }
 
-        Eyes();
-        DrawPath();
+    public override void DecisionTree() {
+        if (steps <= 0 || isMoving) return;
+        AtLocation();
+        BFS();
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        MoveTo(nextTile); 
+    }
 
-        PickAction();
-        ExecuteAction();
+    private void AtLocation() {
+        if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
+        switch (action) {
+            case Action.Investegating:
+                Search();
+                break;
+            case Action.Searching:
+                Patrole();
+                break;
+            case Action.Patroling:
+                Patrole();
+                break;
+            case Action.Attacking:
+                action = Action.Attacking;
+                targetLocation = target.transform.position;
+                break;
+        }
+    }
+
+    protected override void UnitGone() {   
+        if (action == Action.Attacking) {
+            Investegate(targetLocation);
+        }
     }
 
     // ---------------------------------------------------------------------
-    
+
 
     // https://answers.unity.com/questions/475066/how-to-get-a-random-point-on-navmesh.html
-    public Vector3 RandomNavmeshLocation(float radius) {
+    private Vector3 RandomNavmeshLocation(float radius) {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         UnityEngine.AI.NavMeshHit hit;
         Vector3 finalPosition = Vector3.zero;
-        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, 1)) {
-            finalPosition = hit.position;            
+        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
         }
         return finalPosition;
     }
 
     private Vector3[] GenerateRandomPath(int pathLength) {
         Vector3[] path = new Vector3[pathLength];
-        for (int i = 0; i < pathLength; i++) {
+        for (int i = 0; i < pathLength; i++)
+        {
             Vector3 nextPoint = RandomNavmeshLocation(1000f);
             path[i] = nextPoint;
         }
         return path;
     }
 
-    Vector3[] GetManualPath() {
-        Transform[] points = Path.transform.GetComponentsInChildren<Transform>();
+    private Vector3[] GetManualPath() {
+        Transform PathObject = null;
+        foreach (Transform child in transform) {
+            if (child.name != "Path") continue;
+            PathObject = child.transform;
+        }
+        if (PathObject == null) Debug.Log("No 'Path' found");
+
+        Transform[] points = PathObject.GetComponentsInChildren<Transform>();
         Vector3[] path = new Vector3[points.Length];
         for (int i = 0; i < points.Length; i++) {
             Transform point = points[i];
@@ -116,15 +115,13 @@ public class Enemy : MonoBehaviour {
             path[i] = position;
         }
         return path;
-        Debug.LogError("memberVariable must be set to point to a Transform.", transform);
-        return new Vector3[0];
     }
 
-    private void DrawPath() {
+    private void DrawPatrole() {
 
         viewColor = Color.green;
         moveColor = Color.blue;
-        if (currentAction == Action.ChasePlayer) {
+        if (action == Action.Attacking) {
             viewColor = Color.red;
             moveColor = Color.red;
         }
@@ -139,75 +136,16 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    private void Eyes() {
-
-        inc = Mathf.Max(2, inc);
-        RaycastHit hit;
-
-        for (int angle = -FOV; angle <= FOV; angle += inc) {
-            Vector3 targetPos = new Vector3(0, 0, 0);
-            targetPos += Quaternion.AngleAxis(angle, Vector3.up) * Character.transform.forward * distance;
-
-            Debug.DrawRay(Character.transform.position, targetPos, viewColor);
-
-            if (Physics.Raycast(Character.transform.position, targetPos, out hit, distance)) {
-                if (hit.transform.tag == "Player") {
-                    currentAction = Action.ChasePlayer;
-                    ChasePlayer();
-                    return;
-                }
-            }
-        }
-        if (currentAction == Action.ChasePlayer) {
-            currentAction = Action.ScoutArea;
-        }
-    }
-
     // ---------------------------------------------------------------------
 
-    private void PickAction() {
-        if (!startTurn) return;
-
-        switch (currentAction) {
-            case Action.Idle:
-                Idle();
-                break;
-            case Action.Patrole:
-                Patroling();
-                break;
-            case Action.ChasePlayer:
-                ChasePlayer();
-                break;
-            case Action.ScoutArea:
-                ScoutArea();
-                break;
-            case Action.LookAround:
-                LookAround();
-                break;
-            default:
-                Debug.Log("Error: Action not found.");
-                break;
-        }
-        startTurn = false;
-        executing = true;
-    }
-
-    private void ExecuteAction() {
-        if (!executing) return;
-
-        AttackPlayer();
-        MoveToLocation();
-    }
-
-    // ---------------------------------------------------------------------
-
-    private void Idle() {
-        targetLocation = Character.transform.position;
-    }
-
-    private void Patroling() {
+    private void Patrole() {
+        float dist = Vector3.Distance(transform.position, targetLocation);
+        if (dist <= 0.001f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
+        action = Action.Patroling;
+    }
 
+    protected void nextPathPoint() {
         if (circlePatrole) {
             if (clockwise) {
                 if (++patrolPoint >= patrolPoints.Length - 1) clockwise = false;
@@ -219,48 +157,20 @@ public class Enemy : MonoBehaviour {
         }
     }
 
-    private void ChasePlayer() {
-        targetLocation = player.transform.position;
+    private void Investegate(Vector3 position) {
+        action = Action.Investegating;
+        targetLocation = position;
     }
 
-    private void ScoutArea() {
-        targetLocation = RandomNavmeshLocation(moveDistance);
+    private void Search() {   
+        action = Action.Searching;
+        targetLocation = RandomNavmeshLocation(moveRange);
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        //MoveTo(nextTile);
     }
 
     private void LookAround() {
-        targetLocation = Character.transform.position;
-    }
-
-    // ---------------------------------------------------------------------
-
-    private void AttackPlayer() {
-        float distanceToPlayer = Vector3.Distance(Character.transform.position, player.transform.position);
-        if (distanceToPlayer > attackDistance) return;
-
-        targetLocation = Character.transform.position;
-        Debug.Log("Attack!");
-        endTurn();
-    }
-
-    private void MoveToLocation() {
-        float distanceToLocation = Vector3.Distance(Character.transform.position, targetLocation);
-        if (distanceToLocation < 0.01f) endTurn();
-
-        Character.transform.LookAt(targetLocation, Vector3.up);
-
-        float step = moveSpeed * Time.deltaTime;
-        Debug.DrawLine(Character.transform.position, targetLocation, moveColor);
-        targetLocation.y = Character.transform.position.y;
-        Character.transform.position = Vector3.MoveTowards(Character.transform.position, targetLocation, step);
-    }
-
-    // ---------------------------------------------------------------------
-
-    private void TakeDamage(float damageTaken) {
-        health -= damageTaken;
-    }
-
-    private void Dead() {
-        Destroy(gameObject);
+        action = Action.Scouting;
+        targetLocation = transform.position;
     }
 }
