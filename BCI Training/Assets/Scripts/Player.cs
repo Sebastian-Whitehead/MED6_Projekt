@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Player : Unit {
 
-    public new Action action = Action.Idle;
     public State state = State.Idle;
 
     public enum State {
@@ -13,11 +12,6 @@ public class Player : Unit {
         Attack,
         Move,
         Charge
-    }
-
-    public new enum Action {
-        Idle,
-        Chasing
     }
 
     private Resources res;

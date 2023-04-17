@@ -4,23 +4,12 @@ using UnityEngine;
 
 public class Enemy : Unit {
 
-    public new Action action = Action.Patroling;
 
     [Header("Patrole")]
     private int patrolPoint = 1;
     private Vector3[] patrolPoints;
     public bool circlePatrole = false;
     private bool clockwise = true;
-
-    public new enum Action
-    {
-        Idle,
-        Patroling,
-        Chasing,
-        ScoutingArea,
-        LookingAround,
-        Investegating,
-    }
 
     public EnemyHealth enemyHealth;
 
@@ -68,7 +57,8 @@ public class Enemy : Unit {
     }
 
     protected override void UnitGone()
-    {   
+    {      
+        return; 
         if (action == Action.Chasing) {
             Investegate(targetLocation);
         }

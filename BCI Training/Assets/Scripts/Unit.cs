@@ -5,8 +5,17 @@ using UnityEngine;
 public abstract class Unit : PlayerMove {
 
     protected TurnManager turnManager;
-    public enum Action { Idle, Chasing };
-    protected Action action;
+    public enum Action
+    {
+        Idle,
+        Patroling,
+        Chasing,
+        ScoutingArea,
+        LookingAround,
+        Investegating,
+    };
+
+    public Action action;
 
     [Header("Character")]
     public float attackRange = 1f;
