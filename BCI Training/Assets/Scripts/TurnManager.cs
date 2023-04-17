@@ -5,23 +5,14 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
 
-    public Turn turn = Turn.Player;
+    public bool playerTurn = true;
     public bool collectiveTurn = false;
     private int enemyTurn = 0;
     private bool wait = false;
-
-    public enum Turn
-    {
-        Idle,
-        Player,
-        Enemies
-    }
-
     private Enemy[] enemies;
-    private Unit player;
+    private Player player;
 
-    void Awake()
-    {
+    void Awake() {
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
         player = GameObject.Find("Player").GetComponent<Player>();
     }
@@ -33,9 +24,10 @@ public class TurnManager : MonoBehaviour
     }
 
     private void PlayerTurn() {
-        if (turn != Turn.Player) return;
+        if (!playerTurn) return;
 
         if (!player.Active() && !player.isMoving && wait) {
+            player.Reset();
             EndTurn();
             return;
         }
@@ -43,7 +35,7 @@ public class TurnManager : MonoBehaviour
     }
 
     private void EnemiesCollectiveTurn() {
-        if (turn != Turn.Enemies) return;
+        if (playerTurn) return;
         if (!collectiveTurn) return;
         foreach (Enemy enemy in enemies) {
             enemy.Activate();
@@ -51,7 +43,7 @@ public class TurnManager : MonoBehaviour
     }
 
     private void EnemiesSeparateTurn() {
-        if (turn != Turn.Enemies) return;
+        if (playerTurn) return;
         if (collectiveTurn) return;
         
         Enemy enemy = enemies[enemyTurn];
@@ -69,24 +61,14 @@ public class TurnManager : MonoBehaviour
 
     // ---------------------------------------------------------------------
 
-    public void EndTurn()
-    {
+    public void EndTurn() {
         // TODO: Wait for seconds
 
-        switch (turn)
-        {
-            case Turn.Player:
-                turn = Turn.Enemies;
-                break;
-            case Turn.Enemies:
-                turn = Turn.Player;
-                break;
-        }
+        playerTurn = !playerTurn;
         wait = false;
     }
 
-    public void Wait()
-    {
+    public void Wait() {
         wait = true;
     }
 }

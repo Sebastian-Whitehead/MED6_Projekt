@@ -222,16 +222,23 @@ MonoBehaviour:
   maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 2
+  steps: 0
+  action: 1
+  maxHealth: 10
   attackRange: 5
   damage: 2
+  health: 0
+  alive: 1
   offensive: 0
   inc: 5
   FOV: 180
   distance: 10
   targetTag: Enemy
-  excecute: 0
-  action: 1
+  active: 0
   state: 0
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8
   confirmBtn: {fileID: 6495027317920004733}
 --- !u!114 &9160982866661872752
 MonoBehaviour:
@@ -440,7 +447,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  images: []
+  sprites:
+  - {fileID: 21300000, guid: 4def28fd306ec434ba232eb4b4c91170, type: 3}
+  - {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
+  - {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
 --- !u!1001 &7094183942324419803
 PrefabInstance:
   m_ObjectHideFlags: 0

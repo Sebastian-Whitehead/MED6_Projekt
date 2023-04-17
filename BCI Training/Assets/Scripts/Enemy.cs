@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class Enemy : Unit {
 
-    public new Action action = Action.Patroling;
-
     [Header("Patrole")]
     private int patrolPoint = 1;
     private Vector3[] patrolPoints;
     public bool circlePatrole = false;
     private bool clockwise = true;
 
-    public new enum Action
-    {
-        Idle,
-        Patroling,
-        Chasing,
-        ScoutingArea,
-        LookingAround,
-        Investegating,
-    }
-
-    public EnemyHealth enemyHealth;
+    private EnemyHealth enemyHealth;
 
     // ---------------------------------------------------------------------
 
@@ -31,6 +19,7 @@ public class Enemy : Unit {
         audioManager.PlayCategory("TakeDamage");
         Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
+        Investegate(hitPosition);
     }
 
     // ---------------------------------------------------------------------
@@ -42,8 +31,8 @@ public class Enemy : Unit {
         enemyHealth = GetComponent<EnemyHealth>();
         //patrolPoints = GenerateRandomPath(5);
         patrolPoints = GetManualPath();
-        action = Action.Patroling;
-        offensive = true;
+        targetLocation = transform.position;
+        DecisionTree();
     }
 
     protected override void ChildUpdate() {
@@ -51,25 +40,35 @@ public class Enemy : Unit {
         DrawPatrole();
     }
 
-    public override void AtLocation() {
+    public override void DecisionTree() {
+        if (steps <= 0 || isMoving) return;
+        AtLocation();
         BFS();
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        MoveTo(nextTile); 
+    }
+
+    private void AtLocation() {
+        if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
         switch (action) {
             case Action.Investegating:
-                ScoutArea();
+                Search();
                 break;
-            case Action.ScoutingArea:
+            case Action.Searching:
                 Patrole();
                 break;
             case Action.Patroling:
                 Patrole();
                 break;
+            case Action.Attacking:
+                action = Action.Attacking;
+                targetLocation = target.transform.position;
+                break;
         }
-        MoveTo(GetTileAtPosition(targetLocation));
     }
 
-    protected override void UnitGone()
-    {   
-        if (action == Action.Chasing) {
+    protected override void UnitGone() {   
+        if (action == Action.Attacking) {
             Investegate(targetLocation);
         }
     }
@@ -78,8 +77,7 @@ public class Enemy : Unit {
 
 
     // https://answers.unity.com/questions/475066/how-to-get-a-random-point-on-navmesh.html
-    private Vector3 RandomNavmeshLocation(float radius)
-    {
+    private Vector3 RandomNavmeshLocation(float radius) {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
         randomDirection += transform.position;
         UnityEngine.AI.NavMeshHit hit;
@@ -91,8 +89,7 @@ public class Enemy : Unit {
         return finalPosition;
     }
 
-    private Vector3[] GenerateRandomPath(int pathLength)
-    {
+    private Vector3[] GenerateRandomPath(int pathLength) {
         Vector3[] path = new Vector3[pathLength];
         for (int i = 0; i < pathLength; i++)
         {
@@ -120,19 +117,16 @@ public class Enemy : Unit {
         return path;
     }
 
-    private void DrawPatrole()
-    {
+    private void DrawPatrole() {
 
         viewColor = Color.green;
         moveColor = Color.blue;
-        if (action == Action.Chasing)
-        {
+        if (action == Action.Attacking) {
             viewColor = Color.red;
             moveColor = Color.red;
         }
 
-        for (int i = 0; i < patrolPoints.Length; i++)
-        {
+        for (int i = 0; i < patrolPoints.Length; i++) {
             Vector3 startPoint = patrolPoints[i] + new Vector3(0, 1, 0);
             Vector3 endPoint;
             if (i >= patrolPoints.Length - 1) endPoint = patrolPoints[0] + new Vector3(0, 1, 0);
@@ -144,48 +138,39 @@ public class Enemy : Unit {
 
     // ---------------------------------------------------------------------
 
-    private void Patrole()
-    {
+    private void Patrole() {
+        float dist = Vector3.Distance(transform.position, targetLocation);
+        if (dist <= 0.001f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
-        if (circlePatrole)
-        {
-            if (clockwise)
-            {
+    }
+
+    protected void nextPathPoint() {
+        if (circlePatrole) {
+            if (clockwise) {
                 if (++patrolPoint >= patrolPoints.Length - 1) clockwise = false;
-            }
-            else
-            {
+            } else {
                 if (--patrolPoint <= 0) clockwise = true;
             }
-        }
-        else
-        {
+        } else {
             if (++patrolPoint >= patrolPoints.Length) patrolPoint = 0;
         }
     }
 
-    private void Investegate(Vector3 position)
-    {
+    private void Investegate(Vector3 position) {
         action = Action.Investegating;
         targetLocation = position;
-        Tile nextTile = GetTileAtPosition(targetLocation);
-        //MoveTo(nextTile);
     }
 
-    private void ScoutArea()
-    {   
-        action = Action.ScoutingArea;
+    private void Search() {   
+        action = Action.Searching;
         targetLocation = RandomNavmeshLocation(moveRange);
         Tile nextTile = GetTileAtPosition(targetLocation);
         //MoveTo(nextTile);
     }
 
-    private void LookAround()
-    {
-        action = Action.LookingAround;
+    private void LookAround() {
+        action = Action.Scouting;
         targetLocation = transform.position;
-        Tile nextTile = GetTileAtPosition(targetLocation);
-        //MoveTo(nextTile);
     }
 }

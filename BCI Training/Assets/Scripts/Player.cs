@@ -13,6 +13,7 @@ public class Player : Unit {
         Move,
         Charge
     }
+    public LayerMask PlayerLayer;
 
     private Resources res; // Health and mana
     public Button confirmBtn; // Execute action
@@ -30,21 +31,25 @@ public class Player : Unit {
         
     }
 
+    protected override void UnitGone() {}
+    public override void DecisionTree() {}
+    
     // Check mouse click to move, attack
     void CheckMouseClick() {
 
-        if (turnManager.turn != TurnManager.Turn.Player) return; // Turn check
+        if (!turnManager.playerTurn) return; // Turn check
         if (!active) return; // Check activity
         if (!isMoving) BFS(); // Breath search to moveable location
+        if (steps <= 0) Deactivate();
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         
         target = null; // Enemy target
-        excecute = false; // Action execution
+        execute = false; // Action execution
         offensive = false; // Can attack enemies
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (!Physics.Raycast(ray, out hit, Mathf.Infinity)) return;
+        if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
         SetMoveTarget(hit.collider); // Set tile to move to
         SetAttackTarget(hit.collider); // Set enemy to attack
         ActivateBtn(); // Activate confirm btn
@@ -63,7 +68,7 @@ public class Player : Unit {
     private void ConfirmAction() {
         if (state == State.Idle) return;
         Debug.Log("Confirm action");
-        excecute = true; // Execute action
+        execute = true; // Execute action
         confirmBtn.interactable = false; // Deactivate confirm btn
         state = State.Idle; // Idle player
         Deactivate(); // Deactivate player
@@ -89,6 +94,13 @@ public class Player : Unit {
         offensive = true; // Enable attack mode
     }
 
+    private float RangeChance(Vector3 targetPos) {
+        Vector3 playerPos = gameObject.transform.position;
+        float distance = Vector3.Distance(playerPos, targetPos);
+        float hitChance = 100 - Mathf.Pow(distance, 2);
+        return hitChance;
+    }
+
     // Ready mana charging
     void ReadyCharge() {
         Debug.Log("Ready: Charge");
@@ -105,8 +117,15 @@ public class Player : Unit {
     public override void AtLocation() {}
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
+        health -= damage;
+        //action = Action.Idle;
         res.Damage(damageTaken);
         audioManager.PlayCategory("TakeDamage");
+    }
+
+    public void Reset() {
+        offensive = false;
+        target = null;
     }
 
     // Check if player can attack

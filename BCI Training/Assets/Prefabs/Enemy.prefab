@@ -540,21 +540,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
-  moveRange: 5
+  moveRange: 3
   maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 5
+  steps: 0
+  action: 1
+  maxHealth: 10
   attackRange: 1
   damage: 1
-  offensive: 0
+  health: 10
+  alive: 1
+  offensive: 1
   inc: 5
   FOV: 25
   distance: 5
   targetTag: Player
-  excecute: 1
-  action: 1
+  active: 0
   circlePatrole: 0
-  enemyHealth: {fileID: 0}
 --- !u!114 &8986806732966117096
 MonoBehaviour:
   m_ObjectHideFlags: 0

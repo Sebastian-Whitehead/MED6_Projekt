@@ -9,11 +9,21 @@ public class PlayerMove : TacticsMove {
         Init();
     }
 
-    
+    protected void MoveToGrid(Collider collider) {
+        if (collider.tag == "Tile") {
+            Tile t = collider.GetComponent<Tile>();
+            if (t.selectable){
+                MoveTo(t);
+            }
+        }
+    }
 
     protected Tile GetTileAtPosition(Vector3 position) {
         RaycastHit hit;
-        if (!Physics.Raycast(position, -Vector3.up, out hit, 1)) return null;
+        if (!Physics.Raycast(position, -Vector3.up, out hit, 2)) {
+            Debug.Log("Tile not found");
+            return null;
+        }
         return hit.collider.GetComponent<Tile>();
     }
 }

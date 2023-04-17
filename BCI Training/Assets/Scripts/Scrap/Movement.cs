@@ -37,6 +37,7 @@ public class Movement : MonoBehaviour {
     protected IEnumerator movingTo(Vector3 destination) {
         while (true)
         {
+            Debug.Log("Moving");
             _transform.position = Vector3.MoveTowards(_transform.position, destination, moveSpeed * Time.deltaTime);
 
             // Debug.Log(Vector3.Distance(_transform.position, dest));
