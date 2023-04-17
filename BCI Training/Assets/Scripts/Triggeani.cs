@@ -7,7 +7,9 @@ public class Triggeani : MonoBehaviour
     Animator anim;
     private CharacterController _controller;
     private float _speed = 5f;
-    public AudioClip impact;
+    public AudioClip move;
+    public AudioClip hitSound;
+    public AudioClip death;
     AudioSource audioSource;
     bool isMoving = false;
     public int life;
@@ -36,7 +38,7 @@ public class Triggeani : MonoBehaviour
 
         if (isMoving) {
             while (audioSource.isPlaying == false){
-            audioSource.Play();
+            audioSource.PlayOneShot(move);
         }
 
         }
@@ -55,5 +57,19 @@ public class Triggeani : MonoBehaviour
             isMoving = false;
             audioSource.Stop();
         }
+
+        if (isPlaying(anim, "hit reaction girl"))        {
+            audioSource.PlayOneShot(hitSound);
+            Debug.Log("HIT");
+        }
     }
+
+    bool isPlaying(Animator anim, string stateName)
+{
+    if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
+            anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        return true;
+    else
+        return false;
+}
 }

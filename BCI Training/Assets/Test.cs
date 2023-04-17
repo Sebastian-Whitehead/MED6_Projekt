@@ -7,6 +7,8 @@ public class Test : StateMachineBehaviour
     public Animator Girl;
     public int playerLife;
     public bool check = true;
+    public AudioClip hitSound;
+    GameObject temp;
    
 
     
@@ -25,9 +27,10 @@ public class Test : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator anim, AnimatorStateInfo stateInfo, int layerIndex)
     {
+
      if (check == true){
      playerLife = GameObject.Find("Player").GetComponent<Triggeani>().life;
-     Debug.Log(playerLife);
+     //Debug.Log(playerLife);
      check = false; 
      }
      playerLife = playerLife - 1;

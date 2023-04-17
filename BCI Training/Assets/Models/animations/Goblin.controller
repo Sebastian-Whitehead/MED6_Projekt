@@ -46,6 +46,7 @@ MonoBehaviour:
   Girl: {fileID: 1999691977, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
   playerLife: 0
   check: 1
+  hitSound: {fileID: 8300000, guid: 39dbc80cdc937054197aeccd16b4e79d, type: 3}
 --- !u!1101 &-2483795508024262238
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
