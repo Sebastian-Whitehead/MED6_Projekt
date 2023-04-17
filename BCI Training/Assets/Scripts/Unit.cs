@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Unit : PlayerMove {
@@ -20,6 +21,7 @@ public abstract class Unit : PlayerMove {
     public string targetTag;
     protected Vector3 targetLocation;
     protected Unit target;
+   
 
     [Header("Debug")]
     protected Color viewColor = Color.green;
@@ -57,7 +59,6 @@ public abstract class Unit : PlayerMove {
     }
 
     protected void Eyes() {
-
         if (!offensive) return;
         
         inc = Mathf.Max(2, inc);
@@ -70,9 +71,11 @@ public abstract class Unit : PlayerMove {
             Debug.DrawRay(transform.position, targetPos, viewColor);
 
             if (Physics.Raycast(transform.position, targetPos, out hit, distance)) {
-                if (hit.transform.tag == targetTag) {
+                if (hit.transform.tag == targetTag && chasing == false)
+                {
                     ChaseTarget(hit.transform);
                     audioManager.PlayCategory("SpotPlayer");
+                    chasing = true;
                     return;
                 }
             }
@@ -88,15 +91,14 @@ public abstract class Unit : PlayerMove {
 
     protected void ChaseTarget(Transform tmpTarget)
     {
+        //Debug.Log(currentTile.transform.position);
         action = Action.Chasing;
         target = tmpTarget.GetComponent<Unit>();
         if(tag == "Player") return;
         targetLocation = tmpTarget.position;
         FindPlayer();
         BFS();
-        //Debug.Log(currentTile);
         CalculatePath();
-        AStarTargetTile.targetTile = true;
 
     }
 
