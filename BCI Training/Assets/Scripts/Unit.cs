@@ -68,7 +68,7 @@ public abstract class Unit : PlayerMove {
         if (!Alive()) return;
         Eyes(); // Raycast see targets depended to 'offensive'
         ChildUpdate(); // Subclasses Update method
-        if (!execute && tag == "Player") return; // Execute on confirm
+        if (!execute && tag == "Player") return; // Execute on confirm btn
         AttackTarget(); // Attack target, if set
         DecisionTree(); // Decision tree to pick next action
         if (steps <= 0 && active) Deactivate();
@@ -143,20 +143,18 @@ public abstract class Unit : PlayerMove {
     public void Activate() {
         active = true; // Reset active
         hasAttacked = false; // Reset attacked
-        steps = moveRange + 1; // Reset steps
+        steps = moveRange + 1; // Reset steps plus one
         turnManager.Wait(); // TurnManager wait for unit to finish execution
         hasSpotted = false;
+        execute = false;
     }
 
     // Deactivate unit 
     public void Deactivate() {
         Debug.Log("Deactivate " + name);
-        //if ((tag == "Enemy" && (steps <= 0 || !isMoving)) || 
-        //(tag == "Player" && steps <= 0) || hasAttacked) {
-            active = false; // Disable activity
-            isMoving = false; // Disable moving
-            steps = 0; // Remove all steps
-        //}
+        active = false; // Disable activity
+        isMoving = false; // Disable moving
+        steps = 0; // Remove all steps
     }
 
     // Return activity

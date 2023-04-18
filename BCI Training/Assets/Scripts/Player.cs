@@ -37,11 +37,9 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void CheckMouseClick() {
 
-        if (isMoving) return;
+        if (execute || !active) return;
         if (!turnManager.playerTurn) return; // Turn check
-        if (!active) return; // Check activity
         if (!isMoving) BFS(); // Breath search to moveable location
-        if (steps <= 0) Deactivate();
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         
         target = null; // Enemy target
