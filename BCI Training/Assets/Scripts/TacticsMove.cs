@@ -99,13 +99,12 @@ public class TacticsMove : MonoBehaviour {
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
         // Debug.Log(name + " moving");
+        // Debug.Log(name + ", " + path.Count);
         if (!isMoving) return;
         if (steps <= 0) {
             RemoveSelectableTiles();
             isMoving = false;
         }
-
-        // Debug.Log(name + ", " + path.Count);
 
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
@@ -191,7 +190,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             chasing = false; 
         }
 
-        Debug.Log(lastTile + ", " + t);
+        // Debug.Log(lastTile + ", " + t);
 
         return lastTile;
     }
@@ -228,11 +227,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             closedList.Add(t); //add to closed list, we have found the closest route to this t.
 
             if (t == target){ //cannot step on target, because there is a unit, stop algorithm 1 node before end
-                Debug.Log("t: " + t);
-                Debug.Log("AStarTargetTile: " + AStarTargetTile);
                 AStarTargetTile = FindLastTile(t);
-                Debug.Log("AStarTargetTile: " + AStarTargetTile);
-                Debug.Log("t == target");
                 MoveTo(AStarTargetTile);
                 return;
             }
