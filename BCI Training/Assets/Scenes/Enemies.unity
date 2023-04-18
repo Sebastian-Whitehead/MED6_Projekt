@@ -2186,11 +2186,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4297702686298052400, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4297702686298052400, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4297702686918607357, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2202,11 +2202,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4297702686944133770, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4297702686944133770, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 4297702687541245587, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_RootOrder
@@ -2255,14 +2255,6 @@ PrefabInstance:
     - target: {fileID: 4297702687541245599, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_Name
       value: Enemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
-      propertyPath: moveRange
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
-      propertyPath: moveSpeed
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: circlePatrole
@@ -14618,14 +14610,6 @@ PrefabInstance:
     - target: {fileID: 4297702687541245599, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
-      propertyPath: attackRange
-      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 5597108059709316947, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
       propertyPath: circlePatrole

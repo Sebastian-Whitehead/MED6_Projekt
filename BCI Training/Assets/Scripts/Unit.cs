@@ -41,8 +41,10 @@ public abstract class Unit : PlayerMove {
 
     [Header("Manager")] // Managing variables
     public bool active = false; // Actions are possible
-    protected bool execute = false; // Execution of current action
+    public bool execute = false; // Execution of current action
     protected AudioManager audioManager;
+
+    public bool hasSpotted = false;
 
     // ---------------------------------------------------------------------
 
@@ -54,6 +56,7 @@ public abstract class Unit : PlayerMove {
     public abstract void DecisionTree(); // Enemy decision tree to pick action
     protected abstract bool AttackCheck(); // Check possible attack
 
+    public bool astar = false;
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -71,10 +74,14 @@ public abstract class Unit : PlayerMove {
         if (!execute && tag == "Player") return; // Execute on confirm
         AttackTarget(); // Attack target, if set
         DecisionTree(); // Decision tree to pick next action
-        if (tag == "Enemy" && !isMoving && steps < moveRange) Deactivate();
+        //if (active) return;
+        //if (steps <= 0 && active) Deactivate();
+        //if (tag == "Enemy" && !isMoving && steps < moveRange) Deactivate();
+        // Deactivate();
         if (!isMoving) return; // Break when not moving
         Move(); // Move to target tile
-        if (path.Count <= 0) Deactivate(); // Deactivate when at location
+        //if (tag == "Enemy" && path.Count <= 0 && active) Deactivate(); // Deactivate when at location
+        if (path.Count <= 0 && active) Deactivate();
     }
 
     // Positive and alive method
@@ -100,7 +107,6 @@ public abstract class Unit : PlayerMove {
             if (!Physics.Raycast(transform.position, targetPos, out hit, distance)) continue;
             if (hit.transform.tag != targetTag) continue; // Only matching 'target tag'
             SetTarget(hit.transform); // Set target to hit game object
-            audioManager.PlayCategory("SpotPlayer");
             return; // Break loop
         }
     }
@@ -111,22 +117,28 @@ public abstract class Unit : PlayerMove {
         targetLocation = transform.position; // Target location to current location
     }
 
-    protected void SetTarget(Transform tmpTarget)
-    {
+    protected void SetTarget(Transform tmpTarget) {
         //Debug.Log(currentTile.transform.position);
         action = Action.Attacking;
         target = tmpTarget.GetComponent<Unit>();
         targetLocation = tmpTarget.position;
 
         if (tag == "Player") return;
-        if (isMoving) return;
-        if (turnManager.playerTurn) return;
+        //if (isMoving) return;
+        if (hasSpotted) return;
+        if (astar) return;
 
+        astar = true;
+        Debug.Log(name + " isMoving: " + isMoving);
+        Debug.Log(name + " Player spotted");
+        hasSpotted = true;
+        AStarTargetTile = GetTileAtPosition(targetLocation);
         audioManager.PlayCategory("SpotPlayer");
+        
+        Tile nextTile = GetTileAtPosition(targetLocation);
         FindPlayer();
         BFS();
-        CalculatePath();
-
+        CalculatePath(nextTile);
     }
 
     // Attack target, if set and close enough
@@ -137,7 +149,7 @@ public abstract class Unit : PlayerMove {
         if (!offensive) return; // Break at not offensive
         if (!AttackCheck()) return; // Break attack not possible
 
-        Debug.Log(transform.name + " attacking " + target.name);
+        Debug.Log(name + " attacking " + target.name);
         target.TakeDamage(transform.position, damage); // Target takes damage
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
@@ -150,10 +162,10 @@ public abstract class Unit : PlayerMove {
          // Calc. distance from unit to target
         float distance = Vector3.Distance(playerPos, targetPos);
         if (distance > attackRange) { // Break at distance more than range
-            Debug.Log("Out of range");
+            // Debug.Log("Out of range");
             // Walk to target instead
-            BFS(); // Breath search tiles
-            MoveTo(GetTileAtPosition(targetPos)); // Move towards target
+            // BFS(); // Breath search tiles
+            //MoveTo(GetTileAtPosition(targetPos)); // Move towards target
             return true; // Abort method
         }
         return false; // Confirm method
@@ -167,16 +179,19 @@ public abstract class Unit : PlayerMove {
         hasAttacked = false; // Reset attacked
         steps = moveRange; // Reset steps
         turnManager.Wait(); // TurnManager wait for unit to finish execution
+        astar = false;
     }
 
     // Deactivate unit 
     public void Deactivate() {
-        if ((tag == "Enemy" && (steps <= 0 || !isMoving)) || 
-        (tag == "Player" && steps <= 0) || hasAttacked) {
+        Debug.Log("Deactivate " + name);
+        //if ((tag == "Enemy" && (steps <= 0 || !isMoving)) || 
+        //(tag == "Player" && steps <= 0) || hasAttacked) {
             active = false; // Disable activity
             isMoving = false; // Disable moving
             steps = 0; // Remove all steps
-        }
+            hasSpotted = false;
+        //}
     }
 
     // Return activity

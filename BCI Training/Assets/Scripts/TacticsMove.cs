@@ -73,7 +73,7 @@ public class TacticsMove : MonoBehaviour {
             int moveAble = steps;
             if (tag == "Enemy") moveAble = 100;
 
-            if (t.distance < moveAble){
+            if (t.distance < moveRange){
                 foreach(Tile tile in t.adjacentList){ //Anything adjacent to it, will set the original tile as parent.
                     if (!tile.visisted){
                         tile.parentTile = t;
@@ -86,9 +86,7 @@ public class TacticsMove : MonoBehaviour {
         }
     }
 
-    public void MoveTo(Tile tile)
-    {
-
+    public void MoveTo(Tile tile) {
         path.Clear();
         isMoving = true;
         tile.targetTile = true;
@@ -101,13 +99,16 @@ public class TacticsMove : MonoBehaviour {
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
+        // Debug.Log(name + " moving");
+        /*
         if (!isMoving) return;
-        if (steps < 0) {
+        if (steps <= 0) {
             RemoveSelectableTiles();
             isMoving = false;
         }
+        */
 
-        // Debug.Log(tag + ", " + path.Count);
+        // Debug.Log(name + ", " + path.Count);
 
         if (path.Count > 0) {
             Tile t = path.Peek(); //look at the stack, dont remove anything till we reach it.
@@ -137,6 +138,7 @@ public class TacticsMove : MonoBehaviour {
                 
             }
         } else {
+            RemoveSelectableTiles();
             isMoving = false;
         }
     }
@@ -216,7 +218,11 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             closedList.Add(t); //add to closed list, we have found the closest route to this t.
 
             if (t == target){ //cannot step on target, because there is a unit, stop algorithm 1 node before end
-                AStarTargetTile = FindLastTile(t);
+                
+                // Check if tile is ocupted
+                AStarTargetTile = target;
+                RaycastHit hit;
+                if (Physics.Raycast(target.transform.position, Vector3.up, out hit, 2)) AStarTargetTile = FindLastTile(t);
                 MoveTo(AStarTargetTile);
                 return;
             }

@@ -18,7 +18,6 @@ public class Enemy : Unit {
         audioManager.PlayCategory("TakeDamage");
         Investegate(hitPosition);
         transform.LookAt(hitPosition, Vector3.up);
-        Investegate(hitPosition);
     }
 
     // ---------------------------------------------------------------------
@@ -41,10 +40,15 @@ public class Enemy : Unit {
 
     public override void DecisionTree() {
         if (steps <= 0 || isMoving) return;
+        Debug.Log(name + " decision tree");
         AtLocation();
-        BFS();
         Tile nextTile = GetTileAtPosition(targetLocation);
-        MoveTo(nextTile); 
+        Debug.Log(name + " nextTile: " + nextTile);
+        //BFS();
+        //MoveTo(nextTile); 
+
+        BFS();
+        CalculatePath(nextTile);
     }
 
     private void AtLocation() {

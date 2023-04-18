@@ -57,7 +57,7 @@ public class Player : Unit {
     // Activate confirm button
     private void ActivateBtn() {
         if (state == State.Idle) return;
-        Debug.Log("Activate Confirm Btn");
+        // Debug.Log("Activate Confirm Btn");
         confirmBtn.interactable = true;
         ConfirmBtn conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         conBtn.UpdateSprite(state.ToString()); // Update confirm sprite
@@ -66,17 +66,18 @@ public class Player : Unit {
     // Confirm action
     private void ConfirmAction() {
         if (state == State.Idle) return;
-        Debug.Log("Confirm action");
+        // Debug.Log("Confirm action");
         execute = true; // Execute action
         confirmBtn.interactable = false; // Deactivate confirm btn
         state = State.Idle; // Idle player
-        Deactivate(); // Deactivate player
+        //Deactivate(); // Deactivate player
+        active = false;
     }
 
     // Ready moving
     void SetMoveTarget(Collider collider) {
         if (collider.tag == "Tile") {
-            Debug.Log("Set move: " + collider.name);
+            // Debug.Log("Set move: " + collider.name);
             state = State.Move;
             Tile t = collider.GetComponent<Tile>();
             if (t.selectable) MoveTo(t);
@@ -86,7 +87,7 @@ public class Player : Unit {
     // Ready attacking
     void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
-        Debug.Log("Set attack: " + collider.name);
+        // Debug.Log("Set attack: " + collider.name);
         targetLocation = collider.transform.position; // Set target to enemy location
         state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);

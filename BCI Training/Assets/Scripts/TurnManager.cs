@@ -26,7 +26,7 @@ public class TurnManager : MonoBehaviour
     private void PlayerTurn() {
         if (!playerTurn) return;
 
-        if (!player.Active() && !player.isMoving && wait) {
+        if (!player.Active() && !player.isMoving && wait && player.execute) {
             player.Reset();
             EndTurn();
             return;
@@ -62,6 +62,7 @@ public class TurnManager : MonoBehaviour
     // ---------------------------------------------------------------------
 
     public void EndTurn() {
+        Debug.Log("End turn");
         // TODO: Wait for seconds
 
         playerTurn = !playerTurn;

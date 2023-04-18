@@ -223,6 +223,8 @@ MonoBehaviour:
   jumpHeight: 2
   moveSpeed: 2
   steps: 0
+  chasing: 0
+  AStarTargetTile: {fileID: 0}
   action: 1
   maxHealth: 10
   attackRange: 100
@@ -230,11 +232,14 @@ MonoBehaviour:
   health: 0
   alive: 1
   offensive: 0
-  inc: 5
-  FOV: 180
-  distance: 10
+  inc: 2
+  FOV: 10
+  distance: 100
   targetTag: Enemy
   active: 0
+  execute: 0
+  hasSpotted: 0
+  astar: 0
   state: 0
   PlayerLayer:
     serializedVersion: 2
