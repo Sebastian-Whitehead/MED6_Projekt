@@ -166,7 +166,7 @@ public class TacticsMove : MonoBehaviour {
     }
 
 protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and calc path at max move distance
-    Stack<Tile> TempPath = new Stack<Tile>();
+        Stack<Tile> TempPath = new Stack<Tile>();
 
         Tile next = t.parentTile;
         while (next != null){ //Path from the tile next to the target back to start
@@ -222,7 +222,8 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
                 // Check if tile is ocupted
                 AStarTargetTile = target;
                 RaycastHit hit;
-                if (Physics.Raycast(target.transform.position, Vector3.up, out hit, 2)) AStarTargetTile = FindLastTile(t);
+                if (Physics.Raycast(target.transform.position, Vector3.up, out hit, 2))
+                    AStarTargetTile = FindLastTile(t);
                 MoveTo(AStarTargetTile);
                 return;
             }

@@ -56,8 +56,6 @@ public abstract class Unit : PlayerMove {
     public abstract void DecisionTree(); // Enemy decision tree to pick action
     protected abstract bool AttackCheck(); // Check possible attack
 
-    public bool astar = false;
-
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
@@ -118,27 +116,19 @@ public abstract class Unit : PlayerMove {
     }
 
     protected void SetTarget(Transform tmpTarget) {
-        //Debug.Log(currentTile.transform.position);
-        action = Action.Attacking;
-        target = tmpTarget.GetComponent<Unit>();
-        targetLocation = tmpTarget.position;
-
         if (tag == "Player") return;
-        //if (isMoving) return;
         if (hasSpotted) return;
-        if (astar) return;
 
-        astar = true;
-        Debug.Log(name + " isMoving: " + isMoving);
-        Debug.Log(name + " Player spotted");
+        // Debug.Log(name + " isMoving: " + isMoving);
+        // Debug.Log(name + " Player spotted");
+        
+        action = Action.Attacking;
         hasSpotted = true;
-        AStarTargetTile = GetTileAtPosition(targetLocation);
         audioManager.PlayCategory("SpotPlayer");
         
-        Tile nextTile = GetTileAtPosition(targetLocation);
         FindPlayer();
-        BFS();
-        CalculatePath(nextTile);
+        //BFS();
+        CalculatePath();
     }
 
     // Attack target, if set and close enough
@@ -179,7 +169,7 @@ public abstract class Unit : PlayerMove {
         hasAttacked = false; // Reset attacked
         steps = moveRange; // Reset steps
         turnManager.Wait(); // TurnManager wait for unit to finish execution
-        astar = false;
+        hasSpotted = false;
     }
 
     // Deactivate unit 
@@ -190,7 +180,6 @@ public abstract class Unit : PlayerMove {
             active = false; // Disable activity
             isMoving = false; // Disable moving
             steps = 0; // Remove all steps
-            hasSpotted = false;
         //}
     }
 
