@@ -71,7 +71,7 @@ public class Player : Unit {
         confirmBtn.interactable = false; // Deactivate confirm btn
         state = State.Idle; // Idle player
         //Deactivate(); // Deactivate player
-        active = false;
+        //active = false;
     }
 
     // Ready moving

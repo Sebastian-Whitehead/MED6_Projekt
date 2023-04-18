@@ -24,8 +24,6 @@ public abstract class Unit : PlayerMove {
     public float maxHealth = 10f;
     public float attackRange = 1f; // Range of attack
     public float damage = 2f; // Damage target on attack
-    public float health;
-    public bool alive = true; // Unit is alive
     public bool offensive = false; // Spot and attack targets
 
     [Header("View")] // Viewing propeties
@@ -62,33 +60,23 @@ public abstract class Unit : PlayerMove {
         //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
         audioManager = GetComponent<AudioManager>();
         target = null; // Null set target
-        health = maxHealth;
         ChildAwake(); // Sub-class method call
     }
 
     public void Update() {
-        if (!alive) return;
         Eyes(); // Raycast see targets depended to 'offensive'
         ChildUpdate(); // Subclasses Update method
         if (!execute && tag == "Player") return; // Execute on confirm
         AttackTarget(); // Attack target, if set
         DecisionTree(); // Decision tree to pick next action
         //if (active) return;
-        //if (steps <= 0 && active) Deactivate();
+        if (steps <= 0 && active) Deactivate();
         //if (tag == "Enemy" && !isMoving && steps < moveRange) Deactivate();
         // Deactivate();
         if (!isMoving) return; // Break when not moving
         Move(); // Move to target tile
         //if (tag == "Enemy" && path.Count <= 0 && active) Deactivate(); // Deactivate when at location
         if (path.Count <= 0 && active) Deactivate();
-    }
-
-    // Positive and alive method
-    protected void Alive() {
-        if (health > 0) return; // Break at positive health
-        health = Mathf.Max(health, 0); // Zero minimalize health value
-        alive = false; // Disable living
-        Destroy(gameObject); // Destroy game object (Temporary until animation)
     }
 
     // Eyes to spot game objects matching with 'target tag'
@@ -130,12 +118,15 @@ public abstract class Unit : PlayerMove {
         targetLocation = target.transform.position;
         
         FindPlayer();
-        if (tag == "Enemy") Deactivate();
+        Tile nextTile = GetTileAtPosition(targetLocation);
+        AStarTargetTile = nextTile;
+        Debug.Log("AStarTargetTile: " + AStarTargetTile);
+        CalculatePath(nextTile);
     }
 
     // Attack target, if set and close enough
     private void AttackTarget() {
-        if (tag == "Player") Debug.Log(hasAttacked + ", " + target + ", " + offensive + ", " + AttackCheck());
+        // if (tag == "Player") Debug.Log(hasAttacked + ", " + target + ", " + offensive + ", " + AttackCheck());
         if (hasAttacked) return;
         if (target == null) return; // Break at null target
         if (!offensive) return; // Break at not offensive

@@ -99,13 +99,11 @@ public class TacticsMove : MonoBehaviour {
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
         // Debug.Log(name + " moving");
-        /*
         if (!isMoving) return;
         if (steps <= 0) {
             RemoveSelectableTiles();
             isMoving = false;
         }
-        */
 
         // Debug.Log(name + ", " + path.Count);
 
@@ -137,8 +135,8 @@ public class TacticsMove : MonoBehaviour {
                 
             }
         } else {
-            RemoveSelectableTiles();
-            isMoving = false;
+            //RemoveSelectableTiles();
+            //isMoving = false;
         }
     }
 
