@@ -13,7 +13,8 @@ public abstract class Unit : PlayerMove {
         Attacking,
         Searching,
         Scouting,
-        Investegating
+        Investegating,
+        Attacked
     };
     
     public Action action; // Current action
@@ -116,8 +117,9 @@ public abstract class Unit : PlayerMove {
     }
 
     protected void SetTarget(Transform tmpTarget) {
-        if (tag == "Player") return;
         if (hasSpotted) return;
+        target = tmpTarget.GetComponent<Unit>();
+        if (tag == "Player") return;
 
         // Debug.Log(name + " isMoving: " + isMoving);
         // Debug.Log(name + " Player spotted");
@@ -125,17 +127,17 @@ public abstract class Unit : PlayerMove {
         action = Action.Attacking;
         hasSpotted = true;
         audioManager.PlayCategory("SpotPlayer");
+        targetLocation = target.transform.position;
         
         FindPlayer();
-        //BFS();
-        CalculatePath();
+        if (tag == "Enemy") Deactivate();
     }
 
     // Attack target, if set and close enough
     private void AttackTarget() {
+        if (tag == "Player") Debug.Log(hasAttacked + ", " + target + ", " + offensive + ", " + AttackCheck());
         if (hasAttacked) return;
         if (target == null) return; // Break at null target
-        if (tag == "Enemy" && OutOfRange(targetLocation)) return; // Break when target not in range
         if (!offensive) return; // Break at not offensive
         if (!AttackCheck()) return; // Break attack not possible
 
@@ -144,21 +146,6 @@ public abstract class Unit : PlayerMove {
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
         Deactivate(); // Deactivate unit
-    }
-
-    // Check if distance to given position is matching attack range 
-    private bool OutOfRange(Vector3 targetPos) {
-        Vector3 playerPos = gameObject.transform.position; 
-         // Calc. distance from unit to target
-        float distance = Vector3.Distance(playerPos, targetPos);
-        if (distance > attackRange) { // Break at distance more than range
-            // Debug.Log("Out of range");
-            // Walk to target instead
-            // BFS(); // Breath search tiles
-            //MoveTo(GetTileAtPosition(targetPos)); // Move towards target
-            return true; // Abort method
-        }
-        return false; // Confirm method
     }
 
     // ---------------------------------------------------------------------

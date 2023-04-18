@@ -16,14 +16,29 @@ public class Enemy : Unit {
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
         enemyHealth.Damage(damageTaken);
         audioManager.PlayCategory("TakeDamage");
-        Investegate(hitPosition);
+        action = Action.Attacked;
+        targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
     }
 
     // ---------------------------------------------------------------------
 
-    protected override bool AttackCheck() { return true; }
+    protected override bool AttackCheck() {
+        if (OutOfRange()) return false;
+        return true;
+    }
 
+    // Check if distance to given position is matching attack range 
+    private bool OutOfRange() {
+        Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 unitPos = gameObject.transform.position; 
+         // Calc. distance from unit to target
+        float distance = Vector3.Distance(unitPos, playerPos);
+        if (distance > attackRange) { // Break at distance more than range
+            return true; // Abort method
+        }
+        return false; // Confirm method
+    }
     protected override void ChildAwake()
     {
         enemyHealth = GetComponent<EnemyHealth>();
@@ -48,12 +63,18 @@ public class Enemy : Unit {
         //MoveTo(nextTile); 
 
         //BFS();
+        AStarTargetTile = nextTile;
+        Debug.Log("AStarTargetTile: " + AStarTargetTile);
         CalculatePath(nextTile);
     }
 
     private void AtLocation() {
-        if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
+        Debug.Log(name + " action: " + action);
+        // if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
         switch (action) {
+            case Action.Attacked:
+                Investegate(targetLocation);
+                break;
             case Action.Investegating:
                 Search();
                 break;
@@ -64,10 +85,13 @@ public class Enemy : Unit {
                 Patrole();
                 break;
             case Action.Attacking:
-                action = Action.Attacking;
-                targetLocation = target.transform.position;
+                Investegate(targetLocation);
                 break;
         }
+        bool inLocation = Vector3.Distance(targetLocation, transform.position) <= 0.01f;
+        bool noTarget = targetLocation == null;
+        if (inLocation || noTarget) Search();
+
     }
 
     protected override void UnitGone() {   
@@ -142,6 +166,7 @@ public class Enemy : Unit {
     // ---------------------------------------------------------------------
 
     private void Patrole() {
+        Debug.Log(name + " patrole");
         float dist = Vector3.Distance(transform.position, targetLocation);
         if (dist <= 0.001f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
@@ -170,7 +195,7 @@ public class Enemy : Unit {
         Debug.Log(name + " search");
         action = Action.Searching;
         targetLocation = RandomNavmeshLocation(moveRange);
-        Tile nextTile = GetTileAtPosition(targetLocation);
+        
         //MoveTo(nextTile);
     }
 

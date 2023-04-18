@@ -12,7 +12,6 @@ public class TacticsMove : MonoBehaviour {
 
     public bool isMoving = false;
     public int moveRange = 5; //move tiles pr turn
-    public int maxMoveRange = 5; //move tiles pr turn
     public float jumpHeight = 2; //drop down and jump 2 tiles
     public float moveSpeed = 2;
     public int steps = 0;
@@ -167,6 +166,13 @@ public class TacticsMove : MonoBehaviour {
 
 protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and calc path at max move distance
         Stack<Tile> TempPath = new Stack<Tile>();
+        
+        RaycastHit hit;
+        bool ocupied = true;
+        if (!Physics.Raycast(t.transform.position, Vector3.up, out hit, 2)) {
+            TempPath.Push(t);
+            ocupied = false;
+        }
 
         Tile next = t.parentTile;
         while (next != null){ //Path from the tile next to the target back to start
@@ -174,15 +180,21 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             next = next.parentTile;
         }
 
-        if (TempPath.Count <= moveRange){
-            return t.parentTile;
+        if (TempPath.Count <= moveRange) {
+            if (ocupied || t.parentTile == null) return t.parentTile;
+            else return t;
         }
+
+        int tmp = moveRange;
         Tile lastTile = null;
         for (int i = 0; i <= moveRange; i++){
             lastTile = TempPath.Pop(); //pop each tile for number of moves
             //when we pop the last one, we move to that tile
             chasing = false; 
         }
+
+        Debug.Log(lastTile + ", " + t);
+
         return lastTile;
     }
 
@@ -218,12 +230,11 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             closedList.Add(t); //add to closed list, we have found the closest route to this t.
 
             if (t == target){ //cannot step on target, because there is a unit, stop algorithm 1 node before end
-                
-                // Check if tile is ocupted
-                AStarTargetTile = target;
-                RaycastHit hit;
-                if (Physics.Raycast(target.transform.position, Vector3.up, out hit, 2))
-                    AStarTargetTile = FindLastTile(t);
+                Debug.Log("t: " + t);
+                Debug.Log("AStarTargetTile: " + AStarTargetTile);
+                AStarTargetTile = FindLastTile(t);
+                Debug.Log("AStarTargetTile: " + AStarTargetTile);
+                Debug.Log("t == target");
                 MoveTo(AStarTargetTile);
                 return;
             }
