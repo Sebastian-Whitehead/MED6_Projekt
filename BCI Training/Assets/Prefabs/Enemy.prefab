@@ -509,18 +509,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMoving: 0
   moveRange: 5
-  maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 2
   steps: 0
   chasing: 0
   AStarTargetTile: {fileID: 0}
   action: 1
-  maxHealth: 10
   attackRange: 1
   damage: 1
-  health: 10
-  alive: 1
   offensive: 1
   inc: 5
   FOV: 25

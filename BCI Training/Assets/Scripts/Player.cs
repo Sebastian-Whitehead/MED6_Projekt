@@ -41,6 +41,8 @@ public class Player : Unit {
         if (!turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
+
+        Dehighlight();
         
         target = null; // Enemy target
         execute = false; // Action execution
@@ -91,6 +93,18 @@ public class Player : Unit {
         state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);
         offensive = true; // Enable attack mode
+        Highlight(collider);
+    }
+
+    void Highlight(Collider target) {
+        target.GetComponent<Highlight>().selected = true;
+    }
+
+    void Dehighlight() {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies) {
+            enemy.GetComponent<Highlight>().selected = false;
+        }
     }
 
     private float RangeChance(Vector3 targetPos) {
