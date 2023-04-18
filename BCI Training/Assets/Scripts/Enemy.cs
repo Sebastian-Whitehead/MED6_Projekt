@@ -21,6 +21,10 @@ public class Enemy : Unit {
         transform.LookAt(hitPosition, Vector3.up);
     }
 
+    protected override bool Alive() {
+        return enemyHealth.alive;
+    }
+
     // ---------------------------------------------------------------------
 
     protected override bool AttackCheck() {

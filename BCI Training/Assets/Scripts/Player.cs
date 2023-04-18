@@ -37,6 +37,7 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void CheckMouseClick() {
 
+        if (isMoving) return;
         if (!turnManager.playerTurn) return; // Turn check
         if (!active) return; // Check activity
         if (!isMoving) BFS(); // Breath search to moveable location
@@ -128,5 +129,9 @@ public class Player : Unit {
     protected override bool AttackCheck() {
         if (!res.ManaCheck()) return false;
         return true;
+    }
+
+    protected override bool Alive() {
+        return res.alive;
     }
 }

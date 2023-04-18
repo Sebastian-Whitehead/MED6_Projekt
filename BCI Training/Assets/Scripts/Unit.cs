@@ -21,7 +21,6 @@ public abstract class Unit : PlayerMove {
     protected bool hasAttacked = false; // Has attacked this turn
 
     [Header("Character")] // 
-    public float maxHealth = 10f;
     public float attackRange = 1f; // Range of attack
     public float damage = 2f; // Damage target on attack
     public bool offensive = false; // Spot and attack targets
@@ -54,6 +53,7 @@ public abstract class Unit : PlayerMove {
     protected abstract void ChildUpdate(); // Sub-class method of 'Update'
     public abstract void DecisionTree(); // Enemy decision tree to pick action
     protected abstract bool AttackCheck(); // Check possible attack
+    protected abstract bool Alive(); // Check if unit is alive
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -64,18 +64,16 @@ public abstract class Unit : PlayerMove {
     }
 
     public void Update() {
+        if (!Alive() && active) Deactivate();
+        if (!Alive()) return;
         Eyes(); // Raycast see targets depended to 'offensive'
         ChildUpdate(); // Subclasses Update method
         if (!execute && tag == "Player") return; // Execute on confirm
         AttackTarget(); // Attack target, if set
         DecisionTree(); // Decision tree to pick next action
-        //if (active) return;
         if (steps <= 0 && active) Deactivate();
-        //if (tag == "Enemy" && !isMoving && steps < moveRange) Deactivate();
-        // Deactivate();
         if (!isMoving) return; // Break when not moving
         Move(); // Move to target tile
-        //if (tag == "Enemy" && path.Count <= 0 && active) Deactivate(); // Deactivate when at location
         if (path.Count <= 0 && active) Deactivate();
     }
 
@@ -145,7 +143,7 @@ public abstract class Unit : PlayerMove {
     public void Activate() {
         active = true; // Reset active
         hasAttacked = false; // Reset attacked
-        steps = moveRange; // Reset steps
+        steps = moveRange + 1; // Reset steps
         turnManager.Wait(); // TurnManager wait for unit to finish execution
         hasSpotted = false;
     }

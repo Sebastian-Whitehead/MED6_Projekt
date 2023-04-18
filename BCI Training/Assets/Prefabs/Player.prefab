@@ -219,7 +219,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMoving: 0
   moveRange: 5
-  maxMoveRange: 5
   jumpHeight: 2
   moveSpeed: 2
   steps: 0
@@ -229,8 +228,6 @@ MonoBehaviour:
   maxHealth: 10
   attackRange: 100
   damage: 2
-  health: 0
-  alive: 1
   offensive: 0
   inc: 2
   FOV: 10
@@ -239,7 +236,6 @@ MonoBehaviour:
   active: 0
   execute: 0
   hasSpotted: 0
-  astar: 0
   state: 0
   PlayerLayer:
     serializedVersion: 2
@@ -279,8 +275,8 @@ MonoBehaviour:
   - {fileID: 5402339679619488901}
   - {fileID: 5402339680058942397}
   - {fileID: 5402339679364743755}
-  health: 100
-  maxHealth: 100
+  health: 10
+  maxHealth: 10
   mana: 10
   maxMana: 10
   manaCost: 2
