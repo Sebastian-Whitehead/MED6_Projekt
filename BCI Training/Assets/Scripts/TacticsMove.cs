@@ -112,7 +112,7 @@ public class TacticsMove : MonoBehaviour {
 
             //Calcaulating the players position on top of the target tile.
             //We dont wanna walk into the tile, because then we will go into the ground, therefore we add halfheight and the tile height.. 
-            targetTile.y += halfHeight + t.GetComponent<Collider>().bounds.extents.y;
+            targetTile.y += t.GetComponent<Collider>().bounds.extents.y + 0.01f;
 
             float dist = Vector3.Distance(transform.position, targetTile);
             if (dist >= 0.05f){
