@@ -17,15 +17,16 @@ public class Player : Unit {
 
     private Resources res; // Health and mana
     public Button confirmBtn; // Execute action
+    private ConfirmBtn conBtn;
     
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
+        conBtn = confirmBtn.GetComponentInChildren<ConfirmBtn>(); // Confirm script
         res = GetComponent<Resources>(); // Get resources
     }
 
     protected override void ChildUpdate() {
         res.Alive(audioManager); // Alive check
-        CheckMouseClick(); // Mouse click check
         if (!execute) return; // Only on execute
         if (state == State.Charge) res.RegenMana();
         
@@ -35,17 +36,17 @@ public class Player : Unit {
     public override void DecisionTree() {}
     
     // Check mouse click to move, attack
-    void CheckMouseClick() {
+    void LateUpdate() {
 
         if (execute || !active) return;
+        if (state == State.Idle) ResetConfirmBtn();
         if (!turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
 
         Dehighlight(); // Dehighlight all enemies
-        
-        //attackTarget = null; // Enemy attack target
-        execute = false; // Action execution
+        RemoveTileHighlight();
+        ResetPlayer();
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -59,41 +60,44 @@ public class Player : Unit {
     private void ActivateBtn() {
         if (state == State.Idle) return;
         // Debug.Log("Activate Confirm Btn");
-        confirmBtn.interactable = true;
-        ConfirmBtn conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         conBtn.UpdateSprite(state.ToString()); // Update confirm sprite
     }
 
+    void ResetConfirmBtn() {
+        conBtn.DisableImage();
+    }
+
     // Confirm action
-    private void ConfirmAction() {
+    public void ConfirmAction() {
+        Debug.Log(isMoving);
         if (state == State.Idle) return;
         // Debug.Log("Confirm action");
         execute = true; // Execute action
-        confirmBtn.interactable = false; // Deactivate confirm btn
-        state = State.Idle; // Idle player
-        //Deactivate(); // Deactivate player
-        //active = false;
+        conBtn.DisableImage(); // Deactivate confirm btn
     }
 
     // Ready moving
     void SetMoveTarget(Collider collider) {
-        if (collider.tag == "Tile") {
-            // Debug.Log("Move target: " + collider.name);
-            state = State.Move;
-            Tile t = collider.GetComponent<Tile>();
-            if (t.selectable) MoveTo(t);
-        }
+        isMoving = false; // Reset moving
+        if (collider.tag != "Tile") return;
+        // Debug.Log("Move target: " + collider.name);
+        state = State.Move;
+        Tile t = collider.GetComponent<Tile>();
+        if (t.selectable) MoveTo(t);
+        else state = State.Idle;
     }
 
     // Ready attacking
     void SetAttackTarget(Collider collider) {
+        attackTarget = null; // Reset attack target
         if (collider.tag != targetTag) return;
-        Debug.Log("Attack target: " + collider.name);
+        // Debug.Log("Attack target: " + collider.name);
         targetLocation = collider.transform.position; // Set target to enemy location
-        state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);
-        offensive = true; // Enable attack mode
-        Highlight(collider);
+        state = State.Attack; // Attack state player
+        Eyes(); // Enemy visible from player (TODO: CHECK IF COLLIDER IS TARGET)
+        if (attackTarget == null) state = State.Idle; // Break at no target
+        else Highlight(collider); // Highlight target
     }
 
     void Highlight(Collider target) {
@@ -116,7 +120,7 @@ public class Player : Unit {
 
     // Ready mana charging
     void ReadyCharge() {
-        Debug.Log("Ready: Charge");
+        // Debug.Log("Ready: Charge");
         state = State.Charge;
     }
 
@@ -127,15 +131,13 @@ public class Player : Unit {
     }
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
-        //action = Action.Idle;
         res.Damage(damageTaken);
         audioManager.PlayCategory("TakeDamage");
     }
 
     public void ResetPlayer() {
-        Debug.Log("Reset player");
-        offensive = false;
-        attackTarget = null;
+        // Debug.Log("Reset player");
+        execute = false; // Action execution
     }
 
     // Check if player can attack
@@ -150,5 +152,19 @@ public class Player : Unit {
 
     protected override bool Alive() {
         return res.alive;
+    }
+
+    private void RemoveTileHighlight() {
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+        foreach(var obj in tiles)
+        {
+            Tile tile = obj.GetComponent<Tile>();
+            if (tile.targetTile)
+            {
+                tile.ResetTile();
+                tile.selectable = true;
+            }
+
+        }
     }
 }

@@ -46,7 +46,7 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void Reset(){ //Reset tile to original state
+    public void ResetTile(){ //Reset tile to original state
         adjacentList.Clear();
 
         current = false;
@@ -61,7 +61,7 @@ public class Tile : MonoBehaviour
     }
 
     public void IdentifyNeighbors(Tile target){
-        Reset();
+        ResetTile();
         
         CheckTile(Vector3.forward, target);
         CheckTile(-Vector3.forward, target);

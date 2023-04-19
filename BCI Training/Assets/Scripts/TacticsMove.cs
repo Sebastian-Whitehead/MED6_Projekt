@@ -88,15 +88,6 @@ public class TacticsMove : MonoBehaviour {
     public void MoveTo(Tile tile) {
         path.Clear();
         isMoving = true;
-        
-        Debug.Log(name);
-        Debug.Log("currentTile: " + currentTile);
-        Debug.Log("tile: " + tile);
-        if (currentTile == tile) {
-            Debug.Log("Same tile");
-            return;
-        }
-
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null) { //when end = null, then we are at the starting tile.
@@ -156,7 +147,7 @@ public class TacticsMove : MonoBehaviour {
         }
         
         foreach(Tile tile in selectableTiles){ 
-            tile.Reset();
+            tile.ResetTile();
         }
         selectableTiles.Clear();
     }

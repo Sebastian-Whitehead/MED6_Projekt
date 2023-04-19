@@ -23,7 +23,6 @@ public abstract class Unit : PlayerMove {
     [Header("Character")] // 
     public float attackRange = 1f; // Range of attack
     public float damage = 2f; // Damage target on attack
-    public bool offensive = false; // Spot and attack targets
 
     [Header("View")] // Viewing propeties
     [Range(2, 15)] public int inc = 5; // Increment and rate of raycast
@@ -66,7 +65,6 @@ public abstract class Unit : PlayerMove {
     public void Update() {
         if (!Alive() && active) Deactivate();
         if (!Alive()) return;
-        Eyes(); // Raycast see targets depended to 'offensive'
         ChildUpdate(); // Subclasses Update method
         if (!execute && tag == "Player") return; // Execute on confirm btn
         AttackTarget(); // Attack target, if set
@@ -78,8 +76,7 @@ public abstract class Unit : PlayerMove {
     }
 
     // Eyes to spot game objects matching with 'target tag'
-    private void Eyes() {
-        if (!offensive) return; // Break at not offensive
+    protected void Eyes() {
         
         inc = Mathf.Max(2, inc); // Minimalize increments
         RaycastHit hit;
@@ -127,8 +124,7 @@ public abstract class Unit : PlayerMove {
 
     // Attack target, if set and close enough
     private void AttackTarget() {
-        if (tag == "Player") Debug.Log(hasAttacked + ", " + attackTarget + ", " + offensive + ", " + AttackCheck());
-        if (!offensive) return; // Break at not offensive
+        // if (tag == "Player") Debug.Log(hasAttacked + ", " + attackTarget + ", " + AttackCheck());
         if (hasAttacked) {
             //if (tag == "Player") Debug.Log(name + " has attacked");
             return;
@@ -160,7 +156,7 @@ public abstract class Unit : PlayerMove {
 
     // Deactivate unit 
     public void Deactivate() {
-        Debug.Log("Deactivate " + name);
+        // Debug.Log("Deactivate " + name);
         active = false; // Disable activity
         isMoving = false; // Disable moving
         steps = 0; // Remove all steps

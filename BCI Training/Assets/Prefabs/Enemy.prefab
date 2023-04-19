@@ -516,7 +516,6 @@ MonoBehaviour:
   action: 1
   attackRange: 1
   damage: 1
-  offensive: 1
   inc: 5
   FOV: 25
   distance: 5

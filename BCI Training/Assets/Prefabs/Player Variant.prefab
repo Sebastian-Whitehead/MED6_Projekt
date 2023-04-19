@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1665464201
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1665464202}
-  m_Layer: 0
-  m_Name: Spawnpoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1665464202
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1665464201}
-  m_LocalRotation: {x: -0, y: -0.0000000745058, z: -0, w: -1}
-  m_LocalPosition: {x: 0.32413542, y: 1.5043377, z: 0.15791431}
-  m_LocalScale: {x: 8.311258, y: 8.311258, z: 8.311258}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4628275403281859653}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &779353494691008401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2921549616829068447, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2921549616829068447, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_AnchorMax.x
@@ -296,6 +265,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7731033366477169445, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -4766010668697859271, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
       propertyPath: m_Icon
       value: 
@@ -307,6 +284,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5465940246521907071, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
@@ -469,22 +450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PassiveInterval: {x: 0, y: 0}
   active: 1
---- !u!114 &-5569974014639534554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5436195879884906239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 4def28fd306ec434ba232eb4b4c91170, type: 3}
-  - {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
-  - {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
 --- !u!114 &-5358928364705347171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +535,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 54013935248017186, guid: ba44394998abfd74691113457d3c133f, type: 3}
-  Spawnpoint: {fileID: 1665464202}
+  Spawnpoint: {fileID: 0}
   playerLife: 0
   projectileSpeed: 0
 --- !u!114 &745708049729215748
@@ -595,7 +560,6 @@ MonoBehaviour:
   action: 1
   attackRange: 100
   damage: 2
-  offensive: 0
   inc: 2
   FOV: 10
   distance: 100

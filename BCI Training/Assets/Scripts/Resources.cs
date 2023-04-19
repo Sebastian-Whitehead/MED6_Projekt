@@ -111,7 +111,7 @@ public class Resources: MonoBehaviour
 
     public bool ManaCheck() {
         bool manaCheck = manaCost <= mana;
-        Debug.Log("ManaCheck: " + manaCheck);
+        // Debug.Log("ManaCheck: " + manaCheck);
         return manaCheck;
     }
 
