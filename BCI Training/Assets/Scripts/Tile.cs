@@ -51,7 +51,7 @@ public class Tile : MonoBehaviour
 
       
         
-    
+
     public void ResetTile(){ //Reset tile to original state
         adjacentList.Clear();
 

@@ -103,9 +103,15 @@ public class Resources: MonoBehaviour
             mana -= expendPoints;
     }
 
+    public void Expend()
+    {
+        if (mana < maxMana)
+            mana -= manaCost;
+    }
+
     public bool ManaCheck() {
         bool manaCheck = manaCost <= mana;
-        Debug.Log("ManaCheck: " + manaCheck);
+        // Debug.Log("ManaCheck: " + manaCheck);
         return manaCheck;
     }
 

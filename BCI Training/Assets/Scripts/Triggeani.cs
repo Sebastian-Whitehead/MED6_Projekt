@@ -8,17 +8,21 @@ public class Triggeani : MonoBehaviour
     private CharacterController _controller;
     private float _speed = 5f;
     public AudioClip move;
-    public AudioClip hitSound;
+    public AudioClip impact;
     public AudioClip death;
     AudioSource audioSource;
+    AudioSource hitSource;
     bool isMoving = false;
     public int life;
+    private Shoot shoot;
  
     void Start()
     {
         _controller = GetComponent<CharacterController>();
         anim = gameObject.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        shoot = GetComponent<Shoot>();
+        
         
     }
     void Update()
@@ -29,10 +33,13 @@ public class Triggeani : MonoBehaviour
             anim.SetTrigger("Move");
         }
 
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && life >0)
         {
+            shoot.shooting();
             anim.SetTrigger("Shoot");
         }
+
+       
 
         
 
@@ -55,21 +62,37 @@ public class Triggeani : MonoBehaviour
         }
         else {
             isMoving = false;
-            audioSource.Stop();
-        }
-
-        if (isPlaying(anim, "hit reaction girl"))        {
-            audioSource.PlayOneShot(hitSound);
-            Debug.Log("HIT");
+            //audioSource.Stop();
         }
     }
 
-    bool isPlaying(Animator anim, string stateName)
+ /*   bool isPlaying(Animator anim, string stateName)
 {
     if (anim.GetCurrentAnimatorStateInfo(0).IsName(stateName) &&
             anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         return true;
     else
         return false;
+}*/
+
+void OnCollisionEnter(Collision collision){
+     if (collision.gameObject.tag == "Projectile")
+        {
+            life = life-1;
+            if (life > 0){
+                anim.SetTrigger("Hit");
+                while (audioSource.isPlaying == false){
+                audioSource.PlayOneShot(impact);
+                }
+                Debug.Log("Play hitsound");
+
+            }
+            else {
+                anim.SetTrigger("Death");
+                audioSource.PlayOneShot(death);
+            }
+        }
 }
+
+
 }

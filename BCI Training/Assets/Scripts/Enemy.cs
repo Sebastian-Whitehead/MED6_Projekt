@@ -54,22 +54,23 @@ public class Enemy : Unit {
 
     protected override void ChildUpdate() {
         enemyHealth.Alive(audioManager);
+        Eyes(); // Raycast see targets depended to 'offensive'
         DrawPatrole();
     }
 
     public override void DecisionTree() {
         if (steps <= 0 || isMoving) return;
-        Debug.Log(name + " decision tree");
+        // Debug.Log(name + " decision tree");
         AtLocation();
         Tile nextTile = GetTileAtPosition(targetLocation);
-        Debug.Log(name + " nextTile: " + nextTile);
         AStarTargetTile = nextTile;
-        Debug.Log("AStarTargetTile: " + AStarTargetTile);
+        // Debug.Log(name + " nextTile: " + nextTile);
+        // Debug.Log("AStarTargetTile: " + AStarTargetTile);
         CalculatePath(nextTile);
     }
 
     private void AtLocation() {
-        Debug.Log(name + " action: " + action);
+        // Debug.Log(name + " action: " + action);
         // if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
         switch (action) {
             case Action.Attacked:
@@ -166,9 +167,12 @@ public class Enemy : Unit {
     // ---------------------------------------------------------------------
 
     private void Patrole() {
-        Debug.Log(name + " patrole");
-        float dist = Vector3.Distance(transform.position, targetLocation);
-        if (dist <= 0.1f) nextPathPoint();
+        // Debug.Log(name + " patrole");
+        Vector3 position = transform.position;
+        Vector3 targetPosition = targetLocation;
+        position.y = targetPosition.y = 0;
+        float dist = Vector3.Distance(position, targetPosition);
+        if (dist <= 0.01f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
     }

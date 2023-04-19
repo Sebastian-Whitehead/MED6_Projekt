@@ -8,9 +8,9 @@ public class ConfirmBtn : MonoBehaviour {
     private Dictionary<string, Sprite> confirmBtnSprites; // Name, sprite dict
     private Image image; // Image component
 
-    // Start is called before the first frame update
-    void Start() {
+    void Awake() {
         image = GetComponent<Image>(); // Button image component
+        image.enabled = false;
         FormatSprites(); // Format sprites from list to dict
     }
 
@@ -24,6 +24,11 @@ public class ConfirmBtn : MonoBehaviour {
     // Update sprite from given name in dict
     public void UpdateSprite(string spriteName) {
         image.sprite = confirmBtnSprites[spriteName];
+        image.enabled = true;
+    }
+
+    public void DisableImage() {
+        image.enabled = false;
     }
 
 
