@@ -225,7 +225,6 @@ MonoBehaviour:
   chasing: 0
   AStarTargetTile: {fileID: 0}
   action: 1
-  maxHealth: 10
   attackRange: 100
   damage: 2
   offensive: 0
@@ -556,10 +555,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2932070616132324136, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
