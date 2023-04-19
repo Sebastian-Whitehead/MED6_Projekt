@@ -114,7 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e70b3093de960d46bb909e33bdef604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camTransform: {fileID: 0}
 --- !u!1 &2373166507875786768
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +167,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2373166507875786768}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -756,6 +755,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4297702687541245587}
     m_Modifications:
+    - target: {fileID: 7337279259193059070, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
+      propertyPath: m_text
+      value: 'Health: 5/5'
+      objectReference: {fileID: 0}
     - target: {fileID: 7337279259329921944, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1
@@ -854,6 +857,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7337279260102504670, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337279260102504671, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.18992639
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337279260102504671, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7337279260102504671, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
+      propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

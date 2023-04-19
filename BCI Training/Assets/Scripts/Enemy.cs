@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : Unit {
 
     [Header("Patrole")]
-    private int patrolPoint = 1;
+    private int patrolPoint = 0;
     private Vector3[] patrolPoints;
     public bool circlePatrole = false;
     private bool clockwise = true;
@@ -63,10 +63,6 @@ public class Enemy : Unit {
         AtLocation();
         Tile nextTile = GetTileAtPosition(targetLocation);
         Debug.Log(name + " nextTile: " + nextTile);
-        //BFS();
-        //MoveTo(nextTile); 
-
-        //BFS();
         AStarTargetTile = nextTile;
         Debug.Log("AStarTargetTile: " + AStarTargetTile);
         CalculatePath(nextTile);
@@ -172,7 +168,7 @@ public class Enemy : Unit {
     private void Patrole() {
         Debug.Log(name + " patrole");
         float dist = Vector3.Distance(transform.position, targetLocation);
-        if (dist <= 0.001f) nextPathPoint();
+        if (dist <= 0.1f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
     }
