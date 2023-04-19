@@ -190,13 +190,13 @@ public class Enemy : Unit {
     }
 
     private void Investegate(Vector3 position) {
-        Debug.Log(name + " inv.");
+        // Debug.Log(name + " inv.");
         action = Action.Investegating;
         targetLocation = position;
     }
 
     private void Search() {
-        Debug.Log(name + " search");
+        // Debug.Log(name + " search");
         action = Action.Searching;
         targetLocation = RandomNavmeshLocation(moveRange);
         
