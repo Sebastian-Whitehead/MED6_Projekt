@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9733d0bada0e77748a63654ef4f5748a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightImage: {fileID: 3484490652366827820, guid: cff8eb5bb2282f1499b6d6692f960fe6, type: 3}
+  highlightImage: {fileID: 9044498279914433718}
   selected: 0
 --- !u!1 &1153289553701158495
 GameObject:
