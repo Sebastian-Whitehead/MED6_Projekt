@@ -152,6 +152,83 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+--- !u!114 &2475779377647653306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549616940408363, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779377695236539 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549616820743722, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779378529708481 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549617655211600, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779378733090851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549615844804530, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779378834144030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549616214258831, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779379129930952 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549616526826329, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2475779379573001125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2921549616550495284, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+  m_PrefabInstance: {fileID: 779353494691008401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5165723916218819502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -534,3 +611,29 @@ MonoBehaviour:
   Category: TakeDamage
   AudioClips:
   - {fileID: 8300000, guid: 1d1ba072ce164c24eba9dca177b9a9b7, type: 3}
+--- !u!114 &6951986837288754579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d56ba6522a102b4db3c342f5ec79bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Highlight: {fileID: 2475779378733090851}
+  SucessHighlight: {fileID: 2475779378529708481}
+  Slider: {fileID: 2475779379129930952}
+  BCIAssembly:
+  - {fileID: 2475779377695236539}
+  - {fileID: 2475779379573001125}
+  - {fileID: 2475779378733090851}
+  - {fileID: 2475779378529708481}
+  - {fileID: 2475779378834144030}
+  - {fileID: 2475779377647653306}
+  BciPromptDuration: 7
+  speed: 1
+  promptSpeed: 0.5
+  simulateBci: 0

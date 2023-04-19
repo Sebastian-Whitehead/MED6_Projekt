@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -518,6 +518,7 @@ MonoBehaviour:
   mana: 10
   maxMana: 10
   manaCost: 2
+  fixedRegenPoints: 0
   alive: 1
 --- !u!114 &1220949498
 MonoBehaviour:
@@ -604,10 +605,10 @@ MonoBehaviour:
   - {fileID: 175983907}
   - {fileID: 1683496956}
   - {fileID: 1362438023}
-  BciPromptDuration: 0
-  speed: 0
-  promptSpeed: 0
-  simulateBci: 0
+  BciPromptDuration: 5
+  speed: 0.1
+  promptSpeed: 5
+  simulateBci: 1
 --- !u!114 &1319792183 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7337279260083887949, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}

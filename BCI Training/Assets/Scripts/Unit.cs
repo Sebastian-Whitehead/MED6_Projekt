@@ -43,6 +43,7 @@ public abstract class Unit : PlayerMove {
     protected AudioManager audioManager;
 
     public bool hasSpotted = false;
+    private Resources playerResources;
 
     // ---------------------------------------------------------------------
 
@@ -61,6 +62,10 @@ public abstract class Unit : PlayerMove {
         audioManager = GetComponent<AudioManager>();
         target = null; // Null set target
         ChildAwake(); // Sub-class method call
+        if (CompareTag("Player"))
+        {
+            playerResources = GetComponent<Resources>();
+        }
     }
 
     public void Update() {
@@ -105,7 +110,7 @@ public abstract class Unit : PlayerMove {
     protected void SetTarget(Transform tmpTarget) {
         if (hasSpotted) return;
         target = tmpTarget.GetComponent<Unit>();
-        if (tag == "Player") return;
+        if (CompareTag("Player")) return;
 
         // Debug.Log(name + " isMoving: " + isMoving);
         // Debug.Log(name + " Player spotted");
@@ -135,6 +140,10 @@ public abstract class Unit : PlayerMove {
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
         Deactivate(); // Deactivate unit
+        if (CompareTag("Player"))
+        {
+            playerResources.mana--;
+        }
     }
 
     // ---------------------------------------------------------------------

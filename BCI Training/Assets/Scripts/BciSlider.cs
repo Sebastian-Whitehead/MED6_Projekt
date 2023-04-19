@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -20,13 +21,15 @@ public class BciSlider : MonoBehaviour
     public float promptSpeed;
     private float currentSpeed;
     
-    public bool simulateBci; 
+    public bool simulateBci;
+    private Resources resources;
     
     [NonSerialized] public float currentInputValue;
     
     // Start is called before the first frame update
     void Start()
     {
+        resources = GetComponent<Resources>();
         Slider.maxValue = 1;
         HideBci();
         ResetBci();
@@ -91,6 +94,7 @@ public class BciSlider : MonoBehaviour
         SucessHighlight.enabled = true;
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
+        resources.mana++;
     }
 
     public void Fail()
@@ -104,7 +108,7 @@ public class BciSlider : MonoBehaviour
         if (Slider.value >= 0.418f)
         {
             currentInputValue = Random.Range(0.6f, 1f);
-            if (currentInputValue >= 0.9995f) // Simulation Threshold
+            if (currentInputValue >= 0.999f) // Simulation Threshold
             {
                 currentInputValue = 1f;
                 Debug.Log("THUNK!");
