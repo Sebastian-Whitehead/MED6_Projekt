@@ -61,6 +61,7 @@ public class Player : Unit {
         // Debug.Log("Activate Confirm Btn");
         confirmBtn.interactable = true;
         ConfirmBtn conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
+        Debug.Log(state.ToString());
         conBtn.UpdateSprite(state.ToString()); // Update confirm sprite
     }
 
