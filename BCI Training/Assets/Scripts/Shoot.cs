@@ -7,7 +7,8 @@ public class Shoot : MonoBehaviour
     public Rigidbody projectile;
     public Transform Spawnpoint;
     public float playerLife;
-    public  float projectileSpeed;
+    public float projectileSpeed;
+    public KeyCode UserKey;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +18,21 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         playerLife = GameObject.Find("Player").GetComponent<Animator>().GetFloat("Life");
-        if (Input.GetKeyDown("space") && playerLife > 0){
-           StartCoroutine(waiter());
+        /* playerLife = GameObject.Find("Player").GetComponent<Animator>().GetFloat("Life");
+        if (Input.GetKeyDown(UserKey) && playerLife > 0){
+           StartCoroutine(waiter());*/
          }
 
 
 
 
-    }
+   
+
+    public void shooting()
+    { 
+           StartCoroutine(waiter());
+         }
+
 
     IEnumerator waiter()
  {
