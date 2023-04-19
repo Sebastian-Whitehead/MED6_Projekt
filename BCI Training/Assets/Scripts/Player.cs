@@ -17,7 +17,7 @@ public class Player : Unit {
 
     private Resources res; // Health and mana
     public Button confirmBtn; // Execute action
-    private ConfirmBtn conBtn;
+    public GameObject[] tiles;
     
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
@@ -34,7 +34,7 @@ public class Player : Unit {
 
     protected override void UnitGone() {}
     public override void DecisionTree() {}
-    
+
     // Check mouse click to move, attack
     void LateUpdate() {
 
