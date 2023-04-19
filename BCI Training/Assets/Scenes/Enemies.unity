@@ -11428,6 +11428,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Goblin (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2230184318124213310, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_IsActive
       value: 1
