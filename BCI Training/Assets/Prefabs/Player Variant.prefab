@@ -96,7 +96,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
       propertyPath: m_Name
-      value: Player
+      value: Player Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
@@ -245,6 +245,76 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-9156623983333504291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f17cc561acb9224a91a573c10ba5df7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PassiveInterval: {x: 0, y: 0}
+  active: 1
+--- !u!114 &-5358928364705347171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: Attack
+  AudioClips:
+  - {fileID: 8300000, guid: de3f4ba5abb0b4a4a84b85cd05c5b237, type: 3}
+--- !u!114 &-844248247019358157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025ebe6693ed46d45a395fb8e0c56e99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manaPoints:
+  - {fileID: 5402339679760923587, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679756773260, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678172176246, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678164845847, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678409061275, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678172743879, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339680178458903, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679031835562, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679168215152, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678318340760, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  healthPoints:
+  - {fileID: 5402339680156496384, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678322246973, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679892020217, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339680234208446, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678830284725, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678947877909, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339678633793053, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679619488901, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339680058942397, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  - {fileID: 5402339679364743755, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  health: 10
+  maxHealth: 10
+  mana: 10
+  maxMana: 10
+  manaCost: 2
+  fixedRegenPoints: 0
+  alive: 1
 --- !u!114 &1999691976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,7 +327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec138638022c041bd842fc892d0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impact: {fileID: 8300000, guid: 5e6e51faf13b7f54e9777a4f28ea8cdd, type: 3}
+  move: {fileID: 0}
+  hitSound: {fileID: 0}
+  death: {fileID: 0}
+  life: 0
 --- !u!114 &1999691981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,3 +345,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 54013935248017186, guid: ba44394998abfd74691113457d3c133f, type: 3}
   Spawnpoint: {fileID: 1665464202}
+  playerLife: 0
+  projectileSpeed: 0
+--- !u!114 &745708049729215748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f646b05846eef44abd5ad00eed9f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+  moveRange: 5
+  jumpHeight: 2
+  moveSpeed: 2
+  steps: 0
+  chasing: 0
+  AStarTargetTile: {fileID: 0}
+  action: 1
+  attackRange: 100
+  damage: 2
+  offensive: 0
+  inc: 2
+  FOV: 10
+  distance: 100
+  targetTag: Enemy
+  active: 0
+  execute: 0
+  hasSpotted: 0
+  state: 0
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  confirmBtn: {fileID: 6495027317920004733, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+--- !u!114 &4265660811415541313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd772ef679ee694c86b83299a959788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Category: TakeDamage
+  AudioClips:
+  - {fileID: 8300000, guid: 1d1ba072ce164c24eba9dca177b9a9b7, type: 3}
+--- !u!114 &-5569974014639534554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 4def28fd306ec434ba232eb4b4c91170, type: 3}
+  - {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
+  - {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
