@@ -100,14 +100,13 @@ public class Resources: MonoBehaviour
 
     public void Expend(float expendPoints)
     {
-        if (mana <= maxMana)
-            mana -= expendPoints;
+        if (mana <= maxMana) mana -= expendPoints;
     }
 
     public void Expend()
     {
-        if (mana <= maxMana)
-            mana -= manaCost;
+        // Debug.Log("Decrease mana " + manaCost);
+        if (mana <= maxMana) mana -= manaCost;
         ManaBarFiller();
     }
 
