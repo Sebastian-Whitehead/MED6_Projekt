@@ -2236,6 +2236,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1032826432297432291, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 1032826432297432291, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_Name
       value: Goblin (1)
       objectReference: {fileID: 0}
@@ -10900,7 +10904,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1515775500}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -11402,7 +11406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 368880136437149273, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 368880136437149273, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -11417,8 +11421,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1032826432297432291, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 1032826432297432291, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_Name
-      value: Goblin
+      value: Goblin (0)
       objectReference: {fileID: 0}
     - target: {fileID: 2230184318124213310, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_IsActive
@@ -11426,11 +11434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887400422215048171, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.000002
+      value: 12.000002
       objectReference: {fileID: 0}
     - target: {fileID: 5887400422215048171, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.000001
+      value: 12.000001
       objectReference: {fileID: 0}
     - target: {fileID: 6232694002528817173, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_AnchorMax.x
@@ -14998,18 +15006,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8
       objectReference: {fileID: 0}
@@ -15049,16 +15045,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5436195879884906239, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5436195879884906239, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1746482040275060792, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}

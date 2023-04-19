@@ -167,8 +167,11 @@ public class Enemy : Unit {
 
     private void Patrole() {
         Debug.Log(name + " patrole");
-        float dist = Vector3.Distance(transform.position, targetLocation);
-        if (dist <= 0.1f) nextPathPoint();
+        Vector3 position = transform.position;
+        Vector3 targetPosition = targetLocation;
+        position.y = targetPosition.y = 0;
+        float dist = Vector3.Distance(position, targetPosition);
+        if (dist <= 0.01f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
     }

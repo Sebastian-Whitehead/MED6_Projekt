@@ -463,6 +463,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2921549615818747340, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2921549616829068419, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Name
       value: NewCanvas
@@ -551,13 +555,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2921549616838558891, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2921549616940408362, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2921549616970614641, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921549617656434496, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2921549617750300227, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2921549617839141916, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4058132884476823206, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Interactable
@@ -605,7 +625,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 7094183942324419803}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

@@ -42,9 +42,9 @@ public class Player : Unit {
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
 
-        Dehighlight();
+        Dehighlight(); // Dehighlight all enemies
         
-        target = null; // Enemy target
+        //attackTarget = null; // Enemy attack target
         execute = false; // Action execution
 
         RaycastHit hit;
@@ -78,7 +78,7 @@ public class Player : Unit {
     // Ready moving
     void SetMoveTarget(Collider collider) {
         if (collider.tag == "Tile") {
-            // Debug.Log("Set move: " + collider.name);
+            // Debug.Log("Move target: " + collider.name);
             state = State.Move;
             Tile t = collider.GetComponent<Tile>();
             if (t.selectable) MoveTo(t);
@@ -88,7 +88,7 @@ public class Player : Unit {
     // Ready attacking
     void SetAttackTarget(Collider collider) {
         if (collider.tag != targetTag) return;
-        // Debug.Log("Set attack: " + collider.name);
+        Debug.Log("Attack target: " + collider.name);
         targetLocation = collider.transform.position; // Set target to enemy location
         state = State.Attack;
         transform.LookAt(targetLocation, Vector3.up);
@@ -132,14 +132,19 @@ public class Player : Unit {
         audioManager.PlayCategory("TakeDamage");
     }
 
-    public void Reset() {
+    public void ResetPlayer() {
+        Debug.Log("Reset player");
         offensive = false;
-        target = null;
+        attackTarget = null;
     }
 
     // Check if player can attack
     protected override bool AttackCheck() {
-        if (!res.ManaCheck()) return false;
+        if (!res.ManaCheck()) {
+            Debug.Log(name + " no mana");
+            return false;
+        }
+        res.Expend(); // Decrease mana
         return true;
     }
 

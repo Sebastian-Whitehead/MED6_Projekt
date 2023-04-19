@@ -759,6 +759,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Health: 5/5'
       objectReference: {fileID: 0}
+    - target: {fileID: 7337279259193059070, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7337279259329921944, guid: 262bcb14c3e791b4c9826efd5b415ab5, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 1

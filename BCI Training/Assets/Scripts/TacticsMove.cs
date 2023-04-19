@@ -28,7 +28,7 @@ public class TacticsMove : MonoBehaviour {
 
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
-        halfHeight = GetComponent<Collider>().bounds.extents.y;//Gives distance from tile to center of the player. Calculate where player is on the tile.
+        halfHeight = GetComponent<Collider>().bounds.extents.y / 2; //Gives distance from tile to center of the player. Calculate where player is on the tile.
     }
 
     public void GetcurrentTile(){ //Find the tile currently under the player.
@@ -88,6 +88,15 @@ public class TacticsMove : MonoBehaviour {
     public void MoveTo(Tile tile) {
         path.Clear();
         isMoving = true;
+        
+        Debug.Log(name);
+        Debug.Log("currentTile: " + currentTile);
+        Debug.Log("tile: " + tile);
+        if (currentTile == tile) {
+            Debug.Log("Same tile");
+            return;
+        }
+
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null) { //when end = null, then we are at the starting tile.
@@ -177,8 +186,12 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             next = next.parentTile;
         }
 
+        // Debug.Log("t.parentTile: " + t.parentTile);
+        // Debug.Log("t: " + t);
+
         if (TempPath.Count <= moveRange) {
-            if (ocupied || t.parentTile == null) return t.parentTile;
+            if (t.parentTile == null && t == null) {}
+            if (ocupied) return t.parentTile;
             else return t;
         }
 
@@ -190,7 +203,6 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             chasing = false; 
         }
 
-        // Debug.Log(lastTile + ", " + t);
 
         return lastTile;
     }
@@ -200,7 +212,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
 
         foreach(Tile t in list){ //looking for the lowest f cost.
             if (t.f < lowest.f){
-               lowest = t; 
+               lowest = t;
             }
         }
 

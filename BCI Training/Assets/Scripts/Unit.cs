@@ -31,7 +31,7 @@ public abstract class Unit : PlayerMove {
     [Range(0f, 100f)] public float distance = 10f; // Raycast/view distance
     public string targetTag; // Tag unit will target and attack
     protected Vector3 targetLocation; // Target location to go to (check usage)
-    protected Unit target; // Target to attack
+    protected Unit attackTarget; // Target to attack
 
     [Header("Debug")] // Gizmo propeties
     protected Color viewColor = Color.green; // Visualize eyes raycast
@@ -43,7 +43,6 @@ public abstract class Unit : PlayerMove {
     protected AudioManager audioManager;
 
     public bool hasSpotted = false;
-    private Resources playerResources;
 
     // ---------------------------------------------------------------------
 
@@ -58,14 +57,10 @@ public abstract class Unit : PlayerMove {
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
-        //target = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
+        //attackTarget = GameObject.FindGameObjectWithTag(targetTag).GetComponent<Unit>();
         audioManager = GetComponent<AudioManager>();
-        target = null; // Null set target
+        attackTarget = null; // Null set attack target
         ChildAwake(); // Sub-class method call
-        if (CompareTag("Player"))
-        {
-            playerResources = GetComponent<Resources>();
-        }
     }
 
     public void Update() {
@@ -93,8 +88,10 @@ public abstract class Unit : PlayerMove {
             Vector3 targetPos = new Vector3(0, 0, 0); // Intilize a zero-vector
             // Get angle from for-loop and object forward direction
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
-            Debug.DrawRay(transform.position, targetPos, viewColor); // Visualize raycast
-            if (!Physics.Raycast(transform.position, targetPos, out hit, distance)) continue;
+            Vector3 projection = transform.position;
+            projection.y = 1;
+            Debug.DrawRay(projection, targetPos, viewColor); // Visualize raycast
+            if (!Physics.Raycast(projection, targetPos, out hit, distance)) continue;
             if (hit.transform.tag != targetTag) continue; // Only matching 'target tag'
             SetTarget(hit.transform); // Set target to hit game object
             return; // Break loop
@@ -109,7 +106,8 @@ public abstract class Unit : PlayerMove {
 
     protected void SetTarget(Transform tmpTarget) {
         if (hasSpotted) return;
-        target = tmpTarget.GetComponent<Unit>();
+        attackTarget = tmpTarget.GetComponent<Unit>();
+
         if (CompareTag("Player")) return;
 
         // Debug.Log(name + " isMoving: " + isMoving);
@@ -118,7 +116,7 @@ public abstract class Unit : PlayerMove {
         action = Action.Attacking;
         hasSpotted = true;
         audioManager.PlayCategory("SpotPlayer");
-        targetLocation = target.transform.position;
+        targetLocation = attackTarget.transform.position;
         
         FindPlayer();
         Tile nextTile = GetTileAtPosition(targetLocation);
@@ -129,21 +127,23 @@ public abstract class Unit : PlayerMove {
 
     // Attack target, if set and close enough
     private void AttackTarget() {
-        // if (tag == "Player") Debug.Log(hasAttacked + ", " + target + ", " + offensive + ", " + AttackCheck());
-        if (hasAttacked) return;
-        if (target == null) return; // Break at null target
+        if (tag == "Player") Debug.Log(hasAttacked + ", " + attackTarget + ", " + offensive + ", " + AttackCheck());
         if (!offensive) return; // Break at not offensive
+        if (hasAttacked) {
+            //if (tag == "Player") Debug.Log(name + " has attacked");
+            return;
+        }
+        if (attackTarget == null) {
+            //if (tag == "Player") Debug.Log(name + " attack target null");
+            return; // Break at null attack target
+        }
         if (!AttackCheck()) return; // Break attack not possible
 
-        Debug.Log(name + " attacking " + target.name);
-        target.TakeDamage(transform.position, damage); // Target takes damage
+        Debug.Log(name + " attacking " + attackTarget.name);
+        attackTarget.TakeDamage(transform.position, damage); // Target takes damage
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
         Deactivate(); // Deactivate unit
-        if (CompareTag("Player"))
-        {
-            playerResources.mana--;
-        }
     }
 
     // ---------------------------------------------------------------------

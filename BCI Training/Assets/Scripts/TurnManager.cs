@@ -27,7 +27,7 @@ public class TurnManager : MonoBehaviour
         if (!playerTurn) return;
 
         if (!player.Active() && !player.isMoving && wait && player.execute) {
-            player.Reset();
+            player.ResetPlayer();
             EndTurn();
             return;
         }
