@@ -77,6 +77,7 @@ public class Resources: MonoBehaviour
     {
         if (health > 0)
             health -= dmgPoints;
+        HealthBarFiller();
     }
 
     public void Heal(float healPoints)
@@ -99,14 +100,15 @@ public class Resources: MonoBehaviour
 
     public void Expend(float expendPoints)
     {
-        if (mana < maxMana)
+        if (mana <= maxMana)
             mana -= expendPoints;
     }
 
     public void Expend()
     {
-        if (mana < maxMana)
+        if (mana <= maxMana)
             mana -= manaCost;
+        ManaBarFiller();
     }
 
     public bool ManaCheck() {
