@@ -17,6 +17,7 @@ public class Player : Unit {
 
     private Resources res; // Health and mana
     public Button confirmBtn; // Execute action
+    public GameObject[] tiles;
     
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
@@ -33,8 +34,10 @@ public class Player : Unit {
 
     protected override void UnitGone() {}
     public override void DecisionTree() {}
-    
+
     // Check mouse click to move, attack
+ 
+    
     void CheckMouseClick() {
 
         if (execute || !active) return;
@@ -43,7 +46,18 @@ public class Player : Unit {
         if (!Input.GetMouseButtonDown(0)) return; // Click check
 
         Dehighlight();
-        
+        tiles = GameObject.FindGameObjectsWithTag("Tile");
+        foreach(var obj in tiles)
+        {
+            Tile tile = obj.GetComponent<Tile>();
+            if (tile.targetTile)
+            {
+                tile.ResetTile();
+                tile.selectable = true;
+            }
+            
+        }
+       
         target = null; // Enemy target
         execute = false; // Action execution
 
@@ -76,7 +90,8 @@ public class Player : Unit {
     }
 
     // Ready moving
-    void SetMoveTarget(Collider collider) {
+    void SetMoveTarget(Collider collider)
+    {
         if (collider.tag == "Tile") {
             // Debug.Log("Set move: " + collider.name);
             state = State.Move;
@@ -132,7 +147,7 @@ public class Player : Unit {
         audioManager.PlayCategory("TakeDamage");
     }
 
-    public void Reset() {
+    public void ResetPlayer() {
         offensive = false;
         target = null;
     }

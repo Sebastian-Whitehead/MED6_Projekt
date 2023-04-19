@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-
     public bool current = false;
     public bool targetTile = false; //Target posiiton
     public bool selectable = false; //The clickable tiles
@@ -32,7 +32,8 @@ public class Tile : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (current){
+        if (current)
+        {
             GetComponent<Renderer>().material.color = Color.yellow;
         }
         else if (targetTile){
@@ -44,9 +45,14 @@ public class Tile : MonoBehaviour
         else{
             GetComponent<Renderer>().material.color = Color.white;
         }
+        
+
     }
 
-    public void Reset(){ //Reset tile to original state
+      
+        
+    
+    public void ResetTile(){ //Reset tile to original state
         adjacentList.Clear();
 
         current = false;
@@ -61,7 +67,7 @@ public class Tile : MonoBehaviour
     }
 
     public void IdentifyNeighbors(Tile target){
-        Reset();
+        ResetTile();
         
         CheckTile(Vector3.forward, target);
         CheckTile(-Vector3.forward, target);

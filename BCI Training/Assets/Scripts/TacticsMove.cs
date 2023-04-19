@@ -147,7 +147,7 @@ public class TacticsMove : MonoBehaviour {
         }
         
         foreach(Tile tile in selectableTiles){ 
-            tile.Reset();
+            tile.ResetTile();
         }
         selectableTiles.Clear();
     }
