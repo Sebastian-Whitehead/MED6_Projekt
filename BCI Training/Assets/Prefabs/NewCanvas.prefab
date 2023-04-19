@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2325522303200445438}
   - component: {fileID: 4493788834634811419}
-  - component: {fileID: 530883406309978509}
   - component: {fileID: 6853665507069503833}
   m_Layer: 5
   m_Name: Image
@@ -47,22 +46,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63672243956004653}
   m_CullTransparentMesh: 1
---- !u!114 &530883406309978509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63672243956004653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprites:
-  - {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
-  - {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
-  - {fileID: 21300000, guid: b45d4f07d2df1a04a8f383255b948b4e, type: 3}
 --- !u!114 &6853665507069503833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,10 +109,10 @@ RectTransform:
   m_Father: {fileID: 7431194331752458209}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -43}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 75}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5754268590154893841
 CanvasRenderer:
@@ -161,15 +144,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: '{{prompt}}'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0884cff96a4d9a04ebb430ee089e95c0, type: 2}
+  m_sharedMaterial: {fileID: -4282425905006662818, guid: 0884cff96a4d9a04ebb430ee089e95c0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4082,6 +4065,7 @@ GameObject:
   - component: {fileID: 4058132884476823206}
   - component: {fileID: 2978851564340623753}
   - component: {fileID: 6493676082612727323}
+  - component: {fileID: 3559009736749057394}
   m_Layer: 5
   m_Name: ConfirmBtn
   m_TagString: Untagged
@@ -4228,3 +4212,19 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
+--- !u!114 &3559009736749057394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8689499754775747581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 668a3b22e2c929a42b4450bbffe4ae67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 6e3ed1d42f3b2bb43b5e486f678abee9, type: 3}
+  - {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
+  - {fileID: 21300000, guid: b45d4f07d2df1a04a8f383255b948b4e, type: 3}

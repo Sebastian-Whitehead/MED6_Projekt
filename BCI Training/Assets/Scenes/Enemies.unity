@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -204,17 +204,6 @@ CapsuleCollider:
   m_Height: 3.505723
   m_Direction: 1
   m_Center: {x: 0, y: 1.9931922, z: 0}
---- !u!114 &16645918 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 745708049729215748, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
-  m_PrefabInstance: {fileID: 6220792793728884510}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 16645902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42f646b05846eef44abd5ad00eed9f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &59681198
 GameObject:
   m_ObjectHideFlags: 0
@@ -6639,7 +6628,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c829eedd7d03fd04ea5a640edc3520ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 16645918}
 --- !u!1001 &974073700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15126,6 +15114,10 @@ PrefabInstance:
       propertyPath: MinDistance
       value: 2.4543009
       objectReference: {fileID: 0}
+    - target: {fileID: 734900714056775868, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_Name
+      value: ConfirmSprite
+      objectReference: {fileID: 0}
     - target: {fileID: 745708049729215748, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: confirmBtn
       value: 
@@ -15148,7 +15140,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3639387354668910903, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Interactable
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639387354668910903, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_Colors.m_DisabledColor.a
+      value: 0.5019608
       objectReference: {fileID: 0}
     - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_RootOrder
@@ -15197,6 +15193,38 @@ PrefabInstance:
     - target: {fileID: 5436195879884906239, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921891121066944624, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921891121066944624, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921891121066944624, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 7921891121066944624, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -92
+      objectReference: {fileID: 0}
+    - target: {fileID: 8146508222298068749, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 0884cff96a4d9a04ebb430ee089e95c0, type: 2}
+    - target: {fileID: 8146508222298068749, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4282425905006662818, guid: 0884cff96a4d9a04ebb430ee089e95c0, type: 2}
+    - target: {fileID: 8146508222298068749, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234722118391354476, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1746482040275060792, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
       propertyPath: m_Layer

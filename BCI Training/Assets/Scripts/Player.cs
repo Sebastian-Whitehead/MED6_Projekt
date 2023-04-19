@@ -22,7 +22,7 @@ public class Player : Unit {
     
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
-        conBtn = confirmBtn.GetComponentInChildren<ConfirmBtn>(); // Confirm script
+        conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         res = GetComponent<Resources>(); // Get resources
     }
 

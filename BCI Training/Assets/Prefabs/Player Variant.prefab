@@ -119,6 +119,34 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.topLeft.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.topLeft.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.topLeft.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8925826388282595484, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
+      propertyPath: m_fontColorGradient.bottomRight.r
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
 --- !u!114 &2475779377543121120 stripped
@@ -793,6 +821,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   confirmBtn: {fileID: 6495027317920004733, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
+  tiles: []
 --- !u!114 &4265660811415541313
 MonoBehaviour:
   m_ObjectHideFlags: 0
