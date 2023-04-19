@@ -17,6 +17,7 @@ public class Player : Unit {
 
     private Resources res; // Health and mana
     public Button confirmBtn; // Execute action
+    private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
     
     protected override void ChildAwake() {
