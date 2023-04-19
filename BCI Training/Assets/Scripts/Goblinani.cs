@@ -11,12 +11,17 @@ public class Goblinani : MonoBehaviour
     public AudioClip impact;
     public AudioClip Death;
     AudioSource audioSource;
+    private Shoot shoot;
+     private float _speed = 5f;
+    public AudioClip move;
+    bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+        shoot = GetComponent<Shoot>();
     }
 
     // Update is called once per frame
@@ -24,14 +29,15 @@ public class Goblinani : MonoBehaviour
     {
 
        
-        if (Input.GetKeyDown("q"))
+        if (Input.GetKeyDown("q") && gLife >0)
         {
+            shoot.shooting();
             anim.SetTrigger("Punch");
         }
 
         if (Input.GetKeyDown("e"))
         {
-            anim.SetTrigger("Death");
+            anim.SetTrigger("Run");
         }
     }
      
