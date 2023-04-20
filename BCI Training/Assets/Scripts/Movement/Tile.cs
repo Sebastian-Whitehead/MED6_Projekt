@@ -24,14 +24,19 @@ public class Tile : MonoBehaviour
     public float gCost = 0; //Cost from parent to current tile, som from the beginning
     public float heuristicCost = 0; //From processed tile to destination - estimated
 
+    private TurnManager turnManager;
 
-    void Start()
+    void Awake()
     {
-        
+        turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
     }
 
     // Update is called once per frame
     void Update() {
+        if (!turnManager.playerTurn) {
+            GetComponent<Renderer>().material.color = Color.white;
+            return;
+        }
         if (current)
         {
             GetComponent<Renderer>().material.color = Color.yellow;
