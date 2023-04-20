@@ -440,7 +440,7 @@ MonoBehaviour:
   isMoving: 0
   moveRange: 5
   jumpHeight: 2
-  moveSpeed: 2
+  moveSpeed: 5
   steps: 0
   chasing: 0
   AStarTargetTile: {fileID: 0}
