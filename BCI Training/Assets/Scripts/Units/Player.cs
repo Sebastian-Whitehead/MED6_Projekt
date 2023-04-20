@@ -47,7 +47,7 @@ public class Player : Unit {
 
         Dehighlight(); // Dehighlight all enemies
         RemoveTileHighlight();
-        ResetPlayer();
+        execute = false; // Action execution
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -70,7 +70,6 @@ public class Player : Unit {
 
     // Confirm action
     public void ConfirmAction() {
-        Debug.Log(isMoving);
         if (state == State.Idle) return;
         // Debug.Log("Confirm action");
         execute = true; // Execute action
@@ -82,10 +81,10 @@ public class Player : Unit {
         isMoving = false; // Reset moving
         if (collider.tag != "Tile") return;
         // Debug.Log("Move target: " + collider.name);
-        state = State.Move;
-        Tile t = collider.GetComponent<Tile>();
-        if (t.selectable) MoveTo(t);
-        else state = State.Idle;
+        state = State.Move; // Update state to move
+        Tile t = collider.GetComponent<Tile>(); // Get tile script
+        if (t.selectable) MoveTo(t); // Move to selectable
+        else ResetPlayer(); // Reset when not selectable
     }
 
     // Ready attacking
@@ -97,7 +96,7 @@ public class Player : Unit {
         transform.LookAt(targetLocation, Vector3.up);
         state = State.Attack; // Attack state player
         Eyes(); // Enemy visible from player (TODO: CHECK IF COLLIDER IS TARGET)
-        if (attackTarget == null) state = State.Idle; // Break at no target
+        if (attackTarget == null) ResetPlayer(); // Break at no target
         else Highlight(collider); // Highlight target
     }
 
@@ -138,13 +137,15 @@ public class Player : Unit {
 
     public void ResetPlayer() {
         // Debug.Log("Reset player");
-        execute = false; // Action execution
+        state = State.Idle;
+        execute = false;
     }
 
     // Check if player can attack
     protected override bool AttackCheck() {
         if (!res.ManaCheck()) {
             Debug.Log(name + " no mana");
+            ResetPlayer(); // Stop execution at no mana
             return false;
         }
         res.Expend(); // Decrease mana
