@@ -54,9 +54,14 @@ public class BciSlider : MonoBehaviour
             Highlight.enabled = true;
             currentSpeed = promptSpeed;
             
-            if (currentInputValue == 1f){ Success();}
-            if (Slider.value >= 1f){ Fail();}
+            
+            if (Slider.value >= 1f)Fail();
         }
+    }
+
+    public void FilterInputSuccess()
+    {
+        if (Slider.value >= 0.418f && StartBciPrompt == true) Success();
     }
 
     public void ShowAndHideBci(bool show)
