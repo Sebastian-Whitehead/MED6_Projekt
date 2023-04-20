@@ -40,7 +40,7 @@ public class Goblinani : MonoBehaviour
                 anim.SetFloat("Speed", Mathf.Abs(velocity.z));
              } else if (moving == false) {
             anim.SetFloat("Speed", 0);
-            Debug.Log("not moving");
+//            Debug.Log("not moving");
         }
        
        /* if (Input.GetKeyDown("q") && gLife >0)

@@ -16,8 +16,7 @@ public class BciSlider : MonoBehaviour
 
     public Button ChargeButton;
     public Image[] ChargeButtonImg;
-    public TextMeshProUGUI ChargeButtonTxt;
-    
+
     public float BciPromptDuration;
     private bool StartBciPrompt;
     
@@ -26,7 +25,6 @@ public class BciSlider : MonoBehaviour
     public float promptSpeed;
     private float currentSpeed;
     
-    public bool simulateBci;
     private PlayerFeatures resources;
     
     [NonSerialized] public float currentInputValue;
@@ -37,7 +35,6 @@ public class BciSlider : MonoBehaviour
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;
         ShowAndHideBci(false);
-        ChargeButton.onClick.AddListener(ChargeMana);
     }
 
     // Update is called once per frame
@@ -47,16 +44,20 @@ public class BciSlider : MonoBehaviour
         
         time -= Time.deltaTime * currentSpeed;
         Slider.value = 1 - (time / BciPromptDuration);
-        if (simulateBci){ SimulateBCI();}
-        
+
         if (Slider.value >= 0.418f && StartBciPrompt == true)
         {
             Highlight.enabled = true;
             currentSpeed = promptSpeed;
             
-            if (currentInputValue == 1f){ Success();}
-            if (Slider.value >= 1f){ Fail();}
+            
+            if (Slider.value >= 1f)Fail();
         }
+    }
+
+    public void FilterInputSuccess()
+    {
+        if (Slider.value >= 0.418f && StartBciPrompt == true) Success();
     }
 
     public void ShowAndHideBci(bool show)
@@ -73,7 +74,6 @@ public class BciSlider : MonoBehaviour
     private void ShowChargeButton(bool state)
     {
         ChargeButton.enabled = state;
-        ChargeButtonTxt.enabled = state;
         foreach (var currentElement in ChargeButtonImg)
         {
             currentElement.enabled = state;
@@ -95,30 +95,7 @@ public class BciSlider : MonoBehaviour
         ShowAndHideBci(true);
         StartBciPrompt = true;
     }
-    
-    public void SimulateBCI()
-    {
-        if (Slider.value >= 0.418f)
-        {
-            currentInputValue = Random.Range(0.6f, 1f);
-            if (currentInputValue >= 0.999f) // Simulation Threshold
-            {
-                currentInputValue = 1f;
-                Debug.Log("THUNK!");
-            }
-            
-            if (Input.GetKeyDown("space")) // Force Success
-            {
-                currentInputValue = 1f;
-                Debug.Log("THUNK!");
-            }
-            Debug.Log(currentInputValue);
-            return;
-        }
-        currentInputValue = Random.Range(0f, 1f);
-        Debug.Log(currentInputValue);
-    }
-    
+
     // ----------------------------------------------------------------------------------- //
     //  Success and Failure Conditions
     

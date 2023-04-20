@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5408782549962993300, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408782549962993300, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 885052759}
+    - target: {fileID: 5408782549962993300, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FilterInputSuccess
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408782549962993300, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BciSlider, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408782549962993301, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408782549962993301, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 885052759}
+    - target: {fileID: 5408782549962993301, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FilterInputSuccess
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408782549962993301, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
+      propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BciSlider, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5408782549962993304, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
       propertyPath: m_Name
       value: InputManager
@@ -5711,6 +5743,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1006826214294123933, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
   m_PrefabInstance: {fileID: 876580211}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &885052759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6951986837288754579, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+  m_PrefabInstance: {fileID: 6220792793728884510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d56ba6522a102b4db3c342f5ec79bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &887305618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15218,6 +15261,26 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0.5019608
       objectReference: {fileID: 0}
+    - target: {fileID: 4587407230785263984, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587407230785263984, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587407230785263984, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587407230785263984, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1424
+      objectReference: {fileID: 0}
+    - target: {fileID: 4587407230785263984, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 15.9
+      objectReference: {fileID: 0}
     - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -15320,7 +15383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_fontSize
-      value: 6.05
+      value: 8.05
       objectReference: {fileID: 0}
     - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_margin.w
@@ -15328,11 +15391,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_margin.x
-      value: 78.11237
+      value: -86.138245
       objectReference: {fileID: 0}
     - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_margin.z
-      value: 78.49807
+      value: -90.240204
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_fontStyle
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1746482040275060792, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
       propertyPath: m_Layer
