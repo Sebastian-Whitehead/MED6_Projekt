@@ -18,7 +18,7 @@ public class TacticsMove : MonoBehaviour {
     float halfHeight = 0; 
     public bool chasing = false;
     
-    Vector3 velocity = new Vector3();
+    public Vector3 velocity = new Vector3();
     Vector3 direction = new Vector3(); //heading
 
     GameObject target;
