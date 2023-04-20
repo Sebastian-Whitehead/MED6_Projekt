@@ -27,14 +27,14 @@ public class BciSlider : MonoBehaviour
     private float currentSpeed;
     
     public bool simulateBci;
-    private Resources resources;
+    private PlayerFeatures resources;
     
     [NonSerialized] public float currentInputValue;
     
     // Start is called before the first frame update
     void Start()
     {
-        resources = GetComponent<Resources>();
+        resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;
         ShowAndHideBci(false);
         ChargeButton.onClick.AddListener(ChargeMana);
