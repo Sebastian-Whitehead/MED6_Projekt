@@ -149,7 +149,6 @@ PrefabInstance:
     - target: {fileID: 2932070616132324136, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Sprite
       value: 
-<<<<<<< Updated upstream
       objectReference: {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
     - target: {fileID: 8580510199954602061, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_text
@@ -187,9 +186,6 @@ PrefabInstance:
       propertyPath: m_fontColorGradient.bottomRight.r
       value: 0
       objectReference: {fileID: 0}
-=======
-      objectReference: {fileID: 21300000, guid: ec8fdcd657a729243a79dc39db393f90, type: 3}
->>>>>>> Stashed changes
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
 --- !u!114 &665784090371911946 stripped
@@ -500,7 +496,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
 --- !u!114 &4115322570216966894 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3732430540182799743, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
@@ -515,11 +510,6 @@ MonoBehaviour:
 --- !u!114 &4270125367868162016 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3572016110656958577, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-=======
---- !u!114 &3639387354668910903 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4058132884476823206, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
->>>>>>> Stashed changes
   m_PrefabInstance: {fileID: 779353494691008401}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -528,7 +518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
 --- !u!114 &9062589693302716380 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8580510199954602061, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
@@ -540,8 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
->>>>>>> Stashed changes
 --- !u!1001 &5165723916218819502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -876,17 +863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ec138638022c041bd842fc892d0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-<<<<<<< Updated upstream
-  move: {fileID: 0}
-  impact: {fileID: 0}
-  death: {fileID: 0}
-  life: 0
-=======
   move: {fileID: 8300000, guid: 5e6e51faf13b7f54e9777a4f28ea8cdd, type: 3}
   impact: {fileID: 8300000, guid: b18b0adf648494f49a3f808ad1d89431, type: 3}
   death: {fileID: 8300000, guid: 63aacb8aac4334a4a9a8c64384421107, type: 3}
   life: 10
->>>>>>> Stashed changes
 --- !u!114 &1999691981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -937,12 +917,8 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 8
-<<<<<<< Updated upstream
   confirmBtn: {fileID: 6495027317920004733, guid: 151d7458b62b44a4285462bed9f088d0, type: 3}
   tiles: []
-=======
-  confirmBtn: {fileID: 3639387354668910903}
->>>>>>> Stashed changes
 --- !u!114 &4265660811415541313
 MonoBehaviour:
   m_ObjectHideFlags: 0

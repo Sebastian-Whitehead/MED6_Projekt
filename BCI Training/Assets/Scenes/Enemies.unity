@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5408782549962993306, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5408782549962993306, guid: abf9f88117a292e4693a50931d9c9378, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1153,7 +1153,7 @@ Transform:
   - {fileID: 1945922119}
   - {fileID: 59681199}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &249008606
 PrefabInstance:
@@ -4401,7 +4401,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &723102634
 PrefabInstance:
@@ -4496,7 +4496,7 @@ Transform:
   - {fileID: 1587990350}
   - {fileID: 404009764}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &744946343
 PrefabInstance:
@@ -7796,6 +7796,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1006826214294123933, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
   m_PrefabInstance: {fileID: 1067920711}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1077877717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3639387354668910903, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+  m_PrefabInstance: {fileID: 6220792793728884510}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1083003155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15114,7 +15125,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5412453237133595244, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5412453237133595244, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15180,7 +15191,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-<<<<<<< Updated upstream
     - target: {fileID: 1999691980, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: MinDistance
       value: 2.4543009
@@ -15192,9 +15202,7 @@ PrefabInstance:
     - target: {fileID: 745708049729215748, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: confirmBtn
       value: 
-      objectReference: {fileID: 1880538197}
-=======
->>>>>>> Stashed changes
+      objectReference: {fileID: 1077877717}
     - target: {fileID: 2475779377647653307, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -15207,7 +15215,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
     - target: {fileID: 2477014356779975865, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -15224,11 +15231,9 @@ PrefabInstance:
       propertyPath: m_Colors.m_DisabledColor.a
       value: 0.5019608
       objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes
     - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4628275403281859653, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15274,7 +15279,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-<<<<<<< Updated upstream
     - target: {fileID: 7921891121066944624, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -15507,7 +15511,5 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-=======
->>>>>>> Stashed changes
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
