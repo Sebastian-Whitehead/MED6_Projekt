@@ -6,7 +6,7 @@ public class Triggeani : MonoBehaviour
 {
     Animator anim;
     private CharacterController _controller;
-    private float _speed = 5f;
+   // private float _speed = 5f;
     public AudioClip move;
     public AudioClip impact;
     public AudioClip death;
@@ -15,6 +15,7 @@ public class Triggeani : MonoBehaviour
     bool isMoving = false;
     public int life;
     private Shoot shoot;
+    private TacticsMove player;
  
     void Start()
     {
@@ -22,6 +23,7 @@ public class Triggeani : MonoBehaviour
         anim = gameObject.GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         shoot = GetComponent<Shoot>();
+        player= GetComponent<TacticsMove>();
         
         
     }
@@ -30,7 +32,6 @@ public class Triggeani : MonoBehaviour
         //if (Input.GetMouseButtonDown(0))
         if (Input.GetKey("d"))
         {
-            anim.SetTrigger("Move");
         }
 
         if (Input.GetKeyDown("space") && life >0)
@@ -38,31 +39,39 @@ public class Triggeani : MonoBehaviour
             shoot.shooting();
             anim.SetTrigger("Shoot");
         }
-
+        bool moving = player.isMoving;
        
 
         
 
-        if (isMoving) {
+        if (moving) {
             while (audioSource.isPlaying == false){
             audioSource.PlayOneShot(move);
+            anim.SetTrigger("Move");
         }
 
         }
 
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        Vector3 direction = new Vector3(horizontalInput, 0, 0);
+
         //_direction = new Vector3(0, 0, horizontalInput) * _speed;
-        Vector3 velocity = direction * _speed;
+        Vector3 velocity = player.velocity;
 
         //_controller.Move(velocity * Time.deltaTime);
-        anim.SetFloat("Speed", Mathf.Abs(horizontalInput));
-        if (velocity.x != 0){
+        
+       /* if (velocity.x != 0){
             isMoving = true;
         }
         else {
             isMoving = false;
             //audioSource.Stop();
+        }*/
+        if(moving == true && velocity.x > 0.1){
+            anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+             } else if (moving == true && velocity.z > 0.1){
+                anim.SetFloat("Speed", Mathf.Abs(velocity.z));
+             } else if (moving == false) {
+            
+            anim.SetFloat("Speed", 0);
         }
     }
 

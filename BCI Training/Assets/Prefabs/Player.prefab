@@ -223,11 +223,11 @@ MonoBehaviour:
   moveSpeed: 2
   steps: 0
   chasing: 0
+  velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
   action: 1
   attackRange: 100
   damage: 2
-  offensive: 0
   inc: 2
   FOV: 10
   distance: 100
