@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5408782549962993306}
   - component: {fileID: 5408782549962993305}
   - component: {fileID: 5408782549962993300}
-  - component: {fileID: 5408782549962993307}
   - component: {fileID: 5408782549962993301}
   - component: {fileID: 5408782549962993302}
+  - component: {fileID: 61288097185474581}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -31,6 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.3251829, y: 1.0000261, z: -11.220469}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,6 +55,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: onKeySequenceLogReady
         m_Mode: 0
         m_Arguments:
@@ -68,6 +70,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnInputReceived
         m_Mode: 0
         m_Arguments:
@@ -82,6 +85,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
         m_Arguments:
@@ -114,6 +118,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: updateBCIStatus
         m_Mode: 0
         m_Arguments:
@@ -128,6 +133,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnMotorImageryDetected
         m_Mode: 0
         m_Arguments:
@@ -142,6 +148,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnInputReceived
         m_Mode: 0
         m_Arguments:
@@ -156,33 +163,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnBCIEvent
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &5408782549962993307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5408782549962993304}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d076990866d7a2046b67a6ba7a899656, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onBlink:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: OnInputReceived
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -214,6 +196,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: updateBCIStatus
         m_Mode: 0
         m_Arguments:
@@ -228,6 +211,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnMotorImageryDetected
         m_Mode: 0
         m_Arguments:
@@ -242,6 +226,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnInputReceived
         m_Mode: 0
         m_Arguments:
@@ -256,6 +241,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnBCIEvent
         m_Mode: 0
         m_Arguments:
@@ -278,3 +264,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608d31225d60e544ebbf028cc528e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &61288097185474581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5408782549962993304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8044bb5719035e14ab33f5a950770e12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreateMetaCollection: 1
+  enableMySQLSave: 1
+  email: anonymous
+  connectToMySQL: {fileID: 0}
+  enableCSVSave: 1
+  savePath: 
+  filePrefix: log
+  fileExtension: .csv
