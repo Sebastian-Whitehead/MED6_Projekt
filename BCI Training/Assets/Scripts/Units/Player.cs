@@ -40,10 +40,10 @@ public class Player : Unit {
     void LateUpdate() {
 
         if (execute || !active) return;
-        if (state == State.Idle) ResetConfirmBtn();
         if (!turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
+        if (state == State.Idle) ResetConfirmBtn();
 
         Dehighlight(); // Dehighlight all enemies
         RemoveTileHighlight();

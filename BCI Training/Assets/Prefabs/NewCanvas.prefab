@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4493788834634811419}
   - component: {fileID: 6853665507069503833}
   m_Layer: 5
-  m_Name: Image
+  m_Name: ConfirmSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
