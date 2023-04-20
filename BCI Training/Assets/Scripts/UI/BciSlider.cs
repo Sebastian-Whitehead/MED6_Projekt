@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,10 @@ public class BciSlider : MonoBehaviour
     public Image SucessHighlight;
     public Slider Slider;
     public Image[] BCIAssembly;
+
+    public Button ChargeButton;
+    public Image[] ChargeButtonImg;
+    public TextMeshProUGUI ChargeButtonTxt;
     
     public float BciPromptDuration;
     private bool StartBciPrompt;
@@ -31,19 +36,13 @@ public class BciSlider : MonoBehaviour
     {
         resources = GetComponent<Resources>();
         Slider.maxValue = 1;
-        HideBci();
-        ResetBci();
+        ShowAndHideBci(false);
+        ChargeButton.onClick.AddListener(ChargeMana);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("w"))
-        {
-            ShowAndResetBci();
-            StartBciPrompt = true;
-        }
-        
         if (!StartBciPrompt) return;
         
         time -= Time.deltaTime * currentSpeed;
@@ -60,25 +59,27 @@ public class BciSlider : MonoBehaviour
         }
     }
 
-    public void ShowAndResetBci()
+    public void ShowAndHideBci(bool show)
     {
-        Slider.enabled = true;
+        Slider.enabled = show;
         foreach (var currentImg in BCIAssembly)
         {
-            currentImg.enabled = true;
+            currentImg.enabled = show;
         }
         ResetBci();
+        ShowChargeButton(!show);
     }
-    
-    public void HideBci()
+
+    private void ShowChargeButton(bool state)
     {
-        foreach (var currentImg in BCIAssembly)
+        ChargeButton.enabled = state;
+        ChargeButtonTxt.enabled = state;
+        foreach (var currentElement in ChargeButtonImg)
         {
-            currentImg.enabled = false;
+            currentElement.enabled = state;
         }
-        Slider.enabled= false;
     }
-    
+
     public void ResetBci()
     {
         Slider.value = Slider.minValue;
@@ -89,20 +90,12 @@ public class BciSlider : MonoBehaviour
         StartBciPrompt = false;
     }
 
-    public void Success()
+    public void ChargeMana()
     {
-        SucessHighlight.enabled = true;
-        Slider.value = 1 - (time / BciPromptDuration);
-        StartBciPrompt = false;
-        resources.mana++;
+        ShowAndHideBci(true);
+        StartBciPrompt = true;
     }
-
-    public void Fail()
-    {
-        StartBciPrompt = false;
-        HideBci();
-    }
-
+    
     public void SimulateBCI()
     {
         if (Slider.value >= 0.418f)
@@ -125,4 +118,26 @@ public class BciSlider : MonoBehaviour
         currentInputValue = Random.Range(0f, 1f);
         Debug.Log(currentInputValue);
     }
+    
+    // ----------------------------------------------------------------------------------- //
+    //  Success and Failure Conditions
+    
+    public void Success()
+    {
+        SucessHighlight.enabled = true;
+        Slider.value = 1 - (time / BciPromptDuration);
+        StartBciPrompt = false;
+        resources.mana++;
+        ShowAndHideBci(false);
+    }
+
+    public void Fail()
+    {
+        StartBciPrompt = false;
+        ShowAndHideBci(false);
+    }
+
+    
+
+    
 }

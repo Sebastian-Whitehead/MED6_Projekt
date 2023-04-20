@@ -20,7 +20,7 @@ public class EnemyHealth : MonoBehaviour {
     void Update()
     {
         healthbar.SetHealth(health);
-        if (Input.GetKeyDown(KeyCode.Space)) Damage(1);
+        //if (Input.GetKeyDown(KeyCode.Space)) Damage(1);
     }
     
     public void Damage(float dmg)
