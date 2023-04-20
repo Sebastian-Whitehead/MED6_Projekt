@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Resources: MonoBehaviour
+public class PlayerFeatures : MonoBehaviour
 {
     public Image[] manaPoints;
     public Image[] healthPoints;

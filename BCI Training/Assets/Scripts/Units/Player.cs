@@ -15,7 +15,7 @@ public class Player : Unit {
     }
     public LayerMask PlayerLayer;
 
-    private Resources res; // Health and mana
+    private PlayerFeatures res; // Health and mana
     public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
@@ -23,7 +23,7 @@ public class Player : Unit {
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
         conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
-        res = GetComponent<Resources>(); // Get resources
+        res = GetComponent<PlayerFeatures>(); // Get resources
     }
 
     protected override void ChildUpdate() {
