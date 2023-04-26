@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5412453237133595244}
   - component: {fileID: 5412453237133595245}
-  - component: {fileID: 8226975915053222414}
+  - component: {fileID: 8941893838152464325}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74fc7adb0bd7dcd41b086f498a38bd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turn: 1
+  playerTurn: 1
   collectiveTurn: 0
---- !u!114 &8226975915053222414
+--- !u!114 &8941893838152464325
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5412453237133595250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4edb225e8d408cf4d975672f7a4689a2, type: 3}
+  m_Script: {fileID: 11500000, guid: c1865430d7b19314687ce6ef21f1c567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 0
+  gamemode: 0
+  bciSlider: {fileID: 0}
+  player: {fileID: 0}

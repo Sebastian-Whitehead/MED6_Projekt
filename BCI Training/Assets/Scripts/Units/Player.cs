@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SharedDatastructures;
+using Unity.VisualScripting;
 
 public class Player : Unit {
 
@@ -76,37 +77,42 @@ public class Player : Unit {
 
     // Confirm action
     public void ConfirmAction() {
+        print(gamemode);
         if (state == State.Idle) return;
-        if (state != State.Attack || gamemode == Gamemode.Battery)
+        if (state == State.Attack && gamemode == Gamemode.Interval)
+        {
+            bciPrompt.ChargeMana();
+            StartCoroutine(nameof(WaitForBci));
+        }
+        else
         {
             // Debug.Log("Confirm action");
             execute = true;
             conBtn.DisableImage(); // Deactivate confirm btn
-        } else{
-            if (gamemode == Gamemode.Interval)
-            {
-                bciPrompt.ChargeMana();
-                StartCoroutine(nameof(WaitForBci));
-            }
-            
         }
     }
 
-    private IEnumerator WaitForBci()
+    IEnumerator WaitForBci()
     {
         while (true)
         {
-            if (!bciPrompt.complete) yield return null;
-            if (bciPrompt.success)
+            if (!bciPrompt.complete)
             {
-                //TODO: Start Attack Animation
-                execute = true;
-                conBtn.DisableImage();
-                yield break;
-            }else{
-                AttackMiss();
-                conBtn.DisableImage();
-                yield break;
+                yield return null;
+            }
+            if (bciPrompt.complete)
+            {
+                switch (bciPrompt.success)
+                {
+                    case true:
+                        execute = true;
+                        conBtn.DisableImage();
+                        yield break;
+                    case false:
+                        AttackMiss();
+                        conBtn.DisableImage();
+                        yield break;
+                }
             }
         }
     }
@@ -114,6 +120,8 @@ public class Player : Unit {
     void AttackMiss()
     {
         //TODO: Attack Miss Animation
+        state = State.Idle;
+        execute = true;
         Deactivate();
     }
 

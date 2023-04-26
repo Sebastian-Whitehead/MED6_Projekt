@@ -122,8 +122,10 @@ public class BciSlider : MonoBehaviour
     public void Fail()
     {
         StartBciPrompt = false;
+        
         success = false;
         complete = true;
+        
         ShowAndHideBci(false);
     }
 
