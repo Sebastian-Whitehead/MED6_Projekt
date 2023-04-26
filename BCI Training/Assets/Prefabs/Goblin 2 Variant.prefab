@@ -38,6 +38,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8621398941988239365, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: Spawnpoint
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 185843831490857399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: Girl
       value: 
@@ -88,11 +92,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1032826432297432291, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_Name
-      value: Goblin 2
+      value: Goblin 2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594808526786155881, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_RootOrder
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4754344618466991303, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalPosition.z
       value: 1.76
+      objectReference: {fileID: 0}
+    - target: {fileID: 5282392832123260621, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5433220696389494399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_RootOrder
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
@@ -123,3 +139,16 @@ MonoBehaviour:
   playerLife: 2
   projectileSpeed: 2
   UserKey: 113
+--- !u!65 &3121340844585610089
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4333005479999175311}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.91, y: 2.1466196, z: 2.67}
+  m_Center: {x: 0, y: 1.3973225, z: -0}

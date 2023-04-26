@@ -88,6 +88,7 @@ public class TacticsMove : MonoBehaviour {
     public void MoveTo(Tile tile) {
         path.Clear();
         isMoving = true;
+        Debug.Log(name);
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null) { //when end = null, then we are at the starting tile.
@@ -104,6 +105,8 @@ public class TacticsMove : MonoBehaviour {
         if (steps <= 0) {
             RemoveSelectableTiles();
             isMoving = false;
+            Vector3 td = transform.position;
+            transform.position = new Vector3(Mathf.Round(td.x), td.y, Mathf.Round(td.y));
         }
 
         if (path.Count > 0) {
