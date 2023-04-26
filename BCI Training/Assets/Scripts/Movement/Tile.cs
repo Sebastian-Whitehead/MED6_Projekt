@@ -90,6 +90,7 @@ public class Tile : MonoBehaviour
     }
 
     public void CheckTile(Vector3 direction, Tile target){ //Check tile forward, back, left, right, is it traversable?
+        
         Vector3 halfExtents = new Vector3(0.25f, 1/ 2.0f, 0.25f); //Check to see if there is a tile there which is reachable.
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents); //overlapbox returns a list of colliders that is traversable.
 
