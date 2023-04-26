@@ -12,7 +12,6 @@ public class ConfirmBtn : MonoBehaviour {
     private Button btn;
 
     void Awake() {
-        Debug.Log(name + " awake");
         btn = GetComponent<Button>();
         image = GameObject.Find("ConfirmSprite").GetComponent<Image>(); // Button image component
         text = GetComponentInChildren<TMPro.TextMeshProUGUI>(); // Button image component
@@ -36,9 +35,6 @@ public class ConfirmBtn : MonoBehaviour {
     }
 
     public void DisableImage() {
-        Debug.Log(name);
-        Debug.Log(image);
-        Debug.Log(GameObject.Find("ConfirmSprite").GetComponent<Image>());
         image.enabled = false;
         text.SetText("");
         btn.interactable = false;

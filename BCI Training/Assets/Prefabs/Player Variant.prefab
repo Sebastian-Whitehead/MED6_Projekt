@@ -146,10 +146,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2932070616132324136, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 097ee3fe7dd74094fa4169820b44ef53, type: 3}
     - target: {fileID: 3572016110656958577, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Navigation.m_Mode
       value: 0
@@ -548,17 +544,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9062589693302716380 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8580510199954602061, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-  m_PrefabInstance: {fileID: 779353494691008401}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &5165723916218819502
@@ -993,8 +978,6 @@ MonoBehaviour:
   ChargeButtonImg:
   - {fileID: 665784090371911946}
   - {fileID: 4115322570216966894}
-  ChargeButtonTxt: {fileID: 9062589693302716380}
   BciPromptDuration: 7
   speed: 1
   promptSpeed: 0.5
-  simulateBci: 0

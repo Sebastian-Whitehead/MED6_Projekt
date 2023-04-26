@@ -42,7 +42,7 @@ public class TacticsMove : MonoBehaviour {
         Tile savedTile = null;
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1)){ //Locate the tile
             savedTile = hit.collider.GetComponent<Tile>();
-        }
+        } else Debug.Log("(" + name + ") savedTile: None hit");
         return savedTile;
     }
 

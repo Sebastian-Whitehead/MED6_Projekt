@@ -88,6 +88,10 @@ public class Enemy : Unit {
             case Action.Attacking:
                 Investegate(targetLocation);
                 break;
+            case Action.Idle:
+                Idle();
+                return;
+                break;
         }
         bool inLocation = Vector3.Distance(targetLocation, transform.position) <= 0.01f;
         bool noTarget = targetLocation == null;
@@ -165,6 +169,12 @@ public class Enemy : Unit {
     }
 
     // ---------------------------------------------------------------------
+    
+    // Have unit go idle 
+    private void Idle() {
+        action = Action.Idle;
+        targetLocation = transform.position; // Target location to current location
+    }
 
     private void Patrole() {
         // Debug.Log(name + " patrole");
