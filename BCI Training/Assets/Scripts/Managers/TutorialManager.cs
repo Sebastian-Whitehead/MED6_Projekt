@@ -20,9 +20,11 @@ public class TutorialManager : MonoBehaviour {
     }
 
     void CheckArea() {
-        if (enemies.Length <= currentArea) return;
+        if (enemies.Length - 1 <= currentArea) return;
         EnemyHealth enemyHealth = enemies[currentArea];
         if (enemyHealth.alive) return;
+        Debug.Log(enemies.Length);
+        Debug.Log(currentArea);
         Spawn(spawnPoints[currentArea]);
         currentArea++;
     }
