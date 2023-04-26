@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedDatastructures;
 
 public class PlayerFeatures : MonoBehaviour
 {
@@ -15,11 +16,21 @@ public class PlayerFeatures : MonoBehaviour
     private float lastHealth;
     private Shake shake;
     public bool alive = true;
+    
+    public Gamemode gamemode;
+    public Image[] manaUI;
 
     void Start()
     {
         health = maxHealth;
         lastHealth = health;
+        print(gamemode);
+        
+        if (gamemode == Gamemode.Interval)
+        {
+            maxMana = mana = 99999;
+            HideManaUI();
+        }
     }
 
     void Awake() {
@@ -62,6 +73,7 @@ public class PlayerFeatures : MonoBehaviour
 
     void ManaBarFiller()
     {
+        if (gamemode == Gamemode.Interval) return;
         for (int i = 0; i < manaPoints.Length; i++)
         {
             manaPoints[i].enabled = !DisplayManaPoints(mana, i);
@@ -98,11 +110,6 @@ public class PlayerFeatures : MonoBehaviour
         mana += fixedRegenPoints;
     }
 
-    public void Expend(float expendPoints)
-    {
-        if (mana <= maxMana) mana -= expendPoints;
-    }
-
     public void Expend()
     {
         // Debug.Log("Decrease mana " + manaCost);
@@ -120,6 +127,14 @@ public class PlayerFeatures : MonoBehaviour
         if (health > 0) return;
         alive = false;
         audioManager.PlayCategory("Death");
+    }
+
+    public void HideManaUI()
+    {
+        foreach (var currentElement in manaUI)
+        {
+            currentElement.enabled = false;
+        }
     }
     
 }

@@ -59,6 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1865430d7b19314687ce6ef21f1c567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamemode: 0
+  gamemode: 1
   bciSlider: {fileID: 0}
   player: {fileID: 0}

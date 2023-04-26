@@ -10,11 +10,20 @@ public class GameMode : MonoBehaviour
 
     public Gamemode gamemode;
 
-    public BciSlider bciSlider;
-    public Player player;
+    public GameObject player;
+    
+    private BciSlider bciSlider;
+    private Player playerScript;
+    private PlayerFeatures playerFeatures;
+    
+    
 
     private void Start()
     {
-        bciSlider.gamemode = player.gamemode = gamemode;
+        bciSlider = player.GetComponent<BciSlider>();
+        playerScript = player.GetComponent<Player>();
+        playerFeatures = player.GetComponent<PlayerFeatures>();
+        
+        bciSlider.gamemode = playerScript.gamemode = playerFeatures.gamemode = gamemode;
     }
 }
