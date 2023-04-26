@@ -99,7 +99,9 @@ public class Tile : MonoBehaviour
                 RaycastHit hit;
                  //Test if there is something on top of the tile, making it non-walkable...
                  //We add it to the list if the raycast DOES NOT hit something.
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target)){ //include target even if something is sitting on the tile.
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) ||
+                (tile == target) || 
+                !hit.collider.GetComponent<Unit>().Alive()) { //include target even if something is sitting on the tile.
                     
                     adjacentList.Add(tile);
                     //currentTile.parent = 

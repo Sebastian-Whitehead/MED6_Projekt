@@ -453,7 +453,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
   action: 1
-  attackRange: 1
+  attackRange: 1.05
   damage: 1
   inc: 5
   FOV: 25

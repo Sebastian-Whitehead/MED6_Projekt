@@ -21,7 +21,7 @@ public class Enemy : Unit {
         transform.LookAt(hitPosition, Vector3.up);
     }
 
-    protected override bool Alive() {
+    public override bool Alive() {
         return enemyHealth.alive;
     }
 
@@ -29,6 +29,7 @@ public class Enemy : Unit {
 
     protected override bool AttackCheck() {
         if (OutOfRange()) return false;
+        if (!active) return false;
         return true;
     }
 
@@ -62,11 +63,16 @@ public class Enemy : Unit {
         if (steps <= 0 || isMoving) return;
         // Debug.Log(name + " decision tree");
         AtLocation();
+        if (action == Action.Idle) {
+            Deactivate();
+            return;
+        }
         Tile nextTile = GetTileAtPosition(targetLocation);
         AStarTargetTile = nextTile;
         // Debug.Log(name + " nextTile: " + nextTile);
         // Debug.Log("AStarTargetTile: " + AStarTargetTile);
         CalculatePath(nextTile);
+        
     }
 
     private void AtLocation() {
