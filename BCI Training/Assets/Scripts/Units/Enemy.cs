@@ -67,6 +67,7 @@ public class Enemy : Unit {
             Deactivate();
             return;
         }
+        //Debug.Log("targetLocation: " + targetLocation);
         Tile nextTile = GetTileAtPosition(targetLocation);
         AStarTargetTile = nextTile;
         // Debug.Log(name + " nextTile: " + nextTile);
@@ -76,6 +77,7 @@ public class Enemy : Unit {
     }
 
     private void AtLocation() {
+        // Debug.Log("patrolPoint: " + patrolPoint);
         // Debug.Log(name + " action: " + action);
         // if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
         switch (action) {
@@ -97,11 +99,10 @@ public class Enemy : Unit {
             case Action.Idle:
                 Idle();
                 return;
-                break;
         }
-        bool inLocation = Vector3.Distance(targetLocation, transform.position) <= 0.01f;
-        bool noTarget = targetLocation == null;
-        if (inLocation || noTarget) Search();
+        //bool inLocation = Vector3.Distance(targetLocation, transform.position) <= 0.01f;
+        //bool noTarget = targetLocation == null;
+        //if (inLocation || noTarget) Search();
 
     }
 
@@ -188,12 +189,13 @@ public class Enemy : Unit {
         Vector3 targetPosition = targetLocation;
         position.y = targetPosition.y = 0;
         float dist = Vector3.Distance(position, targetPosition);
-        if (dist <= 0.01f) nextPathPoint();
+        if (dist <= 0.5f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
     }
 
     protected void nextPathPoint() {
+        // Debug.Log(name + " controlePoint " + patrolPoint);
         if (circlePatrole) {
             if (clockwise) {
                 if (++patrolPoint >= patrolPoints.Length - 1) clockwise = false;

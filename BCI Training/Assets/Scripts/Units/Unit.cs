@@ -112,7 +112,7 @@ public abstract class Unit : PlayerMove {
         FindPlayer();
         Tile nextTile = GetTileAtPosition(targetLocation);
         AStarTargetTile = nextTile;
-        Debug.Log("AStarTargetTile: " + AStarTargetTile);
+        //Debug.Log("AStarTargetTile: " + AStarTargetTile);
         CalculatePath(nextTile);
     }
 

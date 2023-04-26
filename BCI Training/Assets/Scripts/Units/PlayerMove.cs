@@ -24,6 +24,9 @@ public class PlayerMove : TacticsMove {
             Debug.Log("Tile not found");
             return null;
         }
+        // Debug.Log(hit.collider.name);
+        // Debug.Log(hit.collider.transform.position);
+        hit.collider.GetComponent<Renderer>().material.color = Color.red;
         return hit.collider.GetComponent<Tile>();
     }
 }

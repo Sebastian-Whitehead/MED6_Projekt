@@ -24,7 +24,7 @@ public class PlayerFeatures : MonoBehaviour
     {
         health = maxHealth;
         lastHealth = health;
-        print(gamemode);
+        // print(gamemode);
         
         if (gamemode == Gamemode.Interval)
         {

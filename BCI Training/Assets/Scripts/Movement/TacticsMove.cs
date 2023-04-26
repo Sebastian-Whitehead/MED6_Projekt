@@ -42,7 +42,8 @@ public class TacticsMove : MonoBehaviour {
         Tile savedTile = null;
         if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1)){ //Locate the tile
             savedTile = hit.collider.GetComponent<Tile>();
-        } else Debug.Log("(" + name + ") savedTile: None hit");
+        }
+        // Debug.Log("(" + name + ") savedTile: " + savedTile);
         return savedTile;
     }
 
@@ -88,7 +89,7 @@ public class TacticsMove : MonoBehaviour {
     public void MoveTo(Tile tile) {
         path.Clear();
         isMoving = true;
-        Debug.Log(name);
+        // Debug.Log(name);
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null) { //when end = null, then we are at the starting tile.
@@ -106,7 +107,7 @@ public class TacticsMove : MonoBehaviour {
             RemoveSelectableTiles();
             isMoving = false;
             Vector3 td = transform.position;
-            transform.position = new Vector3(Mathf.Round(td.x), td.y, Mathf.Round(td.y));
+            //transform.position = new Vector3(Mathf.Round(td.x), td.y, Mathf.Round(td.y));
         }
 
         if (path.Count > 0) {
@@ -116,9 +117,10 @@ public class TacticsMove : MonoBehaviour {
             //Calcaulating the players position on top of the target tile.
             //We dont wanna walk into the tile, because then we will go into the ground, therefore we add halfheight and the tile height.. 
             targetTile.y += t.GetComponent<Collider>().bounds.extents.y + 0.01f;
-
-            float dist = Vector3.Distance(transform.position, targetTile);
-            if (dist >= 0.05f){
+            Vector3 position = transform.position;
+            //position.y = targetTile.y = 0;
+            float dist = Vector3.Distance(position, targetTile);
+            if (dist >= 0.1f){
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
 

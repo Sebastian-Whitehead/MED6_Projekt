@@ -79,7 +79,7 @@ public class Player : Unit {
 
     // Confirm action
     public void ConfirmAction() {
-        print(gamemode);
+        // print(gamemode);
         if (state == State.Idle) return;
         if (state == State.Attack && gamemode == Gamemode.Interval)
         {
