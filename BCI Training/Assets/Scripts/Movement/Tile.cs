@@ -10,6 +10,8 @@ public class Tile : MonoBehaviour
     public bool selectable = false; //The clickable tiles
     public bool isWalkable = true; 
 
+    public float opacity;
+
     public List<Tile> adjacentList = new List<Tile>();  //list for identifying the neighbors.
    
    //BFS variables
@@ -50,6 +52,12 @@ public class Tile : MonoBehaviour
         else{
             GetComponent<Renderer>().material.color = Color.white;
         }
+
+        // Decrease opacity
+        Color currentColor = GetComponent<Renderer>().material.color;
+        currentColor.a = opacity;
+        GetComponent<Renderer>().material.color = currentColor;
+
         
 
     }

@@ -65,6 +65,7 @@ public abstract class Unit : PlayerMove {
     public void Update() {
         if (!Alive() && active) Deactivate();
         if (!Alive()) return;
+        if (action == Action.Idle) Deactivate();
         ChildUpdate(); // Subclasses Update method
         if (!execute && tag == "Player") return; // Execute on confirm btn
         AttackTarget(); // Attack target, if set
@@ -93,12 +94,6 @@ public abstract class Unit : PlayerMove {
             SetTarget(hit.transform); // Set target to hit game object
             return; // Break loop
         }
-    }
-
-    // Have unit go idle 
-    private void Idle() {
-        action = Action.Idle;
-        targetLocation = transform.position; // Target location to current location
     }
 
     protected void SetTarget(Transform tmpTarget) {
