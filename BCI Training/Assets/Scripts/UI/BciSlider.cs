@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using SharedDatastructures;
 
 public class BciSlider : MonoBehaviour
 {
@@ -26,7 +27,10 @@ public class BciSlider : MonoBehaviour
     private float currentSpeed;
     
     private PlayerFeatures resources;
-    
+
+    [NonSerialized] public Gamemode gamemode;
+    [NonSerialized] public bool complete;
+    [NonSerialized] public bool success;
     [NonSerialized] public float currentInputValue;
     
     // Start is called before the first frame update
@@ -34,6 +38,7 @@ public class BciSlider : MonoBehaviour
     {
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;
+        ShowChargeButton(false);
         ShowAndHideBci(false);
     }
 
@@ -49,7 +54,6 @@ public class BciSlider : MonoBehaviour
         {
             Highlight.enabled = true;
             currentSpeed = promptSpeed;
-            
             
             if (Slider.value >= 1f)Fail();
         }
@@ -68,7 +72,8 @@ public class BciSlider : MonoBehaviour
             currentImg.enabled = show;
         }
         ResetBci();
-        ShowChargeButton(!show);
+        
+        if(gamemode == Gamemode.Battery) ShowChargeButton(!show);
     }
 
     private void ShowChargeButton(bool state)
@@ -92,6 +97,7 @@ public class BciSlider : MonoBehaviour
 
     public void ChargeMana()
     {
+        complete = false;
         ShowAndHideBci(true);
         StartBciPrompt = true;
     }
@@ -105,12 +111,19 @@ public class BciSlider : MonoBehaviour
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
         resources.mana++;
+        //Maybe delay here
+        
+        success = true;
+        complete = true;
+        
         ShowAndHideBci(false);
     }
 
     public void Fail()
     {
         StartBciPrompt = false;
+        success = false;
+        complete = true;
         ShowAndHideBci(false);
     }
 

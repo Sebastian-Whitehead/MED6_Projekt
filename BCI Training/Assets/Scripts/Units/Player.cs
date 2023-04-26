@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedDatastructures;
 
 public class Player : Unit {
 
@@ -20,10 +22,14 @@ public class Player : Unit {
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
     
+    [NonSerialized] public Gamemode gamemode;
+    public BciSlider bciPrompt;
+    
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
         conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         res = GetComponent<PlayerFeatures>(); // Get resources
+        bciPrompt = GetComponent<BciSlider>();
     }
 
     protected override void ChildUpdate() {
@@ -71,9 +77,44 @@ public class Player : Unit {
     // Confirm action
     public void ConfirmAction() {
         if (state == State.Idle) return;
-        // Debug.Log("Confirm action");
-        execute = true; // Execute action
-        conBtn.DisableImage(); // Deactivate confirm btn
+        if (state != State.Attack || gamemode == Gamemode.Battery)
+        {
+            // Debug.Log("Confirm action");
+            execute = true;
+            conBtn.DisableImage(); // Deactivate confirm btn
+        } else{
+            if (gamemode == Gamemode.Interval)
+            {
+                bciPrompt.ChargeMana();
+                StartCoroutine(nameof(WaitForBci));
+            }
+            
+        }
+    }
+
+    private IEnumerator WaitForBci()
+    {
+        while (true)
+        {
+            if (!bciPrompt.complete) yield return null;
+            if (bciPrompt.success)
+            {
+                //TODO: Start Attack Animation
+                execute = true;
+                conBtn.DisableImage();
+                yield break;
+            }else{
+                AttackMiss();
+                conBtn.DisableImage();
+                yield break;
+            }
+        }
+    }
+
+    void AttackMiss()
+    {
+        //TODO: Attack Miss Animation
+        Deactivate();
     }
 
     // Ready moving
