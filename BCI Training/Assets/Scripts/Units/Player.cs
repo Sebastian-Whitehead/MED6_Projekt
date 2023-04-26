@@ -22,6 +22,7 @@ public class Player : Unit {
     public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
+    public int attackCount = 84;
     
     [NonSerialized] public Gamemode gamemode;
     public BciSlider bciPrompt;
@@ -91,6 +92,13 @@ public class Player : Unit {
             execute = true;
             conBtn.DisableImage(); // Deactivate confirm btn
         }
+    
+        if (state == State.Attack)
+            {
+                attackCount += 1;
+                Debug.Log("Player has attacked " + attackCount);
+            }
+        
     }
 
     IEnumerator WaitForBci()

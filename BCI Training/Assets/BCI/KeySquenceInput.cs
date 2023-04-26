@@ -396,7 +396,7 @@ public class KeySquenceInput : MonoBehaviour
                 loggingManager.Log("KeyLog", "SequenceWindowClosure", currentKeySequenceLogs["SequenceWindowClosure"][k]);
         }
 
-        loggingManager.SaveLog("KeyLog");
+        loggingManager.SaveLog("KeyLog", true);
         loggingManager.ClearLog("KeyLog");
 
         sequenceNumber++;
