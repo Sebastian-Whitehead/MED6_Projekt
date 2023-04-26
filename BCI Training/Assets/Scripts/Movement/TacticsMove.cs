@@ -166,7 +166,8 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         
         RaycastHit hit;
         bool ocupied = true;
-        if (!Physics.Raycast(t.transform.position, Vector3.up, out hit, 2)) {
+        if (!Physics.Raycast(t.transform.position, Vector3.up, out hit, 2) || 
+        !hit.collider.GetComponent<Unit>().Alive()) {
             TempPath.Push(t);
             ocupied = false;
         }

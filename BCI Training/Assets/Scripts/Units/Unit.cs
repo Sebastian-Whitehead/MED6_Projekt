@@ -52,7 +52,7 @@ public abstract class Unit : PlayerMove {
     protected abstract void ChildUpdate(); // Sub-class method of 'Update'
     public abstract void DecisionTree(); // Enemy decision tree to pick action
     protected abstract bool AttackCheck(); // Check possible attack
-    protected abstract bool Alive(); // Check if unit is alive
+    public abstract bool Alive(); // Check if unit is alive
 
     void Awake() {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
@@ -65,7 +65,6 @@ public abstract class Unit : PlayerMove {
     public void Update() {
         if (!Alive() && active) Deactivate();
         if (!Alive()) return;
-        if (action == Action.Idle) Deactivate();
         ChildUpdate(); // Subclasses Update method
         if (!execute && tag == "Player") return; // Execute on confirm btn
         AttackTarget(); // Attack target, if set
@@ -87,7 +86,7 @@ public abstract class Unit : PlayerMove {
             // Get angle from for-loop and object forward direction
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
             Vector3 projection = transform.position;
-            projection.y = 1;
+            projection.y += gameObject.GetComponent<Collider>().bounds.extents.y / 2;
             Debug.DrawRay(projection, targetPos, viewColor); // Visualize raycast
             if (!Physics.Raycast(projection, targetPos, out hit, distance)) continue;
             if (hit.transform.tag != targetTag) continue; // Only matching 'target tag'

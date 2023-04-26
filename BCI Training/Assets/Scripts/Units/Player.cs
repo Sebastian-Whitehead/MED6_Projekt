@@ -145,8 +145,10 @@ public class Player : Unit {
         transform.LookAt(targetLocation, Vector3.up);
         state = State.Attack; // Attack state player
         Eyes(); // Enemy visible from player (TODO: CHECK IF COLLIDER IS TARGET)
-        if (attackTarget == null) ResetPlayer(); // Break at no target
-        else Highlight(collider); // Highlight target
+        if (attackTarget == null) {
+            Debug.Log("(" + name + ") Target: null");
+            ResetPlayer(); // Break at no target
+        } else Highlight(collider); // Highlight target
     }
 
     void Highlight(Collider target) {
@@ -201,7 +203,7 @@ public class Player : Unit {
         return true;
     }
 
-    protected override bool Alive() {
+    public override bool Alive() {
         return res.alive;
     }
 
