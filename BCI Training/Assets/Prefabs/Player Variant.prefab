@@ -702,7 +702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44fa7cb4d79dd5d41ac4a79632c21cd8, type: 3}
       propertyPath: m_LocalScale.y
@@ -824,6 +824,19 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!65 &8371360323157833093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5436195879884906239}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1.5, z: -0}
 --- !u!82 &1999691980
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1065,9 +1078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1177531179078746447, guid: 752c86461ef6a7343b59eb351b788c80, type: 3}
   Spawnpoint: {fileID: 8894182027706406135}
-  playerLife: 0
   projectileSpeed: 0
-  UserKey: 0
 --- !u!114 &745708049729215748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,9 +1096,9 @@ MonoBehaviour:
   jumpHeight: 2
   moveSpeed: 2
   steps: 0
-  chasing: 0
   velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
+  turnSpeed: 1
   action: 1
   attackRange: 100
   damage: 2
@@ -1098,14 +1109,17 @@ MonoBehaviour:
   active: 0
   execute: 0
   hasSpotted: 0
+  hasAttacked: 0
   state: 0
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 8
   confirmBtn: {fileID: 3639387354668910903}
   tiles: []
-  attackCount: 84
+  attack_count: 0
+  _loggingManager: {fileID: 0}
   bciPrompt: {fileID: 0}
+  chargeCount: 0
 --- !u!114 &4265660811415541313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,16 +1164,3 @@ MonoBehaviour:
   BciPromptDuration: 7
   speed: 1
   promptSpeed: 0.5
---- !u!65 &8371360323157833093
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5436195879884906239}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: 1.5, z: -0}
