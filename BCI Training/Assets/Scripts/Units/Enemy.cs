@@ -10,15 +10,23 @@ public class Enemy : Unit {
     public bool circlePatrole = false;
     private bool clockwise = true;
     private EnemyHealth enemyHealth;
+    Animator anim;
+    
 
     // ---------------------------------------------------------------------
 
     public override void TakeDamage(Vector3 hitPosition, float damageTaken) {
+        StartCoroutine(waiter());
+        anim = gameObject.GetComponent<Animator>();
         enemyHealth.Damage(damageTaken);
+        if (enemyHealth.health > 1)
         audioManager.PlayCategory("TakeDamage");
         action = Action.Attacked;
         targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
+        anim.SetTrigger("Hit"); 
+
+
     }
 
     public override bool Alive() {
@@ -26,6 +34,14 @@ public class Enemy : Unit {
     }
 
     // ---------------------------------------------------------------------
+    IEnumerator waiter()
+    {
+    
+    //Wait for 4 seconds
+    yield return new WaitForSeconds(2f);    
+
+    }
+
 
     protected override bool AttackCheck() {
         if (OutOfRange()) return false;
