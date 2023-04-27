@@ -419,6 +419,7 @@ MonoBehaviour:
   steps: 0
   velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
+  turnSpeed: 5
   action: 1
   attackRange: 0.51
   damage: 1

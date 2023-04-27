@@ -19,6 +19,7 @@ public class TacticsMove : MonoBehaviour {
     Vector3 direction = new Vector3(); //heading
     GameObject target;
     public Tile AStarTargetTile;
+    public float turnSpeed = 1f;
 
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
@@ -67,7 +68,7 @@ public class TacticsMove : MonoBehaviour {
             int moveAble = steps;
             if (tag == "Enemy") moveAble = 100;
 
-            if (t.distance < moveRange){
+            if (t.distance < moveAble){
                 foreach(Tile tile in t.adjacentList){ //Anything adjacent to it, will set the original tile as parent.
                     if (!tile.visisted){
                         tile.parentTile = t;
@@ -92,6 +93,7 @@ public class TacticsMove : MonoBehaviour {
         }
     }
 
+    private bool isRotated = false;
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
         // Debug.Log(name + " moving");
@@ -100,7 +102,7 @@ public class TacticsMove : MonoBehaviour {
         if (steps <= 0) {
             RemoveSelectableTiles();
             isMoving = false;
-            Vector3 td = transform.position;
+            isRotated = false;
             //transform.position = new Vector3(Mathf.Round(td.x), td.y, Mathf.Round(td.y));
         }
 
@@ -111,18 +113,47 @@ public class TacticsMove : MonoBehaviour {
             //Calcaulating the players position on top of the target tile.
             //We dont wanna walk into the tile, because then we will go into the ground, therefore we add halfheight and the tile height.. 
             targetTile.y += t.GetComponent<Collider>().bounds.extents.y + 0.01f;
+
+            // Check distance to target (not on y-axis upwards)
             Vector3 position = transform.position;
-            //position.y = targetTile.y = 0;
+            targetTile.y = position.y;
             float dist = Vector3.Distance(position, targetTile);
+            Debug.Log(name + " distance: " + dist);
             if (dist >= 0.1f){
+
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
 
+                /*
+                if (!isRotated && false) {
+
+                    // Rotate towards the target
+                    float singleStep = turnSpeed * Time.deltaTime; // Rotation step speed
+                    Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetTile, singleStep, 0.0f); // Rotation vector
+                    transform.rotation = Quaternion.LookRotation(newDirection); // Rotate rotation vector
+
+                    // Check if unit is looking towards target tile
+                    Quaternion targetDirection = Quaternion.LookRotation(targetTile, Vector3.up); // Rotation towards tile
+                    float angle = Quaternion.Angle(transform.rotation, targetDirection); // Angle from unit and target direction
+                    
+                    if (angle < 1f) isRotated = true;
+
+                } else {
+                    // Move towards target tile
+                    transform.position += velocity * Time.deltaTime;
+
+                    */
+
+                // Move towards target tile
+                Debug.Log("velocity: " + velocity);
                 transform.forward = direction;
                 transform.position += velocity * Time.deltaTime;
+
+
             } else {
+
                 //Tile mid is reached
-                transform.position = targetTile;
+                //transform.position = targetTile;
                 Tile temp = path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
 
@@ -137,7 +168,6 @@ public class TacticsMove : MonoBehaviour {
             //isMoving = false;
         }
     }
-
 
     protected void RemoveSelectableTiles(){ //remove selectable tiles. no longer active. Reset them. Each of the tiles that has been selected as moveable will no longer be selected
         if (currentTile != null){
