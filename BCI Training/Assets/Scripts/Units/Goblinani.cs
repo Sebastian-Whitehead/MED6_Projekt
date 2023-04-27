@@ -62,7 +62,7 @@ public class Goblinani : MonoBehaviour
             gLife = gLife - 2;
             if(gLife>0){
                 anim.SetTrigger("Hit");
-                //Debug.Log("Goblin is hit");
+                Debug.Log("Goblin is hit");
                 audioSource.PlayOneShot(impact);
 
             }
