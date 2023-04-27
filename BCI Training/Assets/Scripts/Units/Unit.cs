@@ -128,14 +128,23 @@ public abstract class Unit : PlayerMove {
         }
         if (!AttackCheck()) return; // Break attack not possible
 
+       // StartCoroutine(waiter());
+
         Debug.Log(name + " attacking " + attackTarget.name);
         attackTarget.TakeDamage(transform.position, damage); // Target takes damage
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
+
         Deactivate(); // Deactivate unit
     }
 
     // ---------------------------------------------------------------------
+    /* IEnumerator waiter()
+    {
+    
+    //Wait for 4 seconds
+    yield return new WaitForSeconds(3f);
+    }*/
 
     // Activate unit
     public void Activate() {
