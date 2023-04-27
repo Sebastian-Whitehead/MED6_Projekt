@@ -382,7 +382,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfd9081b9f4f5c4bb0f2f4534e9cc73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Girl: {fileID: 0}
   gLife: 4
   impact: {fileID: 8300000, guid: f980c76665743ae4a85292f3dc0ab0ab, type: 3}
   Death: {fileID: 8300000, guid: 91887148efd916d4ca5933be51ed314c, type: 3}
@@ -418,11 +417,10 @@ MonoBehaviour:
   jumpHeight: 2
   moveSpeed: 5
   steps: 0
-  chasing: 0
   velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
   action: 1
-  attackRange: 1.01
+  attackRange: 0.51
   damage: 1
   inc: 5
   FOV: 25
@@ -431,6 +429,7 @@ MonoBehaviour:
   active: 0
   execute: 0
   hasSpotted: 0
+  hasAttacked: 0
   circlePatrole: 0
 --- !u!114 &327176175425093348
 MonoBehaviour:
@@ -669,9 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1177531179078746447, guid: 752c86461ef6a7343b59eb351b788c80, type: 3}
   Spawnpoint: {fileID: 1339468198, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
-  playerLife: 2
   projectileSpeed: 2
-  UserKey: 113
 --- !u!1 &1153289553701158495
 GameObject:
   m_ObjectHideFlags: 0
