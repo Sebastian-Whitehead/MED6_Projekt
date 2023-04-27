@@ -20,11 +20,11 @@ public class Enemy : Unit {
         anim = gameObject.GetComponent<Animator>();
         enemyHealth.Damage(damageTaken);
         if (enemyHealth.health > 1)
-        audioManager.PlayCategory("TakeDamage");
+        //audioManager.PlayCategory("TakeDamage");
         action = Action.Attacked;
         targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
-        anim.SetTrigger("Hit"); 
+       // anim.SetTrigger("Hit"); 
 
 
     }

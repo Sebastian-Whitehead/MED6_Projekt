@@ -7,7 +7,7 @@ public class Goblinani : MonoBehaviour
 
     Animator anim;
     //public Animator Girl;
-    public int gLife = 4;
+    public int gLife = 5;
     public AudioClip impact;
     public AudioClip Death;
     AudioSource audioSource;
@@ -62,7 +62,7 @@ public class Goblinani : MonoBehaviour
             gLife = gLife - 2;
             if(gLife>0){
                 anim.SetTrigger("Hit");
-                Debug.Log("Goblin is hit");
+                //Debug.Log("Goblin is hit");
                 audioSource.PlayOneShot(impact);
 
             }
