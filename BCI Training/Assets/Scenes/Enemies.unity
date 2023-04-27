@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2281,6 +2281,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 742554048}
     m_Modifications:
+    - target: {fileID: 185843831490857399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: move
+      value: 
+      objectReference: {fileID: 8300000, guid: 5e6e51faf13b7f54e9777a4f28ea8cdd, type: 3}
+    - target: {fileID: 185843831490857399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 269941499280686951, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22.000002
@@ -2705,6 +2713,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1006826214294123933, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
   m_PrefabInstance: {fileID: 499920573}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!114 &511243930 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2475779378689761885, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
@@ -2716,6 +2725,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+=======
+--- !u!1 &505951245 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5436195879884906239, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+  m_PrefabInstance: {fileID: 6220792793728884510}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1001 &516365136
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5016,10 +5032,26 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6951986837288754579, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
   m_PrefabInstance: {fileID: 6220792793728884510}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
   m_GameObject: {fileID: 205045545}
+=======
+  m_GameObject: {fileID: 505951245}
+>>>>>>> Stashed changes
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d56ba6522a102b4db3c342f5ec79bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &885052772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505951245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8e29c213303ab42bc5c8b36bbd2d93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &887305618
@@ -13385,6 +13417,10 @@ PrefabInstance:
     - target: {fileID: 1999691980, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: MinDistance
       value: 2.4543009
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999691981, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: projectileSpeed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 734900714056775868, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Name

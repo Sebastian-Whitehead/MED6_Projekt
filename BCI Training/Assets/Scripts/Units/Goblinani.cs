@@ -6,7 +6,7 @@ public class Goblinani : MonoBehaviour
 {
 
     Animator anim;
-    public Animator Girl;
+    //public Animator Girl;
     public int gLife = 4;
     public AudioClip impact;
     public AudioClip Death;

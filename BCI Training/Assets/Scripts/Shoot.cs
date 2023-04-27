@@ -6,9 +6,7 @@ public class Shoot : MonoBehaviour
 {
     public Rigidbody projectile;
     public Transform Spawnpoint;
-    public float playerLife;
     public float projectileSpeed;
-    public KeyCode UserKey;
     // Start is called before the first frame update
     void Start()
     {

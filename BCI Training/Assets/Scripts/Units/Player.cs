@@ -22,16 +22,29 @@ public class Player : Unit {
     public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
+<<<<<<< Updated upstream
     public int attackCount = 84;
     
     [NonSerialized] public Gamemode gamemode;
     public BciSlider bciPrompt;
+=======
+    Animator anim;
+    private Shoot shoot;
+    public int attackCount;
+    private CsvReadWrite csvwrite;
+    public int chargeCount;
+>>>>>>> Stashed changes
     
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
         conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         res = GetComponent<PlayerFeatures>(); // Get resources
+<<<<<<< Updated upstream
         bciPrompt = GetComponent<BciSlider>();
+=======
+        shoot = GetComponent<Shoot>();
+        csvwrite = GetComponent<CsvReadWrite>();
+>>>>>>> Stashed changes
     }
 
     protected override void ChildUpdate() {
@@ -81,6 +94,7 @@ public class Player : Unit {
     public void ConfirmAction() {
         // print(gamemode);
         if (state == State.Idle) return;
+<<<<<<< Updated upstream
         if (state == State.Attack && gamemode == Gamemode.Interval)
         {
             bciPrompt.ChargeMana();
@@ -132,6 +146,20 @@ public class Player : Unit {
         state = State.Idle;
         execute = true;
         Deactivate();
+=======
+        // Debug.Log("Confirm action");
+        execute = true; // Execute action
+        conBtn.DisableImage(); // Deactivate confirm btn
+        if (state == State.Attack){
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetTrigger("Shoot");
+        shoot.shooting();
+        attackCount +=1;
+        csvwrite.Save();
+        }
+
+
+>>>>>>> Stashed changes
     }
 
     // Ready moving

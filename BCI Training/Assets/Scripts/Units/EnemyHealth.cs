@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour {
     public float maxHealth = 5;
     public float health;
     public Healthbar healthbar;
+    Animator anim;
 
     public bool alive = true;
     
@@ -36,5 +37,7 @@ public class EnemyHealth : MonoBehaviour {
         if (health > 0) return;
         alive = false;
         audioManager.PlayCategory("Death");
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetTrigger("Death");
     }
 }
