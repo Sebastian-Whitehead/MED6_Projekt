@@ -22,7 +22,10 @@ public class Player : Unit {
     public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
-    public int attackCount = 84;
+    public int attack_count = 0;
+    
+    [SerializeField]
+    private LoggingManager _loggingManager;
     
     [NonSerialized] public Gamemode gamemode;
     public BciSlider bciPrompt;
@@ -102,11 +105,7 @@ public class Player : Unit {
             conBtn.DisableImage(); // Deactivate confirm btn
         }
     
-        if (state == State.Attack)
-            {
-                attackCount += 1;
-                // Debug.Log("Player has attacked " + attackCount);
-            }
+      
         
     }
 
@@ -124,6 +123,11 @@ public class Player : Unit {
                 {
                     case true:
                         execute = true;
+                        if (state == State.Attack)
+                        {
+                            attack_count += 1;
+                            logPlayerData();
+                        }
                         conBtn.DisableImage();
                         anim = gameObject.GetComponent<Animator>();
                         anim.SetTrigger("Shoot");
@@ -259,4 +263,16 @@ public class Player : Unit {
 
         }
     }
+
+    private void logPlayerData()
+    {
+        _loggingManager.Log("Log", new Dictionary<string, object>()
+        {
+            {"Attack", attack_count},
+            {"Event", "Player Attack"},
+            {"State", Enum.GetName(typeof(State), state)},
+        });
+
+    }
+    
 }

@@ -104,7 +104,7 @@ public class SimBCIInput : MonoBehaviour
         consecThresholdBuffer = new int[consecutiveBufferSize];
         consecThresholdBufferVal = new float[consecutiveBufferSize];
         bciState = BCIState.Disconnected;
-        loggingManager = GetComponent<LoggingManager>(); // GameObject.Find("LoggingManager").
+        loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         LogMeta();
         onBCIStateChanged.Invoke(Enum.GetName(typeof(BCIState), bciState), "");
         StartCoroutine("ConnectToBCI");

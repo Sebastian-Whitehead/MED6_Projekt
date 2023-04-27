@@ -22,16 +22,18 @@ public class Logging : MonoBehaviour
       _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
       _loggingManager.CreateLog("Log", headers: new List<string>() {"Attack Count"});
      
+     ;
+      
       _loggingManager.SaveAllLogs(clear:true);
       _loggingManager.NewFilestamp();
    }
 
    private void Update()
    {
-      int attack = playerScript.attackCount;
+      int attack = playerScript.attack_count;
+
       //Store the data
-      _loggingManager.Log("Log", "Attack Count", playerScript.attackCount);
-      
-  
+      _loggingManager.Log("Log", "Attack Count", attack);
+
    }
 }
