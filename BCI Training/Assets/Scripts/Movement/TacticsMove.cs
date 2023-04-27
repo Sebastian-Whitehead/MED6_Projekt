@@ -93,7 +93,7 @@ public class TacticsMove : MonoBehaviour {
         }
     }
 
-    private bool isRotated = false;
+    public bool isRotated = false;
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
         // Debug.Log(name + " moving");
@@ -103,7 +103,6 @@ public class TacticsMove : MonoBehaviour {
             RemoveSelectableTiles();
             isMoving = false;
             isRotated = false;
-            //transform.position = new Vector3(Mathf.Round(td.x), td.y, Mathf.Round(td.y));
         }
 
         if (path.Count > 0) {
@@ -112,14 +111,14 @@ public class TacticsMove : MonoBehaviour {
 
             //Calcaulating the players position on top of the target tile.
             //We dont wanna walk into the tile, because then we will go into the ground, therefore we add halfheight and the tile height.. 
-            targetTile.y += t.GetComponent<Collider>().bounds.extents.y + 0.01f;
+            //targetTile.y += t.GetComponent<Collider>().bounds.extents.y + 0.01f;
 
             // Check distance to target (not on y-axis upwards)
             Vector3 position = transform.position;
             targetTile.y = position.y;
             float dist = Vector3.Distance(position, targetTile);
             Debug.Log(name + " distance: " + dist);
-            if (dist >= 0.11f){
+            if (dist >= 0.1f){
 
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
@@ -139,7 +138,7 @@ public class TacticsMove : MonoBehaviour {
 
                 } else {
                     // Move towards target tile
-                    transform.forward = direction;
+                    //transform.forward = direction;
                     transform.position += velocity * Time.deltaTime;
                 }
 
