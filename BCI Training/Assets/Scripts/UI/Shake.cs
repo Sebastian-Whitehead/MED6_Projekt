@@ -15,16 +15,16 @@ public class Shake : MonoBehaviour
         if (start)
         {
             start = false;
-            StartCoroutine(Shaking());
+            StartCoroutine(Shaking(1));
         }
     }
 
-    public void ShakeOnce() 
+    public void ShakeOnce(float shakeFactor) 
     {
-        StartCoroutine(Shaking());
+        StartCoroutine(Shaking(shakeFactor));
     }
     
-    IEnumerator Shaking()
+    IEnumerator Shaking(float factor)
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;
@@ -33,7 +33,7 @@ public class Shake : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float strength = curve.Evaluate(elapsedTime / duration);
-            transform.position = startPosition + Random.insideUnitSphere * strength;
+            transform.position = startPosition + Random.insideUnitSphere * (strength * factor);
             yield return null;
         }
 

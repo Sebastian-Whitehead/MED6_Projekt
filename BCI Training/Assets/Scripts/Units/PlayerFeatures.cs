@@ -31,6 +31,11 @@ public class PlayerFeatures : MonoBehaviour
             maxMana = mana = 99999;
             HideManaUI();
         }
+
+        if (gamemode == Gamemode.Battery)
+        {
+            mana = 0;
+        }
     }
 
     void Awake() {
@@ -45,8 +50,12 @@ public class PlayerFeatures : MonoBehaviour
         
         if (lastHealth > health)
         {
+<<<<<<< Updated upstream
             shake.ShakeOnce();
             // Debug.Log("Shake");
+=======
+            shake.ShakeOnce(1f);
+>>>>>>> Stashed changes
             lastHealth = health;
         }else if (lastHealth < health)
         {
@@ -100,20 +109,22 @@ public class PlayerFeatures : MonoBehaviour
 
     public void RegenMana(float RegenPoints)
     {
-        if (mana <= 0) return;
+        if (mana >= maxMana) return;
         mana += RegenPoints;
     }
 
     public void RegenMana()
     {
-        if (mana <= 0) return;
+        print("regen mana");
+        if (mana >= maxMana) return;
+        print("Regening");
         mana += fixedRegenPoints;
     }
 
     public void Expend()
     {
         // Debug.Log("Decrease mana " + manaCost);
-        if (mana <= maxMana) mana -= manaCost;
+        if (mana - manaCost >= 0) mana -= manaCost;
         ManaBarFiller();
     }
 

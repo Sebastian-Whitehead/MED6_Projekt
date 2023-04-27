@@ -25,6 +25,7 @@ public class BciSlider : MonoBehaviour
     public float speed;
     public float promptSpeed;
     private float currentSpeed;
+    public Shake shaker;
     
     private PlayerFeatures resources;
 
@@ -32,6 +33,10 @@ public class BciSlider : MonoBehaviour
     [NonSerialized] public bool complete;
     [NonSerialized] public bool success;
     [NonSerialized] public float currentInputValue;
+
+    private int completedReps = 0;
+    private int targetReps = 0;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -72,8 +77,13 @@ public class BciSlider : MonoBehaviour
             currentImg.enabled = show;
         }
         ResetBci();
-        
-        if(gamemode == Gamemode.Battery) ShowChargeButton(!show);
+
+        if (gamemode != Gamemode.Battery) return;
+        if (targetReps <= completedReps || completedReps == 0 || resources.mana >= resources.maxMana)
+        {
+            ShowChargeButton(!show);
+        }
+
     }
 
     private void ShowChargeButton(bool state)
@@ -97,10 +107,53 @@ public class BciSlider : MonoBehaviour
 
     public void ChargeMana()
     {
+        targetReps = 1;
+        completedReps = 0;
+        
+        
         complete = false;
         ShowAndHideBci(true);
         StartBciPrompt = true;
     }
+
+    public void ChargeMana(int repetitions)
+    {
+        targetReps = repetitions;
+        completedReps = 0;
+        complete = false;
+        
+        ShowAndHideBci(true);
+        StartBciPrompt = true;
+        StartCoroutine(nameof(StartBciRepeating));
+        
+    }
+    
+    IEnumerator StartBciRepeating()
+    {
+        while (true)
+        {
+            switch (StartBciPrompt)
+            {
+                case true:
+                    yield return null;
+                    break;
+                case false:
+                    if (completedReps < targetReps && resources.mana < resources.maxMana)
+                    {
+                        print(true);
+                        yield return new WaitForSeconds(1.5f);
+                        ShowAndHideBci(false);
+                        yield return new WaitForSeconds(0.5f);
+                        ShowAndHideBci(true);
+                        StartBciPrompt = true;
+                        break;
+                    }
+                    yield break;
+            }
+        }
+    }
+
+    
 
     // ----------------------------------------------------------------------------------- //
     //  Success and Failure Conditions
@@ -110,23 +163,44 @@ public class BciSlider : MonoBehaviour
         SucessHighlight.enabled = true;
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
-        resources.mana++;
+        completedReps++;
+        resources.RegenMana();
         //Maybe delay here
+        if (gamemode == Gamemode.Battery)
+        {
+            if (completedReps >= targetReps || resources.mana >= resources.maxMana)
+            {
+                Invoke(nameof(SucceseComplete), 1.5f);
+            }
+        }
+        else
+        {
+            SucceseComplete();
+        }
         
+    }
+    
+    void SucceseComplete()
+    {
         success = true;
         complete = true;
-        
         ShowAndHideBci(false);
     }
 
+    
     public void Fail()
     {
         StartBciPrompt = false;
+        shaker.ShakeOnce(0.25f);
+        //completedReps++;
         
-        success = false;
-        complete = true;
-        
-        ShowAndHideBci(false);
+        if (completedReps >= targetReps || gamemode == Gamemode.Interval)
+        {
+            print("BCI FAIL");
+            success = false;
+            complete = true;
+            ShowAndHideBci(false);
+        }
     }
 
     
