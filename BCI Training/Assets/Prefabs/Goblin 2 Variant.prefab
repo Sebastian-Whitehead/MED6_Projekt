@@ -46,6 +46,10 @@ PrefabInstance:
       propertyPath: Girl
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 185843831490857399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: gLife
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 368880136437149273, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -157,6 +161,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 1177531179078746447, guid: 752c86461ef6a7343b59eb351b788c80, type: 3}
   Spawnpoint: {fileID: 1339468198}
-  playerLife: 2
   projectileSpeed: 2
-  UserKey: 113

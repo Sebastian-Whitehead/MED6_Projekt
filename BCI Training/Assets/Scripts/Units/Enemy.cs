@@ -24,7 +24,7 @@ public class Enemy : Unit {
         action = Action.Attacked;
         targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
-       // anim.SetTrigger("Hit"); 
+        //anim.SetTrigger("Hit"); 
 
 
     }
