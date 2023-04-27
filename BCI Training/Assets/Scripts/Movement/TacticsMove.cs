@@ -68,7 +68,7 @@ public class TacticsMove : MonoBehaviour {
             int moveAble = steps;
             if (tag == "Enemy") moveAble = 100;
 
-            if (t.distance < moveAble){
+            if (t.distance < moveRange){
                 foreach(Tile tile in t.adjacentList){ //Anything adjacent to it, will set the original tile as parent.
                     if (!tile.visisted){
                         tile.parentTile = t;
@@ -119,7 +119,7 @@ public class TacticsMove : MonoBehaviour {
             targetTile.y = position.y;
             float dist = Vector3.Distance(position, targetTile);
             Debug.Log(name + " distance: " + dist);
-            if (dist >= 0.1f){
+            if (dist >= 0.11f){
 
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
@@ -128,11 +128,11 @@ public class TacticsMove : MonoBehaviour {
 
                     // Rotate towards the target
                     float singleStep = turnSpeed * Time.deltaTime; // Rotation step speed
-                    Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetTile, singleStep, 0.0f); // Rotation vector
+                    Vector3 newDirection = Vector3.RotateTowards(transform.forward, direction, singleStep, 0.0f); // Rotation vector
                     transform.rotation = Quaternion.LookRotation(newDirection); // Rotate rotation vector
 
                     // Check if unit is looking towards target tile
-                    Quaternion targetDirection = Quaternion.LookRotation(targetTile, Vector3.up); // Rotation towards tile
+                    Quaternion targetDirection = Quaternion.LookRotation(direction, Vector3.up); // Rotation towards tile
                     float angle = Quaternion.Angle(transform.rotation, targetDirection); // Angle from unit and target direction
                     
                     if (angle < 1f) isRotated = true;
@@ -235,7 +235,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         return lowest;
 
     }
-    protected void FindPath(Tile target){ //enemy astar
+    protected bool FindPath(Tile target){ //enemy astar
         ComputeAdjency(target);
         GetcurrentTile();
         //Two lists, open and closed list.
@@ -256,7 +256,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
             if (t == target){ //cannot step on target, because there is a unit, stop algorithm 1 node before end
                 AStarTargetTile = FindLastTile(t);
                 MoveTo(AStarTargetTile);
-                return;
+                return true;
             }
 
             foreach (Tile tile in t.adjacentList){ //process all the neighbors, assumming we are not at the target tile
@@ -290,14 +290,15 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         }
         //problem - what to do if there is no path.
         Debug.Log("Path not found");
+        return false;
     }
-    protected void CalculatePath(){ //Find where it is going to move to
+    protected bool CalculatePath(){ //Find where it is going to move to
         Tile targetTile = GetTargetTile(target);
-        FindPath(targetTile);
+        return FindPath(targetTile);
 
     }
-    protected void CalculatePath(Tile targetTile){ //Find where it is going to move to
-        FindPath(targetTile);
+    protected bool CalculatePath(Tile targetTile){ //Find where it is going to move to
+        return FindPath(targetTile);
     }
 
     protected void FindPlayer(){
