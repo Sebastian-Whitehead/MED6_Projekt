@@ -93,8 +93,12 @@ public class Enemy : Unit {
         AStarTargetTile = nextTile;
         // Debug.Log(name + " nextTile: " + nextTile);
         // Debug.Log("AStarTargetTile: " + AStarTargetTile);
-        CalculatePath(nextTile);
+        bool pathFound = CalculatePath(nextTile);
         
+        // If no path was found, go idle
+        if (!pathFound) {
+            action = Action.Idle;
+        }
     }
 
     private void AtLocation() {

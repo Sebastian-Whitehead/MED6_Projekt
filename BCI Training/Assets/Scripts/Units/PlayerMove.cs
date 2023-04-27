@@ -21,6 +21,8 @@ public class PlayerMove : TacticsMove {
     protected Tile GetTileAtPosition(Vector3 position) {
         RaycastHit hit;
         if (!Physics.Raycast(position, -Vector3.up, out hit, 2)) {
+            Debug.Log(name);
+            Debug.Log(position);
             Debug.Log("Tile not found");
             return null;
         }
