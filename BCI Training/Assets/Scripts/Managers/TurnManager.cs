@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TurnManager : MonoBehaviour
 {
+    private LoggingManager _loggingManager;
 
     public bool playerTurn = true;
     public bool collectiveTurn = false;
@@ -11,8 +13,11 @@ public class TurnManager : MonoBehaviour
     private bool wait = false;
     private Enemy[] enemies;
     private Player player;
+    
+    
 
     void Awake() {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
@@ -71,5 +76,11 @@ public class TurnManager : MonoBehaviour
 
     public void Wait() {
         wait = true;
+    }
+
+    private void OnApplicationQuit()
+    {
+        _loggingManager.SaveAllLogs(clear:true);
+        _loggingManager.NewFilestamp();
     }
 }

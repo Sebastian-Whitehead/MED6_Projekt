@@ -49,17 +49,17 @@ public class LogStore
         {'%', ' '},
     };
 
-
+    private string email;
     public string SessionId { get; set; }
 
 
-    public LogStore(string label, bool createStringOverTime,
+    public LogStore(string label, string email, string sessionID, bool createStringOverTime,
         LogType logType = LogType.LogEachRow, List<string> headers = null)
     {
-        Init(label, createStringOverTime, logType, headers);
+        Init(label, email, sessionID, createStringOverTime, logType, headers);
     }
 
-    private void Init(string label, bool createStringOverTime,
+    private void Init(string label, string email, string sessionID, bool createStringOverTime,
         LogType logType, List<string> headers = null)
     {
         InitiateTargetsSaved();
@@ -70,8 +70,13 @@ public class LogStore
         currentLineLogged = new StringBuilder();
         CurrentLogRow = new SortedDictionary<string, string>();
         this.createStringOverTime = createStringOverTime;
+        this.email = email;
+        SessionId = sessionID;
         this.LogType = logType; ;
         logs.Add("Timestamp", new List<string>());
+        logs.Add("Framecount", new List<string>());
+        logs.Add("SessionID", new List<string>());
+        logs.Add("Email", new List<string>());
         if (headers != null) {
             foreach (string header in headers)
             {
@@ -165,8 +170,11 @@ public class LogStore
     private void AddCommonColumns()
     {
         string timeStamp = GetTimeStamp();
+        string frameCount = GetFrameCount();
         AddToDictIfNotExists(CurrentLogRow, "Timestamp", timeStamp);
-       
+        AddToDictIfNotExists(CurrentLogRow, "Framecount", frameCount);
+        AddToDictIfNotExists(CurrentLogRow, "SessionID", SessionId);
+        AddToDictIfNotExists(CurrentLogRow, "Email", email);
     }
 
     //Terminates the current row 
@@ -344,6 +352,10 @@ public class LogStore
     {
         return System.DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.ffff");
     }
-    
+
+    private string GetFrameCount()
+    {
+        return Time.frameCount == 0 ? "-1" : Time.frameCount.ToString();
+    }
 
 }
