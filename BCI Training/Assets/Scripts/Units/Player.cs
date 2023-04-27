@@ -96,7 +96,7 @@ public class Player : Unit {
         if (state == State.Attack)
             {
                 attackCount += 1;
-                Debug.Log("Player has attacked " + attackCount);
+                // Debug.Log("Player has attacked " + attackCount);
             }
         
     }
@@ -149,15 +149,19 @@ public class Player : Unit {
     void SetAttackTarget(Collider collider) {
         attackTarget = null; // Reset attack target
         if (collider.tag != targetTag) return;
-        // Debug.Log("Attack target: " + collider.name);
         targetLocation = collider.transform.position; // Set target to enemy location
         transform.LookAt(targetLocation, Vector3.up);
         state = State.Attack; // Attack state player
-        Eyes(); // Enemy visible from player (TODO: CHECK IF COLLIDER IS TARGET)
-        if (attackTarget == null) {
-            Debug.Log("(" + name + ") Target: null");
-            ResetPlayer(); // Break at no target
-        } else Highlight(collider); // Highlight target
+        Eyes(); // Enemy visible from player
+        if (!ConfirmTarget(attackTarget)) ResetPlayer(); // Confirm target 
+        else Highlight(collider); // Highlight target
+    }
+
+    bool ConfirmTarget(Unit target) {
+        if (attackTarget == null) return false; // Break at no target
+        bool targetDead = !attackTarget.GetComponent<EnemyHealth>().alive; // Get target alive value
+        if (targetDead) return false; // Check if target is still alive
+        return true; // Confirm target as valid
     }
 
     void Highlight(Collider target) {

@@ -9,26 +9,20 @@ public class TacticsMove : MonoBehaviour {
     GameObject[] tiles;
     protected Stack<Tile> path = new Stack<Tile>(); //Stack getting pushed in reversable order. 
     protected Tile currentTile; //tile player is standing on
-
     public bool isMoving = false;
     public int moveRange = 5; //move tiles pr turn
     public float jumpHeight = 2; //drop down and jump 2 tiles
     public float moveSpeed = 2;
     public int steps = 0;
-    float halfHeight = 0; 
-    public bool chasing = false;
-    
+    //float halfHeight = 0; 
     public Vector3 velocity = new Vector3();
     Vector3 direction = new Vector3(); //heading
-
     GameObject target;
-
-
     public Tile AStarTargetTile;
 
     protected void Init(){
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
-        halfHeight = GetComponent<Collider>().bounds.extents.y / 2; //Gives distance from tile to center of the player. Calculate where player is on the tile.
+        //halfHeight = GetComponent<Collider>().bounds.extents.y / 2; //Gives distance from tile to center of the player. Calculate where player is on the tile.
     }
 
     public void GetcurrentTile(){ //Find the tile currently under the player.
@@ -197,7 +191,6 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         for (int i = 0; i <= moveRange; i++){
             lastTile = TempPath.Pop(); //pop each tile for number of moves
             //when we pop the last one, we move to that tile
-            chasing = false; 
         }
 
 

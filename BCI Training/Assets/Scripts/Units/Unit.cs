@@ -18,7 +18,6 @@ public abstract class Unit : PlayerMove {
     };
     
     public Action action; // Current action
-    protected bool hasAttacked = false; // Has attacked this turn
 
     [Header("Character")] // 
     public float attackRange = 1f; // Range of attack
@@ -40,8 +39,8 @@ public abstract class Unit : PlayerMove {
     public bool active = false; // Actions are possible
     public bool execute = false; // Execution of current action
     protected AudioManager audioManager;
-
     public bool hasSpotted = false;
+    public bool hasAttacked = false; // Has attacked this turn
 
     // ---------------------------------------------------------------------
 

@@ -67,7 +67,12 @@ public class Enemy : Unit {
             Deactivate();
             return;
         }
-        //Debug.Log("targetLocation: " + targetLocation);
+        if (Vector3.Distance(transform.position, targetLocation) <= 0.4f) {
+            Debug.Log(name);
+            Debug.Log("targetLocation: " + targetLocation);
+            Debug.Log("position: " + transform.position);
+            Debug.LogError("Going to self!");
+        }
         Tile nextTile = GetTileAtPosition(targetLocation);
         AStarTargetTile = nextTile;
         // Debug.Log(name + " nextTile: " + nextTile);
@@ -77,9 +82,7 @@ public class Enemy : Unit {
     }
 
     private void AtLocation() {
-        // Debug.Log("patrolPoint: " + patrolPoint);
         // Debug.Log(name + " action: " + action);
-        // if (Vector3.Distance(transform.position, targetLocation) > 0.001f) return;
         switch (action) {
             case Action.Attacked:
                 Investegate(targetLocation);

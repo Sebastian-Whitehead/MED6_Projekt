@@ -46,7 +46,7 @@ public class PlayerFeatures : MonoBehaviour
         if (lastHealth > health)
         {
             shake.ShakeOnce();
-            Debug.Log("Shake");
+            // Debug.Log("Shake");
             lastHealth = health;
         }else if (lastHealth < health)
         {
