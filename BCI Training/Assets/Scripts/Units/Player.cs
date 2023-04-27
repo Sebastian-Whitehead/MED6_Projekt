@@ -28,6 +28,7 @@ public class Player : Unit {
     public BciSlider bciPrompt;
     Animator anim;
     private Shoot shoot;
+    private CsvReadWrite csvwrite;
     public int chargeCount;
     
     protected override void ChildAwake() {
@@ -36,6 +37,7 @@ public class Player : Unit {
         res = GetComponent<PlayerFeatures>(); // Get resources
         bciPrompt = GetComponent<BciSlider>();
         shoot = GetComponent<Shoot>();
+        csvwrite = GetComponent<CsvReadWrite>();
     }
 
          protected override void ChildUpdate() {
