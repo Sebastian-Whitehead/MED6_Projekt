@@ -124,8 +124,7 @@ public class TacticsMove : MonoBehaviour {
                 CalculateDirection(targetTile);
                 SetHorizontVelocity();
 
-                /*
-                if (!isRotated && false) {
+                if (!isRotated) {
 
                     // Rotate towards the target
                     float singleStep = turnSpeed * Time.deltaTime; // Rotation step speed
@@ -140,14 +139,9 @@ public class TacticsMove : MonoBehaviour {
 
                 } else {
                     // Move towards target tile
+                    transform.forward = direction;
                     transform.position += velocity * Time.deltaTime;
-
-                    */
-
-                // Move towards target tile
-                Debug.Log("velocity: " + velocity);
-                transform.forward = direction;
-                transform.position += velocity * Time.deltaTime;
+                }
 
 
             } else {
@@ -156,6 +150,7 @@ public class TacticsMove : MonoBehaviour {
                 //transform.position = targetTile;
                 Tile temp = path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
+                isRotated = false;
 
                 if (path.Count > 0) {
                     steps--;
