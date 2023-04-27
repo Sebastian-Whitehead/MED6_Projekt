@@ -105,15 +105,7 @@ public class Player : Unit {
             conBtn.DisableImage(); // Deactivate confirm btn
         }
     
-<<<<<<< Updated upstream
-        if (state == State.Attack)
-            {
-                attackCount += 1;
-                // Debug.Log("Player has attacked " + attackCount);
-            }
-=======
       
->>>>>>> Stashed changes
         
     }
 
