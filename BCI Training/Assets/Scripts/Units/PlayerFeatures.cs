@@ -50,12 +50,7 @@ public class PlayerFeatures : MonoBehaviour
         
         if (lastHealth > health)
         {
-<<<<<<< Updated upstream
-            shake.ShakeOnce();
-            // Debug.Log("Shake");
-=======
             shake.ShakeOnce(1f);
->>>>>>> Stashed changes
             lastHealth = health;
         }else if (lastHealth < health)
         {

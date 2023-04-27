@@ -483,17 +483,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-<<<<<<< Updated upstream
-    - target: {fileID: 3457820386931253361, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-=======
     - target: {fileID: 4299747697267738727, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: shaker
       value: 
       objectReference: {fileID: 1594819363}
->>>>>>> Stashed changes
     - target: {fileID: 5875199749056448752, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: moveRange
       value: 4
