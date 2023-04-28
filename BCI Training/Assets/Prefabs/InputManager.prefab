@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3775190260574412572}
   - component: {fileID: 3775190260574412573}
   - component: {fileID: 3775190260574412574}
-  - component: {fileID: 9201502386200140189}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -264,23 +263,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 608d31225d60e544ebbf028cc528e1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &9201502386200140189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3775190260574412560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8044bb5719035e14ab33f5a950770e12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CreateMetaCollection: 1
-  enableMySQLSave: 1
-  email: anonymous
-  connectToMySQL: {fileID: 0}
-  enableCSVSave: 1
-  savePath: 
-  filePrefix: log
-  fileExtension: .csv
