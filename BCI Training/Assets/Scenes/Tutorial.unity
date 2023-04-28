@@ -518,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 6616261254364001593, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: projectile
       value: 
-      objectReference: {fileID: 569747814}
+      objectReference: {fileID: 4368627052132516758, guid: e377986561b3e17439c306d82957e20d, type: 3}
     - target: {fileID: 6958948644180552212, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 3
