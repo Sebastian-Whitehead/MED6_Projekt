@@ -36,7 +36,7 @@ public class Shoot : MonoBehaviour
  {
     
     //Wait for 4 seconds
-    yield return new WaitForSeconds(1.4f);
+    yield return new WaitForSeconds(0.7f);
        
     Rigidbody clone;
     clone = (Rigidbody)Instantiate(projectile, Spawnpoint.position, projectile.rotation);

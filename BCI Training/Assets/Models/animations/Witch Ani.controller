@@ -186,7 +186,7 @@ AnimatorStateMachine:
     m_Position: {x: 416.55048, y: 253.22514, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8842006984364067415}
-    m_Position: {x: 670, y: 450, z: 0}
+    m_Position: {x: 680, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6898382409144399174}
     m_Position: {x: 650, y: 60, z: 0}
@@ -211,7 +211,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Standing 2H Magic Attack 01
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -1338499612396699009}

@@ -16,6 +16,7 @@ public class Goblinani : MonoBehaviour
     public AudioClip move;
    // bool isMoving = false;
     private TacticsMove enemy;
+    private EnemyHealth goblin;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class Goblinani : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         shoot = GetComponent<Shoot>();
         enemy= GetComponent<TacticsMove>();
+        goblin = GetComponent<EnemyHealth>();
     }
 
     // Update is called once per frame
@@ -60,15 +62,17 @@ public class Goblinani : MonoBehaviour
             {
             //If the GameObject has the same tag as specified, output this message in the console
             gLife = gLife - 2;
-            if(gLife>0){
+            if(goblin.alive){
                 anim.SetTrigger("Hit");
                 Debug.Log("Goblin is hit");
                 audioSource.PlayOneShot(impact);
+                Destroy(collision.gameObject);
 
             }
             else{ 
                 anim.SetTrigger("Death");
                 audioSource.PlayOneShot(Death);
+                Destroy(collision.gameObject);
             }
             } 
         }
