@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class PlayerFeatures : MonoBehaviour
     private Shake shake;
     public bool alive = true;
     
-    public Gamemode gamemode;
+    [NonSerialized] public Gamemode gamemode;
     public Image[] manaUI;
 
     void Start()
