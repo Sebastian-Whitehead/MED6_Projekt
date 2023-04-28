@@ -22,9 +22,8 @@ public class Player : Unit {
     public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
+
     public int attack_count = 0;
-    
-    [SerializeField]
     private LoggingManager _loggingManager;
     
     [NonSerialized] public Gamemode gamemode;
@@ -33,6 +32,8 @@ public class Player : Unit {
     private Shoot shoot;
     public int chargeCount;
     
+    private TurnManager abcde; 
+    
     protected override void ChildAwake() {
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
         conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
@@ -40,6 +41,7 @@ public class Player : Unit {
         bciPrompt = GetComponent<BciSlider>();
         shoot = GetComponent<Shoot>();
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
+        abcde = GameObject.Find("GameManager").GetComponent<TurnManager>();
     }
 
          protected override void ChildUpdate() {
@@ -95,16 +97,19 @@ public class Player : Unit {
         if (state == State.Attack)
         {
             if (gamemode == Gamemode.Interval){
-            bciPrompt.ChargeMana();
-            StartCoroutine(nameof(WaitForBci));
+                conBtn.DisableImage();
+                bciPrompt.ChargeMana();
+                StartCoroutine(nameof(WaitForBci));
             }
             else if (gamemode == Gamemode.Battery){
             
-            anim = gameObject.GetComponent<Animator>();
-            anim.SetTrigger("Shoot");
-            shoot.shooting();
-            conBtn.DisableImage();
-            res.Expend();
+                anim = gameObject.GetComponent<Animator>();
+                anim.SetTrigger("Shoot");
+                shoot.shooting();
+                conBtn.DisableImage();
+                res.Expend();
+                attack_count += 1;
+                logPlayerData();
             }
         }
         else
@@ -145,7 +150,6 @@ public class Player : Unit {
                         yield break;
                     case false:
                         AttackMiss();
-                        conBtn.DisableImage();
                         yield break;
                 }
             }
@@ -154,23 +158,20 @@ public class Player : Unit {
 
     void AttackMiss()
     {
+        
         //TODO: Attack Miss Animation
         state = State.Idle;
         execute = true;
         // Kan bruges hvis hun stadig skal lave animationen uden at skyde.
         //anim = gameObject.GetComponent<Animator>();
         //anim.SetTrigger("Shoot");
+        
         Deactivate();
+        abcde.EndTurn();
 
         // Debug.Log("Confirm action");
         execute = true; // Execute action
-        conBtn.DisableImage(); // Deactivate confirm btn
-        if (state == State.Attack){
-        
-
-        }
-
-
+        //conBtn.DisableImage(); // Deactivate confirm btn
 
     }
 

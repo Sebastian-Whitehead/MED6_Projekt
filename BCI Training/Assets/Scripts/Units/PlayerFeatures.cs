@@ -20,9 +20,13 @@ public class PlayerFeatures : MonoBehaviour
     
     [NonSerialized] public Gamemode gamemode;
     public Image[] manaUI;
+    
+    private LoggingManager _loggingManager;
+    private int dmgTaken = 0;
 
     void Start()
     {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         health = maxHealth;
         lastHealth = health;
         // print(gamemode);
@@ -55,6 +59,9 @@ public class PlayerFeatures : MonoBehaviour
         {
             shake.ShakeOnce(1f);
             lastHealth = health;
+            dmgTaken++;
+            _loggingManager.Log("Log", "Take Damage", dmgTaken);
+
         }else if (lastHealth < health)
         {
             lastHealth = health;
@@ -145,5 +152,7 @@ public class PlayerFeatures : MonoBehaviour
             currentElement.enabled = false;
         }
     }
+    
+    
     
 }

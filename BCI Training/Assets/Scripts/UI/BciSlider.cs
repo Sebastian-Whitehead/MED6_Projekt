@@ -70,8 +70,11 @@ public class BciSlider : MonoBehaviour
         {
             Highlight.enabled = true;
             currentSpeed = promptSpeed;
-            
-            if (Slider.value >= 1f)Fail();
+
+            if (Slider.value > 0.99)
+            {
+                Fail();
+            }
         }
     }
 
@@ -117,15 +120,12 @@ public class BciSlider : MonoBehaviour
         time = BciPromptDuration;
         currentSpeed = speed;
         StartBciPrompt = false;
-        
     }
 
     public void ChargeMana()
     {
-        nrOfBCI += 1;
         targetReps = 1;
         completedReps = 0;
-        
         
         complete = false;
         ShowAndHideBci(true);
@@ -141,8 +141,6 @@ public class BciSlider : MonoBehaviour
         ShowAndHideBci(true);
         StartBciPrompt = true;
         StartCoroutine(nameof(StartBciRepeating));
-        
-        
     }
     
     IEnumerator StartBciRepeating()
@@ -152,12 +150,12 @@ public class BciSlider : MonoBehaviour
             switch (StartBciPrompt)
             {
                 case true:
+                   
                     yield return null;
                     break;
                 case false:
                     if (completedReps < targetReps && resources.mana < resources.maxMana)
                     {
-                        print(true);
                         yield return new WaitForSeconds(1.5f);
                         ShowAndHideBci(false);
                         yield return new WaitForSeconds(0.5f);
@@ -182,6 +180,9 @@ public class BciSlider : MonoBehaviour
         StartBciPrompt = false;
         completedReps++;
         resources.RegenMana();
+        nrOfBCI++;
+        success = true;
+        logBCIData();
         //Maybe delay here
         if (gamemode == Gamemode.Battery)
         {
@@ -200,9 +201,7 @@ public class BciSlider : MonoBehaviour
     
     void SucceseComplete()
     {
-        success = true;
         complete = true;
-        logBCIData();
         ShowAndHideBci(false);
     }
 
@@ -210,15 +209,20 @@ public class BciSlider : MonoBehaviour
     public void Fail()
     {
         StartBciPrompt = false;
+        print("failure");
+        
         shaker.ShakeOnce(0.25f);
         //completedReps++;
-        success = false;
-        logBCIData();
         
+        print("failure");
+        success = false;
+        nrOfBCI++;
+        logBCIData();
+
         if (completedReps >= targetReps || gamemode == Gamemode.Interval)
         {
             print("BCI FAIL");
-            
+            ShowAndHideBci(false);
             complete = true;
         }
     }
