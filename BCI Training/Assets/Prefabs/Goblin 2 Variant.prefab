@@ -124,7 +124,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 185843831490857399, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: gLife
-      value: 5
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 327176175425093348, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: maxHealth
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 368880136437149273, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_RootOrder
@@ -210,7 +214,12 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8932121857135372803, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: attackRange
+      value: 1.15
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -8621398941988239365, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
 --- !u!4 &3993071271416668213 stripped
 Transform:

@@ -31,13 +31,22 @@ public class TurnManager : MonoBehaviour
     private void PlayerTurn() {
         if (!playerTurn) return;
 
-        if (!player.Active() && !player.isMoving && wait && player.execute) {
+        if (!player.Active() && !player.isMoving && wait && player.execute && Input.GetKeyDown("q")) {
             player.ResetPlayer();
             EndTurn();
+            //StartCoroutine(waiter());
             return;
         }
         if (!wait) player.Activate();
     }
+
+   /* IEnumerator waiter()
+    {
+    
+    //Wait for 4 seconds
+    yield return new WaitForSeconds(1f);
+    EndTurn();
+    }*/
 
     private void EnemiesCollectiveTurn() {
         if (playerTurn) return;
