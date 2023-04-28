@@ -426,7 +426,8 @@ PrefabInstance:
       propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: FilterInputSuccess
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9201502386200140189, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
 --- !u!1001 &229160119
 PrefabInstance:
@@ -643,7 +644,7 @@ PrefabInstance:
     - target: {fileID: 5875199749056448752, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: _loggingManager
       value: 
-      objectReference: {fileID: 1393122164}
+      objectReference: {fileID: 0}
     - target: {fileID: 6616261252899859183, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_Height
       value: 3.5436199
@@ -3119,7 +3120,7 @@ PrefabInstance:
       objectReference: {fileID: 471069410}
     - target: {fileID: 8941893838152464325, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
       propertyPath: gamemode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8941893838152464325, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
       propertyPath: m_Enabled
@@ -3157,7 +3158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CreateMetaCollection: 1
-  enableMySQLSave: 1
+  enableMySQLSave: 0
   email: anonymous
   connectToMySQL: {fileID: 0}
   enableCSVSave: 1
