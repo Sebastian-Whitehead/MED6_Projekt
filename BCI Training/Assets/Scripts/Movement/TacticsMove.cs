@@ -117,7 +117,7 @@ public class TacticsMove : MonoBehaviour {
             Vector3 position = transform.position;
             targetTile.y = position.y;
             float dist = Vector3.Distance(position, targetTile);
-            Debug.Log(name + " distance: " + dist);
+            //Debug.Log(name + " distance: " + dist);
             if (dist >= 0.1f){
 
                 CalculateDirection(targetTile);
