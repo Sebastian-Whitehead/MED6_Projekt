@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17983137, g: 0.22516496, b: 0.30662543, a: 1}
+  m_IndirectSpecularColor: {r: 0.17983153, g: 0.22516537, b: 0.3066258, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3415,15 +3415,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2359839889184358659, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2359839889184358659, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.01
+      value: 2.04
       objectReference: {fileID: 0}
     - target: {fileID: 2359839889184358659, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.77
       objectReference: {fileID: 0}
     - target: {fileID: 2359839889184358659, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_LocalRotation.x
@@ -3469,6 +3469,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616261254364001593, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
+      propertyPath: projectile
+      value: 
+      objectReference: {fileID: 4368627052132516758, guid: e377986561b3e17439c306d82957e20d, type: 3}
     - target: {fileID: 6616261254364001599, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -15247,14 +15251,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594819359}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 6.809476, y: 8.54, z: -3.08}
+  m_LocalRotation: {x: 0.36792743, y: -0, z: -0, w: 0.9298545}
+  m_LocalPosition: {x: 3.46, y: 2.87, z: -5.23}
   m_LocalScale: {x: 0.8757424, y: 0.87574244, z: 0.8757424}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.176, y: 0, z: 0}
 --- !u!114 &1594819362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15343,7 +15347,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 4.82
   m_Depth: -1
   m_CullingMask:

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7571937729080648968}
   - component: {fileID: 6826109765814708909}
   - component: {fileID: 8745922184345886311}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ModelWithTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 611182208436313618, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1006826214294123933, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -116,6 +120,10 @@ PrefabInstance:
     - target: {fileID: 1006826214294123933, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6556424488052434981, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
+      propertyPath: ignore.m_Bits
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 8324109701365800923, guid: e853e3c6d5dc8b947a17d640188b33ee, type: 3}
       propertyPath: m_Materials.Array.data[0]

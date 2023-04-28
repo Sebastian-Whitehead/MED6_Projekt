@@ -41,11 +41,13 @@ public class Goblinani : MonoBehaviour
         // Vi skal finde der hvor modstanderen bevæger sig i stedet for der hvor playeren gør.
         Vector3 velocity = tacticsmove.velocity;
         bool moving = tacticsmove.isMoving;
-
+        print(velocity);
         if(moving == true && velocity.x > 0.1){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+            print("bevæglse x");
              } else if (moving == true && velocity.z > 0.1){
                 anim.SetFloat("Speed", Mathf.Abs(velocity.z));
+                print("bevæglse z");
              } else if (moving == false) {
             anim.SetFloat("Speed", 0);
 //            Debug.Log("not moving");
@@ -58,7 +60,7 @@ public class Goblinani : MonoBehaviour
     //Wait for 4 seconds
     yield return new WaitForSeconds(1f);
     turnManager.waiting = true;
-        
+    turnManager.EndTurn();
 
     }
      

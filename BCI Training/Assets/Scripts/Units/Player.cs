@@ -92,10 +92,20 @@ public class Player : Unit {
         // print(gamemode);
         if (state == State.Idle) return;
 
-        if (state == State.Attack && gamemode == Gamemode.Interval)
+        if (state == State.Attack)
         {
+            if (gamemode == Gamemode.Interval){
             bciPrompt.ChargeMana();
             StartCoroutine(nameof(WaitForBci));
+            }
+            else if (gamemode == Gamemode.Battery){
+            
+            anim = gameObject.GetComponent<Animator>();
+            anim.SetTrigger("Shoot");
+            shoot.shooting();
+            conBtn.DisableImage();
+            res.Expend();
+            }
         }
         else
         {

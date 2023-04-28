@@ -89,6 +89,10 @@ public class Enemy : Unit {
             Debug.Log("position: " + transform.position);
             Debug.LogError("Going to self!");
         }
+        Debug.Log(name);
+            Debug.Log("targetLocation: " + targetLocation);
+            Debug.Log("position: " + transform.position);
+            Debug.LogError("Going to self!");
         Tile nextTile = GetTileAtPosition(targetLocation);
         AStarTargetTile = nextTile;
         // Debug.Log(name + " nextTile: " + nextTile);

@@ -9,6 +9,7 @@ public class Tile : MonoBehaviour
     public bool targetTile = false; //Target posiiton
     public bool selectable = false; //The clickable tiles
     public bool isWalkable = true; 
+    public LayerMask ignore;
 
     public float opacity;
 
@@ -100,7 +101,7 @@ public class Tile : MonoBehaviour
                 RaycastHit hit;
                  //Test if there is something on top of the tile, making it non-walkable...
                  //We add it to the list if the raycast DOES NOT hit something.
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) ||
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1,~ignore) ||
                 (tile == target) || 
                 !hit.collider.GetComponent<Unit>().Alive()) { //include target even if something is sitting on the tile.
                     

@@ -66,7 +66,7 @@ public class TutorialManager : MonoBehaviour {
         UpdateArea(); // Update area when selected enemy dies
     }
 
-    void CheckManaArea3() {
+   void CheckManaArea3() {
         if (currentArea != 3) return; // Guard not area 3
 
         // Check if game mode is battery
