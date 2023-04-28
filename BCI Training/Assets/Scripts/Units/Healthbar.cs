@@ -11,6 +11,7 @@ public class Healthbar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
     public TextMeshProUGUI healthText;
+    public GameObject healthbarAssembly;
 
     public void SetHealth(float health)
     {
@@ -34,6 +35,7 @@ public class Healthbar : MonoBehaviour
         if (slider.value == 0)
         {
             healthText.enabled = false;
+            healthbarAssembly.SetActive(false);
         }
     }
 }

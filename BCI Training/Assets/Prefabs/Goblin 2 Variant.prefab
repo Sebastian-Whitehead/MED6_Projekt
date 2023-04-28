@@ -206,6 +206,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6232694002438913926, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+      propertyPath: healthbarAssembly
+      value: 
+      objectReference: {fileID: 7208646178408706536}
     - target: {fileID: 6232694002528817173, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -259,6 +263,11 @@ MonoBehaviour:
   projectile: {fileID: 1177531179078746447, guid: 752c86461ef6a7343b59eb351b788c80, type: 3}
   Spawnpoint: {fileID: 1339468198}
   projectileSpeed: 2
+--- !u!1 &7208646178408706536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6232694002438913924, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
+  m_PrefabInstance: {fileID: 3635737154632748652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7861190162097862676 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6875929419889800824, guid: 837a9fc855bd9784da7927742b233ffb, type: 3}
