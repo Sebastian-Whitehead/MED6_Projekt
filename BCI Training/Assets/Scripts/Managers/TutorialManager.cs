@@ -33,48 +33,44 @@ public class TutorialManager : MonoBehaviour {
         gameMode = gameManager.GetComponent<GameMode>();
         player = GameObject.Find("Player");
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<EnemyHealth>();
-        UpdateArea();
+        UpdateArea(); // Update area to init
         
-        chargeButton = GameObject.Find("ChargeButton");
-        chargeButton.SetActive(false);
+        chargeButton = GameObject.Find("ChargeButton"); // Get charge button element
+        chargeButton.SetActive(false); // Deactivate charge button
     }
 
     // Update is called once per frame
     void Update() {
-        CheckTutorialComplete();
+        CheckTutorialComplete(); // Check if last area is complete
 
-        CheckMovingArea1();
-        CheckManaArea3();
-        CheckEnemyDeath();
+        CheckMovingArea1(); // Area 1, check player movement (turn end)
+        CheckManaArea3(); // Area 3, check mana regain
+        CheckEnemyDeath(); // Other areas, check enemy alive
     }
 
     void CheckMovingArea1() {
         if (currentArea != 1) return; // Guard area index
-        
-        bool playerMoving = player.GetComponent<TacticsMove>().isMoving;
         if (turnManager.playerTurn) return; // Guard player turn
-        UpdateArea();
+        UpdateArea(); // Update area if players turn is over
     }
 
     void CheckEnemyDeath() {
         if (!enemyAreas.Contains(currentArea)) return; // Guard non enemy areas
         EnemyHealth enemyHealth = enemies[currentEnemy]; // Select current enemy
         if (enemyHealth.alive) return; // Continue when current selected enemy is dead
-        currentEnemy++;
-        UpdateArea();
+        currentEnemy++; // Increment currently selected enemy
+        UpdateArea(); // Update area when selected enemy dies
     }
 
     void CheckManaArea3() {
         if (currentArea != 3) return; // Guard not area 3
 
-        chargeButton.SetActive(true);
-
         // Check if game mode is battery
         if (gameMode.gamemode != Gamemode.Battery) { // Guard other than battery
             currentArea++; // Skip this area
-            return;
+            return; // Abort method
         }
-
+        chargeButton.SetActive(true); // Activate charge button
         float mana = player.GetComponent<PlayerFeatures>().mana; // Players mana
         if (mana <= 0) return; // Guard not enough mana
         UpdateArea(); // when player has gain mana
@@ -93,13 +89,13 @@ public class TutorialManager : MonoBehaviour {
     }
 
     void UpdateUI() {
-        if (currentArea >= tutorialTexts.Length) return;
-        tutorialUI.text = tutorialTexts[currentArea]; 
+        if (currentArea >= tutorialTexts.Length) return; // Guard index error
+        tutorialUI.text = tutorialTexts[currentArea]; // Update text with tutorial text
     }
 
     void Spawn() {
-        if (currentArea >= spawnPoints.Length) return;
-        GameObject spawnPoint = spawnPoints[currentArea];
-        player.transform.position = spawnPoint.transform.position;
+        if (currentArea >= spawnPoints.Length) return; // Guard index error
+        GameObject spawnPoint = spawnPoints[currentArea]; // Current spawn point
+        player.transform.position = spawnPoint.transform.position; // Update position to spawn point
     }
 }
