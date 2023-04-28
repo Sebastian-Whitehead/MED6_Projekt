@@ -71,7 +71,10 @@ public abstract class Unit : PlayerMove {
         if (steps <= 0 && active) Deactivate();
         if (!isMoving) return; // Break when not moving
         Move(); // Move to target tile
-        if (path.Count <= 0 && active) Deactivate();
+        if (path.Count <= 0 && active){ 
+            Deactivate();
+            turnManager.waiting = true;
+        }
     }
 
     // Eyes to spot game objects matching with 'target tag'
@@ -131,28 +134,16 @@ public abstract class Unit : PlayerMove {
             //if (tag == "Player") Debug.Log(name + " attack target null");
             return; // Break at null attack target
         }
-        if (!AttackCheck()){
-            print("Could Not attack");
-            return; // Break attack not possible
-        }
-
-       // StartCoroutine(waiter());
-
+        if (!AttackCheck()) return; // Break attack not possible
         Debug.Log(name + " attacking " + attackTarget.name);
-        attackTarget.TakeDamage(transform.position, damage); // Target takes damage
+        if (CompareTag("Enemy")) attackTarget.TakeDamage(transform.position, damage); // Target takes damage
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
-
+        
         Deactivate(); // Deactivate unit
     }
 
     // ---------------------------------------------------------------------
-    /* IEnumerator waiter()
-    {
-    
-    //Wait for 4 seconds
-    yield return new WaitForSeconds(3f);
-    }*/
 
     // Activate unit
     public void Activate() {

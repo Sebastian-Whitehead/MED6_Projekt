@@ -39,6 +39,7 @@ public class Player : Unit {
         res = GetComponent<PlayerFeatures>(); // Get resources
         bciPrompt = GetComponent<BciSlider>();
         shoot = GetComponent<Shoot>();
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
     }
 
          protected override void ChildUpdate() {
@@ -258,7 +259,6 @@ public class Player : Unit {
                 tile.ResetTile();
                 tile.selectable = true;
             }
-
         }
     }
 

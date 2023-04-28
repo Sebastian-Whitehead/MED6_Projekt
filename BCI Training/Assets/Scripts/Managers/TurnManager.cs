@@ -13,6 +13,7 @@ public class TurnManager : MonoBehaviour
     private bool wait = false;
     private Enemy[] enemies;
     private Player player;
+    public bool waiting = false;
     
     
 
@@ -31,8 +32,7 @@ public class TurnManager : MonoBehaviour
     private void PlayerTurn() {
         if (!playerTurn) return;
 
-        //&& Input.GetKeyDown("q")
-        if (!player.Active() && !player.isMoving && wait && player.execute ) {
+        if (!player.Active() && !player.isMoving && wait && player.execute && waiting == true) {
             player.ResetPlayer();
             EndTurn();
             //StartCoroutine(waiter());
@@ -82,6 +82,7 @@ public class TurnManager : MonoBehaviour
 
         playerTurn = !playerTurn;
         wait = false;
+        waiting = false;
     }
 
     public void Wait() {
