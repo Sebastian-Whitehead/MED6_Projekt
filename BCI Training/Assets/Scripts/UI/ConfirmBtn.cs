@@ -15,7 +15,7 @@ public class ConfirmBtn : MonoBehaviour {
         btn = GetComponent<Button>();
         image = GameObject.Find("ConfirmSprite").GetComponent<Image>(); // Button image component
         text = GetComponentInChildren<TMPro.TextMeshProUGUI>(); // Button image component
-        // DisableImage();
+        DisableImage();
         FormatSprites(); // Format sprites from list to dict
     }
 
