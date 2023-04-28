@@ -126,6 +126,7 @@ public class Player : Unit {
                         {
                             attack_count += 1;
                             logPlayerData();
+                           
                         }
                         conBtn.DisableImage();
                         anim = gameObject.GetComponent<Animator>();
@@ -267,8 +268,8 @@ public class Player : Unit {
         _loggingManager.Log("Log", new Dictionary<string, object>()
         {
             {"Attack", attack_count},
-            {"Event", "Player Attack"},
-            {"State", Enum.GetName(typeof(State), state)},
+           // {"Event", "Player Attack"},
+           // {"State", Enum.GetName(typeof(State), state)},
         });
 
     }

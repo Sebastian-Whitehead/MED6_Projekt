@@ -38,9 +38,15 @@ public class BciSlider : MonoBehaviour
     private int targetReps = 0;
     
     
+    //Logging variables_____________
+    private int nrOfBCI = 0;
+    private LoggingManager _loggingManager;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;
 
@@ -71,7 +77,10 @@ public class BciSlider : MonoBehaviour
 
     public void FilterInputSuccess()
     {
-        if (Slider.value >= 0.418f && StartBciPrompt == true) Success();
+        if (Slider.value >= 0.418f && StartBciPrompt == true)
+        {
+            Success();
+        }
     }
 
     public void ShowAndHideBci(bool show)
@@ -108,10 +117,12 @@ public class BciSlider : MonoBehaviour
         time = BciPromptDuration;
         currentSpeed = speed;
         StartBciPrompt = false;
+        
     }
 
     public void ChargeMana()
     {
+        nrOfBCI += 1;
         targetReps = 1;
         completedReps = 0;
         
@@ -130,6 +141,7 @@ public class BciSlider : MonoBehaviour
         ShowAndHideBci(true);
         StartBciPrompt = true;
         StartCoroutine(nameof(StartBciRepeating));
+        
         
     }
     
@@ -181,6 +193,7 @@ public class BciSlider : MonoBehaviour
         else
         {
             SucceseComplete();
+            
         }
         
     }
@@ -189,6 +202,7 @@ public class BciSlider : MonoBehaviour
     {
         success = true;
         complete = true;
+        logBCIData();
         ShowAndHideBci(false);
     }
 
@@ -198,14 +212,28 @@ public class BciSlider : MonoBehaviour
         StartBciPrompt = false;
         shaker.ShakeOnce(0.25f);
         //completedReps++;
+        success = false;
+        logBCIData();
         
         if (completedReps >= targetReps || gamemode == Gamemode.Interval)
         {
             print("BCI FAIL");
-            success = false;
+            
             complete = true;
-            ShowAndHideBci(false);
         }
+    }
+    
+    
+    private void logBCIData()
+    {
+        _loggingManager.Log("Log", new Dictionary<string, object>()
+        {
+            {"BCI attempt", nrOfBCI},
+          //  {"Event", "BCI Attempt"},
+            {"Success BCI", success}
+            
+        });
+
     }
 
     
