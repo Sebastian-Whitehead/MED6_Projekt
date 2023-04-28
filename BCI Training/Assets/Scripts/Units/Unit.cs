@@ -131,7 +131,10 @@ public abstract class Unit : PlayerMove {
             //if (tag == "Player") Debug.Log(name + " attack target null");
             return; // Break at null attack target
         }
-        if (!AttackCheck()) return; // Break attack not possible
+        if (!AttackCheck()){
+            print("Could Not attack");
+            return; // Break attack not possible
+        }
 
        // StartCoroutine(waiter());
 

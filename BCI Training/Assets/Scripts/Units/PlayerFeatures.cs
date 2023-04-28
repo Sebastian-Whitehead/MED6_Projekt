@@ -33,10 +33,12 @@ public class PlayerFeatures : MonoBehaviour
             HideManaUI();
         }
 
+       /*
         if (gamemode == Gamemode.Battery)
-        {
+        { 
             mana = 0;
         }
+        */
     }
 
     void Awake() {

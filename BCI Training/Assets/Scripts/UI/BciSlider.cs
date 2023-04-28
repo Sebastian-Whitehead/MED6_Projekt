@@ -43,7 +43,12 @@ public class BciSlider : MonoBehaviour
     {
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;
-        ShowChargeButton(false);
+
+        if (gamemode == Gamemode.Interval)
+        {
+            ShowChargeButton(false);
+        }
+
         ShowAndHideBci(false);
     }
 
@@ -86,7 +91,7 @@ public class BciSlider : MonoBehaviour
 
     }
 
-    private void ShowChargeButton(bool state)
+    public void ShowChargeButton(bool state)
     {
         ChargeButton.enabled = state;
         foreach (var currentElement in ChargeButtonImg)

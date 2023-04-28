@@ -25,6 +25,8 @@ public class TutorialManager : MonoBehaviour {
     private TurnManager turnManager;
     private GameObject chargeButton;
     private GameMode gameMode;
+    private BciSlider bciSlider;
+    private PlayerFeatures res;
 
     void Awake() {
         tutorialUI = GameObject.Find("TutorialText").GetComponent<TMPro.TextMeshProUGUI>();
@@ -34,9 +36,11 @@ public class TutorialManager : MonoBehaviour {
         player = GameObject.Find("Player");
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<EnemyHealth>();
         UpdateArea(); // Update area to init
+
         
         chargeButton = GameObject.Find("ChargeButton"); // Get charge button element
         chargeButton.SetActive(false); // Deactivate charge button
+        
     }
 
     // Update is called once per frame

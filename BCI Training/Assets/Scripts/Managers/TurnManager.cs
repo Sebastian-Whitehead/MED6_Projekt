@@ -31,7 +31,8 @@ public class TurnManager : MonoBehaviour
     private void PlayerTurn() {
         if (!playerTurn) return;
 
-        if (!player.Active() && !player.isMoving && wait && player.execute && Input.GetKeyDown("q")) {
+        //&& Input.GetKeyDown("q")
+        if (!player.Active() && !player.isMoving && wait && player.execute ) {
             player.ResetPlayer();
             EndTurn();
             //StartCoroutine(waiter());
