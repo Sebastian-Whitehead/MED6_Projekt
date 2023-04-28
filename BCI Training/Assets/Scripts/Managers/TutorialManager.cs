@@ -67,7 +67,7 @@ public class TutorialManager : MonoBehaviour {
 
         // Check if game mode is battery
         if (gameMode.gamemode != Gamemode.Battery) { // Guard other than battery
-            currentArea++; // Skip this area
+            UpdateArea(); // Skip this area
             return; // Abort method
         }
         chargeButton.SetActive(true); // Activate charge button
