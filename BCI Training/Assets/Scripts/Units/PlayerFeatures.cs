@@ -139,9 +139,13 @@ public class PlayerFeatures : MonoBehaviour
         Color blinkColor = Color.red;
         float blinkDuration = .2f;
         float alpha = 0f;
-        
         Image manabar = GameObject.Find("Manabar").GetComponent<Image>();
-        manabar.color = Color.red;
+
+        while (alpha < 1f) {
+            alpha += Time.deltaTime / blinkDuration;
+            manabar.color = Color.Lerp(originalColor, blinkColor, alpha);
+            yield return null;
+        }
 
         while (alpha > 0f) {
             alpha -= Time.deltaTime / blinkDuration;

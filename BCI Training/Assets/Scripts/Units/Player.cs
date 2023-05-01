@@ -124,6 +124,7 @@ public class Player : Unit {
             conBtn.DisableImage(); // Deactivate confirm btn
         }
         state = State.Idle;
+        Dehighlight(); // Dehighlight all enemies
     }
 
     IEnumerator WaitForBci()
