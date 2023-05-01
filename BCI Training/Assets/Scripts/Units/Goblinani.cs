@@ -41,17 +41,11 @@ public class Goblinani : MonoBehaviour
         // Vi skal finde der hvor modstanderen bevæger sig i stedet for der hvor playeren gør.
         Vector3 velocity = tacticsmove.velocity;
         bool moving = tacticsmove.isMoving;
-<<<<<<< Updated upstream
-        if(moving == true && velocity.x > 0.1){
-            anim.SetFloat("Speed", Mathf.Abs(velocity.x));
-        } else if (moving == true && velocity.z > 0.1){
-=======
         print(velocity);
         if(moving == true && velocity.x > 0.01){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
             print("bevæglse x");
              } else if (moving == true && velocity.z > 0.01){
->>>>>>> Stashed changes
                 anim.SetFloat("Speed", Mathf.Abs(velocity.z));
         } else if (moving == false) {
             anim.SetFloat("Speed", 0);
