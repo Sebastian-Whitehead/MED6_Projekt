@@ -63,8 +63,10 @@ public class Player : Unit {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
-        else if (hit.collider.name == "ConfirmBtn") return;
-        else if (hit.collider.name == "ChargeButton") return;
+        Debug.Log(hit.collider.name);
+
+        if (hit.collider.name == "ConfirmBtn") return;
+        if (hit.collider.name == "ChargeButton") return;
 
         if (execute || !active) return;
         if (!turnManager.playerTurn) return; // Turn check

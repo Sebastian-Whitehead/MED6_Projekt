@@ -100,6 +100,7 @@ public class BciSlider : MonoBehaviour
         Slider.enabled = show;
         foreach (var currentImg in BCIAssembly)
         {
+            if (currentImg.name == "ChargeButton" || currentImg.name == "Mana Bottle") continue;
             currentImg.enabled = show;
         }
         ResetBci();
