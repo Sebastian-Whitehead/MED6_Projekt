@@ -112,17 +112,15 @@ public class PlayerFeatures : MonoBehaviour
             health += healPoints;
     }
 
-    public void RegenMana(float RegenPoints)
+    public void RegenMana(float regenPoints)
     {
         if (mana >= maxMana) return;
-        mana += RegenPoints;
+        if (mana + regenPoints <= maxMana) mana += regenPoints;
+        else mana = maxMana;
     }
 
-    public void RegenMana()
-    {
-        print("regen mana");
+    public void RegenMana(){
         if (mana >= maxMana) return;
-        print("Regening");
         mana += fixedRegenPoints;
     }
 

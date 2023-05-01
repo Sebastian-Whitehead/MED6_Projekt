@@ -179,7 +179,7 @@ public class BciSlider : MonoBehaviour
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
         completedReps++;
-        resources.RegenMana();
+        resources.RegenMana(2);
         nrOfBCI++;
         success = true;
         logBCIData();
