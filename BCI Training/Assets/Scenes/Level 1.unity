@@ -8111,18 +8111,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1615676748785761263, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615676748785761263, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.5148749
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615676748785761263, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1615676748785761263, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
@@ -8206,22 +8194,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 286987890}
-    - target: {fileID: 7757957868690170424, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105094695668924781, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105094695668924781, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8105094695668924781, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
 --- !u!1001 &762474297
