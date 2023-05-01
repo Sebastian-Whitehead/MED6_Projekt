@@ -80,7 +80,7 @@ public class Player : Unit {
 
         SetMoveTarget(hit.collider); // Set tile to move to
         SetAttackTarget(hit.collider); // Set enemy to attack
-        Invoke("ActivateBtn", 0.1f); // Activate confirm btn
+        Invoke("ActivateBtn", 0.15f); // Activate confirm btn
     }
 
     // Activate confirm button
