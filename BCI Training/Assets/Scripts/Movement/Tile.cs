@@ -38,19 +38,13 @@ public class Tile : MonoBehaviour
     void Update() {
         if (!turnManager.playerTurn) {
             GetComponent<Renderer>().material.color = Color.white;
-            return;
-        }
-        if (current)
-        {
+        } else if (current) {
             GetComponent<Renderer>().material.color = Color.yellow;
-        }
-        else if (targetTile){
+        } else if (targetTile){
             GetComponent<Renderer>().material.color = Color.blue;
-        }
-        else if (selectable){
+        } else if (selectable){
             GetComponent<Renderer>().material.color = Color.red;
-        }
-        else{
+        } else {
             GetComponent<Renderer>().material.color = Color.white;
         }
 
