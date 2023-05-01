@@ -16,6 +16,10 @@ public class Triggeani : MonoBehaviour
     public int life;
     private Shoot shoot;
     private TacticsMove player;
+    private PlayerFeatures playerfeatures;
+    private float lastHealth;
+    private float health;
+    private bool dead = false;
  
     void Start()
     {
@@ -24,21 +28,15 @@ public class Triggeani : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         shoot = GetComponent<Shoot>();
         player= GetComponent<TacticsMove>();
+        playerfeatures = GetComponent<PlayerFeatures>();
+        lastHealth = playerfeatures.maxHealth;
         
         
     }
     void Update()
-    {
+    {   
+        health = playerfeatures.health;
         //if (Input.GetMouseButtonDown(0))
-        if (Input.GetKey("d"))
-        {
-        }
-
-        if (Input.GetKeyDown("space") && life >0)
-        {
-            shoot.shooting();
-            anim.SetTrigger("Shoot");
-        }
         bool moving = player.isMoving;
        
 
@@ -49,20 +47,24 @@ public class Triggeani : MonoBehaviour
             audioSource.PlayOneShot(move);}
 
         }*/
-
-
-        //_direction = new Vector3(0, 0, horizontalInput) * _speed;
-        Vector3 velocity = player.velocity;
-
-        //_controller.Move(velocity * Time.deltaTime);
-        
-       /* if (velocity.x != 0){
-            isMoving = true;
+        if (lastHealth > health && health > 0){
+            anim.SetTrigger("Hit");
+            while (audioSource.isPlaying == false){
+                audioSource.PlayOneShot(impact);
+                }
+            lastHealth = health;
         }
-        else {
-            isMoving = false;
-            //audioSource.Stop();
-        }*/
+
+        if (health == 0 && dead == false){
+            anim.SetTrigger("Death");
+            while (audioSource.isPlaying == false){
+                audioSource.PlayOneShot(death);
+                dead = true;
+                }
+            
+        }
+
+        Vector3 velocity = player.velocity;
         if(moving == true && velocity.x > 0.1){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
             while (audioSource.isPlaying == false){
@@ -85,25 +87,5 @@ public class Triggeani : MonoBehaviour
     else
         return false;
 }*/
-
-void OnCollisionEnter(Collision collision){
-     if (collision.gameObject.tag == "Projectile")
-        {
-            life = life-1;
-            if (life > 0){
-                anim.SetTrigger("Hit");
-                while (audioSource.isPlaying == false){
-                audioSource.PlayOneShot(impact);
-                }
-                Debug.Log("Play hitsound");
-
-            }
-            else {
-                anim.SetTrigger("Death");
-                audioSource.PlayOneShot(death);
-            }
-        }
-}
-
 
 }
