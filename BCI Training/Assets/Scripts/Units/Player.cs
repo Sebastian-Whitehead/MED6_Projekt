@@ -46,11 +46,10 @@ public class Player : Unit {
         abcde = GameObject.Find("GameManager").GetComponent<TurnManager>();
     }
 
-         protected override void ChildUpdate() {
+    protected override void ChildUpdate() {
         res.Alive(audioManager); // Alive check
         if (!execute) return; // Only on execute
         if (state == State.Charge) res.RegenMana();
-        
     }
         
     
@@ -77,8 +76,8 @@ public class Player : Unit {
         Dehighlight(); // Dehighlight all enemies
         RemoveTileHighlight();
         execute = false; // Action execution
-        // attackTarget = null;
-        // isMoving = false;
+        // attackTarget = null; // Reset attacking (Can't execute atm)
+        // isMoving = false; // Reset moving (Can't execute atm)
 
         SetMoveTarget(hit.collider); // Set tile to move to
         SetAttackTarget(hit.collider); // Set enemy to attack
