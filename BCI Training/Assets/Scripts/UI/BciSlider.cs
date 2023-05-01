@@ -54,7 +54,6 @@ public class BciSlider : MonoBehaviour
         ChargeButtonImg = GameObject.Find("ChargeButton").GetComponentsInChildren<Image>();
         if (Camera.main != null) shaker = Camera.main.GetComponent<Shake>();
         
-        
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;

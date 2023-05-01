@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SharedDatastructures;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour {
 
@@ -23,11 +25,9 @@ public class TutorialManager : MonoBehaviour {
     [Header("Gameplay manipulation")]
     private GameObject player;
     private TurnManager turnManager;
-    private GameObject chargeButton;
-    private GameMode gameMode;
+    private Image[] chargeButton;
     private BciSlider bciSlider;
-    private PlayerFeatures res;
-
+    private GameMode gameMode;
     private bool checkComplete = false;
 
     void Awake() {
@@ -37,12 +37,12 @@ public class TutorialManager : MonoBehaviour {
         gameMode = gameManager.GetComponent<GameMode>();
         player = GameObject.Find("Player");
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<EnemyHealth>();
-        UpdateArea(); // Update area to init
+        bciSlider = player.GetComponent<BciSlider>();
+    }
 
-        
-        chargeButton = GameObject.Find("ChargeButton"); // Get charge button element
-        chargeButton.SetActive(false); // Deactivate charge button
-        
+    void Start() {
+        bciSlider.ShowChargeButton(false);
+        UpdateArea(); // Update area to init
     }
 
     // Update is called once per frame
@@ -57,13 +57,13 @@ public class TutorialManager : MonoBehaviour {
     void CheckMovingArea1() {
         if (currentArea != 1) return; // Guard area index
         if (turnManager.playerTurn) return; // Guard player turn
-        //UpdateArea();
         StartCoroutine(DelayUpdateArea(1f)); // Update area if players turn is over
     }
 
     void CheckEnemyDeath()
     {
         if (!enemyAreas.Contains(currentArea)) return; // Guard non enemy areas
+        if (currentEnemy >= enemies.Length) return; // Guard enemy index
         EnemyHealth enemyHealth = enemies[currentEnemy]; // Select current enemy
         if (enemyHealth.alive) return; // Continue when current selected enemy is dead
         currentEnemy++; // Increment currently selected enemy
@@ -78,16 +78,10 @@ public class TutorialManager : MonoBehaviour {
             UpdateArea(); // Skip this area
             return; // Abort method
         }
-        chargeButton.SetActive(true); // Activate charge button
         float mana = player.GetComponent<PlayerFeatures>().mana; // Players mana
         if (mana < 4) return; // Guard not enough mana
-        if (gameMode.gamemode == Gamemode.Interval){ UpdateArea(); // when player has gain mana
+        if (gameMode.gamemode == Gamemode.Interval) { UpdateArea(); // when player has gain mana
         } else { StartCoroutine(DelayUpdateArea(1f)); }
-    }
-
-    void CheckTutorialComplete() {
-        if (currentArea < 5) return; // Guard index less than end
-        Debug.Log("Tutorial done!");
     }
 
     // Update spawn point and tutorial text
@@ -96,6 +90,9 @@ public class TutorialManager : MonoBehaviour {
         Spawn(); // Spawn player at current spawn location
         UpdateUI(); // Update tutorial UI to current text
         currentArea++; // Increment area value
+
+        if (currentArea == 3 && gameMode.gamemode == Gamemode.Battery)
+        bciSlider.ShowChargeButton(true); // Activate charge button
     }
 
     IEnumerator DelayUpdateArea(float sec)
@@ -117,5 +114,18 @@ public class TutorialManager : MonoBehaviour {
         if (currentArea >= spawnPoints.Length) return; // Guard index error
         GameObject spawnPoint = spawnPoints[currentArea]; // Current spawn point
         player.transform.position = spawnPoint.transform.position; // Update position to spawn point
+    }
+
+    void CheckTutorialComplete() {
+        if (currentArea < 6) return; // Guard index less than end
+        if (checkComplete) return;
+        checkComplete = true;
+        Debug.Log("Tutorial done!");
+        Invoke("GoToNextScene", 2f);
+    }
+
+    void GoToNextScene() {
+        //Launch the new scene
+        SceneManager.LoadScene("Level 1");
     }
 }
