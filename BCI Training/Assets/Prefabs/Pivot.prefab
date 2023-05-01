@@ -318,17 +318,9 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 2921549617076482110, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 56.400024
-      objectReference: {fileID: 0}
     - target: {fileID: 2921549617659353154, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_TagString
       value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 2921549617659353155, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 111.70001
       objectReference: {fileID: 0}
     - target: {fileID: 3572016110656958577, guid: 61958b2c4b17f6443a524bcea6d4bf42, type: 3}
       propertyPath: m_Navigation.m_Mode
