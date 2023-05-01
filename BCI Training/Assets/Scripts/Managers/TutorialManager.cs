@@ -16,7 +16,7 @@ public class TutorialManager : MonoBehaviour {
         "Select red tile. Press 'Move' to confirm.",
         "Select enemy. Confirm to attack!",
         "No mana! Charge your mana!",
-        "Water tiles are unobstructed.",
+        "Grass and water are unobstructed.",
         "Other tiles are obstructed."
     };
 
