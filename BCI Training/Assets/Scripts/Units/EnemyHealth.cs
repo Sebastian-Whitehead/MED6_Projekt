@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour {
     public float maxHealth = 5;
     public float health;
     public Healthbar healthbar;
     Animator anim;
-
+    public Image LOS;
     public bool alive = true;
     
     // Start is called before the first frame update
@@ -39,5 +40,6 @@ public class EnemyHealth : MonoBehaviour {
         audioManager.PlayCategory("Death");
         anim = gameObject.GetComponent<Animator>();
         anim.SetTrigger("Death");
+        LOS.enabled = false;
     }
 }
