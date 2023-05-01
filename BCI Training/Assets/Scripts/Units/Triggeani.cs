@@ -65,12 +65,14 @@ public class Triggeani : MonoBehaviour
         }
 
         Vector3 velocity = player.velocity;
-        if(moving == true && velocity.x > 0.1){
+        if(moving == true && Mathf.Abs(velocity.x) > 0.1){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
+            Debug.Log(velocity.x);
             while (audioSource.isPlaying == false){
                 audioSource.PlayOneShot(move);}
-        } else if (moving == true && velocity.z > 0.1){
+        } else if (moving == true && Mathf.Abs(velocity.z) > 0.1){
             anim.SetFloat("Speed", Mathf.Abs(velocity.z));
+            Debug.Log(velocity.z);
             while (audioSource.isPlaying == false){
                 audioSource.PlayOneShot(move);}
         } else if (moving == false) {

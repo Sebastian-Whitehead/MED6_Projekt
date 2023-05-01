@@ -42,10 +42,10 @@ public class Goblinani : MonoBehaviour
         Vector3 velocity = tacticsmove.velocity;
         bool moving = tacticsmove.isMoving;
 
-        if(moving == true && velocity.x > 0.01){
+        if(moving == true && Mathf.Abs(velocity.x) > 0.01){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
            // print("bevæglse x");
-        } else if (moving == true && velocity.z > 0.01){
+        } else if (moving == true && Mathf.Abs(velocity.z) > 0.01){
                 anim.SetFloat("Speed", Mathf.Abs(velocity.z));
         } else if (moving == false) {
             anim.SetFloat("Speed", 0);

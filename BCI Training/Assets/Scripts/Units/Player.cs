@@ -63,7 +63,7 @@ public class Player : Unit {
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
-        Debug.Log(hit.collider.name);
+        //Debug.Log(hit.collider.name);
 
         if (hit.collider.name == "ConfirmBtn") return;
         if (hit.collider.name == "ChargeButton") return;
