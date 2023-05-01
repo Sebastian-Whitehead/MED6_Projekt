@@ -8,8 +8,10 @@ public class AudioManager : MonoBehaviour {
 
     public Vector2 PassiveInterval;
     public bool active = true;
+    private EnemyHealth enemyHealth;
 
     void Awake() {
+        enemyHealth = GetComponent<EnemyHealth>();
         audioSource = GetComponent<AudioSource>();
         AudioList[] audioLists = GetComponents<AudioList>();
         audioClipDict = new Dictionary<string, List<AudioClip>>();
@@ -25,7 +27,7 @@ public class AudioManager : MonoBehaviour {
         if (audioClipDict.ContainsKey("Passive")) {
             while (true) {
                 yield return new WaitForSeconds(waitTime);
-                if (!audioSource.isPlaying) PlayCategory("Passive");
+                if (!audioSource.isPlaying && enemyHealth.alive) PlayCategory("Passive");
             }
         }
     }
