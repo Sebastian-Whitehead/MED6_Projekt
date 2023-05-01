@@ -59,6 +59,12 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void LateUpdate() {
 
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
+        else if (hit.collider.name == "ConfirmBtn") return;
+        else if (hit.collider.name == "ChargeButton") return;
+
         if (execute || !active) return;
         if (!turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
@@ -72,9 +78,6 @@ public class Player : Unit {
         // attackTarget = null;
         // isMoving = false;
 
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
         SetMoveTarget(hit.collider); // Set tile to move to
         SetAttackTarget(hit.collider); // Set enemy to attack
         ActivateBtn(); // Activate confirm btn

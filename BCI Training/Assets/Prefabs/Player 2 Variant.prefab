@@ -75,13 +75,41 @@ PrefabInstance:
       propertyPath: projectileSpeed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1189997888722977614, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.423122
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189997888722977614, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.083666
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189997888722977614, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6.4231224
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475779377498029999, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 56.400024
+      objectReference: {fileID: 0}
     - target: {fileID: 2475779377647653307, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475779377686788876, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475779377686788878, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2475779377686788882, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2475779378534406098, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 111.70001
       objectReference: {fileID: 0}
     - target: {fileID: 2475779378700662625, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -142,6 +170,18 @@ PrefabInstance:
     - target: {fileID: 5436195879884906239, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_Name
       value: Player 2 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024121519113137399, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.0000019158633
+      objectReference: {fileID: 0}
+    - target: {fileID: 7024121519113137399, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.5714285
+      objectReference: {fileID: 0}
+    - target: {fileID: 8428649426338949341, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9062589693302716380, guid: 63e9f9abdae97d94e862b13d1e3f1b4e, type: 3}
       propertyPath: m_fontSize
