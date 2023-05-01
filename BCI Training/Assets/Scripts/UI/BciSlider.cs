@@ -10,13 +10,13 @@ using SharedDatastructures;
 
 public class BciSlider : MonoBehaviour
 {
-    public Image Highlight;
-    public Image SucessHighlight;
-    public Slider Slider;
-    public Image[] BCIAssembly;
+    private Image Highlight;
+    private Image SucessHighlight;
+    private Slider Slider;
+    private Image[] BCIAssembly;
 
-    public Button ChargeButton;
-    public Image[] ChargeButtonImg;
+    [NonSerialized] public Button ChargeButton;
+    [NonSerialized] public Image[] ChargeButtonImg;
 
     public float BciPromptDuration;
     private bool StartBciPrompt;
@@ -25,7 +25,7 @@ public class BciSlider : MonoBehaviour
     public float speed;
     public float promptSpeed;
     private float currentSpeed;
-    public Shake shaker;
+    [NonSerialized] public Shake shaker;
     
     private PlayerFeatures resources;
 
@@ -46,6 +46,15 @@ public class BciSlider : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Highlight = GameObject.Find("Bci Highlight").GetComponent<Image>();
+        SucessHighlight = GameObject.Find("Bci Highlight (sucess)").GetComponent<Image>();
+        BCIAssembly = GameObject.Find("BciBackground").GetComponentsInChildren<Image>();
+        Slider = GameObject.Find("Slider").GetComponent<Slider>();
+        ChargeButton = GameObject.Find("ChargeButton").GetComponent<Button>();
+        ChargeButtonImg = GameObject.Find("ChargeButton").GetComponentsInChildren<Image>();
+        if (Camera.main != null) shaker = Camera.main.GetComponent<Shake>();
+        
+        
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         resources = GetComponent<PlayerFeatures>();
         Slider.maxValue = 1;

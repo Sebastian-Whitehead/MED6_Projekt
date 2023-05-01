@@ -19,7 +19,7 @@ public class Player : Unit {
     public LayerMask PlayerLayer;
 
     private PlayerFeatures res; // Health and mana
-    public Button confirmBtn; // Execute action
+    [NonSerialized] public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
     public GameObject[] tiles;
 
@@ -27,14 +27,16 @@ public class Player : Unit {
     private LoggingManager _loggingManager;
     
     [NonSerialized] public Gamemode gamemode;
-    public BciSlider bciPrompt;
+    [NonSerialized] public BciSlider bciPrompt;
     Animator anim;
     private Shoot shoot;
     public int chargeCount;
     
     private TurnManager abcde; 
     
-    protected override void ChildAwake() {
+    protected override void ChildAwake()
+    {
+        confirmBtn = GameObject.Find("ConfirmBtn").GetComponent<Button>();
         confirmBtn.onClick.AddListener(ConfirmAction); // Confirm action btn
         conBtn = confirmBtn.GetComponent<ConfirmBtn>(); // Confirm script
         res = GetComponent<PlayerFeatures>(); // Get resources

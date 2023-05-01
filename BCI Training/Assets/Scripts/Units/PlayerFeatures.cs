@@ -7,8 +7,8 @@ using SharedDatastructures;
 
 public class PlayerFeatures : MonoBehaviour
 {
-    public Image[] manaPoints;
-    public Image[] healthPoints;
+    private Image[] manaPoints;
+    private Image[] healthPoints;
     public float health, maxHealth = 100;
     public float mana, maxMana = 10;
     public float manaCost = 2;
@@ -18,7 +18,7 @@ public class PlayerFeatures : MonoBehaviour
     public bool alive = true;
     
     [NonSerialized] public Gamemode gamemode;
-    public Image[] manaUI;
+    private Image[] manaUI;
     
     private LoggingManager _loggingManager;
     private int dmgTaken = 0;
@@ -35,13 +35,10 @@ public class PlayerFeatures : MonoBehaviour
             maxMana = mana = 99999;
             HideManaUI();
         }
-
-       /*
-        if (gamemode == Gamemode.Battery)
-        { 
-            mana = 0;
-        }
-        */
+        
+        manaPoints = GameObject.Find("Manapoints").GetComponentsInChildren<Image>();
+        healthPoints = GameObject.Find("FillerHearts").GetComponentsInChildren<Image>();
+        manaUI = GameObject.Find("Manabar").GetComponentsInChildren<Image>();
     }
 
     void Awake() {
