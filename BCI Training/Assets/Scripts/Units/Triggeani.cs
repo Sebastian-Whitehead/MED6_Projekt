@@ -44,13 +44,11 @@ public class Triggeani : MonoBehaviour
 
         
 
-        if (moving) {
+      /*  if (moving) {
             while (audioSource.isPlaying == false){
-            audioSource.PlayOneShot(move);
-            anim.SetTrigger("Move");
-        }
+            audioSource.PlayOneShot(move);}
 
-        }
+        }*/
 
 
         //_direction = new Vector3(0, 0, horizontalInput) * _speed;
@@ -67,9 +65,13 @@ public class Triggeani : MonoBehaviour
         }*/
         if(moving == true && velocity.x > 0.1){
             anim.SetFloat("Speed", Mathf.Abs(velocity.x));
-             } else if (moving == true && velocity.z > 0.1){
-                anim.SetFloat("Speed", Mathf.Abs(velocity.z));
-             } else if (moving == false) {
+            while (audioSource.isPlaying == false){
+                audioSource.PlayOneShot(move);}
+        } else if (moving == true && velocity.z > 0.1){
+            anim.SetFloat("Speed", Mathf.Abs(velocity.z));
+            while (audioSource.isPlaying == false){
+                audioSource.PlayOneShot(move);}
+        } else if (moving == false) {
             
             anim.SetFloat("Speed", 0);
         }

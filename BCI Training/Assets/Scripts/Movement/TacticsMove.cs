@@ -150,6 +150,7 @@ public class TacticsMove : MonoBehaviour {
                 Tile temp = path.Pop(); // remove that tile of the path, because we have reached it. 
                 //Eventually we have popped all the tiles and reached the goal.
                 isRotated = false;
+                velocity = Vector3.zero; 
 
                 if (path.Count > 0) {
                     steps--;
