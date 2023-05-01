@@ -64,10 +64,13 @@ public class Player : Unit {
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         if (state == State.Idle) ResetConfirmBtn();
+        if (!isMoving && attackTarget == null) ResetConfirmBtn();
 
         Dehighlight(); // Dehighlight all enemies
         RemoveTileHighlight();
         execute = false; // Action execution
+        // attackTarget = null;
+        // isMoving = false;
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

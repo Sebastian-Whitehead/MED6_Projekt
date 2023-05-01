@@ -13,7 +13,6 @@ public class PlayerFeatures : MonoBehaviour
     public float mana, maxMana = 10;
     public float manaCost = 2;
     public float fixedRegenPoints;
-
     private float lastHealth;
     private Shake shake;
     public bool alive = true;
@@ -136,7 +135,26 @@ public class PlayerFeatures : MonoBehaviour
     public bool ManaCheck() {
         bool manaCheck = manaCost <= mana;
         // Debug.Log("ManaCheck: " + manaCheck);
+        if (!manaCheck) StartCoroutine(Blink());
         return manaCheck;
+    }
+
+    private IEnumerator Blink() {   
+        Color originalColor = Color.white;
+        Color blinkColor = Color.red;
+        float blinkDuration = .2f;
+        float alpha = 0f;
+        
+        Image manabar = GameObject.Find("Manabar").GetComponent<Image>();
+        manabar.color = Color.red;
+
+        while (alpha > 0f) {
+            alpha -= Time.deltaTime / blinkDuration;
+            manabar.color = Color.Lerp(originalColor, blinkColor, alpha);
+            yield return null;
+        }
+
+        manabar.color = originalColor;
     }
 
     public void Alive(AudioManager audioManager) {
