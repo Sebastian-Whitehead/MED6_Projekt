@@ -63,7 +63,6 @@ public class Player : Unit {
         if (!turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
-        
         if (state == State.Idle) ResetConfirmBtn();
 
         Dehighlight(); // Dehighlight all enemies
@@ -118,9 +117,7 @@ public class Player : Unit {
             execute = true;
             conBtn.DisableImage(); // Deactivate confirm btn
         }
-    
-      
-        
+        state = State.Idle;
     }
 
     IEnumerator WaitForBci()
@@ -190,6 +187,7 @@ public class Player : Unit {
     void SetAttackTarget(Collider collider) {
         attackTarget = null; // Reset attack target
         if (collider.tag != targetTag) return;
+        if (gamemode == Gamemode.Battery && !res.ManaCheck()) return; // Guard no mana
         targetLocation = collider.transform.position; // Set target to enemy location
         transform.LookAt(targetLocation, Vector3.up);
         state = State.Attack; // Attack state player
