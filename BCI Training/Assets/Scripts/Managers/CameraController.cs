@@ -1,23 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class CameraController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform target;
+    private Vector3 offset;
+
+    private void Start()
     {
-        
+        offset = new Vector3(transform.position.x - target.position.x, 0, transform.position.z - target.position.z);
+        print(offset.x + "//" + offset.z);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Reset rotation
-        Quaternion currentRotation = transform.rotation;
-        //currentRotation.x = 0;
-        currentRotation.y = 0;
-        //currentRotation.z = 0;
-        transform.rotation = currentRotation;
+        transform.position = new Vector3(target.position.x + offset.x, transform.position.y + offset.y, target.position.z + offset.z); 
     }
 }
