@@ -19,6 +19,7 @@ public class TacticsMove : MonoBehaviour {
     Vector3 direction = new Vector3(); //heading
     GameObject target;
     public Tile AStarTargetTile;
+    private bool isRotated = false;
     public float turnSpeed = 1f;
 
     protected void Init(){
@@ -93,7 +94,6 @@ public class TacticsMove : MonoBehaviour {
         }
     }
 
-    public bool isRotated = false;
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
         // Debug.Log(name + " moving");

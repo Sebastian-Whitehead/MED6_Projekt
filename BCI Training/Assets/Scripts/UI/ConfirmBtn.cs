@@ -10,11 +10,15 @@ public class ConfirmBtn : MonoBehaviour {
     private Image image; // Image component
     private TMPro.TextMeshProUGUI text; // Text component
     private Button btn;
+    private BoxCollider confirmCol;
 
     void Awake() {
         btn = GetComponent<Button>();
         image = GameObject.Find("ConfirmSprite").GetComponent<Image>(); // Button image component
         text = GetComponentInChildren<TMPro.TextMeshProUGUI>(); // Button image component
+        confirmCol = GetComponent<BoxCollider>();
+
+        // Update
         DisableImage();
         FormatSprites(); // Format sprites from list to dict
     }
@@ -28,6 +32,7 @@ public class ConfirmBtn : MonoBehaviour {
 
     // Update sprite from given name in dict
     public void UpdateSprite(string spriteName) {
+        confirmCol.enabled = true;
         image.sprite = confirmBtnSprites[spriteName];
         image.enabled = true;
         text.SetText(spriteName);
@@ -35,6 +40,7 @@ public class ConfirmBtn : MonoBehaviour {
     }
 
     public void DisableImage() {
+        confirmCol.enabled = false;
         image.enabled = false;
         text.SetText("");
         btn.interactable = false;

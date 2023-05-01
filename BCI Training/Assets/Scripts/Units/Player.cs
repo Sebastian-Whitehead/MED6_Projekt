@@ -31,8 +31,7 @@ public class Player : Unit {
     Animator anim;
     private Shoot shoot;
     public int chargeCount;
-    
-    private TurnManager abcde; 
+    private TurnManager turnManager; 
     
     protected override void ChildAwake()
     {
@@ -43,7 +42,7 @@ public class Player : Unit {
         bciPrompt = GetComponent<BciSlider>();
         shoot = GetComponent<Shoot>();
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
-        abcde = GameObject.Find("GameManager").GetComponent<TurnManager>();
+        turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
     }
 
     protected override void ChildUpdate() {
@@ -52,8 +51,6 @@ public class Player : Unit {
         if (state == State.Charge) res.RegenMana();
     }
         
-    
-
     protected override void UnitGone() {}
     public override void DecisionTree() {}
 
@@ -69,7 +66,7 @@ public class Player : Unit {
         if (hit.collider.name == "ChargeButton") return;
 
         if (execute || !active) return;
-        if (!turnManager.playerTurn) return; // Turn check
+        if (!base.turnManager.playerTurn) return; // Turn check
         if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         if (state == State.Idle) ResetConfirmBtn();
@@ -83,7 +80,7 @@ public class Player : Unit {
 
         SetMoveTarget(hit.collider); // Set tile to move to
         SetAttackTarget(hit.collider); // Set enemy to attack
-        ActivateBtn(); // Activate confirm btn
+        Invoke("ActivateBtn", 0.1f); // Activate confirm btn
     }
 
     // Activate confirm button
@@ -173,7 +170,7 @@ public class Player : Unit {
         //anim.SetTrigger("Shoot");
         
         Deactivate();
-        abcde.EndTurn();
+        turnManager.EndTurn();
 
         // Debug.Log("Confirm action");
         execute = true; // Execute action
