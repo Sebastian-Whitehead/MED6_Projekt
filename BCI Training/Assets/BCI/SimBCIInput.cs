@@ -191,7 +191,7 @@ public class SimBCIInput : MonoBehaviour
             } else {
                 correctConfPosition = 0;
             }
-        } else if ((Input.GetKey(KeyCode.C) || Input.GetMouseButton(3)) ) {
+        } else if ((Input.GetKeyUp(KeyCode.C) || Input.GetMouseButtonUp(3)) ) {
             Debug.Log("Clear");
             correctConfPosition = 0;
             consecThresholdIndex = 0;
