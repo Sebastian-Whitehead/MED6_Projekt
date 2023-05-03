@@ -13,7 +13,7 @@ public abstract class Unit : PlayerMove {
         Searching,
         Scouting,
         Investegating,
-        Attacked
+        Damaged
     };
     
     public Action action;                           // Current action
