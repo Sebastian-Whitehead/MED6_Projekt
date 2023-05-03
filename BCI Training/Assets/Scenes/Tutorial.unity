@@ -3436,13 +3436,13 @@ MonoBehaviour:
   - {fileID: 698662882}
   - {fileID: 1673689410}
   tutorialTexts:
-  - 'Select red tile.
+  - 'Select a red tile.
 
     Press ''Move'' to confirm.'
-  - 'Select enemy.
+  - 'Select the enemy.
 
     Confirm to attack!'
-  - 'No mana!
+  - 'No more mana!
 
     Charge your mana!'
   - 'Grass and water
