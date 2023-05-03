@@ -4,6 +4,7 @@ using UnityEngine;
 using SharedDatastructures;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DebugStuff;
 
 public class TutorialManager : MonoBehaviour {
 
@@ -41,6 +42,7 @@ public class TutorialManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        GoToLevel1();
         CheckTutorialComplete(); // Check if last area is complete
         
         CheckMovingArea1(); // Area 1, check player movement (turn end)
@@ -80,7 +82,7 @@ public class TutorialManager : MonoBehaviour {
 
     // Update spawn point and tutorial text
     void UpdateArea() {
-        print("Updating Area!");
+        // print("Updating Area!");
         Spawn(); // Spawn player at current spawn location
         UpdateUI(); // Update tutorial UI to current text
         currentArea++; // Increment area value
@@ -119,7 +121,11 @@ public class TutorialManager : MonoBehaviour {
     }
 
     void GoToNextScene() {
-        //Launch the new scene
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("Level 1"); // Launch the new scene
+    }
+
+    void GoToLevel1() {
+        if (!Input.GetKeyUp(KeyCode.F1)) return;
+        GoToNextScene();
     }
 }

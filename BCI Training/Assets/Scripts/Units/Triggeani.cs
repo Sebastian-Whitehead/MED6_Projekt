@@ -11,9 +11,9 @@ public class Triggeani : MonoBehaviour
     public AudioClip impact;
     public AudioClip death;
     AudioSource audioSource;
-    AudioSource hitSource;
-    bool isMoving = false;
-    public int life;
+    // AudioSource hitSource;
+    // bool isMoving = false;
+    // public int life;
     private Shoot shoot;
     private TacticsMove player;
     private PlayerFeatures playerfeatures;

@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 3429788255612120519, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: mana
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3457820386931253361, guid: 1e20fc7f72fc6c047815f71fe20e7c18, type: 3}
       propertyPath: m_Size.y

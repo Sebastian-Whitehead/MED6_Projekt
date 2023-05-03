@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SharedDatastructures;
 using Unity.VisualScripting;
+using DebugStuff;
 
 public class Player : Unit {
 
@@ -28,7 +29,7 @@ public class Player : Unit {
     [NonSerialized] public BciSlider bciPrompt;
     Animator anim;
     private Shoot shoot;
-    private TurnManager turnManager; 
+    private TurnManager NewturnManager; 
 
 
     [Header("Logging/status")]
@@ -45,7 +46,7 @@ public class Player : Unit {
         bciPrompt = GetComponent<BciSlider>();
         shoot = GetComponent<Shoot>();
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
-        turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
+        NewturnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
     }
 
     protected override void ChildUpdate() {
@@ -59,6 +60,8 @@ public class Player : Unit {
 
     // Check mouse click to move, attack
     void LateUpdate() {
+        ConsoleToGUI test = new ConsoleToGUI();
+        test.Log("Player", "player", LogType.LogEachRow);
 
         if (state == State.Idle) ResetConfirmBtn();
         else if (!isMoving && attackTarget == null) ResetConfirmBtn();
@@ -67,7 +70,7 @@ public class Player : Unit {
             return; // Guard BCI active
         }
 
-        if (!turnManager.playerTurn) return; // Turn check
+        if (!NewturnManager.playerTurn) return; // Turn check
         if (execute || !active) return;
         if (!isMoving) BFS(); // Breath search to moveable location
 
@@ -178,7 +181,7 @@ public class Player : Unit {
         anim.SetTrigger("Shoot");
         
         Deactivate();
-        turnManager.EndTurn();
+        NewturnManager.EndTurn();
 
         // Debug.Log("Confirm action");
         execute = true; // Execute action
