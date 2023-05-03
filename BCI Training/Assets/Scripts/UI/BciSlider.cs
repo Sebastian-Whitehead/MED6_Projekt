@@ -35,6 +35,7 @@ public class BciSlider : MonoBehaviour
     [NonSerialized] public bool complete;
     [NonSerialized] public bool success;
     [NonSerialized] public float currentInputValue;
+    [NonSerialized] public bool showable;
 
     private int completedReps = 0;
     private int targetReps = 0;
@@ -75,7 +76,8 @@ public class BciSlider : MonoBehaviour
     {
         if (!StartBciPrompt)
         {
-            ShowChargeButton(resources.maxMana !> resources.mana);
+            if(gamemode == Gamemode.Battery && showable && complete) 
+                ShowChargeButton(resources.maxMana !> resources.mana);
             return;
         }
         

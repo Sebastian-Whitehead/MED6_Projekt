@@ -35,7 +35,9 @@ public class TutorialManager : MonoBehaviour {
         bciSlider = player.GetComponent<BciSlider>();
     }
 
-    void Start() {
+    void Start()
+    {
+        bciSlider.showable = false;
         bciSlider.ShowChargeButton(false);
         UpdateArea(); // Update area to init
     }
@@ -88,7 +90,10 @@ public class TutorialManager : MonoBehaviour {
         currentArea++; // Increment area value
 
         if (currentArea == 3 && gameMode.gamemode == Gamemode.Battery)
-        bciSlider.ShowChargeButton(true); // Activate charge button
+        {
+            bciSlider.showable = true;
+            bciSlider.ShowChargeButton(true); // Activate charge button
+        }
     }
 
     IEnumerator DelayUpdateArea(float sec)
