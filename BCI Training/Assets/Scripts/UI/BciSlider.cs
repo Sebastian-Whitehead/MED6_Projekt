@@ -73,7 +73,11 @@ public class BciSlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!StartBciPrompt) return;
+        if (!StartBciPrompt)
+        {
+            ShowChargeButton(resources.maxMana !> resources.mana);
+            return;
+        }
         
         time -= Time.deltaTime * currentSpeed;
         Slider.value = 1 - (time / BciPromptDuration);
