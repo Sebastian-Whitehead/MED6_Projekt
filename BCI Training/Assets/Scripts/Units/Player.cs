@@ -57,17 +57,16 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void LateUpdate() {
 
+        if (!turnManager.playerTurn) return; // Turn check
+        if (execute || !active) return;
+        if (!isMoving) BFS(); // Breath search to moveable location
+
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
-        //Debug.Log(hit.collider.name);
-
         if (hit.collider.name == "ConfirmBtn") return;
         if (hit.collider.name == "ChargeButton") return;
 
-        if (execute || !active) return;
-        if (!base.turnManager.playerTurn) return; // Turn check
-        if (!isMoving) BFS(); // Breath search to moveable location
         if (!Input.GetMouseButtonDown(0)) return; // Click check
         if (state == State.Idle) ResetConfirmBtn();
         if (!isMoving && attackTarget == null) ResetConfirmBtn();
