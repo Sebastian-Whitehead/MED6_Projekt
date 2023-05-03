@@ -6,6 +6,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     private LoggingManager _loggingManager;
+    private int PlayerTurnCount = 0;
 
     public bool playerTurn = true;
     public bool collectiveTurn = false;
@@ -31,10 +32,11 @@ public class TurnManager : MonoBehaviour
 
     private void PlayerTurn() {
         if (!playerTurn) return;
-
         if (!player.Active() && !player.isMoving && wait && player.execute && waiting == true) {
             player.ResetPlayer();
             EndTurn();
+            PlayerTurnCount += 1;
+            _loggingManager.Log("Log", "Nr of Turns", PlayerTurnCount);
             return;
         }
         if (!wait) player.Activate();
