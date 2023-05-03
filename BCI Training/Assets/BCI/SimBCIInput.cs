@@ -167,7 +167,7 @@ public class SimBCIInput : MonoBehaviour
             return;
         }
         timer += Time.deltaTime;
-        if (Input.GetKey(KeyCode.V) && timer > waitTime)
+        if ((Input.GetKey(KeyCode.V) || Input.GetMouseButton(4)) && timer > waitTime)
         {
             timer = 0f;
             confidence = float.Parse(confArray[confPosition], System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
@@ -177,12 +177,12 @@ public class SimBCIInput : MonoBehaviour
             } else {
                 confPosition = 0;
             }
-        } else if (Input.GetKeyUp(KeyCode.V)) {
+        } else if (Input.GetKeyUp(KeyCode.V) || Input.GetMouseButtonUp(4)) {
             confPosition = UnityEngine.Random.Range(0,maxConfPosition);
             consecThresholdIndex = 0;
             Array.Clear(consecThresholdBuffer, 0, consecThresholdBuffer.Length);
             classification = MotorImageryEvent.Rest;
-        } else if (Input.GetKey(KeyCode.C) && timer > waitTime) {
+        } else if ((Input.GetKey(KeyCode.C) || Input.GetMouseButton(3)) && timer > waitTime) {
             timer = 0f;
             confidence = float.Parse(correctConfArray[correctConfPosition], System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
             Debug.Log(correctConfArray[correctConfPosition]);
@@ -191,7 +191,7 @@ public class SimBCIInput : MonoBehaviour
             } else {
                 correctConfPosition = 0;
             }
-        } else if (Input.GetKeyUp(KeyCode.C)) {
+        } else if ((Input.GetKey(KeyCode.C) || Input.GetMouseButton(3)) ) {
             Debug.Log("Clear");
             correctConfPosition = 0;
             consecThresholdIndex = 0;
