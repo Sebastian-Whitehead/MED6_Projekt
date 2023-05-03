@@ -4131,6 +4131,7 @@ GameObject:
   - component: {fileID: 1595443638992629172}
   - component: {fileID: 283030534513049243}
   - component: {fileID: 3572016110656958577}
+  - component: {fileID: 5730836394241593930}
   m_Layer: 5
   m_Name: ChargeButton
   m_TagString: Untagged
@@ -4241,6 +4242,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!65 &5730836394241593930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3178531509497343165}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 30, y: 30, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3308184827988461578
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,7 +19,7 @@ public class BciSlider : MonoBehaviour
     [NonSerialized] public Image[] ChargeButtonImg;
 
     public float BciPromptDuration;
-    private bool StartBciPrompt;
+    [NonSerialized] public bool StartBciPrompt;
     
     private float time;
     public float speed;
@@ -28,6 +28,8 @@ public class BciSlider : MonoBehaviour
     [NonSerialized] public Shake shaker;
     
     private PlayerFeatures resources;
+    private Player player;
+    private TurnManager turnManager;
 
     [NonSerialized] public Gamemode gamemode;
     [NonSerialized] public bool complete;
@@ -56,6 +58,8 @@ public class BciSlider : MonoBehaviour
         
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         resources = GetComponent<PlayerFeatures>();
+        player = GameObject.Find("Player").GetComponent<Player>();
+        turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         Slider.maxValue = 1;
 
         if (gamemode == Gamemode.Interval)
@@ -203,7 +207,6 @@ public class BciSlider : MonoBehaviour
         else
         {
             SucceseComplete();
-            
         }
         
     }
@@ -212,6 +215,10 @@ public class BciSlider : MonoBehaviour
     {
         complete = true;
         ShowAndHideBci(false);
+        if (gamemode == Gamemode.Battery) {
+            player.ResetPlayer();
+            turnManager.EndTurn();
+        }
     }
 
     

@@ -9,7 +9,7 @@ public class ConfirmBtn : MonoBehaviour {
     private Dictionary<string, Sprite> confirmBtnSprites; // Name : sprite dict
     private Image image; // Image component
     private TMPro.TextMeshProUGUI text; // Text component
-    private Button btn;
+    public Button btn;
     private BoxCollider confirmCol;
 
     void Awake() {

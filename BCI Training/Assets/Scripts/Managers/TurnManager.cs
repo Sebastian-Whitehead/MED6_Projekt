@@ -35,19 +35,10 @@ public class TurnManager : MonoBehaviour
         if (!player.Active() && !player.isMoving && wait && player.execute && waiting == true) {
             player.ResetPlayer();
             EndTurn();
-            //StartCoroutine(waiter());
             return;
         }
         if (!wait) player.Activate();
     }
-
-   /* IEnumerator waiter()
-    {
-    
-    //Wait for 4 seconds
-    yield return new WaitForSeconds(1f);
-    EndTurn();
-    }*/
 
     private void EnemiesCollectiveTurn() {
         if (playerTurn) return;
@@ -71,14 +62,17 @@ public class TurnManager : MonoBehaviour
             }
             return;
         }
-        if (!wait) enemy.Activate();
+        if (!wait) {
+            if (!enemy.GetComponent<EnemyHealth>().alive) {
+                enemyTurn++;
+            } else enemy.Activate();
+        }
     }
 
     // ---------------------------------------------------------------------
 
     public void EndTurn() {
         // Debug.Log("End turn");
-        // TODO: Wait for seconds
 
         playerTurn = !playerTurn;
         wait = false;

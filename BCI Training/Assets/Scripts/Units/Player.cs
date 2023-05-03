@@ -17,21 +17,24 @@ public class Player : Unit {
         Charge
     }
     public LayerMask PlayerLayer;
-
     private PlayerFeatures res; // Health and mana
     [NonSerialized] public Button confirmBtn; // Execute action
     private ConfirmBtn conBtn; // Confirm button script
-    public GameObject[] tiles;
-
-    public int attack_count = 0;
-    private LoggingManager _loggingManager;
+    [NonSerialized] public GameObject[] tiles;
     
+    
+    [Header("Managers")] 
     [NonSerialized] public Gamemode gamemode;
     [NonSerialized] public BciSlider bciPrompt;
     Animator anim;
     private Shoot shoot;
-    public int chargeCount;
     private TurnManager turnManager; 
+
+
+    [Header("Logging/status")]
+    private LoggingManager _loggingManager;
+    public int attack_count = 0;
+    public int chargeCount;
     
     protected override void ChildAwake()
     {
@@ -57,21 +60,25 @@ public class Player : Unit {
     // Check mouse click to move, attack
     void LateUpdate() {
 
+        if (state == State.Idle) ResetConfirmBtn();
+        else if (!isMoving && attackTarget == null) ResetConfirmBtn();
+        if (bciPrompt.StartBciPrompt) {
+            ResetPlayer();
+            return; // Guard BCI active
+        }
+
         if (!turnManager.playerTurn) return; // Turn check
         if (execute || !active) return;
         if (!isMoving) BFS(); // Breath search to moveable location
 
+        if (!Input.GetMouseButtonDown(0)) return; // Click check
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(ray, out hit, Mathf.Infinity, ~PlayerLayer)) return;
         if (hit.collider.name == "ConfirmBtn") return;
         if (hit.collider.name == "ChargeButton") return;
 
-        if (!Input.GetMouseButtonDown(0)) return; // Click check
-        if (state == State.Idle) ResetConfirmBtn();
-        if (!isMoving && attackTarget == null) ResetConfirmBtn();
-
-        Dehighlight(); // Dehighlight all enemies
+        DehighlightEnemies(); // Dehighlight all enemies
         RemoveTileHighlight();
         execute = false; // Action execution
         // attackTarget = null; // Reset attacking (Can't execute atm)
@@ -90,6 +97,7 @@ public class Player : Unit {
     }
 
     void ResetConfirmBtn() {
+        if (!conBtn.btn.IsInteractable()) return;
         conBtn.DisableImage();
     }
 
@@ -123,7 +131,7 @@ public class Player : Unit {
             conBtn.DisableImage(); // Deactivate confirm btn
         }
         state = State.Idle;
-        Dehighlight(); // Dehighlight all enemies
+        DehighlightEnemies(); // Dehighlight all enemies
     }
 
     IEnumerator WaitForBci()
@@ -213,7 +221,7 @@ public class Player : Unit {
         target.GetComponent<Highlight>().selected = true;
     }
 
-    void Dehighlight() {
+    void DehighlightEnemies() {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemies) {
             enemy.GetComponent<Highlight>().selected = false;
@@ -266,6 +274,7 @@ public class Player : Unit {
     }
 
     private void RemoveTileHighlight() {
+        // Debug.Log("RemoveTileHighlight");
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
         foreach(var obj in tiles)
         {
