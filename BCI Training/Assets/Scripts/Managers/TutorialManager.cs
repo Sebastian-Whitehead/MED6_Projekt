@@ -14,13 +14,7 @@ public class TutorialManager : MonoBehaviour {
     private EnemyHealth[] enemies;
     public GameObject[] spawnPoints;
     private TMPro.TextMeshProUGUI tutorialUI; // Text component
-    private string[] tutorialTexts = {
-        "Select red tile. Press 'Move' to confirm.",
-        "Select enemy. Confirm to attack!",
-        "No mana! Charge your mana!",
-        "Grass and water are unobstructed.",
-        "Other tiles are obstructed."
-    };
+    [TextArea] public string[] tutorialTexts;
 
     [Header("Gameplay manipulation")]
     private GameObject player;
