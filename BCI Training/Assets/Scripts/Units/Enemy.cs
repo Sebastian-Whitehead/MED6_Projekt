@@ -116,9 +116,6 @@ public class Enemy : Unit {
             case Action.Patroling:
                 Patrole();
                 break;
-            case Action.Attacking:
-                Investegate(targetLocation);
-                break;
             case Action.Idle:
                 Idle();
                 return;

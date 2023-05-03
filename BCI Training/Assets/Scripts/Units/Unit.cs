@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Unit : PlayerMove {
-
     
     // Possible actions
     public enum Action {
