@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -44,6 +45,9 @@ public abstract class Unit : PlayerMove {
     public bool hasSpotted = false;                 // Unit has spotted their target (Maybe no used)
     public bool hasAttacked = false;                // Has attacked this turn
     protected TurnManager turnManager;              // Turn manager
+    
+    protected TextMeshProUGUI alertTxt;
+    protected TextMeshProUGUI searchTxt;
 
     // ---------------------------------------------------------------------
 
@@ -59,6 +63,12 @@ public abstract class Unit : PlayerMove {
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         audioManager = GetComponent<AudioManager>();
         attackTarget = null; // Null set attack target
+        if (CompareTag("Enemy"))
+        {
+            alertTxt = GameObject.Find(name + "/Enemy Billboard/AlertTxt").GetComponent<TextMeshProUGUI>();
+            searchTxt = GameObject.Find(name + "/Enemy Billboard/SearchTxt").GetComponent<TextMeshProUGUI>();
+            alertTxt.enabled = searchTxt.enabled = false;
+        }
         ChildAwake(); // Sub-class method call
     }
 
@@ -107,6 +117,7 @@ public abstract class Unit : PlayerMove {
         action = Action.Attacking;
         hasSpotted = true;
         audioManager.PlayCategory("SpotPlayer");
+        alertTxt.enabled = true;
         targetLocation = attackTarget.transform.position;
         
         FindPlayer();

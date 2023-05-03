@@ -205,6 +205,7 @@ public class Enemy : Unit {
         if (dist <= 0.5f) nextPathPoint();
         targetLocation = patrolPoints[patrolPoint];
         action = Action.Patroling;
+        searchTxt.enabled = false;
     }
 
     protected void nextPathPoint() {
@@ -230,7 +231,8 @@ public class Enemy : Unit {
         // Debug.Log(name + " search");
         action = Action.Searching;
         targetLocation = RandomNavmeshLocation(moveRange);
-        
+        alertTxt.enabled = false;
+        searchTxt.enabled = true;
         //MoveTo(nextTile);
     }
 
