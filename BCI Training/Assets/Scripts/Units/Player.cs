@@ -54,7 +54,6 @@ public class Player : Unit {
         if (state == State.Charge) res.RegenMana();
     }
         
-    protected override void UnitGone() {}
     public override void DecisionTree() {}
 
     // Check mouse click to move, attack

@@ -2024,6 +2024,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
+      propertyPath: moveRange
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: attackRange
       value: 1.01
       objectReference: {fileID: 0}
@@ -5189,6 +5193,10 @@ PrefabInstance:
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: action
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
+      propertyPath: moveRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7187891034675729799, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14507,7 +14515,7 @@ PrefabInstance:
       objectReference: {fileID: 162030020}
     - target: {fileID: 8941893838152464325, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
       propertyPath: gamemode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afb1e044cb2f8b140aeaa03fe4febcc7, type: 3}
@@ -15777,6 +15785,10 @@ PrefabInstance:
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: action
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
+      propertyPath: moveRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7187891034675729799, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20747,6 +20759,10 @@ PrefabInstance:
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: action
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
+      propertyPath: moveRange
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7187891034675729799, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: m_LocalPosition.x

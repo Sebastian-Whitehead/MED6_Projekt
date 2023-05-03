@@ -46,7 +46,6 @@ public abstract class Unit : PlayerMove {
 
     // Abstrac methods
     public abstract void TakeDamage(Vector3 hitPosition, float damageTaken);
-    protected abstract void UnitGone(); // Target is gone after marked
     protected abstract void ChildAwake(); // Sub-class method of 'Awake'
     protected abstract void ChildUpdate(); // Sub-class method of 'Update'
     public abstract void DecisionTree(); // Enemy decision tree to pick action

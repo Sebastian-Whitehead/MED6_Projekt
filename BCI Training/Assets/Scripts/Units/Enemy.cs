@@ -123,16 +123,6 @@ public class Enemy : Unit {
                 Idle();
                 return;
         }
-        //bool inLocation = Vector3.Distance(targetLocation, transform.position) <= 0.01f;
-        //bool noTarget = targetLocation == null;
-        //if (inLocation || noTarget) Search();
-
-    }
-
-    protected override void UnitGone() {   
-        if (action == Action.Attacking) {
-            Investegate(targetLocation);
-        }
     }
 
     // ---------------------------------------------------------------------
