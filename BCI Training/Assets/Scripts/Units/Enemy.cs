@@ -11,7 +11,7 @@ public class Enemy : Unit {
     private bool clockwise = true;
     private EnemyHealth enemyHealth;
     Animator anim;
-    
+    private int skipTurnCounter = 0;
 
     // ---------------------------------------------------------------------
 
@@ -21,7 +21,7 @@ public class Enemy : Unit {
         enemyHealth.Damage(damageTaken);
         if (enemyHealth.health > 1)
         //audioManager.PlayCategory("TakeDamage");
-        action = Action.Attacked;
+        action = Action.Damaged;
         targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
         //anim.SetTrigger("Hit"); 
@@ -77,7 +77,7 @@ public class Enemy : Unit {
 
     public override void DecisionTree() {
         if (steps <= 0 || isMoving) return;
-        // Debug.Log(name + " decision tree");
+        Debug.Log(name + " decision tree " + action);
         AtLocation();
         if (action == Action.Idle) {
             Deactivate();
@@ -104,7 +104,10 @@ public class Enemy : Unit {
     private void AtLocation() {
         // Debug.Log(name + " action: " + action);
         switch (action) {
-            case Action.Attacked:
+            case Action.Damaged:
+                Investegate(targetLocation);
+                break;
+            case Action.Attacking:
                 Investegate(targetLocation);
                 break;
             case Action.Investegating:
@@ -218,7 +221,7 @@ public class Enemy : Unit {
     }
 
     private void Investegate(Vector3 position) {
-        // Debug.Log(name + " inv.");
+        Debug.Log(name + " inv.");
         action = Action.Investegating;
         targetLocation = position;
     }
