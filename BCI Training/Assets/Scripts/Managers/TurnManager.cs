@@ -54,6 +54,7 @@ public class TurnManager : MonoBehaviour
         if (playerTurn) return;
         if (collectiveTurn) return;
         
+        if (enemyTurn >= enemies.Length) return;
         Enemy enemy = enemies[enemyTurn];
         if (!enemy.Active() && !enemy.isMoving && wait) {
             wait = false;

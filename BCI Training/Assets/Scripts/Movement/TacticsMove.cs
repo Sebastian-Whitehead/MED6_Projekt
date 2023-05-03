@@ -86,6 +86,10 @@ public class TacticsMove : MonoBehaviour {
         path.Clear();
         isMoving = true;
         // Debug.Log(name);
+        if (tile == null) {
+            Debug.Log("No path found");
+            return;
+        }
         tile.targetTile = true;
         Tile endLocation = tile; //target tile end location
         while (endLocation != null) { //when end = null, then we are at the starting tile.

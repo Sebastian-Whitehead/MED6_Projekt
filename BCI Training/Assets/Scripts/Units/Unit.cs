@@ -125,22 +125,17 @@ public abstract class Unit : PlayerMove {
 
     // Attack target, if set and close enough
     private void AttackTarget() {
-        // if (tag == "Player") Debug.Log(hasAttacked + ", " + attackTarget + ", " + AttackCheck());
-        if (hasAttacked) {
-            //if (tag == "Player") Debug.Log(name + " has attacked");
-            return;
-        }
-        if (attackTarget == null) {
-            //if (tag == "Player") Debug.Log(name + " attack target null");
-            return; // Break at null attack target
-        }
+        if (hasAttacked) return; // Guard already attacked
+        if (attackTarget == null) return; // Break at null attack target
+        if (!active) return; // Guard activity
         if (!AttackCheck()) return; // Break attack not possible
         Debug.Log(name + " attacking " + attackTarget.name);
         if (CompareTag("Enemy")) attackTarget.TakeDamage(transform.position, damage); // Target takes damage
+        transform.LookAt(attackTarget.transform.position, Vector3.up);
         audioManager.PlayCategory("Attack"); // Play attack sound effect
         hasAttacked = true;
         
-        Deactivate(); // Deactivate unit
+        //Deactivate(); // Deactivate unit
     }
 
     // ---------------------------------------------------------------------
@@ -161,6 +156,7 @@ public abstract class Unit : PlayerMove {
         active = false; // Disable activity
         isMoving = false; // Disable moving
         steps = 0; // Remove all steps
+        attackTarget = null;
     }
 
     // Return activity
