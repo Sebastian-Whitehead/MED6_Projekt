@@ -35,6 +35,7 @@ public class Player : Unit {
     private LoggingManager _loggingManager;
     public int attack_count = 0;
     public int chargeCount;
+    [NonSerialized] public bool moveAllowed = true; // Prevent Movement after tutorial stage complete Otherwise does nothing
     
     protected override void ChildAwake()
     {
@@ -192,7 +193,7 @@ public class Player : Unit {
         // Debug.Log("Move target: " + collider.name);
         state = State.Move; // Update state to move
         Tile t = collider.GetComponent<Tile>(); // Get tile script
-        if (t.selectable) MoveTo(t); // Move to selectable
+        if (t.selectable && moveAllowed) MoveTo(t); // Move to selectable
         else ResetPlayer(); // Reset when not selectable
     }
 

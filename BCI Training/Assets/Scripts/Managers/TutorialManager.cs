@@ -98,11 +98,14 @@ public class TutorialManager : MonoBehaviour {
     IEnumerator DelayUpdateArea(float sec)
     {
         if (checkComplete) yield break;
+        Player playerComp = player.GetComponent<Player>();
+        playerComp.moveAllowed = false;
         checkComplete = true;
         yield return new WaitForSeconds(sec);
         print("Delay!");
         UpdateArea();
         checkComplete = false;
+        playerComp.moveAllowed = true;
     }
 
     void UpdateUI() {
