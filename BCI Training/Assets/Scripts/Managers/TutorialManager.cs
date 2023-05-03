@@ -4,7 +4,6 @@ using UnityEngine;
 using SharedDatastructures;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using DebugStuff;
 
 public class TutorialManager : MonoBehaviour {
 

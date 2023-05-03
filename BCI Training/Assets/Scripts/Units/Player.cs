@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using SharedDatastructures;
 using Unity.VisualScripting;
-using DebugStuff;
 
 public class Player : Unit {
 
@@ -60,8 +59,6 @@ public class Player : Unit {
 
     // Check mouse click to move, attack
     void LateUpdate() {
-        ConsoleToGUI test = new ConsoleToGUI();
-        test.Log("Player", "player", LogType.LogEachRow);
 
         if (state == State.Idle) ResetConfirmBtn();
         else if (!isMoving && attackTarget == null) ResetConfirmBtn();

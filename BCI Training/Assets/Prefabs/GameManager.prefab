@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5412453237133595244}
   - component: {fileID: 5412453237133595245}
   - component: {fileID: 8941893838152464325}
+  - component: {fileID: 1856671098665508060}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTurn: 1
   collectiveTurn: 0
+  waiting: 0
 --- !u!114 &8941893838152464325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,5 +62,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gamemode: 1
-  bciSlider: {fileID: 0}
   player: {fileID: 0}
+--- !u!114 &1856671098665508060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5412453237133595250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b40a9fac69c8c64497a746d1114043b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
