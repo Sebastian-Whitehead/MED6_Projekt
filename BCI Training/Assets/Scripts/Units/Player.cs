@@ -162,12 +162,12 @@ public class Player : Unit {
     void AttackMiss()
     {
         
-        //TODO: Attack Miss Animation
         state = State.Idle;
         execute = true;
+
         // Kan bruges hvis hun stadig skal lave animationen uden at skyde.
-        //anim = gameObject.GetComponent<Animator>();
-        //anim.SetTrigger("Shoot");
+        anim = gameObject.GetComponent<Animator>();
+        anim.SetTrigger("Shoot");
         
         Deactivate();
         turnManager.EndTurn();
