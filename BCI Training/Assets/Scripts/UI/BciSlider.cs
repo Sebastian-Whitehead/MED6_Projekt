@@ -44,8 +44,13 @@ public class BciSlider : MonoBehaviour
     //Logging variables_____________
     private int nrOfBCI = 0;
     private LoggingManager _loggingManager;
-    
-    
+
+    private void Awake()
+    {
+        ChargeButton = GameObject.Find("ChargeButton").GetComponent<Button>();
+        ChargeButtonImg = GameObject.Find("ChargeButton").GetComponentsInChildren<Image>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,8 +58,6 @@ public class BciSlider : MonoBehaviour
         SucessHighlight = GameObject.Find("Bci Highlight (sucess)").GetComponent<Image>();
         BCIAssembly = GameObject.Find("BciBackground").GetComponentsInChildren<Image>();
         Slider = GameObject.Find("Slider").GetComponent<Slider>();
-        ChargeButton = GameObject.Find("ChargeButton").GetComponent<Button>();
-        ChargeButtonImg = GameObject.Find("ChargeButton").GetComponentsInChildren<Image>();
         if (Camera.main != null) shaker = Camera.main.GetComponent<Shake>();
         
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
@@ -63,9 +66,12 @@ public class BciSlider : MonoBehaviour
         turnManager = GameObject.Find("GameManager").GetComponent<TurnManager>();
         Slider.maxValue = 1;
 
+        resources.mana = 0;
+        resources.maxMana = 10;
         if (gamemode == Gamemode.Interval)
         {
             ShowChargeButton(false);
+            resources.mana = resources.maxMana = 9999;
         }
 
         ShowAndHideBci(false);

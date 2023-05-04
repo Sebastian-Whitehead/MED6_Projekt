@@ -18,7 +18,7 @@ public class GameMode : MonoBehaviour
     
     
 
-    private void Start()
+    private void Awake()
     {
         bciSlider = player.GetComponent<BciSlider>();
         playerScript = player.GetComponent<Player>();

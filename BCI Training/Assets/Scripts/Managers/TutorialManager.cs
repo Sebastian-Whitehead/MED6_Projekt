@@ -37,8 +37,19 @@ public class TutorialManager : MonoBehaviour {
     void Start()
     {
         bciSlider.showable = false;
-        bciSlider.ShowChargeButton(false);
+        Invoke("delayStart", 1f);
         UpdateArea(); // Update area to init
+    }
+
+    void delayStart()
+    {
+        bciSlider.ShowChargeButton(false);
+        PlayerFeatures res = player.GetComponent<PlayerFeatures>();
+        if (gameMode.gamemode == Gamemode.Battery)
+        {
+            res.mana = 4;
+            res.maxMana = 10;
+        }
     }
 
     // Update is called once per frame
