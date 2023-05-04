@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,16 @@ public class EnemyHealth : MonoBehaviour {
     public Image LOS;
     public bool alive = true;
     
+    private TextMeshProUGUI alertTxt;
+    private TextMeshProUGUI searchTxt;
+    
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        alertTxt = GameObject.Find(name + "/Enemy Billboard/AlertTxt").GetComponent<TextMeshProUGUI>();
+        searchTxt = GameObject.Find(name + "/Enemy Billboard/SearchTxt").GetComponent<TextMeshProUGUI>();
+        if (health == 0)
+            health = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
     }
 
@@ -40,6 +47,6 @@ public class EnemyHealth : MonoBehaviour {
         audioManager.PlayCategory("Death");
         anim = gameObject.GetComponent<Animator>();
         anim.SetTrigger("Death");
-        LOS.enabled = false;
+        LOS.enabled = alertTxt.enabled = searchTxt.enabled = false;
     }
 }

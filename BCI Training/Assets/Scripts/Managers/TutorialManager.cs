@@ -47,7 +47,7 @@ public class TutorialManager : MonoBehaviour {
         PlayerFeatures res = player.GetComponent<PlayerFeatures>();
         if (gameMode.gamemode == Gamemode.Battery)
         {
-            res.mana = 4;
+            res.mana = 2;
             res.maxMana = 10;
         }
     }

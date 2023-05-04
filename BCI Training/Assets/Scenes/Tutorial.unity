@@ -305,7 +305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3775190260574412572, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3775190260574412572, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
       propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -317,7 +317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3775190260574412573, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3775190260574412573, guid: c941a1a16ad63934b91509931ad2cace, type: 3}
       propertyPath: onBCIMotorImagery.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3629,6 +3629,10 @@ PrefabInstance:
     - target: {fileID: 3588170370249781515, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3962859063078678664, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
+      propertyPath: health
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3962859063078678664, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: m_Enabled
