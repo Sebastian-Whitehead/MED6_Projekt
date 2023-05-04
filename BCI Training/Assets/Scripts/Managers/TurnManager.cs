@@ -28,6 +28,13 @@ public class TurnManager : MonoBehaviour
         PlayerTurn();
         EnemiesCollectiveTurn();
         EnemiesSeparateTurn();
+        ForceEndInput();
+    }
+
+    private void ForceEndInput()
+    {
+        if (Input.GetKey(KeyCode.Mouse2) && !playerTurn)
+            EndTurn();
     }
 
     private void PlayerTurn() {
@@ -53,13 +60,18 @@ public class TurnManager : MonoBehaviour
     private void EnemiesSeparateTurn() {
         if (playerTurn) return;
         if (collectiveTurn) return;
+
+        if (enemyTurn >= enemies.Length)
+        {
+            EndTurn();
+            return;
+        }
         
-        if (enemyTurn >= enemies.Length) return;
+        //print(enemyTurn + " / " + enemies.Length);
         Enemy enemy = enemies[enemyTurn];
         if (!enemy.Active() && !enemy.isMoving && wait) {
             wait = false;
             if (++enemyTurn >= enemies.Length) {
-                enemyTurn = 0;
                 EndTurn();
                 return;
             }
@@ -76,7 +88,7 @@ public class TurnManager : MonoBehaviour
 
     public void EndTurn() {
         // Debug.Log("End turn");
-
+        enemyTurn = 0;
         playerTurn = !playerTurn;
         wait = false;
         waiting = false;
