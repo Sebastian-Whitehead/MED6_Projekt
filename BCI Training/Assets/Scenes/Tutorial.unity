@@ -3475,16 +3475,16 @@ MonoBehaviour:
     Press ''Move'' to confirm.'
   - 'Select the enemy.
 
-    Confirm to attack!'
+    Confirm to  throw a spell!'
   - 'No more mana!
 
     Charge your mana!'
   - 'Grass and water
 
-    are see through.'
+    does not block vision or spells.'
   - 'Other tiles
 
-    aren''t see through.'
+    does block vision or spells.'
 --- !u!4 &1500000733
 Transform:
   m_ObjectHideFlags: 0
