@@ -77,7 +77,7 @@ public class Enemy : Unit {
 
     public override void DecisionTree() {
         if (steps <= 0 || isMoving) return;
-        Debug.Log(name + " decision tree " + action);
+        // Debug.Log(name + " decision tree " + action);
         AtLocation();
         if (action == Action.Idle) {
             Deactivate();
