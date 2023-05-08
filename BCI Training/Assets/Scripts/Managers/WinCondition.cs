@@ -9,7 +9,9 @@ public class WinCondition : MonoBehaviour
 
     private EnemyHealth[] enemies;
     private Infographic infographic;
-    
+    private bool isComplete = false;
+    private bool completeLog = false;
+
     // Start is called before the first frame update
     void Awake() {
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
@@ -19,7 +21,8 @@ public class WinCondition : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        IsEnemiesDead(); // Check if last area is complete
+        isComplete = IsEnemiesDead(); // Check if last area is complete
+        if (isComplete && completeLog) _loggingManager.Log("Game", "Event", "Test Complete");
     }
 
     bool IsEnemiesDead() {
@@ -27,7 +30,7 @@ public class WinCondition : MonoBehaviour
             if (enemyHealth.alive) return false; // Continue when current selected enemy is dead
         }
         infographic.UpdateAndDisplay("Test Complete");
-        _loggingManager.Log("Game", "Event", "Test Complete");
+        
         return true;
     }
 

@@ -11,7 +11,12 @@ using SharedDatastructures;
 public class BciSlider : MonoBehaviour
 {
     private Image Highlight;
-    private Image SucessHighlight;
+    private Image SuccessHighlight;
+    private Image FailHighlight;
+
+    private TextMeshProUGUI successText;
+    private TextMeshProUGUI failText;
+    
     private Slider Slider;
     private Image[] BCIAssembly;
 
@@ -57,7 +62,11 @@ public class BciSlider : MonoBehaviour
     void Start()
     {
         Highlight = GameObject.Find("Bci Highlight").GetComponent<Image>();
-        SucessHighlight = GameObject.Find("Bci Highlight (sucess)").GetComponent<Image>();
+        SuccessHighlight = GameObject.Find("Bci Highlight (success)").GetComponent<Image>();
+        FailHighlight = GameObject.Find("Bci Highlight (Fail)").GetComponent<Image>();
+        failText = GameObject.Find("BCI Fail Text").GetComponent<TextMeshProUGUI>();
+        successText = GameObject.Find("BCI Success Text").GetComponent<TextMeshProUGUI>();
+        
         BCIAssembly = GameObject.Find("BciBackground").GetComponentsInChildren<Image>();
         Slider = GameObject.Find("Slider").GetComponent<Slider>();
         if (Camera.main != null) shaker = Camera.main.GetComponent<Shake>();
@@ -142,8 +151,8 @@ public class BciSlider : MonoBehaviour
     public void ResetBci()
     {
         Slider.value = Slider.minValue;
-        Highlight.enabled = false;
-        SucessHighlight.enabled = false;
+        Highlight.enabled = SuccessHighlight.enabled = FailHighlight.enabled = 
+            successText.enabled = failText.enabled = false;
         time = BciPromptDuration;
         currentSpeed = speed;
         StartBciPrompt = false;
@@ -202,7 +211,8 @@ public class BciSlider : MonoBehaviour
     
     public void Success()
     {
-        SucessHighlight.enabled = true;
+        SuccessHighlight.enabled = true;
+        successText.enabled = true;
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
         completedReps++;
@@ -240,8 +250,9 @@ public class BciSlider : MonoBehaviour
     public void Fail()
     {
         StartBciPrompt = false;
-        print("failure");
-        
+        //print("failure");
+        FailHighlight.enabled = true;
+        failText.enabled = true;
         shaker.ShakeOnce(0.25f);
         //completedReps++;
         
