@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMove : TacticsMove {
 
+    public LayerMask ignore;
+
     // Start is called before the first frame update
     void Start() {
         Init();
@@ -26,8 +28,12 @@ public class PlayerMove : TacticsMove {
             Debug.Log("Tile not found");
             return null;
         }
-        // Debug.Log(hit.collider.name);
-        // Debug.Log(hit.collider.transform.position);
+        if (hit.collider.tag != "Tile") {
+            Debug.Log("Not tile!");
+            Debug.Log(hit.collider.name);
+            Debug.Log(hit.collider.transform.position);
+            if (CompareTag("Enemy")) return null;
+        }
         hit.collider.GetComponent<Renderer>().material.color = Color.red;
         return hit.collider.GetComponent<Tile>();
     }

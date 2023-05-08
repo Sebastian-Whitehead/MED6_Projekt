@@ -93,6 +93,12 @@ public class Enemy : Unit {
         int tries = 2;
         while (tries-- > 0) {
             Tile nextTile = GetTileAtPosition(targetLocation);
+            Debug.Log("ADWWAD");
+            if (nextTile == null) {
+                Search();
+                break;
+            }
+
             AStarTargetTile = nextTile;
             // Debug.Log(name + " nextTile: " + nextTile);
             // Debug.Log("AStarTargetTile: " + AStarTargetTile);
