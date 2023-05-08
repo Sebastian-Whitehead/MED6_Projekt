@@ -337,58 +337,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 025ebe6693ed46d45a395fb8e0c56e99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manaPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  healthPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  health: 10
-  maxHealth: 10
+  health: 20
+  maxHealth: 20
   mana: 10
   maxMana: 10
   manaCost: 2
   fixedRegenPoints: 0
   alive: 1
-  manaUI:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &1999691976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +359,6 @@ MonoBehaviour:
   move: {fileID: 8300000, guid: 5e6e51faf13b7f54e9777a4f28ea8cdd, type: 3}
   impact: {fileID: 8300000, guid: b18b0adf648494f49a3f808ad1d89431, type: 3}
   death: {fileID: 8300000, guid: 63aacb8aac4334a4a9a8c64384421107, type: 3}
-  life: 10
 --- !u!114 &1999691981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,7 +394,6 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   AStarTargetTile: {fileID: 0}
   turnSpeed: 5
-  isRotated: 0
   action: 1
   attackRange: 100
   damage: 2
@@ -456,10 +409,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 8
-  confirmBtn: {fileID: 0}
-  tiles: []
   attack_count: 0
-  bciPrompt: {fileID: 0}
   chargeCount: 0
 --- !u!114 &4265660811415541313
 MonoBehaviour:
@@ -488,21 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d56ba6522a102b4db3c342f5ec79bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Highlight: {fileID: 0}
-  SucessHighlight: {fileID: 0}
-  Slider: {fileID: 0}
-  BCIAssembly:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  ChargeButton: {fileID: 0}
-  ChargeButtonImg:
-  - {fileID: 0}
-  - {fileID: 0}
   BciPromptDuration: 7
   speed: 1
   promptSpeed: 0.5
-  shaker: {fileID: 0}
