@@ -36,7 +36,6 @@ public class GameMode : MonoBehaviour
         {
             {"Gamemode", gamemode},
             {"Event", "Scene Start"},
-            // {"State", Enum.GetName(typeof(State), state)},
         });
 
     }
