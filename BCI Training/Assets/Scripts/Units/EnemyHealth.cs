@@ -20,6 +20,7 @@ public class EnemyHealth : MonoBehaviour {
     {
         alertTxt = GameObject.Find(name + "/Enemy Billboard/AlertTxt").GetComponent<TextMeshProUGUI>();
         searchTxt = GameObject.Find(name + "/Enemy Billboard/SearchTxt").GetComponent<TextMeshProUGUI>();
+
         if (health == 0)
             health = maxHealth;
         healthbar.SetMaxHealth(maxHealth);

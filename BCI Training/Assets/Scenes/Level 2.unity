@@ -10529,7 +10529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: action
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: moveRange
