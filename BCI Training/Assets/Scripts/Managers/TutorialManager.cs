@@ -144,12 +144,11 @@ public class TutorialManager : MonoBehaviour {
     void GoToNextScene()
     {
         _loggingManager.Log("Game", "Event", "End Tutorial");
-        SceneManager.LoadScene("Level 1"); // Launch the new scene
+        SceneManager.LoadScene("Level 2"); // Launch the new scene
     }
 
     void GoToLevel1() {
         if (!Input.GetKeyUp(KeyCode.F1)) return;
-        
         GoToNextScene();
     }
 }
