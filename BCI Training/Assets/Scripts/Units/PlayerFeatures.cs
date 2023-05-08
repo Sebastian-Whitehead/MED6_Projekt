@@ -22,7 +22,8 @@ public class PlayerFeatures : MonoBehaviour
     
     private LoggingManager _loggingManager;
     private int dmgTaken = 0;
-
+    private string eventStr;
+    
     void Start()
     {   
         // Get components
@@ -57,11 +58,8 @@ public class PlayerFeatures : MonoBehaviour
             shake.ShakeOnce(1f);
             lastHealth = health;
             dmgTaken++;
-            _loggingManager.Log("Log", "Take Damage", dmgTaken);
-
-        }else if (lastHealth < health)
-        {
-            lastHealth = health;
+            eventStr = "Player Hurt";
+            logPlayerData();
         }
 
         if (health > maxHealth)
@@ -111,12 +109,16 @@ public class PlayerFeatures : MonoBehaviour
 
     public void RegenMana(float regenPoints)
     {
+        eventStr = "RegenMana";
+        logPlayerData();
         if (mana >= maxMana) return;
         if (mana + regenPoints <= maxMana) mana += regenPoints;
         else mana = maxMana;
     }
 
     public void RegenMana(){
+        eventStr = "RegenMana";
+        logPlayerData();
         if (mana >= maxMana) return;
         mana += fixedRegenPoints;
     }
@@ -161,6 +163,7 @@ public class PlayerFeatures : MonoBehaviour
         if (health > 0) return;
         alive = false;
         audioManager.PlayCategory("Death");
+        _loggingManager.Log("Game", "Event", "PlayerDeath");
     }
 
     public void HideManaUI()
@@ -171,6 +174,17 @@ public class PlayerFeatures : MonoBehaviour
         }
     }
     
-    
+    private void logPlayerData()
+    {
+        _loggingManager.Log("Game", new Dictionary<string, object>()
+        {
+            {"Player Health", health},
+            {"Player Mana", mana},
+            {"Take Damage", dmgTaken},
+            {"Event", eventStr},
+            // {"State", Enum.GetName(typeof(State), state)},
+        });
+
+    }
     
 }

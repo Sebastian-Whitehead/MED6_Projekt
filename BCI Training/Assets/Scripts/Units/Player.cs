@@ -34,7 +34,7 @@ public class Player : Unit {
     [Header("Logging/status")]
     private LoggingManager _loggingManager;
     public int attack_count = 0;
-    public int chargeCount;
+    public string eventStr;
     [NonSerialized] public bool moveAllowed = true; // Prevent Movement after tutorial stage complete Otherwise does nothing
     
     protected override void ChildAwake()
@@ -121,6 +121,7 @@ public class Player : Unit {
                 conBtn.DisableImage();
                 res.Expend();
                 attack_count += 1;
+                eventStr = "Player Attacking";
                 logPlayerData();
             }
         }
@@ -151,6 +152,7 @@ public class Player : Unit {
                         if (state == State.Attack)
                         {
                             attack_count += 1;
+                            eventStr = "Player Attacking";
                             logPlayerData();
                            
                         }
@@ -193,7 +195,10 @@ public class Player : Unit {
         // Debug.Log("Move target: " + collider.name);
         state = State.Move; // Update state to move
         Tile t = collider.GetComponent<Tile>(); // Get tile script
-        if (t.selectable && moveAllowed) MoveTo(t); // Move to selectable
+        if (t.selectable && moveAllowed){
+            MoveTo(t); // Move to selectable
+            _loggingManager.Log("Game", "Event","Player Moving");
+        }
         else ResetPlayer(); // Reset when not selectable
     }
 
@@ -289,10 +294,10 @@ public class Player : Unit {
 
     private void logPlayerData()
     {
-        _loggingManager.Log("Log", new Dictionary<string, object>()
+        _loggingManager.Log("Game", new Dictionary<string, object>()
         {
             {"Attack", attack_count},
-           // {"Event", "Player Attack"},
+            {"Event", eventStr},
            // {"State", Enum.GetName(typeof(State), state)},
         });
 

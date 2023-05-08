@@ -24,7 +24,10 @@ public class TutorialManager : MonoBehaviour {
     private GameMode gameMode;
     private bool checkComplete = false;
 
+    private LoggingManager _loggingManager;
+
     void Awake() {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         tutorialUI = GameObject.Find("TutorialText").GetComponent<TMPro.TextMeshProUGUI>();
         GameObject gameManager = GameObject.Find("GameManager");
         turnManager = gameManager.GetComponent<TurnManager>();
@@ -138,12 +141,15 @@ public class TutorialManager : MonoBehaviour {
         Invoke("GoToNextScene", 2f);
     }
 
-    void GoToNextScene() {
+    void GoToNextScene()
+    {
+        _loggingManager.Log("Game", "Event", "End Tutorial");
         SceneManager.LoadScene("Level 1"); // Launch the new scene
     }
 
     void GoToLevel1() {
         if (!Input.GetKeyUp(KeyCode.F1)) return;
+        
         GoToNextScene();
     }
 }

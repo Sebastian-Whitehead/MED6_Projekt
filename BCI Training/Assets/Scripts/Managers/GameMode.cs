@@ -16,14 +16,28 @@ public class GameMode : MonoBehaviour
     private Player playerScript;
     private PlayerFeatures playerFeatures;
     
-    
+    private LoggingManager _loggingManager;
 
     private void Awake()
     {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         bciSlider = player.GetComponent<BciSlider>();
         playerScript = player.GetComponent<Player>();
         playerFeatures = player.GetComponent<PlayerFeatures>();
         
         bciSlider.gamemode = playerScript.gamemode = playerFeatures.gamemode = gamemode;
+        
+        logData();
+    }
+    
+    private void logData()
+    {
+        _loggingManager.Log("Game", new Dictionary<string, object>()
+        {
+            {"Gamemode", gamemode},
+            {"Event", "Scene Start"},
+            // {"State", Enum.GetName(typeof(State), state)},
+        });
+
     }
 }

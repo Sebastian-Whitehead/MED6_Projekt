@@ -15,9 +15,12 @@ public class EnemyHealth : MonoBehaviour {
     private TextMeshProUGUI alertTxt;
     private TextMeshProUGUI searchTxt;
     
+    private LoggingManager _loggingManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         alertTxt = GameObject.Find(name + "/Enemy Billboard/AlertTxt").GetComponent<TextMeshProUGUI>();
         searchTxt = GameObject.Find(name + "/Enemy Billboard/SearchTxt").GetComponent<TextMeshProUGUI>();
         if (health == 0)
@@ -49,5 +52,16 @@ public class EnemyHealth : MonoBehaviour {
         anim.SetTrigger("Death");
         LOS.enabled = alertTxt.enabled = searchTxt.enabled = false;
         GetComponent<BoxCollider>().enabled = GetComponent<CapsuleCollider>().enabled = false;
+        logPlayerData();
+    }
+    
+    private void logPlayerData()
+    {
+        _loggingManager.Log("Game", new Dictionary<string, object>()
+        {
+            {"GoblinName", this.name},
+            {"Event", "Goblin Death"},
+        });
+
     }
 }

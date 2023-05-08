@@ -7,6 +7,7 @@ public class TurnManager : MonoBehaviour
 {
     private LoggingManager _loggingManager;
     private int PlayerTurnCount = 0;
+    private string eventStr;
 
     public bool playerTurn = true;
     public bool collectiveTurn = false;
@@ -42,17 +43,27 @@ public class TurnManager : MonoBehaviour
         if (!player.Active() && !player.isMoving && wait && player.execute && waiting == true) {
             player.ResetPlayer();
             EndTurn();
-            PlayerTurnCount += 1;
-            _loggingManager.Log("Log", "Nr of Turns", PlayerTurnCount);
+            eventStr = "End Player Turn";
+            logData();
             return;
         }
-        if (!wait) player.Activate();
+
+        if (!wait)
+        {
+            PlayerTurnCount += 1;
+            eventStr = "Start Player Turn";
+            logData();
+            player.Activate();
+        }
     }
 
     private void EnemiesCollectiveTurn() {
         if (playerTurn) return;
         if (!collectiveTurn) return;
-        foreach (Enemy enemy in enemies) {
+        foreach (Enemy enemy in enemies)
+        {
+            eventStr = "Start Goblins Turn";
+            logData();
             enemy.Activate();
         }
     }
@@ -63,6 +74,7 @@ public class TurnManager : MonoBehaviour
 
         if (enemyTurn >= enemies.Length)
         {
+            _loggingManager.Log("Game", "Event", "End Goblin Turn");
             EndTurn();
             return;
         }
@@ -71,8 +83,10 @@ public class TurnManager : MonoBehaviour
         Enemy enemy = enemies[enemyTurn];
         if (!enemy.Active() && !enemy.isMoving && wait) {
             wait = false;
-            if (++enemyTurn >= enemies.Length) {
+            if (++enemyTurn >= enemies.Length)
+            {
                 EndTurn();
+                _loggingManager.Log("Game", "Event", "End Goblin Turn");
                 return;
             }
             return;
@@ -80,8 +94,27 @@ public class TurnManager : MonoBehaviour
         if (!wait) {
             if (!enemy.GetComponent<EnemyHealth>().alive) {
                 enemyTurn++;
-            } else enemy.Activate();
+            }
+            else
+            {
+                eventStr = "Start Goblin Turn";
+                logData();
+                enemy.Activate();
+            }
+            
         }
+    }
+    
+    private void logData()
+    {
+        _loggingManager.Log("Game", new Dictionary<string, object>()
+        {
+            {"Nr of Turns", PlayerTurnCount},
+            {"PlayerTurn", playerTurn},
+            {"Event", eventStr},
+            // {"State", Enum.GetName(typeof(State), state)},
+        });
+
     }
 
     // ---------------------------------------------------------------------
@@ -103,4 +136,6 @@ public class TurnManager : MonoBehaviour
         _loggingManager.SaveAllLogs(clear:true);
         _loggingManager.NewFilestamp();
     }
+    
+    
 }

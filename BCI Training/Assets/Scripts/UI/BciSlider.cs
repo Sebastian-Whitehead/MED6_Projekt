@@ -41,9 +41,11 @@ public class BciSlider : MonoBehaviour
     private int targetReps = 0;
     
     
+    
     //Logging variables_____________
     private int nrOfBCI = 0;
     private LoggingManager _loggingManager;
+    private string eventStr;
 
     private void Awake()
     {
@@ -207,6 +209,7 @@ public class BciSlider : MonoBehaviour
         resources.RegenMana(2);
         nrOfBCI++;
         success = true;
+        eventStr = "BciSuccess";
         logBCIData();
         //Maybe delay here
         if (gamemode == Gamemode.Battery)
@@ -245,6 +248,7 @@ public class BciSlider : MonoBehaviour
         print("failure");
         success = false;
         nrOfBCI++;
+        eventStr = "BciFail";
         logBCIData();
 
         if (completedReps >= targetReps || gamemode == Gamemode.Interval)
@@ -258,10 +262,10 @@ public class BciSlider : MonoBehaviour
     
     private void logBCIData()
     {
-        _loggingManager.Log("Log", new Dictionary<string, object>()
+        _loggingManager.Log("Game", new Dictionary<string, object>()
         {
             {"BCI attempt", nrOfBCI},
-          //  {"Event", "BCI Attempt"},
+            {"Event", eventStr},
             {"Success BCI", success}
             
         });
