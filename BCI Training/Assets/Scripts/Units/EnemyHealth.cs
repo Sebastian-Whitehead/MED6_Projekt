@@ -48,5 +48,6 @@ public class EnemyHealth : MonoBehaviour {
         anim = gameObject.GetComponent<Animator>();
         anim.SetTrigger("Death");
         LOS.enabled = alertTxt.enabled = searchTxt.enabled = false;
+        GetComponent<BoxCollider>().enabled = GetComponent<CapsuleCollider>().enabled = false;
     }
 }
