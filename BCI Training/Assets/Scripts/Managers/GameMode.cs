@@ -27,9 +27,14 @@ public class GameMode : MonoBehaviour
         
         bciSlider.gamemode = playerScript.gamemode = playerFeatures.gamemode = gamemode;
         
+        
+    }
+
+    private void Start()
+    {
         logData();
     }
-    
+
     private void logData()
     {
         _loggingManager.Log("Game", new Dictionary<string, object>()
