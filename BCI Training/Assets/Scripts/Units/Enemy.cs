@@ -89,16 +89,20 @@ public class Enemy : Unit {
             Debug.Log("position: " + transform.position);
             Debug.LogError("Going to self!");
         }
-        Tile nextTile = GetTileAtPosition(targetLocation);
-        AStarTargetTile = nextTile;
-        // Debug.Log(name + " nextTile: " + nextTile);
-        // Debug.Log("AStarTargetTile: " + AStarTargetTile);
-        bool pathFound = CalculatePath(nextTile);
+
+        int tries = 2;
+        while (tries-- > 0) {
+            Tile nextTile = GetTileAtPosition(targetLocation);
+            AStarTargetTile = nextTile;
+            // Debug.Log(name + " nextTile: " + nextTile);
+            // Debug.Log("AStarTargetTile: " + AStarTargetTile);
+            bool pathFound = CalculatePath(nextTile);
         
-        // If no path was found, go idle
-        if (!pathFound) {
-            action = Action.Idle;
+            // If no path was found, go idle
+            if (pathFound) return;
+            Search();
         }
+        action = Action.Idle;
     }
 
     private void AtLocation() {

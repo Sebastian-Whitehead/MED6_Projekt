@@ -118,6 +118,7 @@ public abstract class Unit : PlayerMove {
         hasSpotted = true;
         audioManager.PlayCategory("SpotPlayer");
         alertTxt.enabled = true;
+        searchTxt.enabled = false;
         targetLocation = attackTarget.transform.position;
         
         FindPlayer();
