@@ -3208,7 +3208,7 @@ GameObject:
   - component: {fileID: 2921549617655211601}
   - component: {fileID: 2921549617655211600}
   m_Layer: 5
-  m_Name: Bci Highlight (sucess)
+  m_Name: Bci Highlight (success)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

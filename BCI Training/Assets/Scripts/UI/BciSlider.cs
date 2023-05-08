@@ -11,7 +11,7 @@ using SharedDatastructures;
 public class BciSlider : MonoBehaviour
 {
     private Image Highlight;
-    private Image SucessHighlight;
+    private Image SuccessHighlight;
     private Image FailHighlight;
 
     private TextMeshProUGUI successText;
@@ -62,10 +62,10 @@ public class BciSlider : MonoBehaviour
     void Start()
     {
         Highlight = GameObject.Find("Bci Highlight").GetComponent<Image>();
-        SucessHighlight = GameObject.Find("Bci Highlight (sucess)").GetComponent<Image>();
+        SuccessHighlight = GameObject.Find("Bci Highlight (success)").GetComponent<Image>();
         FailHighlight = GameObject.Find("Bci Highlight (Fail)").GetComponent<Image>();
-        successText = GameObject.Find("BCI Fail Text").GetComponent<TextMeshProUGUI>();
-        failText = GameObject.Find("BCI Success Text").GetComponent<TextMeshProUGUI>();
+        failText = GameObject.Find("BCI Fail Text").GetComponent<TextMeshProUGUI>();
+        successText = GameObject.Find("BCI Success Text").GetComponent<TextMeshProUGUI>();
         
         BCIAssembly = GameObject.Find("BciBackground").GetComponentsInChildren<Image>();
         Slider = GameObject.Find("Slider").GetComponent<Slider>();
@@ -151,7 +151,7 @@ public class BciSlider : MonoBehaviour
     public void ResetBci()
     {
         Slider.value = Slider.minValue;
-        Highlight.enabled = SucessHighlight.enabled = FailHighlight.enabled = 
+        Highlight.enabled = SuccessHighlight.enabled = FailHighlight.enabled = 
             successText.enabled = failText.enabled = false;
         time = BciPromptDuration;
         currentSpeed = speed;
@@ -211,7 +211,7 @@ public class BciSlider : MonoBehaviour
     
     public void Success()
     {
-        SucessHighlight.enabled = true;
+        SuccessHighlight.enabled = true;
         successText.enabled = true;
         Slider.value = 1 - (time / BciPromptDuration);
         StartBciPrompt = false;
