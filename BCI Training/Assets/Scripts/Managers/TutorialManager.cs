@@ -116,7 +116,7 @@ public class TutorialManager : MonoBehaviour {
         playerComp.moveAllowed = false;
         checkComplete = true;
         yield return new WaitForSeconds(sec);
-        print("Delay!");
+        //print("Delay!");
         UpdateArea();
         checkComplete = false;
         playerComp.moveAllowed = true;

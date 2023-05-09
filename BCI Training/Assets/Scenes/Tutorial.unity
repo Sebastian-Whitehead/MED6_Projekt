@@ -3823,11 +3823,27 @@ PrefabInstance:
 '
       objectReference: {fileID: 0}
     - target: {fileID: 4669993893204370515, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669993893204370515, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669993893834967034, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
+      propertyPath: m_Value
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669993894231736969, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4669993894231736969, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669993894231736969, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4669993894346437258, guid: e4e0a66eb8e58934fba9c37a6791375f, type: 3}

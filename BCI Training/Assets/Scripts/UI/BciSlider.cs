@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class BciSlider : MonoBehaviour
 
     private TextMeshProUGUI successText;
     private TextMeshProUGUI failText;
-    
+
     private Slider Slider;
     private Image[] BCIAssembly;
 
@@ -25,13 +26,13 @@ public class BciSlider : MonoBehaviour
 
     public float BciPromptDuration;
     [NonSerialized] public bool StartBciPrompt;
-    
+
     private float time;
     public float speed;
     public float promptSpeed;
     private float currentSpeed;
     [NonSerialized] public Shake shaker;
-    
+
     private PlayerFeatures resources;
     private Player player;
     private TurnManager turnManager;
@@ -44,10 +45,18 @@ public class BciSlider : MonoBehaviour
 
     private int completedReps = 0;
     private int targetReps = 0;
-    
-    
-    
-    //Logging variables_____________
+
+    private readonly float[] successChanceLimits =  {0.65f, 0.85f};
+    private float successChance;
+    private bool willSucceed = false;
+    private bool timeChosen = false;
+    private bool forced = false;
+    private float startPoint;
+    private SimBCIInput simBciInput;
+    private bool pressState = false;
+
+
+//Logging variables_____________
     private int nrOfBCI = 0;
     private LoggingManager _loggingManager;
     private string eventStr;
@@ -62,6 +71,7 @@ public class BciSlider : MonoBehaviour
     void Start()
     {
         Highlight = GameObject.Find("Bci Highlight").GetComponent<Image>();
+        simBciInput = GameObject.Find("InputManager").GetComponent<SimBCIInput>();
         SuccessHighlight = GameObject.Find("Bci Highlight (success)").GetComponent<Image>();
         FailHighlight = GameObject.Find("Bci Highlight (Fail)").GetComponent<Image>();
         failText = GameObject.Find("BCI Fail Text").GetComponent<TextMeshProUGUI>();
@@ -86,6 +96,8 @@ public class BciSlider : MonoBehaviour
         }
 
         ShowAndHideBci(false);
+        successChance = Random.Range(successChanceLimits[0], successChanceLimits[1]);
+        print("successChance: " + successChance);
     }
 
     // Update is called once per frame
@@ -98,6 +110,24 @@ public class BciSlider : MonoBehaviour
             return;
         }
         
+        if (!timeChosen)
+        {
+            if (SuccessRoll()){
+                startPoint = Random.Range(0.2f, 0.78f);
+                print("Will succeed --> Start point: " + startPoint);
+                willSucceed = true;
+            }
+            timeChosen = true;
+        }
+        
+        print("dibs " + !forced + " " + willSucceed + " " + (Slider.value >= startPoint));
+        if (!forced && willSucceed && Slider.value >= startPoint)
+        {
+            ForceSuccess();
+            Invoke(nameof(ForceSuccess), 3.5f);
+            forced = true;
+        }
+        
         time -= Time.deltaTime * currentSpeed;
         Slider.value = 1 - (time / BciPromptDuration);
 
@@ -105,7 +135,9 @@ public class BciSlider : MonoBehaviour
         {
             Highlight.enabled = true;
             currentSpeed = promptSpeed;
-
+            
+            
+            
             if (Slider.value > 0.99)
             {
                 Fail();
@@ -119,6 +151,22 @@ public class BciSlider : MonoBehaviour
         {
             Success();
         }
+    }
+
+    private bool SuccessRoll()
+    {
+        float roll = Random.Range(0f, 1f);
+        print("roll: " + roll);
+        if (roll > successChance) return false;
+        return true;
+    }
+
+    private void ForceSuccess()
+    {
+        print( "// cPress: " + simBciInput.cPress);
+        //simBciInput.vPress = pressState;
+        simBciInput.cPress = !pressState;
+        pressState = !pressState;
     }
 
     public void ShowAndHideBci(bool show)
@@ -156,6 +204,10 @@ public class BciSlider : MonoBehaviour
         time = BciPromptDuration;
         currentSpeed = speed;
         StartBciPrompt = false;
+        
+        timeChosen = false;
+        willSucceed = false;
+        forced = false;
     }
 
     public void ChargeMana()
