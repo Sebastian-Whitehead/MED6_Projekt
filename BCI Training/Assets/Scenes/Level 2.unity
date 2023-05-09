@@ -27752,10 +27752,6 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
-      propertyPath: moveSpeed
-      value: 8.96
-      objectReference: {fileID: 0}
-    - target: {fileID: 5296794105716499567, guid: 0742f60f8c181504bb1c6bdb5f8ddc2c, type: 3}
       propertyPath: circlePatrole
       value: 1
       objectReference: {fileID: 0}

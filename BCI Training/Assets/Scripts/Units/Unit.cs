@@ -135,7 +135,7 @@ public abstract class Unit : PlayerMove {
         if (!active) return;                                            // Guard activity
         if (!AttackCheck()) return;                                     // Break attack not possible
 
-        Debug.Log(name + " attacking " + attackTarget.name);
+        // Debug.Log(name + " attacking " + attackTarget.name);
         if (CompareTag("Enemy")) attackTarget.TakeDamage(transform.position, damage); // Target takes damage
         transform.LookAt(attackTarget.transform.position, Vector3.up);
         audioManager.PlayCategory("Attack");                            // Play attack sound effect
