@@ -91,11 +91,11 @@ public abstract class Unit : PlayerMove {
     // Eyes to spot game objects matching with 'target tag'
     protected void Eyes() {
         
-        inc = Mathf.Max(2, inc); // Minimalize increments
+        inc = Mathf.Max(2, inc); // Minimize increments
         RaycastHit hit;
 
         for (int angle = -FOV; angle <= FOV; angle += inc) {
-            Vector3 targetPos = new Vector3(0, 0, 0);           // Intilize a zero-vector
+            Vector3 targetPos = new Vector3(0, 0, 0);           // Initialize a zero-vector
             // Get angle from for-loop and object forward direction
             targetPos += Quaternion.AngleAxis(angle, Vector3.up) * transform.forward * distance;
             Vector3 projection = transform.position;            // Unit position
