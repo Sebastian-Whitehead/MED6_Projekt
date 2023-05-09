@@ -27,7 +27,6 @@ public class TutorialManager : MonoBehaviour {
     private LoggingManager _loggingManager;
 
     void Awake() {
-        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         tutorialUI = GameObject.Find("TutorialText").GetComponent<TMPro.TextMeshProUGUI>();
         GameObject gameManager = GameObject.Find("GameManager");
         turnManager = gameManager.GetComponent<TurnManager>();
@@ -39,6 +38,7 @@ public class TutorialManager : MonoBehaviour {
 
     void Start()
     {
+        _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
         bciSlider.showable = false;
         Invoke("delayStart", 1f);
         UpdateArea(); // Update area to init
