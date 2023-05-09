@@ -46,6 +46,8 @@ public class BciSlider : MonoBehaviour
     private int completedReps = 0;
     private int targetReps = 0;
 
+//Wizard of Oz_____________
+    public bool wizardOfOz = true;
     private readonly float[] successChanceLimits =  {0.65f, 0.85f};
     private float successChance;
     private bool willSucceed = false;
@@ -109,25 +111,29 @@ public class BciSlider : MonoBehaviour
                 ShowChargeButton(resources.maxMana !> resources.mana);
             return;
         }
-        
-        if (!timeChosen)
+
+        if (wizardOfOz)
         {
-            if (SuccessRoll()){
-                startPoint = Random.Range(0.2f, 0.78f);
-                print("Will succeed --> Start point: " + startPoint);
-                willSucceed = true;
+            if (!timeChosen)
+            {
+                if (SuccessRoll())
+                {
+                    startPoint = Random.Range(0.2f, 0.78f);
+                    print("Will succeed --> Start point: " + startPoint);
+                    willSucceed = true;
+                }
+                timeChosen = true;
             }
-            timeChosen = true;
+
+            //print("dibs " + !forced + " " + willSucceed + " " + (Slider.value >= startPoint));
+            if (!forced && willSucceed && Slider.value >= startPoint)
+            {
+                ForceSuccess();
+                Invoke(nameof(ForceSuccess), 3.5f);
+                forced = true;
+            }
         }
-        
-        print("dibs " + !forced + " " + willSucceed + " " + (Slider.value >= startPoint));
-        if (!forced && willSucceed && Slider.value >= startPoint)
-        {
-            ForceSuccess();
-            Invoke(nameof(ForceSuccess), 3.5f);
-            forced = true;
-        }
-        
+
         time -= Time.deltaTime * currentSpeed;
         Slider.value = 1 - (time / BciPromptDuration);
 
