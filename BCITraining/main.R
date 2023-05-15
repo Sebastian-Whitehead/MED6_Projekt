@@ -7,17 +7,19 @@ library(grid)
 library(tidyr)
 library(reshape2)
 
+setwd("C:/Users/Tonko/OneDrive/Dokumenter/School/MED6/Projekt")
+
 # Specify the path to the Excel file
-version_path <- "../../version.xlsx"
-overall_path <- "../../overall.xlsx"
+version_path <- "version.xlsx"
+overall_path <- "overall.xlsx"
 
 # Read the Excel file into a data frame
 version <- read_excel(version_path)
 overall <- read_excel(overall_path)
 
 version_colors = c("red", "blue")
-version_names = c("Attack", "Mana")
-version_labels = c("Highly\nAttack", "", "Neutral", "", "Highly\nMana")
+version_names = c("Interval", "Battery")
+version_labels = c("Highly\nInterval", "", "Neutral", "", "Highly\nBattery")
 agreeScala <- c("Strongly\ndisagree", "Disagree", "Somewhat\ndisagree", "Neutral", "Somewhat\nagree", "Agree", "Strongly\nagree")
 
 # -----------------------------------------------------------------------
@@ -84,14 +86,14 @@ metaphorPreference_hist <- ggplot(overall, aes(x = `Version likes`, fill = "red"
   geom_histogram(alpha = 0.5, bins = 5, binwidth = 1, colour = "black") +
   scale_x_continuous(limits = c(0, 6), breaks = seq(1, 5, by = 1), labels = version_labels) +
   scale_y_continuous(limits = c(0, maxPreference), breaks = seq(0, maxPreference, by = 1)) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Preferred metaphor", y = "Density")
 
 pacingPreference_hist <- ggplot(overall, aes(x = `Pacing likes`, fill = "red")) +
   geom_histogram(alpha = 0.5, bins = 5, binwidth = 1, colour = "black") +
   scale_x_continuous(limits = c(0, 6), breaks = seq(1, 5, by = 1), labels = version_labels) +
   scale_y_continuous(limits = c(0, maxPreference), breaks = seq(0, maxPreference, by = 1)) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Preferred pacing", y = "Density")
 
 thisMetaphor_hist
@@ -106,7 +108,7 @@ max_delta = max(version$success_delta, version$failed_delta, na.rm = TRUE)
 success_delta <- ggplot(version, aes(y = factor(`Current played version`),
                     x = success_delta)) +
   geom_boxplot() +
-  scale_y_discrete(labels = c("Attack", "Mana")) +
+  scale_y_discrete(labels = version_names) +
   ylab("") +
   xlab("Succeded difference") +
   scale_x_continuous(breaks = seq(0, max_delta, by = 1))
@@ -116,7 +118,7 @@ failed_delta <- ggplot(version,
                          y = factor(`Current played version`),
                          x = failed_delta)) +
   geom_boxplot() +
-  scale_y_discrete(labels = c("Attack", "Mana")) +
+  scale_y_discrete(labels = version_names) +
   ylab("") +
   xlab("Failed difference") +
   scale_x_continuous(breaks = seq(0, max_delta, by = 1))
@@ -141,7 +143,7 @@ concentration_box <- ggplot(version, aes(y = factor(`Current played version`),
                     x = `I could concentrate while performing motor imagery.`)) +
   geom_boxplot() +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_y_discrete(labels = c("Attack", "Mana")) +
+  scale_y_discrete(labels = version_names) +
   ylab("")
 
 frustration_hist <- ggplot(version,
@@ -149,7 +151,7 @@ frustration_hist <- ggplot(version,
                          fill = factor(`Current played version`))) +
   geom_histogram(binwidth = .5, position = position_dodge(width = .75), alpha = 0.5) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Frustration", y = "Frequency", fill = "Version")
 frustration_hist
 
@@ -172,15 +174,16 @@ concentration_hist <- ggplot(version,
                             fill = factor(`Current played version`))) +
   geom_histogram(binwidth = .5, position = position_dodge(width = .75), alpha = 0.5) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Concentration", y = "Frequency", fill = "Version")
 
 frustration_density <- ggplot(version, aes(x = `Performing motor imagery was frustrating.`,
                                      fill = factor(`Current played version`))) +
   geom_density(alpha = 0.5, aes(group = factor(`Current played version`))) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Frustration", y = "Density", fill = "Version")
+frustration_density
 
 engagement_density <- ggplot(version, aes(x = `Performing motor imagery broke my engagement.`,
                                      fill = factor(`Current played version`))) +
@@ -193,27 +196,30 @@ engagement_density <- ggplot(version, aes(x = `Performing motor imagery broke my
     legend.box.just = "right",
     legend.margin = margin(6, 6, 6, 6)
   )
+engagement_density
 
 concentration_density <- ggplot(version, aes(x = `I could concentrate while performing motor imagery.`,
                                              fill = factor(`Current played version`))) +
   geom_density(alpha = 0.5, aes(group = factor(`Current played version`))) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names) +
   labs(x = "Concentration", y = "Density", fill = "Version")
+concentration_density
 
 timing_density <- ggplot(version, aes(x = `The timing of the motor imagery made sense.`,
                                       fill = factor(`Current played version`))) +
   geom_density(alpha = 0.5, aes(group = factor(`Current played version`))) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names) +
   labs(x = "Timing", y = "Density", fill = "Version")
+timing_density
 
 natural_density <- ggplot(version, aes(
   x = `It felt natural to perform motor imagery in this context.`,
   fill = factor(`Current played version`))) +
   geom_density(alpha = 0.5, aes(group = factor(`Current played version`))) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Natural", y = "Density", fill = "Version") + theme(
     legend.position = c(.99, .5),
     legend.justification = c("right"),
@@ -226,8 +232,9 @@ trigger_density <- ggplot(version, aes(x = `I found the triggers for motor image
                                        fill = factor(`Current played version`))) +
   geom_density(alpha = 0.5, aes(group = factor(`Current played version`))) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, labels = version_names, guide = FALSE) +
+  scale_fill_manual(values = version_colors, labels = version_names ) +
   labs(x = "Trigger", y = "Density", fill = "Version")
+trigger_density
 
 # -----------------------------------------------------------------------
 
@@ -244,7 +251,7 @@ general_questions$mean = rowMeans(reversed)
 general_collective <- ggplot(general_questions, aes(x = mean, fill = "red")) +
   geom_density(alpha = 0.5) +
   scale_x_continuous(limits = c(1, 7), breaks = seq(1, 7, by = 1), labels = agreeScala) +
-  scale_fill_manual(values = version_colors, guide = FALSE) +
+  scale_fill_manual(values = version_colors ) +
   labs(x = "", y = "Density")
 general_collective
 
