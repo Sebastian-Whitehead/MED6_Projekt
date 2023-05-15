@@ -1,0 +1,182 @@
+;;;;;Interval;;;;;;;Battery;
+Event;Gamemode;Success BCI;NULL;Timestamp;Interval;Null;;Event;Success BCI;Timestamp;NULL;Null;Null
+BCIStateUpdated;NULL;NULL;NULL;49:21.1;BCIStateUpdated;NULL;;BCIStateUpdated;NULL;55:23.0;NULL;BCIStateUpdated;NULL
+Scene Start;Interval;NULL;NULL;49:21.1;Scene Start;NULL;;Scene Start;NULL;55:23.0;NULL;Scene Start;NULL
+Start Player Turn;NULL;NULL;NULL;49:21.1;Start Player Turn;NULL;;Start Player Turn;NULL;55:23.0;NULL;Start Player Turn;NULL
+BCIStateUpdated;NULL;NULL;NULL;49:21.7;BCIStateUpdated;NULL;;BCIStateUpdated;NULL;55:23.5;NULL;BCIStateUpdated;NULL
+BCIStateUpdated;NULL;NULL;NULL;49:21.7;BCIStateUpdated;NULL;;BCIStateUpdated;NULL;55:23.5;NULL;BCIStateUpdated;NULL
+Player Moving;NULL;NULL;NULL;49:24.0;Player Moving;NULL;;Player Moving;NULL;55:25.3;NULL;Player Moving;NULL
+End Player Turn;NULL;NULL;NULL;49:27.5;End Player Turn;NULL;;End Player Turn;NULL;55:28.7;NULL;End Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:27.5;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:28.7;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:28.5;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:29.8;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:28.6;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:29.8;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:29.4;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:30.7;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:30.5;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:31.9;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:30.8;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;55:32.1;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;49:31.3;End Goblin Turn;NULL;;End Goblin Turn;NULL;55:32.6;NULL;End Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;49:31.3;Start Player Turn;NULL;;Start Player Turn;NULL;55:32.6;NULL;Start Player Turn;NULL
+Player Moving;NULL;NULL;NULL;49:33.0;Player Moving;NULL;;BciFail;FALSE;55:39.9;NULL;BciFail;FALSE
+End Player Turn;NULL;NULL;NULL;49:36.8;End Player Turn;NULL;;MotorImagery;NULL;55:51.0;NULL;MotorImagery;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:36.8;Start Goblin Turn;NULL;;NULL;NULL;55:51.0;NULL;NULL;NULL
+Player Hurt;NULL;NULL;NULL;49:37.1;Player Hurt;NULL;;RegenMana;NULL;55:51.0;NULL;RegenMana;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:37.1;Start Goblin Turn;NULL;;BciSuccess;TRUE;55:51.0;NULL;BciSuccess;TRUE
+Start Goblin Turn;NULL;NULL;NULL;49:37.1;Start Goblin Turn;NULL;;MotorImagery;NULL;55:58.9;NULL;MotorImagery;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:38.0;Start Goblin Turn;NULL;;NULL;NULL;55:58.9;NULL;NULL;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:38.8;Start Goblin Turn;NULL;;RegenMana;NULL;55:58.9;NULL;RegenMana;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:40.2;Start Goblin Turn;NULL;;BciSuccess;TRUE;55:58.9;NULL;BciSuccess;TRUE
+End Goblin Turn;NULL;NULL;NULL;49:40.4;End Goblin Turn;NULL;;MotorImagery;NULL;56:09.2;NULL;MotorImagery;NULL
+Start Player Turn;NULL;NULL;NULL;49:40.4;Start Player Turn;NULL;;NULL;NULL;56:09.2;NULL;NULL;NULL
+MotorImagery;NULL;NULL;NULL;49:50.0;MotorImagery;NULL;;RegenMana;NULL;56:09.2;NULL;RegenMana;NULL
+NULL;NULL;NULL;NULL;49:50.0;NULL;NULL;;BciSuccess;TRUE;56:09.2;NULL;BciSuccess;TRUE
+RegenMana;NULL;NULL;NULL;49:50.0;RegenMana;NULL;;MotorImagery;NULL;56:18.8;NULL;MotorImagery;NULL
+BciSuccess;NULL;TRUE;NULL;49:50.0;BciSuccess;TRUE;;NULL;NULL;56:18.8;NULL;NULL;NULL
+Goblin Death;NULL;NULL;NULL;49:50.8;Goblin Death;NULL;;RegenMana;NULL;56:18.8;NULL;RegenMana;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:51.8;Start Goblin Turn;NULL;;BciSuccess;TRUE;56:18.8;NULL;BciSuccess;TRUE
+Start Goblin Turn;NULL;NULL;NULL;49:51.9;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:20.4;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:52.3;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:20.6;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:53.0;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:20.6;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;49:53.7;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:21.5;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;49:54.8;End Goblin Turn;NULL;;Start Goblin Turn;NULL;56:22.7;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;49:54.9;Start Player Turn;NULL;;Start Goblin Turn;NULL;56:24.2;NULL;Start Goblin Turn;NULL
+MotorImagery;NULL;NULL;NULL;50:06.1;MotorImagery;NULL;;End Goblin Turn;NULL;56:24.4;NULL;End Goblin Turn;NULL
+NULL;NULL;NULL;NULL;50:06.1;NULL;NULL;;Start Player Turn;NULL;56:24.4;NULL;Start Player Turn;NULL
+RegenMana;NULL;NULL;NULL;50:06.1;RegenMana;NULL;;Player Moving;NULL;56:25.5;NULL;Player Moving;NULL
+BciSuccess;NULL;TRUE;NULL;50:06.1;BciSuccess;TRUE;;End Player Turn;NULL;56:28.9;NULL;End Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:08.2;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:28.9;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:08.2;Start Goblin Turn;NULL;;Player Hurt;NULL;56:29.1;NULL;Player Hurt;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:08.9;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:29.1;NULL;Start Goblin Turn;NULL
+Player Hurt;NULL;NULL;NULL;50:10.0;Player Hurt;NULL;;Start Goblin Turn;NULL;56:29.1;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:10.1;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:29.6;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:11.6;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:31.4;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;50:12.1;End Goblin Turn;NULL;;Start Goblin Turn;NULL;56:32.1;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;50:12.1;Start Player Turn;NULL;;End Goblin Turn;NULL;56:33.3;NULL;End Goblin Turn;NULL
+MotorImagery;NULL;NULL;NULL;50:18.3;MotorImagery;NULL;;Start Player Turn;NULL;56:33.3;NULL;Start Player Turn;NULL
+NULL;NULL;NULL;NULL;50:18.3;NULL;NULL;;Player Attacking;NULL;56:34.3;NULL;Player Attacking;NULL
+RegenMana;NULL;NULL;NULL;50:18.3;RegenMana;NULL;;Goblin Death;NULL;56:35.2;NULL;Goblin Death;NULL
+BciSuccess;NULL;TRUE;NULL;50:18.3;BciSuccess;TRUE;;Start Player Turn;NULL;56:36.2;NULL;Start Player Turn;NULL
+Goblin Death;NULL;NULL;NULL;50:19.1;Goblin Death;NULL;;Player Moving;NULL;56:36.7;NULL;Player Moving;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:20.1;Start Goblin Turn;NULL;;End Player Turn;NULL;56:39.9;NULL;End Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:20.2;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:39.9;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:21.4;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:40.0;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:22.0;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:40.6;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;50:22.6;End Goblin Turn;NULL;;Start Goblin Turn;NULL;56:40.9;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;50:22.6;Start Player Turn;NULL;;Start Goblin Turn;NULL;56:42.4;NULL;Start Goblin Turn;NULL
+MotorImagery;NULL;NULL;NULL;50:30.4;MotorImagery;NULL;;End Goblin Turn;NULL;56:42.8;NULL;End Goblin Turn;NULL
+NULL;NULL;NULL;NULL;50:30.4;NULL;NULL;;Start Player Turn;NULL;56:42.9;NULL;Start Player Turn;NULL
+RegenMana;NULL;NULL;NULL;50:30.4;RegenMana;NULL;;Player Moving;NULL;56:44.7;NULL;Player Moving;NULL
+BciSuccess;NULL;TRUE;NULL;50:30.4;BciSuccess;TRUE;;End Player Turn;NULL;56:48.4;NULL;End Player Turn;NULL
+Goblin Death;NULL;NULL;NULL;50:31.8;Goblin Death;NULL;;Start Goblin Turn;NULL;56:48.4;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:32.8;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:48.4;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:32.9;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:49.8;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:33.7;Start Goblin Turn;NULL;;Player Hurt;NULL;56:50.0;NULL;Player Hurt;NULL
+End Goblin Turn;NULL;NULL;NULL;50:33.9;End Goblin Turn;NULL;;Start Goblin Turn;NULL;56:50.1;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;50:33.9;Start Player Turn;NULL;;Start Goblin Turn;NULL;56:50.6;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;50:35.1;Player Moving;NULL;;End Goblin Turn;NULL;56:50.6;NULL;End Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;50:38.6;End Player Turn;NULL;;Start Player Turn;NULL;56:50.6;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:38.6;Start Goblin Turn;NULL;;Player Attacking;NULL;56:52.3;NULL;Player Attacking;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:38.7;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:54.1;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:39.2;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;56:54.2;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;50:40.7;End Goblin Turn;NULL;;Start Goblin Turn;NULL;56:55.1;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;50:40.7;Start Player Turn;NULL;;Player Hurt;NULL;56:55.1;NULL;Player Hurt;NULL
+Player Moving;NULL;NULL;NULL;50:41.5;Player Moving;NULL;;Start Goblin Turn;NULL;56:55.1;NULL;Start Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;50:45.1;End Player Turn;NULL;;Start Goblin Turn;NULL;56:55.3;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:45.1;Start Goblin Turn;NULL;;End Goblin Turn;NULL;56:55.4;NULL;End Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:45.2;Start Goblin Turn;NULL;;Start Player Turn;NULL;56:55.4;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:45.8;Start Goblin Turn;NULL;;Player Attacking;NULL;56:57.3;NULL;Player Attacking;NULL
+End Goblin Turn;NULL;NULL;NULL;50:46.5;End Goblin Turn;NULL;;Goblin Death;NULL;56:58.0;NULL;Goblin Death;NULL
+Start Player Turn;NULL;NULL;NULL;50:46.5;Start Player Turn;NULL;;Start Goblin Turn;NULL;56:59.1;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;50:48.7;Player Moving;NULL;;Start Goblin Turn;NULL;56:59.1;NULL;Start Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;50:51.4;End Player Turn;NULL;;Start Goblin Turn;NULL;56:59.7;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:51.4;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;57:01.3;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:51.5;Start Goblin Turn;NULL;;Player Hurt;NULL;57:01.6;NULL;Player Hurt;NULL
+Start Goblin Turn;NULL;NULL;NULL;50:52.6;Start Goblin Turn;NULL;;End Goblin Turn;NULL;57:01.7;NULL;End Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;50:53.4;End Goblin Turn;NULL;;Start Player Turn;NULL;57:01.7;NULL;Start Player Turn;NULL
+Start Player Turn;NULL;NULL;NULL;50:53.4;Start Player Turn;NULL;;Player Attacking;NULL;57:03.1;NULL;Player Attacking;NULL
+MotorImagery;NULL;NULL;NULL;51:03.7;MotorImagery;NULL;;Goblin Death;NULL;57:03.9;NULL;Goblin Death;NULL
+NULL;NULL;NULL;NULL;51:03.7;NULL;NULL;;Start Goblin Turn;NULL;57:04.9;NULL;Start Goblin Turn;NULL
+RegenMana;NULL;NULL;NULL;51:03.7;RegenMana;NULL;;Start Goblin Turn;NULL;57:05.0;NULL;Start Goblin Turn;NULL
+BciSuccess;NULL;TRUE;NULL;51:03.7;BciSuccess;TRUE;;Start Goblin Turn;NULL;57:05.6;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:05.9;Start Goblin Turn;NULL;;End Goblin Turn;NULL;57:06.4;NULL;End Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:06.0;Start Goblin Turn;NULL;;Start Player Turn;NULL;57:06.4;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:06.9;Start Goblin Turn;NULL;;MotorImagery;NULL;57:17.4;NULL;MotorImagery;NULL
+Player Hurt;NULL;NULL;NULL;51:07.3;Player Hurt;NULL;;NULL;NULL;57:17.4;NULL;NULL;NULL
+End Goblin Turn;NULL;NULL;NULL;51:07.3;End Goblin Turn;NULL;;RegenMana;NULL;57:17.4;NULL;RegenMana;NULL
+Start Player Turn;NULL;NULL;NULL;51:07.4;Start Player Turn;NULL;;BciSuccess;TRUE;57:17.4;NULL;BciSuccess;TRUE
+BciFail;NULL;FALSE;NULL;51:20.6;BciFail;FALSE;;BciFail;FALSE;57:30.4;NULL;BciFail;FALSE
+Start Goblin Turn;NULL;NULL;NULL;51:20.6;Start Goblin Turn;NULL;;MotorImagery;NULL;57:37.3;NULL;MotorImagery;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:20.7;Start Goblin Turn;NULL;;NULL;NULL;57:37.3;NULL;NULL;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:21.3;Start Goblin Turn;NULL;;RegenMana;NULL;57:37.3;NULL;RegenMana;NULL
+Player Hurt;NULL;NULL;NULL;51:21.3;Player Hurt;NULL;;BciSuccess;TRUE;57:37.3;NULL;BciSuccess;TRUE
+End Goblin Turn;NULL;NULL;NULL;51:21.3;End Goblin Turn;NULL;;MotorImagery;NULL;57:44.6;NULL;MotorImagery;NULL
+Start Player Turn;NULL;NULL;NULL;51:21.4;Start Player Turn;NULL;;NULL;NULL;57:44.6;NULL;NULL;NULL
+MotorImagery;NULL;NULL;NULL;51:29.5;MotorImagery;NULL;;RegenMana;NULL;57:44.6;NULL;RegenMana;NULL
+NULL;NULL;NULL;NULL;51:29.5;NULL;NULL;;BciSuccess;TRUE;57:44.6;NULL;BciSuccess;TRUE
+RegenMana;NULL;NULL;NULL;51:29.5;RegenMana;NULL;;MotorImagery;NULL;57:52.3;NULL;MotorImagery;NULL
+BciSuccess;NULL;TRUE;NULL;51:29.5;BciSuccess;TRUE;;NULL;NULL;57:52.3;NULL;NULL;NULL
+Goblin Death;NULL;NULL;NULL;51:30.2;Goblin Death;NULL;;RegenMana;NULL;57:52.3;NULL;RegenMana;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:31.3;Start Goblin Turn;NULL;;BciSuccess;TRUE;57:52.3;NULL;BciSuccess;TRUE
+Start Goblin Turn;NULL;NULL;NULL;51:31.4;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;57:53.8;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;51:32.1;End Goblin Turn;NULL;;Start Goblin Turn;NULL;57:53.9;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;51:32.1;Start Player Turn;NULL;;Start Goblin Turn;NULL;57:55.1;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:35.1;Player Moving;NULL;;End Goblin Turn;NULL;57:56.6;NULL;End Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;51:38.0;End Player Turn;NULL;;Start Player Turn;NULL;57:56.6;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:38.0;Start Goblin Turn;NULL;;Player Moving;NULL;57:57.2;NULL;Player Moving;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:38.1;Start Goblin Turn;NULL;;End Player Turn;NULL;58:00.3;NULL;End Player Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;51:39.5;End Goblin Turn;NULL;;Start Goblin Turn;NULL;58:00.3;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;51:39.5;Start Player Turn;NULL;;Start Goblin Turn;NULL;58:00.4;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:40.1;Player Moving;NULL;;Start Goblin Turn;NULL;58:01.3;NULL;Start Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;51:43.5;End Player Turn;NULL;;End Goblin Turn;NULL;58:01.8;NULL;End Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:43.5;Start Goblin Turn;NULL;;Start Player Turn;NULL;58:01.8;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:43.6;Start Goblin Turn;NULL;;Player Moving;NULL;58:02.6;NULL;Player Moving;NULL
+End Goblin Turn;NULL;NULL;NULL;51:44.4;End Goblin Turn;NULL;;End Player Turn;NULL;58:04.6;NULL;End Player Turn;NULL
+Start Player Turn;NULL;NULL;NULL;51:44.5;Start Player Turn;NULL;;Start Goblin Turn;NULL;58:04.6;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:45.1;Player Moving;NULL;;Start Goblin Turn;NULL;58:04.7;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:45.7;Player Moving;NULL;;Start Goblin Turn;NULL;58:05.2;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:46.1;Player Moving;NULL;;End Goblin Turn;NULL;58:05.4;NULL;End Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;51:48.9;End Player Turn;NULL;;Start Player Turn;NULL;58:05.4;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:49.0;Start Goblin Turn;NULL;;Player Attacking;NULL;58:06.7;NULL;Player Attacking;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:49.0;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;58:08.8;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;51:49.5;End Goblin Turn;NULL;;Start Goblin Turn;NULL;58:08.8;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;51:49.6;Start Player Turn;NULL;;Start Goblin Turn;NULL;58:09.6;NULL;Start Goblin Turn;NULL
+Player Moving;NULL;NULL;NULL;51:50.6;Player Moving;NULL;;Player Hurt;NULL;58:09.8;NULL;Player Hurt;NULL
+Player Moving;NULL;NULL;NULL;51:52.1;Player Moving;NULL;;End Goblin Turn;NULL;58:09.9;NULL;End Goblin Turn;NULL
+End Player Turn;NULL;NULL;NULL;51:55.2;End Player Turn;NULL;;Start Player Turn;NULL;58:09.9;NULL;Start Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:55.2;Start Goblin Turn;NULL;;Player Attacking;NULL;58:11.7;NULL;Player Attacking;NULL
+Start Goblin Turn;NULL;NULL;NULL;51:55.3;Start Goblin Turn;NULL;;Goblin Death;NULL;58:12.5;NULL;Goblin Death;NULL
+End Goblin Turn;NULL;NULL;NULL;51:55.9;End Goblin Turn;NULL;;Start Goblin Turn;NULL;58:13.5;NULL;Start Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;51:55.9;Start Player Turn;NULL;;Start Goblin Turn;NULL;58:13.6;NULL;Start Goblin Turn;NULL
+MotorImagery;NULL;NULL;NULL;52:03.7;MotorImagery;NULL;;End Goblin Turn;NULL;58:15.0;NULL;End Goblin Turn;NULL
+NULL;NULL;NULL;NULL;52:03.7;NULL;NULL;;Start Player Turn;NULL;58:15.0;NULL;Start Player Turn;NULL
+RegenMana;NULL;NULL;NULL;52:03.7;RegenMana;NULL;;Player Moving;NULL;58:15.5;NULL;Player Moving;NULL
+BciSuccess;NULL;TRUE;NULL;52:03.7;BciSuccess;TRUE;;End Player Turn;NULL;58:18.5;NULL;End Player Turn;NULL
+Goblin Death;NULL;NULL;NULL;52:05.1;Goblin Death;NULL;;Start Goblin Turn;NULL;58:18.5;NULL;Start Goblin Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;52:06.1;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;58:18.6;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;52:06.3;End Goblin Turn;NULL;;End Goblin Turn;NULL;58:19.4;NULL;End Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;52:06.3;Start Player Turn;NULL;;Start Player Turn;NULL;58:19.5;NULL;Start Player Turn;NULL
+Player Moving;NULL;NULL;NULL;52:07.4;Player Moving;NULL;;Player Moving;NULL;58:19.9;NULL;Player Moving;NULL
+End Player Turn;NULL;NULL;NULL;52:11.0;End Player Turn;NULL;;End Player Turn;NULL;58:22.9;NULL;End Player Turn;NULL
+Start Goblin Turn;NULL;NULL;NULL;52:11.0;Start Goblin Turn;NULL;;Start Goblin Turn;NULL;58:22.9;NULL;Start Goblin Turn;NULL
+Player Hurt;NULL;NULL;NULL;52:11.2;Player Hurt;NULL;;Start Goblin Turn;NULL;58:22.9;NULL;Start Goblin Turn;NULL
+End Goblin Turn;NULL;NULL;NULL;52:11.3;End Goblin Turn;NULL;;End Goblin Turn;NULL;58:23.5;NULL;End Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;52:11.3;Start Player Turn;NULL;;Start Player Turn;NULL;58:23.5;NULL;Start Player Turn;NULL
+MotorImagery;NULL;NULL;NULL;52:18.0;MotorImagery;NULL;;Player Moving;NULL;58:24.3;NULL;Player Moving;NULL
+NULL;NULL;NULL;NULL;52:18.0;NULL;NULL;;End Player Turn;NULL;58:26.2;NULL;End Player Turn;NULL
+RegenMana;NULL;NULL;NULL;52:18.0;RegenMana;NULL;;Start Goblin Turn;NULL;58:26.2;NULL;Start Goblin Turn;NULL
+BciSuccess;NULL;TRUE;NULL;52:18.0;BciSuccess;TRUE;;Start Goblin Turn;NULL;58:26.3;NULL;Start Goblin Turn;NULL
+Goblin Death;NULL;NULL;NULL;52:18.8;Goblin Death;NULL;;End Goblin Turn;NULL;58:27.0;NULL;End Goblin Turn;NULL
+Start Player Turn;NULL;NULL;NULL;52:19.8;Start Player Turn;NULL;;Start Player Turn;NULL;58:27.0;NULL;Start Player Turn;NULL
+;;;;;;;;Player Attacking;NULL;58:28.1;;Player Attacking;NULL
+;;;;;;;;Goblin Death;NULL;58:29.5;;Goblin Death;NULL
+;;;;;;;;Start Goblin Turn;NULL;58:30.5;;Start Goblin Turn;NULL
+;;;;;;;;End Goblin Turn;NULL;58:30.7;;End Goblin Turn;NULL
+;;;;;;;;Start Player Turn;NULL;58:30.7;;Start Player Turn;NULL
+;;;;;;;;Player Moving;NULL;58:30.9;;Player Moving;NULL
+;;;;;;;;End Player Turn;NULL;58:34.5;;End Player Turn;NULL
+;;;;;;;;Start Goblin Turn;NULL;58:34.6;;Start Goblin Turn;NULL
+;;;;;;;;Player Hurt;NULL;58:34.8;;Player Hurt;NULL
+;;;;;;;;End Goblin Turn;NULL;58:34.9;;End Goblin Turn;NULL
+;;;;;;;;Start Player Turn;NULL;58:34.9;;Start Player Turn;NULL
+;;;;;;;;Player Attacking;NULL;58:36.6;;Player Attacking;NULL
+;;;;;;;;Goblin Death;NULL;58:37.3;;Goblin Death;NULL
+;;;;;;;;End Goblin Turn;NULL;58:38.5;;End Goblin Turn;NULL
+;;;;;;;;Start Player Turn;NULL;58:38.6;;Start Player Turn;NULL
