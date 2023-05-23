@@ -27,7 +27,9 @@ The development of this video game was undertaken as a bachelor project during t
 Supervisor: Bastian Ilsø Hougaard
 
 ## Usage and Installation Instructions:
-In the "Builds" folder, you will find two different builds of the game, "Battery" and "Interval". These are both simulated versions of the BCI and will work without BCI equipment. The mode can be changed within the Unity project under the "Game Manager" script.
+The Unity project is the folder called "BCI Training".
+In the "Builds" folder, you will find two different builds of the game, "Battery" and "Interval". These are both simulated versions of the BCI and will work without BCI equipment.
+The mode can be changed within the Unity project under the "Game Manager" script.
 
 ### BCI Installation Instructions:
 To add BCI equipment, the following steps must be taken in the Unity project:
