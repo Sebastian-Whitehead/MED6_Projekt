@@ -4,8 +4,9 @@
 Key Abbreviations:
 - BCI: Brain-Computer Interface
 - MI: Motor Imagery
-- 
+
 This project aims to address the following problem formulation:
+
 **"How does 'charging/battery'- and 'interval'-based pacing compare, in terms of the player's engagement, in a video game designed for upper limb motor imagery training in children with cerebral palsy?"**
 MI is to imaging moving a limb, that the BCI will read. This projects MI is open and closing ones hand.
 The pacing "battery" is focusing on groupings of MI events, with longer rest periods, while "interval" focuses on more rapid singular MI events.
