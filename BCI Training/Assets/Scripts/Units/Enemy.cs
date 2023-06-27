@@ -25,13 +25,17 @@ public class Enemy : Unit {
         targetLocation = hitPosition;
         transform.LookAt(hitPosition, Vector3.up);
         //anim.SetTrigger("Hit"); 
-
-
     }
+
+    /*
+    The TakeDamage method is overridden from the base class. It is called when the enemy receives damage. 
+    Inside this method, it starts a coroutine waiter() and performs actions such as reducing health, setting the enemy in a damaged state, updating the target location, and playing animations.
+    */
 
     public override bool Alive() {
         return enemyHealth.alive;
     }
+    //Checks if enemy is alive based on health.
 
     // ---------------------------------------------------------------------
     IEnumerator waiter()
@@ -41,13 +45,18 @@ public class Enemy : Unit {
     yield return new WaitForSeconds(2f);    
 
     }
-
+    //coroutine waits for 2 seconds before continuing execution. It is used in the TakeDamage method to introduce a delay.
 
     protected override bool AttackCheck() {
         if (OutOfRange()) return false;
         if (!active) return false;
         return true;
     }
+    /*
+    checks if the enemy is in range to attack the player. 
+    It returns true if the enemy is within the attack range and active.
+    */
+
 
     // Check if distance to given position is matching attack range 
     private bool OutOfRange() {
@@ -60,6 +69,12 @@ public class Enemy : Unit {
         }
         return false; // Confirm method
     }
+    /*
+    calculates the distance between the enemy and the player. If the distance exceeds the attack range, it returns true,
+    indicating that the player is out of range for an attack.
+    */
+
+
     protected override void ChildAwake()
     {
         enemyHealth = GetComponent<EnemyHealth>();
@@ -68,12 +83,21 @@ public class Enemy : Unit {
         targetLocation = transform.position;
         DecisionTree();
     }
+    /*
+    Is called during initialization. 
+    It sets up the enemy's health, patrol points, target location, and invokes the DecisionTree method
+    to start the enemy's decision-making process.
+    */
 
     protected override void ChildUpdate() {
         enemyHealth.Alive(audioManager);
         Eyes(); // Raycast see targets depended to 'offensive'
         DrawPatrole();
     }
+    /*
+    It handles updating the enemy's health, performing raycasts to detect targets,
+     and drawing the patrol path.
+    */
 
     public override void DecisionTree() {
         if (steps <= 0 || isMoving) return;
@@ -109,6 +133,10 @@ public class Enemy : Unit {
         }
         action = Action.Idle;
     }
+    /*
+    The DecisionTree method is overridden from the base class and contains the enemy's decision-making logic. 
+    It determines the appropriate action based on the current state of the enemy and invokes corresponding methods.
+    */
 
     private void AtLocation() {
         // Debug.Log(name + " action: " + action);
@@ -149,6 +177,7 @@ public class Enemy : Unit {
         }
         return finalPosition;
     }
+    //method generates a random position on the NavMesh within a given radius
 
     private Vector3[] GenerateRandomPath(int pathLength) {
         Vector3[] path = new Vector3[pathLength];
@@ -159,6 +188,7 @@ public class Enemy : Unit {
         }
         return path;
     }
+    //method generates a random patrol path by calling RandomNavmeshLocation multiple times.
 
     private Vector3[] GetManualPath() {
         Transform PathObject = null;
@@ -177,6 +207,10 @@ public class Enemy : Unit {
         }
         return path;
     }
+    /*
+    ethod retrieves a predefined patrol path from child objects named "Path"
+     and stores it as an array of positions.
+    */
 
     private void DrawPatrole() {
 
@@ -217,6 +251,12 @@ public class Enemy : Unit {
         searchTxt.enabled = false;
     }
 
+    /*
+    The Patrole method handles the enemy's patrolling behavior.
+    It checks the distance between the enemy and the target patrol point and updates the target location accordingly. 
+    It also updates the action to "Patrolling".
+    */
+
     protected void nextPathPoint() {
         // Debug.Log(name + " controlePoint " + patrolPoint);
         if (circlePatrole) {
@@ -235,6 +275,7 @@ public class Enemy : Unit {
         action = Action.Investegating;
         targetLocation = position;
     }
+    //sets the enemy's action to "Investigating" and updates the target location to the specified position.
 
     private void Search() {
         // Debug.Log(name + " search");

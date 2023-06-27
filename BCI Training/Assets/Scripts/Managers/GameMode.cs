@@ -45,3 +45,11 @@ public class GameMode : MonoBehaviour
 
     }
 }
+
+/*
+Tager komponenterne og putter en gamemode variabel ind I det og sætter den variabel til at være tilsvarende gamemode. 
+Altså interval/Battery
+Log game mode nemt også.
+
+
+*/

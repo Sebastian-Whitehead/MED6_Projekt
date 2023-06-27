@@ -22,3 +22,11 @@ public class CameraController : MonoBehaviour
         transform.position = new Vector3(target.position.x + offset.x, transform.position.y + offset.y, target.position.z + offset.z); 
     }
 }
+
+/*
+
+Låser cam til en fast stilling efter targets placering og flytter kamera I forhold til target. 
+I det her tilfælde er det playeren. 
+I stedet for at gøre det til et child af det. 
+
+*/

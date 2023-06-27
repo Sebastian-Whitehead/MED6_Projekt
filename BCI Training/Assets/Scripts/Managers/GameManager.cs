@@ -30,3 +30,9 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(scene.name);
     }
 }
+
+/*
+og en funktion til at genstarte level.
+Tjekker hver update om spillet er slut.
+
+*/

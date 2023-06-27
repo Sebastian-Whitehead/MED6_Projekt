@@ -24,6 +24,10 @@ public class TurnManager : MonoBehaviour
         enemies = GameObject.Find("Enemies").GetComponentsInChildren<Enemy>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
+    /*
+    finder logging mananger, alle fjender og spilleren, så den kan bruge dem
+    */
+
 
     void Update() {
         PlayerTurn();
@@ -37,6 +41,8 @@ public class TurnManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse2) && !playerTurn)
             EndTurn();
     }
+    /*Tvinger stop når man trykker på mus2 og det ik er spillerens tur*/
+
 
     private void PlayerTurn() {
         if (!playerTurn) return;
@@ -57,6 +63,14 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    /*
+    This method is responsible for managing the player's turn
+    It checks if it's currently the player's turn and if the player is active, not moving, and has executed their actions.
+    if yes:
+     it increments the PlayerTurnCount, resets the player, ends the turn, and logs the event.
+    */
+
+
     private void EnemiesCollectiveTurn() {
         if (playerTurn) return;
         if (!collectiveTurn) return;
@@ -67,6 +81,8 @@ public class TurnManager : MonoBehaviour
             enemy.Activate();
         }
     }
+
+    /*Not used*/
 
     private void EnemiesSeparateTurn() {
         if (playerTurn) return;
@@ -105,6 +121,13 @@ public class TurnManager : MonoBehaviour
         }
     }
     
+    /*
+    runs if not player or collective turn.
+    it checks if it's the last enemy's turn. If so, it ends the turn.
+    Otherwise, it activates the current enemy if it's not active, not moving, and it's the time to wait.
+    
+    */
+
     private void logData()
     {
         _loggingManager.Log("Game", new Dictionary<string, object>()
@@ -126,6 +149,8 @@ public class TurnManager : MonoBehaviour
         wait = false;
         waiting = false;
     }
+    //end current turn. resets enemyTurn. 
+
 
     public void Wait() {
         wait = true;

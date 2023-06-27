@@ -36,6 +36,7 @@ public class TutorialManager : MonoBehaviour {
         bciSlider = player.GetComponent<BciSlider>();
     }
 
+
     void Start()
     {
         _loggingManager = GameObject.Find("LoggingManager").GetComponent<LoggingManager>();
@@ -54,6 +55,12 @@ public class TutorialManager : MonoBehaviour {
             res.maxMana = 10;
         }
     }
+    /*
+     This method is invoked after a delay of one second from the start of the tutorial. 
+     It prepares the player and the game environment for the tutorial. 
+     It sets the player's mana and maxMana based on the game mode. 
+     For the battery game mode, it sets the mana to 2 and the maxMana to 10.
+    */
 
     // Update is called once per frame
     void Update() {
@@ -64,12 +71,18 @@ public class TutorialManager : MonoBehaviour {
         CheckManaArea3(); // Area 3, check mana regain
         CheckEnemyDeath(); // Other areas, check enemy alive
     }
+    //It contains the main logic for checking the tutorial progress and triggering events accordingly.
 
     void CheckMovingArea1() {
         if (currentArea != 1) return; // Guard area index
         if (turnManager.playerTurn) return; // Guard player turn
         StartCoroutine(DelayUpdateArea(1f)); // Update area if players turn is over
     }
+    /*
+    his method checks the completion condition for area 1 (movement tutorial). 
+    If it's area 1 and it's not the player's turn, it starts a coroutine 
+    (DelayUpdateArea()) to delay the update of the tutorial area.
+    */
 
     void CheckEnemyDeath()
     {
@@ -80,6 +93,11 @@ public class TutorialManager : MonoBehaviour {
         currentEnemy++; // Increment currently selected enemy
         StartCoroutine(DelayUpdateArea(1.75f)); // Update area when selected enemy dies
     }
+    /*
+    This method checks the completion condition for the tutorial areas with enemies. 
+    If the current area is in the list of enemy areas, it checks if the current enemy is dead. 
+    If so, it increments the currentEnemy index and starts a coroutine 
+    */
 
    void CheckManaArea3() {
        if (currentArea != 3) return; // Guard not area 3
@@ -94,6 +112,12 @@ public class TutorialManager : MonoBehaviour {
         if (gameMode.gamemode == Gamemode.Interval) { UpdateArea(); // when player has gain mana
         } else { StartCoroutine(DelayUpdateArea(1f)); }
     }
+    /*
+    his method checks the completion condition for area 3 (mana regain tutorial). 
+    If it's area 3 and the game mode is battery, it checks if the player's mana is greater than or equal to 4.
+    If it's not enough mana, the method returns. 
+    If the game mode is not battery, it updates the tutorial area immediately. 
+    */
 
     // Update spawn point and tutorial text
     void UpdateArea() {
@@ -109,6 +133,12 @@ public class TutorialManager : MonoBehaviour {
         }
     }
 
+    /*
+    updates tutorial area by doing 3 things.
+    spawn, updating UI text, increment current area, if current are is 3, and mode is battery is enables
+    bci slider and sows charge button.
+    */
+
     IEnumerator DelayUpdateArea(float sec)
     {
         if (checkComplete) yield break;
@@ -121,6 +151,11 @@ public class TutorialManager : MonoBehaviour {
         checkComplete = false;
         playerComp.moveAllowed = true;
     }
+    /*
+    This coroutine delays the update of the tutorial area to allow for certain actions to complete. 
+    It temporarily disables player movement, sets checkComplete to true to prevent duplicate updates, waits for the
+     specified delay time, updates the area, sets checkComplete back to false, and enables player movement again.
+    */
 
     void UpdateUI() {
         if (currentArea >= tutorialTexts.Length) return; // Guard index error
@@ -140,6 +175,10 @@ public class TutorialManager : MonoBehaviour {
         Debug.Log("Tutorial done!");
         Invoke("GoToNextScene", 2f);
     }
+    /*
+    his method checks if the tutorial is complete by verifying if the currentArea is greater than or equal to 6. 
+    If so, it sets checkComplete to true to prevent duplicate calls and invokes the GoToNextScene() method after a delay of 2 seconds.
+    */
 
     void GoToNextScene()
     {
@@ -151,4 +190,5 @@ public class TutorialManager : MonoBehaviour {
         if (!Input.GetKeyUp(KeyCode.F1)) return;
         GoToNextScene();
     }
+    //Force to go to lvl it when pressing f1.
 }

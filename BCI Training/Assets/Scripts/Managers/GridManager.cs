@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//NOT IN USE
 public class GridManager : MonoBehaviour
 {
  [SerializeField] private int width;

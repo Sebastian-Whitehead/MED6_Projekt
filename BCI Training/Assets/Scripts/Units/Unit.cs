@@ -107,6 +107,10 @@ public abstract class Unit : PlayerMove {
             return;                                             // Break loop
         }
     }
+    /*
+    This method performs raycasts to detect game objects matching the targetTag within the unit's field of view. 
+    It sets the attackTarget if a valid target is found.
+    */
 
     protected void SetTarget(Transform tmpTarget) {
         if (hasSpotted) return;
@@ -127,6 +131,10 @@ public abstract class Unit : PlayerMove {
         bool pathFound = CalculatePath(nextTile);
         if (!pathFound) action = Action.Idle; // If no path was found, go idle
     }
+    /*
+    : This method sets the attackTarget and updates the unit's action to Attacking when a valid target is detected. 
+    It also plays sound effects and sets the target location for movement.
+    */
 
     // Attack target, if set and close enough
     private void AttackTarget() {

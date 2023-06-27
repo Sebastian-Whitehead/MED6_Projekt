@@ -2,6 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+
+ 	- Finder alle audio lists på awake
+	- Og spiller det passivt.
+
+    Når man siger kør kategori finder den en tilfældig lyd inden for den kategori fx hvor de dør.
+    Derfor er der AudioList.cs.
+    Passiv - kører tilfældigt interval.
+    
+    Awake() - kaldet når audioManger er initialiseret
+    
+*/
+
 public class AudioManager : MonoBehaviour {
     private Dictionary<string, List<AudioClip>> audioClipDict;
     private AudioSource audioSource;
@@ -31,6 +44,13 @@ public class AudioManager : MonoBehaviour {
             }
         }
     }
+    /*
+    PlayPassive() Coroutune - spiller passive audio clips med random intervaller.
+    tjekker om aktiv flag = true.
+    så vælger den random wait time mellem de to intervaller.
+    Hvis passiv kateogien eksiterer i audio clip dict dictionary så går den i uendeligt loop.
+    */
+
     
     public void PlayCategory(string category) {
         if (!active) return;
@@ -39,10 +59,22 @@ public class AudioManager : MonoBehaviour {
         PlayClip(audioClip);
     }
 
+    /* 
+        PlayCategory() method: This method is used to play an audio clip from a specific category. 
+        It checks if the active flag is set to true and retrieves a random audio clip from the specified category using the GetRandomAudioClip() method. 
+        If an audio clip is found, it plays it using PlayClip().
+    */
+
     public void PlayClip(AudioClip audioClip) {
         if (!active) return;
         audioSource.PlayOneShot(audioClip);
     }
+
+    /*
+    PlayClip() method: This method plays a single audio clip using the audioSource.PlayOneShot() method.
+    It checks if the active flag is set to true.
+    
+    */
 
     private AudioClip GetRandomAudioClip(string category) {
         if (!audioClipDict.ContainsKey(category)) {
@@ -58,4 +90,10 @@ public class AudioManager : MonoBehaviour {
         AudioClip randomAudioClip = audioClips[randomIndex];
         return randomAudioClip;
     }
+
+    /*
+        GetRandomAudioClip() method: This method retrieves a random audio clip from the specified category. 
+        It checks if the category exists in the audioClipDict dictionary. 
+        If it does, it selects a random audio clip from the list associated with that category.
+    */
 }

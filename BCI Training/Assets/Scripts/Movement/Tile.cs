@@ -73,7 +73,9 @@ public class Tile : MonoBehaviour
 
         f = gCost = heuristicCost = 0;
     }
-
+    /*
+    method resets the tile to its original state, clearing the adjacent list and resetting various flags and values.
+    */
     public void IdentifyNeighbors(Tile target){
         ResetTile();
         
@@ -109,4 +111,10 @@ public class Tile : MonoBehaviour
         }
     
     }
+    /*
+    method checks a specific direction for a walkable tile. 
+    It uses Physics.OverlapBox() to detect colliders in that direction. 
+    If a tile collider is detected and it is walkable, it further checks if there is an obstacle on top of the tile using Physics.Raycast(). 
+    If the tile is not obstructed or it is the target tile, it adds the tile to the adjacentList.
+    */
 }

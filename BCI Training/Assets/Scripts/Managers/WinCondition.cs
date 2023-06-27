@@ -35,3 +35,5 @@ public class WinCondition : MonoBehaviour
     }
 
 }
+//Tjekker om fjender er døde og så vinder man.
+//Opdaterer text I UI'en og viser den.

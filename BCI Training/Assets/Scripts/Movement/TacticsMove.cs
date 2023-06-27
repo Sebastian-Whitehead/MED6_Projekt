@@ -26,11 +26,17 @@ public class TacticsMove : MonoBehaviour {
         tiles = GameObject.FindGameObjectsWithTag("Tile"); //all tiles in 1 array, do this every frame if we add and remove tiles on the go. while playing.
         //halfHeight = GetComponent<Collider>().bounds.extents.y / 2; //Gives distance from tile to center of the player. Calculate where player is on the tile.
     }
+    //find alle game objects med Tile tag i scenen.
 
     public void GetcurrentTile(){ //Find the tile currently under the player.
         currentTile = GetTargetTile(gameObject); //Target tile for the player.
         currentTile.current = true; //Change color from the Tile Script current variable.
     }
+    /*
+    The GetcurrentTile method determines the current tile
+    by casting a ray from the unit's position downwards and checking for a collision with a tile. 
+    The current tile is then marked as "current" using a variable in the Tile script.
+    */
 
     public Tile GetTargetTile(GameObject target)
     {
@@ -42,6 +48,10 @@ public class TacticsMove : MonoBehaviour {
         // Debug.Log("(" + name + ") savedTile: " + savedTile);
         return savedTile;
     }
+    /*
+    method used to get the Tile component of a given target game object by casting a ray downwards
+     from its position and checking for a collision with a tile.
+    */
 
     public void ComputeAdjency(Tile target){ //go thorugh each tile
         foreach(GameObject tile in tiles){
@@ -49,6 +59,11 @@ public class TacticsMove : MonoBehaviour {
             t.IdentifyNeighbors(target);
         }
     }
+    /*
+     iterates through all tiles and calls the IdentifyNeighbors method on each tile, 
+     passing the target tile as a parameter. 
+     This method is responsible for identifying the neighboring tiles for each tile.
+    */
 
     public void BFS() {
         ComputeAdjency(null);
@@ -97,6 +112,11 @@ public class TacticsMove : MonoBehaviour {
             endLocation = endLocation.parentTile;
         }
     }
+    /*
+     It clears the path stack, sets isMoving to true, 
+     and sets the target tile as the Tile parameter passed to the method. 
+     It also marks the target tile as the target for visualization purposes.
+    */
 
     public void Move() { //move from one tile to the next. - each step in the path is a tile. 
         
@@ -168,6 +188,14 @@ public class TacticsMove : MonoBehaviour {
         }
     }
 
+    /*
+    It checks if the unit is currently moving and if it has any steps remaining.
+    If there are no steps remaining, it removes the selectable tiles and stops the movement.
+    if there are steps remaining, it checks if there are tiles in the path stack.
+    If there are, it retrieves the next tile from the stack and calculates the direction and velocity needed to move towards that tile. 
+    It also handles rotation towards the target tile. If the unit has reached the target tile, it pops the tile from the stack and decreases the steps count.
+    */
+
     protected void RemoveSelectableTiles(){ //remove selectable tiles. no longer active. Reset them. Each of the tiles that has been selected as moveable will no longer be selected
         if (currentTile != null){
             currentTile.current = false; 
@@ -179,11 +207,19 @@ public class TacticsMove : MonoBehaviour {
         }
         selectableTiles.Clear();
     }
-
+    /*
+     method is responsible for resetting the selectable tiles and the current tile. 
+     It iterates through the selectableTiles list and calls the ResetTile method on each tile, clearing the selection. 
+     It also sets the currentTile variable to null.
+    */
     public void CalculateDirection(Vector3 target){
         direction = target - transform.position; //The direction you are travelling
         direction.Normalize(); 
     }
+    /*
+    method calculates the direction vector needed to move towards a target position. 
+    It subtracts the target position from the unit's current position and normalizes the resulting vector.
+    */
 
     public void SetHorizontVelocity(){
         velocity = direction * moveSpeed; //define velocity vector.
@@ -225,7 +261,15 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
 
         return lastTile;
     }
-
+    /*
+    This method is used to find the last tile in a path, given a target tile. 
+    It starts by initializing a stack called TempPath to store the tiles in the path
+    Then, it checks if the tile t is unoccupied by performing a raycast from its position upwards
+    f the raycast doesn't hit any colliders or if the collider's associated unit is not alive, 
+    it pushes t onto the stack. 
+    Next, it iterates through the parent tiles of t until it reaches the starting tile, pushing each tile onto TempPath.
+    Finally, it pops the last moveRange number of tiles from TempPath and returns the last tile as the destination tile for the enemy.
+    */
     protected Tile LowestF(List <Tile> list){ //find greatest potential of getting to where we are going.
         Tile lowest = list[0];
 
@@ -239,6 +283,13 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         return lowest;
 
     }
+    /*
+    This method finds the tile with the lowest f cost from a given list of tiles. 
+    It initializes lowest with the first tile from the list and compares the f values of each tile in the list. 
+    The tile with the lowest f cost is assigned to lowest. 
+    Afterward, it removes the tile from the list and returns lowest.
+    */
+
     protected bool FindPath(Tile target){ //enemy astar
         ComputeAdjency(target);
         GetcurrentTile();
@@ -301,6 +352,10 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         return FindPath(targetTile);
 
     }
+    /*
+    This method is used to find a path to the target game object (presumably the player)
+     by calling FindPath with the target tile obtained from the GetTargetTile(target) method.
+    */
     protected bool CalculatePath(Tile targetTile){ //Find where it is going to move to
         return FindPath(targetTile);
     }
@@ -309,6 +364,7 @@ protected Tile FindLastTile(Tile t){ //tile in front of the one we look for and 
         GameObject playerTarget = GameObject.FindGameObjectWithTag("Player");
         target = playerTarget;
     }
+    //This method is responsible for finding the player game object and assigning it to the target variable.
 
 
 }
